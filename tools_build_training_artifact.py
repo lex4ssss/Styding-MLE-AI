@@ -1,101 +1,77 @@
 import json
-import re
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 TRAINING = ROOT / "training"
+TEMPLATE = ROOT / "template.html"
 ARTIFACT = ROOT / "ai_engineer_training.html"
-TRACKS_FILE = TRAINING / "tracks.json"
 
-FILE_ORDER = ["quiz_core.json", "quiz_mid_senior.json", "faq_core.json", "faq_mid_senior.json"]
-
-
-def ordered_sources():
-    known = [TRAINING / name for name in FILE_ORDER if (TRAINING / name).exists()]
-    rest = sorted(
-        p for p in TRAINING.glob("*.json")
-        if p.name not in FILE_ORDER and p.name != TRACKS_FILE.name
-    )
-    return known + rest
+QUIZ_FILES = ["quiz_core.json", "quiz_mid_senior.json", "quiz_senior_agents.json"]
+FAQ_FILES = ["faq_core.json", "faq_mid_senior.json", "faq_senior_agents.json"]
+ORDER = "ABCDEFGHIJKLMNOPQRSTUVWZ"
 
 
-def load_tracks():
-    if not TRACKS_FILE.exists():
-        raise SystemExit(f"нет файла треков: {TRACKS_FILE}")
-    data = json.loads(TRACKS_FILE.read_text(encoding="utf-8"))
-    tracks = sorted(data["tracks"], key=lambda t: t["order"])
-    return tracks, data["assignment"]
+def load(name):
+    path = TRAINING / name
+    if not path.exists():
+        raise SystemExit(f"нет источника: {path}")
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
-def collect(sources, assignment):
-    blocks, questions, sections = [], [], []
-    for path in sources:
-        data = json.loads(path.read_text(encoding="utf-8"))
-        blocks += data.get("blocks", [])
-        questions += data.get("questions", [])
-        sections += data.get("sections", [])
-    missing = sorted({b["id"] for b in blocks} - set(assignment))
-    if missing:
-        raise SystemExit(f"блокам не назначен трек в tracks.json: {missing}")
-    for b in blocks:
-        b["track"] = assignment[b["id"]]
-    for s in sections:
-        if s["id"] in assignment:
-            s["track"] = assignment[s["id"]]
-    return blocks, questions, sections
-
-
-def replace_literal(text, varname, obj):
-    lines = text.split("\n")
-    head = f"const {varname} = {{"
-    try:
-        start = next(i for i, line in enumerate(lines) if line.startswith(head))
-    except StopIteration:
-        return text, False
-    end = next(i for i in range(start + 1, len(lines)) if lines[i] == "};")
-    literal = f"const {varname} = " + json.dumps(obj, ensure_ascii=False, indent=2) + ";"
-    return "\n".join(lines[:start] + literal.split("\n") + lines[end + 1:]), True
+def rank(item):
+    return ORDER.index(item["id"]) if item["id"] in ORDER else len(ORDER)
 
 
 def main():
-    sources = ordered_sources()
-    if not sources:
-        raise SystemExit(f"нет источников содержания в {TRAINING}")
-    tracks, assignment = load_tracks()
-    blocks, questions, sections = collect(sources, assignment)
+    blocks, questions, sections = [], [], []
+    for name in QUIZ_FILES:
+        data = load(name)
+        blocks += data.get("blocks", [])
+        questions += data.get("questions", [])
+    for name in FAQ_FILES:
+        sections += load(name).get("sections", [])
 
-    if not ARTIFACT.exists():
-        raise SystemExit(f"нет артефакта: {ARTIFACT}")
-    page = ARTIFACT.read_text(encoding="utf-8")
-    original = page
+    tracks = load("tracks.json")
+    library = load("library.json")
 
-    page, ok_quiz = replace_literal(page, "QUIZ_DATA", {"blocks": blocks, "questions": questions})
-    if not ok_quiz:
-        raise SystemExit("в артефакте не найден литерал QUIZ_DATA")
-    page, ok_faq = replace_literal(page, "FAQ_DATA", {"sections": sections})
-    if not ok_faq:
-        raise SystemExit("в артефакте не найден литерал FAQ_DATA")
-    page, ok_tracks = replace_literal(page, "TRACKS", {"tracks": tracks})
+    orphans = sorted({b["id"] for b in blocks} - set(tracks["assignment"]))
+    if orphans:
+        raise SystemExit(f"блокам не назначен трек в tracks.json: {orphans}")
 
-    terms = sum(len(s.get("terms", [])) for s in sections)
-    kicker = f"ПЕРСОНАЛЬНАЯ ПРОГРАММА · {len(questions)} ВОПРОСОВ · {len(sections)} РАЗДЕЛОВ · {terms} ТЕРМИНОВ"
-    page = re.sub(
-        r'(<div class="brand-kicker">)[^<]*(</div>)',
-        lambda m: m.group(1) + kicker + m.group(2),
-        page,
-        count=1,
-    )
-    page = re.sub(r'"найдено \d+ терминов"', f'"найдено {terms} терминов"', page)
+    known = {b["id"] for b in blocks}
+    stray = sorted({q["block"] for q in questions} - known)
+    if stray:
+        raise SystemExit(f"вопросы ссылаются на несуществующие блоки: {stray}")
 
-    changed = page != original
-    if changed:
+    blocks.sort(key=rank)
+    sections.sort(key=rank)
+    tracks["tracks"].sort(key=lambda t: t["order"])
+
+    if not TEMPLATE.exists():
+        raise SystemExit(f"нет шаблона: {TEMPLATE}")
+
+    payload = {
+        "quiz": {"blocks": blocks, "questions": questions},
+        "faq": {"sections": sections},
+        "library": library,
+        "tracks": tracks,
+    }
+    blob = json.dumps(payload, ensure_ascii=False, separators=(",", ":")).replace("</script", "<\\/script")
+    page = TEMPLATE.read_text(encoding="utf-8").replace("__DATA__", blob)
+
+    previous = ARTIFACT.read_text(encoding="utf-8") if ARTIFACT.exists() else ""
+    if page != previous:
         ARTIFACT.write_text(page, encoding="utf-8")
 
-    print(f"источников: {len(sources)} ({', '.join(p.name for p in sources)})")
+    terms = sum(len(s.get("terms", [])) for s in sections)
+    materials = {r["u"] for s in sections for r in s.get("resources", [])}
+    materials |= {i["u"] for stage in library.get("roadmap", []) for i in stage["items"]}
+    materials |= {i["u"] for g in library.get("catalog", {}).get("groups", []) for i in g["items"]}
+
     print(f"блоков: {len(blocks)} · вопросов: {len(questions)} · разделов: {len(sections)} · терминов: {terms}")
-    print(f"треков: {len(tracks)} · литерал TRACKS в HTML: {'обновлён' if ok_tracks else 'отсутствует, пропущен'}")
-    print(f"артефакт: {'перезаписан' if changed else 'без изменений'}")
+    print(f"треков: {len(tracks['tracks'])} · материалов: {len(materials)}")
+    print(f"страница: {'перезаписана' if page != previous else 'без изменений'}, {round(len(page.encode('utf-8')) / 1024, 1)} kb")
     return 0
 
 

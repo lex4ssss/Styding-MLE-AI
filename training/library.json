@@ -1,0 +1,1358 @@
+{
+ "intro": "Маршрут собран из awesome-artificial-intelligence (роадмап AI-инженера), курса Visual GenAI от Yandex Research и ШАДа, учебника MIT 6.042J и материалов, привязанных к блокам тренажёра. Каждый этап указывает, какие блоки он закрывает, чтобы читать не подряд, а под дыру.",
+ "roadmap": [
+  {
+   "stage": "1",
+   "title": "Основания",
+   "goal": "Понимать, что происходит внутри, и уметь говорить об этом формулами, а не метафорами.",
+   "blocks": [
+    "T",
+    "S",
+    "A"
+   ],
+   "items": [
+    {
+     "t": "MIT 6.042J — Mathematics for Computer Science",
+     "u": "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/mit6_042js15_textbook.pdf",
+     "k": "учебник",
+     "lang": "en",
+     "n": "Главы 16–19: вероятность, матожидание, отклонение от среднего. Глава 13: асимптотика. 920 страниц, читать выборочно."
+    },
+    {
+     "t": "Attention Is All You Need",
+     "u": "https://arxiv.org/abs/1706.03762",
+     "k": "статья",
+     "lang": "en",
+     "n": "Q, K, V и multi-head в оригинале. Разделы 3.1–3.3."
+    },
+    {
+     "t": "Karpathy — Neural Networks: Zero to Hero",
+     "u": "https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ",
+     "k": "видео",
+     "lang": "en",
+     "n": "От градиента руками до GPT. Единственный курс, после которого трансформер перестаёт быть чёрным ящиком."
+    },
+    {
+     "t": "Understanding Deep Learning (Prince)",
+     "u": "https://udlbook.github.io/udlbook/",
+     "k": "книга",
+     "lang": "en",
+     "n": "Бесплатный PDF с ноутбуками. Лучший мост между интуицией и математикой."
+    },
+    {
+     "t": "Speech and Language Processing (Jurafsky, Martin)",
+     "u": "https://web.stanford.edu/~jurafsky/slp3/",
+     "k": "учебник",
+     "lang": "en",
+     "n": "Канон NLP. Главы про эмбеддинги, последовательности и разметку сущностей."
+    }
+   ]
+  },
+  {
+   "stage": "2",
+   "title": "Приложения на моделях",
+   "goal": "Собирать работающие системы: промпт, схема ответа, поиск, инструменты.",
+   "blocks": [
+    "C",
+    "F",
+    "S",
+    "R"
+   ],
+   "items": [
+    {
+     "t": "Hugging Face LLM Course",
+     "u": "https://huggingface.co/learn/llm-course/chapter1/1",
+     "k": "курс",
+     "lang": "en",
+     "n": "Трансформеры, датасеты, дообучение, современный инструментарий."
+    },
+    {
+     "t": "Anthropic — Prompt engineering",
+     "u": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview",
+     "k": "документация",
+     "lang": "en",
+     "n": "Критерии успеха, тестирование промптов, работа со схемами ответа."
+    },
+    {
+     "t": "OpenAI Cookbook",
+     "u": "https://cookbook.openai.com/",
+     "k": "код",
+     "lang": "en",
+     "n": "Рабочие примеры structured outputs, tool use, retrieval и эвалов."
+    },
+    {
+     "t": "LlamaIndex — документация",
+     "u": "https://docs.llamaindex.ai/",
+     "k": "документация",
+     "lang": "en",
+     "n": "Ingestion, индексация, ретриверы, агентные конвейеры."
+    },
+    {
+     "t": "Docling",
+     "u": "https://github.com/docling-project/docling",
+     "k": "инструмент",
+     "lang": "en",
+     "n": "Разбор PDF и сканов в структуру. База для структурного чанкинга."
+    },
+    {
+     "t": "Building Effective Agents (Anthropic)",
+     "u": "https://www.anthropic.com/engineering/building-effective-agents",
+     "k": "статья",
+     "lang": "en",
+     "n": "Когда агент нужен, когда достаточно конвейера. Паттерны и их цена."
+    }
+   ]
+  },
+  {
+   "stage": "3",
+   "title": "Оценка и надёжность",
+   "goal": "Уметь доказать, что стало лучше, и поймать деградацию до заказчика.",
+   "blocks": [
+    "A",
+    "B",
+    "G",
+    "P",
+    "L"
+   ],
+   "items": [
+    {
+     "t": "Demystifying Evals for AI Agents (Anthropic)",
+     "u": "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents",
+     "k": "статья",
+     "lang": "en",
+     "n": "Как строится набор задач, грейдеры и харнесс оценки."
+    },
+    {
+     "t": "Ragas",
+     "u": "https://docs.ragas.io/",
+     "k": "инструмент",
+     "lang": "en",
+     "n": "Метрики RAG: faithfulness, context precision и recall."
+    },
+    {
+     "t": "Promptfoo",
+     "u": "https://www.promptfoo.dev/docs/",
+     "k": "инструмент",
+     "lang": "en",
+     "n": "Тест-кейсы и ассерты для промптов, сравнение моделей, red-team проверки."
+    },
+    {
+     "t": "statsmodels — proportions и тесты",
+     "u": "https://www.statsmodels.org/stable/stats.html",
+     "k": "инструмент",
+     "lang": "en",
+     "n": "proportion_confint, mcnemar, multipletests. Три функции против всех споров о метрике."
+    },
+    {
+     "t": "Designing Machine Learning Systems (Huyen)",
+     "u": "https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/",
+     "k": "книга",
+     "lang": "en",
+     "n": "Утечки, дрейф, мониторинг, границы ответственности компонентов."
+    }
+   ]
+  },
+  {
+   "stage": "4",
+   "title": "Прод и железо",
+   "goal": "Развернуть на своём железе, посчитать деньги, выдержать нагрузку.",
+   "blocks": [
+    "E",
+    "H",
+    "O"
+   ],
+   "items": [
+    {
+     "t": "vLLM — документация",
+     "u": "https://docs.vllm.ai/",
+     "k": "документация",
+     "lang": "en",
+     "n": "PagedAttention, continuous batching, guided decoding — три ответа на вопрос «зачем vLLM»."
+    },
+    {
+     "t": "LiteLLM",
+     "u": "https://docs.litellm.ai/",
+     "k": "инструмент",
+     "lang": "en",
+     "n": "Единый интерфейс к провайдерам, лимиты, учёт расходов."
+    },
+    {
+     "t": "Langfuse",
+     "u": "https://langfuse.com/docs",
+     "k": "инструмент",
+     "lang": "en",
+     "n": "Трассировка вызовов, версии промптов, метрики в проде."
+    },
+    {
+     "t": "OWASP Top 10 для LLM-приложений",
+     "u": "https://genai.owasp.org/llm-top-10/",
+     "k": "документация",
+     "lang": "en",
+     "n": "Инъекции в промпт, утечки данных, небезопасный вывод. Язык разговора с безопасниками."
+    },
+    {
+     "t": "AI Engineering (Huyen)",
+     "u": "https://www.oreilly.com/library/view/ai-engineering/9781098166298/",
+     "k": "книга",
+     "lang": "en",
+     "n": "Приложения на фундаментальных моделях: от выбора модели до эксплуатации."
+    }
+   ]
+  },
+  {
+   "stage": "5",
+   "title": "Генеративное зрение",
+   "goal": "Диффузия и авторегрессия для картинок и видео: теория плюс семь практик.",
+   "blocks": [
+    "R",
+    "K"
+   ],
+   "items": [
+    {
+     "t": "Visual GenAI — курс Yandex Research и ШАД",
+     "u": "https://github.com/dbaranchuk/VisualGenAI",
+     "k": "курс",
+     "lang": "en/ru",
+     "n": "12 лекций: слайды на английском, видео на русском. 7 домашних с ноутбуками, список экзаменационных вопросов."
+    },
+    {
+     "t": "Неделя 1 — DDPM и denoising score matching",
+     "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/week1_ddpm_dsm/ddpm_dsm_lecture.pdf",
+     "k": "слайды",
+     "lang": "en",
+     "n": "Точка входа в диффузию. Дальше идут непрерывное время и flow matching."
+    },
+    {
+     "t": "Неделя 5 — диффузия на практике",
+     "u": "https://github.com/dbaranchuk/VisualGenAI/tree/main/week4_practical_dm",
+     "k": "слайды",
+     "lang": "en",
+     "n": "Архитектуры, пространства, приёмы обучения и сэмплинга, которые реально стоят в проде."
+    },
+    {
+     "t": "Недели 6–7 — модели за несколько шагов",
+     "u": "https://github.com/dbaranchuk/VisualGenAI/tree/main/week5_few_step_models_flow_maps",
+     "k": "слайды",
+     "lang": "en",
+     "n": "Consistency models, MeanFlow, distribution matching. Почему генерация ускорилась в десятки раз."
+    },
+    {
+     "t": "Неделя 11 — мультимодальная генерация и управление",
+     "u": "https://github.com/dbaranchuk/VisualGenAI/tree/main/week9_multimodal_generation_and_conditioning",
+     "k": "слайды",
+     "lang": "en",
+     "n": "ControlNet, IP-Adapter: как вообще управляют тем, что генерится."
+    }
+   ]
+  },
+  {
+   "stage": "6",
+   "title": "Агентная инженерия",
+   "goal": "Строить и удерживать системы, где модель вызывает инструменты и живёт дольше одного окна.",
+   "blocks": [
+    "H",
+    "I"
+   ],
+   "items": [
+    {
+     "t": "Model Context Protocol",
+     "u": "https://modelcontextprotocol.io/",
+     "k": "спецификация",
+     "lang": "en",
+     "n": "Стандарт подключения инструментов и данных к моделям."
+    },
+    {
+     "t": "Effective Context Engineering for AI Agents",
+     "u": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+     "k": "статья",
+     "lang": "en",
+     "n": "Что класть в контекст, что выбрасывать, как жить дольше одного окна."
+    },
+    {
+     "t": "12-Factor Agents",
+     "u": "https://github.com/humanlayer/12-factor-agents",
+     "k": "репозиторий",
+     "lang": "en",
+     "n": "Принципы управляемых LLM-приложений вокруг детерминированного кода."
+    },
+    {
+     "t": "How We Built Our Multi-Agent Research System",
+     "u": "https://www.anthropic.com/engineering/multi-agent-research-system",
+     "k": "статья",
+     "lang": "en",
+     "n": "Оркестратор и воркеры, параллельный поиск, эксплуатационные уроки."
+    },
+    {
+     "t": "Pydantic AI",
+     "u": "https://ai.pydantic.dev/",
+     "k": "фреймворк",
+     "lang": "en",
+     "n": "Типизированные агенты: схема ответа и валидация как часть каркаса."
+    }
+   ]
+  }
+ ],
+ "sources": [
+  {
+   "t": "awesome-artificial-intelligence",
+   "u": "https://github.com/owainlewis/awesome-artificial-intelligence",
+   "n": "Курируемый список для разработчиков, которые строят генеративные и агентные системы. Отсюда взяты книги, курсы, статьи и инструменты этапов 1–4 и 6."
+  },
+  {
+   "t": "Visual GenAI (dbaranchuk)",
+   "u": "https://github.com/dbaranchuk/VisualGenAI",
+   "n": "Курс ШАДа и Yandex Research: 12 лекций, 7 практик, экзаменационные вопросы. Слайды на английском, лекции и семинары на русском."
+  },
+  {
+   "t": "MIT OCW 6.042J, весна 2015",
+   "u": "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/",
+   "n": "Учебник на 920 страниц плюс видеолекции и задачи с решениями."
+  }
+ ],
+ "videos": [
+  {
+   "block": "S",
+   "items": [
+    {
+     "t": "3Blue1Brown — Transformers, the tech behind LLMs (Deep Learning, глава 5)",
+     "u": "https://www.youtube.com/watch?v=wjZofJX0v4M",
+     "k": "видео",
+     "lang": "en",
+     "n": "Визуальный разбор того, как токен проходит через модель. Смотреть перед главой 6."
+    },
+    {
+     "t": "3Blue1Brown — Attention in transformers, step-by-step (глава 6)",
+     "u": "https://www.youtube.com/watch?v=eMlx5fFNoYc",
+     "k": "видео",
+     "lang": "en",
+     "n": "Q, K и V нарисованы по шагам. После него формула softmax(q·kᵀ/√d_k) читается как картинка."
+    },
+    {
+     "t": "Andrej Karpathy — Let's build GPT: from scratch, in code, spelled out",
+     "u": "https://www.youtube.com/watch?v=kCc8FmEb1nY",
+     "k": "видео",
+     "lang": "en",
+     "n": "Self-attention и causal mask пишутся руками в коде. Главное видео блока."
+    },
+    {
+     "t": "Deep Learning School — Лекция. Трансформеры. Self-Attention",
+     "u": "https://www.youtube.com/watch?v=f544TipD2QY",
+     "k": "видео",
+     "lang": "ru",
+     "n": "Курс ФПМИ МФТИ. Русскоязычный вход в тему, если английские лекции идут тяжело."
+    },
+    {
+     "t": "Igor Kotenkov — Transformer, explained in detail (NLP Lecture, на русском)",
+     "u": "https://www.youtube.com/watch?v=iOrNbK2T92M",
+     "k": "видео",
+     "lang": "ru",
+     "n": "Подробный разбор архитектуры с презентацией, уровень выше вводного."
+    },
+    {
+     "t": "Deep Learning School — Лекция. Контестные эмбеддинги. Word2Vec",
+     "u": "https://www.youtube.com/watch?v=WbtQzAvhnRI",
+     "k": "видео",
+     "lang": "ru",
+     "n": "Откуда взялись векторы слов и чем контекстные представления отличаются от статических."
+    },
+    {
+     "t": "ФКН ВШЭ — Глубинное обучение 1, лекция 6: токенизация, эмбеддинги слов, TextCNN",
+     "u": "https://www.youtube.com/watch?v=WihC2R5lNmg",
+     "k": "видео",
+     "lang": "ru",
+     "n": "Токенизация в подслова и почему она влияет на разметку сущностей."
+    },
+    {
+     "t": "ИУ5 — Лекция 8. Трансформеры и механизм внимания",
+     "u": "https://www.youtube.com/watch?v=3GVmrjgkWe8",
+     "k": "видео",
+     "lang": "ru",
+     "n": "Обзорная лекция: внимание в RNN, архитектура трансформера, BERT и GPT в одном месте."
+    }
+   ]
+  },
+  {
+   "block": "F",
+   "items": [
+    {
+     "t": "Practical RAG — Choosing the Right Embedding Model, Chunking Strategy, and More",
+     "u": "https://www.youtube.com/watch?v=j1XRLh7yzzY",
+     "k": "видео",
+     "lang": "en",
+     "n": "Практический разбор решений, которые принимаются до первой строки кода RAG."
+    },
+    {
+     "t": "RAG Retrieval Deep Dive: BM25, Embeddings, and the Power of Agentic Search",
+     "u": "https://www.youtube.com/watch?v=AS_HlJbJjH8",
+     "k": "видео",
+     "lang": "en",
+     "n": "Почему демо работает, а прод нет: разбор слоёв поиска."
+    },
+    {
+     "t": "The Complete Guide to Hybrid Search in RAG (BM25 + Embeddings + Reranker)",
+     "u": "https://www.youtube.com/watch?v=XvKiTfd6Xvo",
+     "k": "видео",
+     "lang": "en",
+     "n": "Гибридный поиск и переранжирование целиком, с кодом."
+    },
+    {
+     "t": "Podlodka Podcast #445 — Векторные базы, эмбеддинги, RAG",
+     "u": "https://www.youtube.com/watch?v=BOWq8JI-XNg",
+     "k": "подкаст",
+     "lang": "ru",
+     "n": "Зачем векторные базы, если есть SQL и полнотекстовый поиск. Разговорный формат, полезен для аргументации перед командой."
+    },
+    {
+     "t": "Как понять RAG за 18 минут, даже если ты никогда не слышал про эмбеддинги",
+     "u": "https://www.youtube.com/watch?v=GkKSDBgz4XQ",
+     "k": "видео",
+     "lang": "ru",
+     "n": "Короткий вход в тему для объяснения коллегам и заказчику."
+    }
+   ]
+  },
+  {
+   "block": "Q",
+   "items": [
+    {
+     "t": "Юрий Кашницкий — Лекция 10. Градиентный бустинг (mlcourse.ai, OpenDataScience)",
+     "u": "https://www.youtube.com/watch?v=ow5LdsjzfL0",
+     "k": "видео",
+     "lang": "ru",
+     "n": "Механика бустинга от функции потерь до практики. Базовая лекция блока."
+    },
+    {
+     "t": "Computer Science Center — CatBoost, градиентный бустинг от Яндекса",
+     "u": "https://www.youtube.com/watch?v=UYDwhuyWYSo",
+     "k": "видео",
+     "lang": "ru",
+     "n": "Упорядоченное кодирование категорий и симметричные деревья от команды разработки."
+    },
+    {
+     "t": "Young&&Yandex — Тренировки по ML, лекция 5: градиентный бустинг, тонкости обучения",
+     "u": "https://www.youtube.com/watch?v=DqUtGa99_H8",
+     "k": "видео",
+     "lang": "ru",
+     "n": "Практические тонкости: переобучение, ранняя остановка, параметры."
+    }
+   ]
+  },
+  {
+   "block": "R",
+   "items": [
+    {
+     "t": "Евгений Разинков — Компьютерное зрение с использованием глубокого обучения, лекция 1",
+     "u": "https://www.youtube.com/watch?v=mvA038KeZ1c",
+     "k": "видео",
+     "lang": "ru",
+     "n": "Введение в задачи зрения: классификация, детекция, сегментация и их метрики."
+    },
+    {
+     "t": "Евгений Разинков — Лекция 6. Локализация объектов",
+     "u": "https://www.youtube.com/watch?v=CRm-7twlcis",
+     "k": "видео",
+     "lang": "ru",
+     "n": "Детекция и IoU: то, что нужно для работы с рамками полей на документе."
+    },
+    {
+     "t": "PythonToday — Распознавание текста с изображения: EasyOCR против Tesseract",
+     "u": "https://www.youtube.com/watch?v=H_nXZSM4WiU",
+     "k": "видео",
+     "lang": "ru",
+     "n": "Практическое сравнение двух движков на Python, с кодом."
+    },
+    {
+     "t": "OTUS — Мультимодальные LLM: как модели видят изображения и понимают текст",
+     "u": "https://www.youtube.com/watch?v=AGEhdbGYneA",
+     "k": "видео",
+     "lang": "ru",
+     "n": "Как картинка попадает в языковую модель. Мост между блоками D и R."
+    }
+   ]
+  },
+  {
+   "block": "M",
+   "items": [
+    {
+     "t": "Optuna: A Define by Run Hyperparameter Optimization Framework (SciPy 2019)",
+     "u": "https://www.youtube.com/watch?v=J_aymk4YXhg",
+     "k": "видео",
+     "lang": "en",
+     "n": "Доклад авторов: зачем define-by-run и как устроен поиск."
+    },
+    {
+     "t": "Optuna: A Define-by-Run Hyperparameter Optimization Framework (SciPy Japan)",
+     "u": "https://www.youtube.com/watch?v=tcrcLRopTX0",
+     "k": "видео",
+     "lang": "en",
+     "n": "Та же тема подробнее, с примерами пространства поиска и прунеров."
+    }
+   ]
+  },
+  {
+   "block": "A",
+   "items": [
+    {
+     "t": "Самая полная и понятная лекция по A/B тестам: метрики, гипотезы, статистика, инструменты",
+     "u": "https://www.youtube.com/watch?v=FEI1OA-zgb8",
+     "k": "видео",
+     "lang": "ru",
+     "n": "Полный цикл проверки гипотезы. Язык, на котором говорят продуктовые команды."
+    },
+    {
+     "t": "Yandex for Analytics — Формула доверия: доверительные интервалы для ratio- и uplift-метрик",
+     "u": "https://www.youtube.com/watch?v=0yhbw9QV9Z4",
+     "k": "видео",
+     "lang": "ru",
+     "n": "Интервалы для дробных метрик — ровно твой случай с пер-полевыми долями."
+    }
+   ]
+  }
+ ],
+ "catalog": {
+  "intro": "Полный перенос awesome-artificial-intelligence: все 83 позиции роадмапа, сгруппированные как в оригинале, с пометкой, какому блоку тренажёра соответствует группа. Плюс полная программа курса Visual GenAI: 12 лекций и 7 практик.",
+  "groups": [
+   {
+    "title": "Книги",
+    "blocks": [
+     "T",
+     "S",
+     "Q"
+    ],
+    "items": [
+     {
+      "t": "Artificial Intelligence: A Modern Approach",
+      "u": "https://aima.cs.berkeley.edu/",
+      "k": "книга",
+      "lang": "en",
+      "n": "Классический справочник по ИИ: поиск, логический вывод, планирование, обучение, робототехника."
+     },
+     {
+      "t": "Reinforcement Learning: An Introduction (Sutton, Barto)",
+      "u": "https://web.stanford.edu/class/psych209/Readings/SuttonBartoIPRLBook2ndEd.pdf",
+      "k": "книга",
+      "lang": "en",
+      "n": "Основы обучения с подкреплением. Бесплатный PDF."
+     },
+     {
+      "t": "Machine Learning Bookcamp (Grigorev)",
+      "u": "https://www.manning.com/books/machine-learning-bookcamp",
+      "k": "книга",
+      "lang": "en",
+      "n": "Проектный вход в табличный ML: от постановки до деплоя."
+     },
+     {
+      "t": "Designing Machine Learning Systems (Huyen)",
+      "u": "https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/",
+      "k": "книга",
+      "lang": "en",
+      "n": "Проектирование ML-систем: данные, утечки, дрейф, эксплуатация."
+     },
+     {
+      "t": "AI Engineering (Huyen)",
+      "u": "https://www.oreilly.com/library/view/ai-engineering/9781098166298/",
+      "k": "книга",
+      "lang": "en",
+      "n": "Приложения на фундаментальных моделях: выбор модели, оценка, стоимость."
+     },
+     {
+      "t": "Build a Large Language Model from Scratch (Raschka)",
+      "u": "https://www.manning.com/books/build-a-large-language-model-from-scratch",
+      "k": "книга",
+      "lang": "en",
+      "n": "Трансформер на PyTorch пошагово, своими руками."
+     },
+     {
+      "t": "Hands-On Large Language Models (Alammar, Grootendorst)",
+      "u": "https://www.llm-book.com/",
+      "k": "книга",
+      "lang": "en",
+      "n": "Визуальное и практическое руководство по языковым моделям."
+     },
+     {
+      "t": "LLM Engineer's Handbook",
+      "u": "https://www.packtpub.com/en-us/product/llm-engineers-handbook-9781836200079",
+      "k": "книга",
+      "lang": "en",
+      "n": "LLMOps: дообучение, сервинг, продакшн-процессы."
+     },
+     {
+      "t": "The 100-Page Language Models Book (Burkov)",
+      "u": "https://www.thelmbook.com/",
+      "k": "книга",
+      "lang": "en",
+      "n": "Сжатое техническое введение в языковые модели."
+     },
+     {
+      "t": "Deep Learning (Goodfellow, Bengio, Courville)",
+      "u": "https://www.deeplearningbook.org/",
+      "k": "книга",
+      "lang": "en",
+      "n": "Математические основания глубокого обучения. Свободно доступна онлайн."
+     },
+     {
+      "t": "Deep Learning: Foundations and Concepts (Bishop)",
+      "u": "https://www.bishopbook.com/",
+      "k": "книга",
+      "lang": "en",
+      "n": "Изложение через теорию вероятностей, от автора классического Pattern Recognition."
+     },
+     {
+      "t": "Understanding Deep Learning (Prince)",
+      "u": "https://udlbook.github.io/udlbook/",
+      "k": "книга",
+      "lang": "en",
+      "n": "Теория, интуиция и ноутбуки. Бесплатный PDF."
+     },
+     {
+      "t": "Speech and Language Processing (Jurafsky, Martin)",
+      "u": "https://web.stanford.edu/~jurafsky/slp3/",
+      "k": "учебник",
+      "lang": "en",
+      "n": "Постоянно обновляемый справочник по NLP: эмбеддинги, разметка, извлечение информации."
+     }
+    ]
+   },
+   {
+    "title": "Курсы",
+    "blocks": [
+     "S",
+     "F",
+     "Q"
+    ],
+    "items": [
+     {
+      "t": "Hugging Face LLM Course",
+      "u": "https://huggingface.co/learn/llm-course/chapter1/1",
+      "k": "курс",
+      "lang": "en",
+      "n": "Трансформеры, датасеты, дообучение и современный инструментарий."
+     },
+     {
+      "t": "Karpathy — Neural Networks: Zero to Hero",
+      "u": "https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ",
+      "k": "видео",
+      "lang": "en",
+      "n": "Нейросети и языковые модели с первых принципов, всё пишется в коде."
+     },
+     {
+      "t": "Stanford CS336: Language Modeling from Scratch",
+      "u": "https://cs336.stanford.edu/",
+      "k": "курс",
+      "lang": "en",
+      "n": "Языковая модель целиком: данные, обучение, оценка, развёртывание."
+     },
+     {
+      "t": "Fast.ai Practical Deep Learning",
+      "u": "https://course.fast.ai/",
+      "k": "курс",
+      "lang": "en",
+      "n": "Код сначала, теория потом. Быстрый вход для практика."
+     },
+     {
+      "t": "Full Stack Deep Learning",
+      "u": "https://fullstackdeeplearning.com/",
+      "k": "курс",
+      "lang": "en",
+      "n": "Полный жизненный цикл продукта на ML, включая эксплуатацию."
+     },
+     {
+      "t": "MIT 6.S191: Introduction to Deep Learning",
+      "u": "https://introtodeeplearning.com/",
+      "k": "курс",
+      "lang": "en",
+      "n": "Короткий интенсив MIT с лекциями и лабораторными."
+     },
+     {
+      "t": "Made With ML",
+      "u": "https://madewithml.com/",
+      "k": "курс",
+      "lang": "en",
+      "n": "Проектирование, разработка и итерации продакшн-систем ML."
+     },
+     {
+      "t": "DeepLearning.AI Short Courses",
+      "u": "https://learn.deeplearning.ai/",
+      "k": "курс",
+      "lang": "en",
+      "n": "Короткие курсы по конкретным приёмам генеративной инженерии."
+     },
+     {
+      "t": "Google Generative AI Learning Path",
+      "u": "https://www.cloudskillsboost.google/paths/118",
+      "k": "курс",
+      "lang": "en",
+      "n": "Вводный маршрут по генеративным моделям и инструментам Google Cloud."
+     },
+     {
+      "t": "AI Engineer (платная программа)",
+      "u": "https://aiengineer.co/",
+      "k": "курс",
+      "lang": "en",
+      "n": "Программа по агентной разработке и выводу ИИ-систем в прод."
+     },
+     {
+      "t": "AI Engineer starter pack",
+      "u": "https://aiengineer.co/start",
+      "k": "набор",
+      "lang": "en",
+      "n": "Бесплатный стартовый набор: скиллы агентов и учебный код."
+     }
+    ]
+   },
+   {
+    "title": "Фундаментальные статьи",
+    "blocks": [
+     "S",
+     "F",
+     "K"
+    ],
+    "items": [
+     {
+      "t": "Attention Is All You Need",
+      "u": "https://arxiv.org/abs/1706.03762",
+      "k": "статья",
+      "lang": "en",
+      "n": "Архитектура трансформера. Первоисточник Q, K, V."
+     },
+     {
+      "t": "Scaling Laws for Neural Language Models",
+      "u": "https://arxiv.org/abs/2001.08361",
+      "k": "статья",
+      "lang": "en",
+      "n": "Связь качества модели с объёмом данных и вычислений."
+     },
+     {
+      "t": "Training Compute-Optimal LLMs (Chinchilla)",
+      "u": "https://arxiv.org/abs/2203.15556",
+      "k": "статья",
+      "lang": "en",
+      "n": "Как размер модели и объём данных должны расти вместе при фиксированном бюджете."
+     },
+     {
+      "t": "Language Models are Few-Shot Learners (GPT-3)",
+      "u": "https://arxiv.org/abs/2005.14165",
+      "k": "статья",
+      "lang": "en",
+      "n": "Обучение в контексте: откуда взялся few-shot как приём."
+     },
+     {
+      "t": "Retrieval-Augmented Generation",
+      "u": "https://arxiv.org/abs/2005.11401",
+      "k": "статья",
+      "lang": "en",
+      "n": "Соединение генерации с внешним поиском. Исходное определение RAG."
+     },
+     {
+      "t": "LoRA: Low-Rank Adaptation",
+      "u": "https://arxiv.org/abs/2106.09685",
+      "k": "статья",
+      "lang": "en",
+      "n": "Низкоранговые адаптеры вместо полного дообучения."
+     },
+     {
+      "t": "InstructGPT: обучение по человеческой обратной связи",
+      "u": "https://arxiv.org/abs/2203.02155",
+      "k": "статья",
+      "lang": "en",
+      "n": "Рецепт instruction tuning и RLHF, на котором стоят современные чат-модели."
+     },
+     {
+      "t": "ReAct",
+      "u": "https://arxiv.org/abs/2210.03629",
+      "k": "статья",
+      "lang": "en",
+      "n": "Совмещение рассуждения и действий: база агентов с инструментами."
+     },
+     {
+      "t": "Constitutional AI",
+      "u": "https://arxiv.org/abs/2212.08073",
+      "k": "статья",
+      "lang": "en",
+      "n": "Обучение безопасному поведению по набору письменных принципов."
+     },
+     {
+      "t": "Direct Preference Optimization",
+      "u": "https://arxiv.org/abs/2305.18290",
+      "k": "статья",
+      "lang": "en",
+      "n": "Выравнивание по предпочтениям без отдельной модели награды."
+     }
+    ]
+   },
+   {
+    "title": "Руководства по сборке систем",
+    "blocks": [
+     "C",
+     "I",
+     "H"
+    ],
+    "items": [
+     {
+      "t": "Building Effective Agents (Anthropic)",
+      "u": "https://www.anthropic.com/engineering/building-effective-agents",
+      "k": "статья",
+      "lang": "en",
+      "n": "Паттерны агентных систем и их цена. Когда достаточно конвейера."
+     },
+     {
+      "t": "A Practical Guide to Building Agents (OpenAI)",
+      "u": "https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf",
+      "k": "руководство",
+      "lang": "en",
+      "n": "Модели, инструменты, инструкции, оркестрация и ограничители."
+     },
+     {
+      "t": "Awesome DeepSeek Agent",
+      "u": "https://github.com/deepseek-ai/awesome-deepseek-agent",
+      "k": "репозиторий",
+      "lang": "en",
+      "n": "Настройка интеграции моделей DeepSeek с кодовыми агентами."
+     },
+     {
+      "t": "OpenAI Cookbook",
+      "u": "https://cookbook.openai.com/",
+      "k": "код",
+      "lang": "en",
+      "n": "Примеры структурированного вывода, tool use, ретривала и эвалов."
+     },
+     {
+      "t": "Anthropic — Prompt engineering",
+      "u": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview",
+      "k": "документация",
+      "lang": "en",
+      "n": "Критерии успеха, тестирование промптов, управление поведением модели."
+     },
+     {
+      "t": "Effective Context Engineering for AI Agents",
+      "u": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+      "k": "статья",
+      "lang": "en",
+      "n": "Отбор и структурирование контекста для долгоживущих агентов."
+     },
+     {
+      "t": "12-Factor Agents",
+      "u": "https://github.com/humanlayer/12-factor-agents",
+      "k": "репозиторий",
+      "lang": "en",
+      "n": "Принципы управляемых LLM-приложений вокруг детерминированного кода."
+     },
+     {
+      "t": "OWASP Top 10 для LLM-приложений",
+      "u": "https://genai.owasp.org/llm-top-10/",
+      "k": "документация",
+      "lang": "en",
+      "n": "Риски генеративных приложений и меры против них."
+     }
+    ]
+   },
+   {
+    "title": "Протоколы и фреймворки агентов",
+    "blocks": [
+     "H",
+     "I"
+    ],
+    "items": [
+     {
+      "t": "Model Context Protocol",
+      "u": "https://modelcontextprotocol.io/specification/2026-07-28",
+      "k": "спецификация",
+      "lang": "en",
+      "n": "Открытый стандарт подключения инструментов, данных и промптов к приложениям на моделях."
+     },
+     {
+      "t": "Agent2Agent Protocol",
+      "u": "https://a2a-protocol.org/latest/specification/",
+      "k": "спецификация",
+      "lang": "en",
+      "n": "Обнаружение агентов, делегирование задач, потоковые и асинхронные обновления."
+     },
+     {
+      "t": "Pydantic AI",
+      "u": "https://ai.pydantic.dev/",
+      "k": "фреймворк",
+      "lang": "en",
+      "n": "Типизированные агенты со схемой ответа и валидацией в основе."
+     },
+     {
+      "t": "LangGraph",
+      "u": "https://docs.langchain.com/oss/python/langgraph/overview",
+      "k": "фреймворк",
+      "lang": "en",
+      "n": "Низкоуровневая оркестрация долгих агентов с состоянием."
+     },
+     {
+      "t": "OpenAI Agents SDK",
+      "u": "https://openai.github.io/openai-agents-python/",
+      "k": "фреймворк",
+      "lang": "en",
+      "n": "Инструменты, передачи, ограничители и трассировка в небольшом SDK."
+     },
+     {
+      "t": "Google Agent Development Kit",
+      "u": "https://google.github.io/adk-docs/",
+      "k": "фреймворк",
+      "lang": "en",
+      "n": "Разработка и оценка агентов в экосистеме Google."
+     },
+     {
+      "t": "Microsoft Agent Framework",
+      "u": "https://learn.microsoft.com/en-us/agent-framework/overview/",
+      "k": "фреймворк",
+      "lang": "en",
+      "n": "Преемник AutoGen и Semantic Kernel: агенты и графовые процессы."
+     }
+    ]
+   },
+   {
+    "title": "Долгоживущие и асинхронные агенты",
+    "blocks": [
+     "H"
+    ],
+    "items": [
+     {
+      "t": "Effective Harnesses for Long-Running Agents",
+      "u": "https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents",
+      "k": "статья",
+      "lang": "en",
+      "n": "Как агенту работать дольше одного окна контекста и восстанавливаться после сбоя."
+     },
+     {
+      "t": "Running Agents (OpenAI Agents SDK)",
+      "u": "https://openai.github.io/openai-agents-python/running_agents/",
+      "k": "документация",
+      "lang": "en",
+      "n": "Жизненный цикл, сессии, исключения, устойчивое исполнение."
+     },
+     {
+      "t": "Human-in-the-Loop",
+      "u": "https://openai.github.io/openai-agents-python/human_in_the_loop/",
+      "k": "документация",
+      "lang": "en",
+      "n": "Пауза, проверка, одобрение и возобновление вызовов без потери состояния."
+     },
+     {
+      "t": "Gemini и Temporal: устойчивый агент",
+      "u": "https://ai.google.dev/gemini-api/docs/temporal-example",
+      "k": "пример",
+      "lang": "en",
+      "n": "Реализация устойчивого исполнения, повторов и человеческого одобрения."
+     }
+    ]
+   },
+   {
+    "title": "Поиск и данные",
+    "blocks": [
+     "F",
+     "R"
+    ],
+    "items": [
+     {
+      "t": "LlamaIndex",
+      "u": "https://docs.llamaindex.ai/",
+      "k": "документация",
+      "lang": "en",
+      "n": "Приём данных, индексация, ретриверы, агентные конвейеры."
+     },
+     {
+      "t": "Haystack",
+      "u": "https://docs.haystack.deepset.ai/",
+      "k": "документация",
+      "lang": "en",
+      "n": "Модульные конвейеры поиска и генерации."
+     },
+     {
+      "t": "Docling",
+      "u": "https://github.com/docling-project/docling",
+      "k": "инструмент",
+      "lang": "en",
+      "n": "Разбор и конвертация документов для ИИ-приложений."
+     }
+    ]
+   },
+   {
+    "title": "Оценка и надёжность",
+    "blocks": [
+     "G",
+     "A",
+     "B"
+    ],
+    "items": [
+     {
+      "t": "Demystifying Evals for AI Agents",
+      "u": "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents",
+      "k": "статья",
+      "lang": "en",
+      "n": "Наборы задач, грейдеры, транскрипты и харнесс оценки."
+     },
+     {
+      "t": "OpenAI Evals",
+      "u": "https://github.com/openai/evals",
+      "k": "инструмент",
+      "lang": "en",
+      "n": "Открытый фреймворк и реестр оценок для моделей и систем."
+     },
+     {
+      "t": "Promptfoo",
+      "u": "https://www.promptfoo.dev/docs/",
+      "k": "инструмент",
+      "lang": "en",
+      "n": "Тест-кейсы, ассерты, сравнение моделей, red-team проверки."
+     },
+     {
+      "t": "Ragas",
+      "u": "https://docs.ragas.io/",
+      "k": "инструмент",
+      "lang": "en",
+      "n": "Оценка и эксперименты для систем поиска и генерации."
+     }
+    ]
+   },
+   {
+    "title": "Развёртывание и наблюдаемость",
+    "blocks": [
+     "E",
+     "H"
+    ],
+    "items": [
+     {
+      "t": "Langfuse",
+      "u": "https://langfuse.com/docs",
+      "k": "инструмент",
+      "lang": "en",
+      "n": "Трассировка, оценка, версии промптов и метрики приложений на LLM."
+     },
+     {
+      "t": "vLLM",
+      "u": "https://docs.vllm.ai/",
+      "k": "документация",
+      "lang": "en",
+      "n": "Движок инференса и сервинга языковых моделей."
+     },
+     {
+      "t": "LiteLLM",
+      "u": "https://docs.litellm.ai/",
+      "k": "инструмент",
+      "lang": "en",
+      "n": "Единый интерфейс и шлюз к множеству провайдеров моделей."
+     }
+    ]
+   },
+   {
+    "title": "Кодовые агенты и бенчмарки",
+    "blocks": [
+     "I",
+     "H"
+    ],
+    "items": [
+     {
+      "t": "SWE-bench",
+      "u": "https://www.swebench.com/",
+      "k": "бенчмарк",
+      "lang": "en",
+      "n": "Независимое сравнение агентов на реальных задачах из репозиториев."
+     },
+     {
+      "t": "Terminal-Bench",
+      "u": "https://www.tbench.ai/leaderboard/terminal-bench/2.1",
+      "k": "бенчмарк",
+      "lang": "en",
+      "n": "Сравнение агентов на терминальных задачах."
+     },
+     {
+      "t": "Claude Code",
+      "u": "https://code.claude.com/",
+      "k": "инструмент",
+      "lang": "en",
+      "n": "Терминальный агент с хуками, субагентами, скиллами и инструкциями уровня репозитория."
+     },
+     {
+      "t": "Codex CLI",
+      "u": "https://github.com/openai/codex",
+      "k": "инструмент",
+      "lang": "en",
+      "n": "Открытый терминальный агент с песочницей и контролем разрешений."
+     },
+     {
+      "t": "Gemini CLI",
+      "u": "https://github.com/google-gemini/gemini-cli",
+      "k": "инструмент",
+      "lang": "en",
+      "n": "Открытый терминальный агент вокруг Gemini."
+     },
+     {
+      "t": "Cursor CLI",
+      "u": "https://cursor.com/cli",
+      "k": "инструмент",
+      "lang": "en",
+      "n": "Терминальный агент, связанный с редактором и облаком Cursor."
+     },
+     {
+      "t": "GitHub Copilot coding agent",
+      "u": "https://docs.github.com/en/copilot/concepts/agents/coding-agent/about-coding-agent",
+      "k": "инструмент",
+      "lang": "en",
+      "n": "Асинхронный агент, работающий от issue и открывающий пул-реквесты."
+     },
+     {
+      "t": "Aider",
+      "u": "https://aider.chat/",
+      "k": "инструмент",
+      "lang": "en",
+      "n": "Открытый парный программист с интеграцией в Git."
+     },
+     {
+      "t": "OpenCode",
+      "u": "https://opencode.ai/",
+      "k": "инструмент",
+      "lang": "en",
+      "n": "Открытый терминальный агент с клиент-серверной архитектурой."
+     },
+     {
+      "t": "OpenHands",
+      "u": "https://docs.all-hands.dev/",
+      "k": "инструмент",
+      "lang": "en",
+      "n": "Платформа для запуска агентов разработки локально или в облаке."
+     },
+     {
+      "t": "Cline",
+      "u": "https://github.com/cline/cline",
+      "k": "инструмент",
+      "lang": "en",
+      "n": "Открытый агент в виде расширения редактора, CLI и SDK."
+     },
+     {
+      "t": "Continue",
+      "u": "https://www.continue.dev/",
+      "k": "инструмент",
+      "lang": "en",
+      "n": "Агенты для IDE и CI с конфигурацией под контролем версий."
+     },
+     {
+      "t": "Neo",
+      "u": "https://github.com/owainlewis/neo",
+      "k": "инструмент",
+      "lang": "en",
+      "n": "Открытый терминальный агент с субагентами, скиллами и песочницей."
+     },
+     {
+      "t": "Blueprint — набор скиллов агента",
+      "u": "https://github.com/owainlewis/blueprint/tree/main/skills",
+      "k": "репозиторий",
+      "lang": "en",
+      "n": "Скиллы для проектирования, реализации, тестирования и ревью изменений."
+     },
+     {
+      "t": "Build Your Own Coding Agent Like Pi",
+      "u": "https://www.youtube.com/watch?v=QER-0DaC-Gk",
+      "k": "видео",
+      "lang": "en",
+      "n": "Минимальный харнесс агента на Go: цикл, инструменты, файлы, терминал."
+     },
+     {
+      "t": "AI Engineer — канал",
+      "u": "https://www.youtube.com/@owainlewis/videos",
+      "k": "видео",
+      "lang": "en",
+      "n": "Практические разборы по кодовым агентам и инженерии ИИ."
+     }
+    ]
+   },
+   {
+    "title": "Оркестрация и software factories",
+    "blocks": [
+     "H",
+     "I"
+    ],
+    "items": [
+     {
+      "t": "Harness Engineering (OpenAI)",
+      "u": "https://openai.com/index/harness-engineering/",
+      "k": "статья",
+      "lang": "en",
+      "n": "Полевой отчёт о разработке с кодовыми агентами: ограничения репозитория, автопроверки, управление."
+     },
+     {
+      "t": "Codex Orchestration with Symphony",
+      "u": "https://openai.com/index/open-source-codex-orchestration-symphony/",
+      "k": "статья",
+      "lang": "en",
+      "n": "Референсная архитектура: работа проекта разбивается на изолированные наблюдаемые прогоны агентов."
+     },
+     {
+      "t": "How We Built Our Multi-Agent Research System",
+      "u": "https://www.anthropic.com/engineering/multi-agent-research-system",
+      "k": "статья",
+      "lang": "en",
+      "n": "Оркестратор и воркеры, параллельный поиск, оценка, эксплуатационные уроки."
+     },
+     {
+      "t": "Factory",
+      "u": "https://github.com/owainlewis/factory",
+      "k": "инструмент",
+      "lang": "en",
+      "n": "Контрольная панель для планирования и координации агентов по репозиториям."
+     }
+    ]
+   },
+   {
+    "title": "Visual GenAI: все 12 лекций",
+    "blocks": [
+     "R",
+     "K"
+    ],
+    "items": [
+     {
+      "t": "Неделя 1 — DDPM и denoising score matching",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/week1_ddpm_dsm/ddpm_dsm_lecture.pdf",
+      "k": "слайды",
+      "lang": "en",
+      "n": "Точка входа в диффузию. Есть лекция и семинар на русском."
+     },
+     {
+      "t": "Неделя 2 — непрерывная диффузия: PF-ODE и SDE",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/week2_continuous_time_diffusion/continuous_time_diffusion_lecture.pdf",
+      "k": "слайды",
+      "lang": "en",
+      "n": "Непрерывное время: два эквивалентных взгляда на процесс."
+     },
+     {
+      "t": "Неделя 3 — flow matching",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/week3_flow_matching_and_solvers/flow_matching_lecture.pdf",
+      "k": "слайды",
+      "lang": "en",
+      "n": "Связь flow matching с диффузией, современный стандарт обучения."
+     },
+     {
+      "t": "Неделя 4 — эффективные солверы: DDIM и DPM-Solver",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/week3_flow_matching_and_solvers/solvers_lecture.pdf",
+      "k": "слайды",
+      "lang": "en",
+      "n": "Как уменьшить число шагов сэмплирования без потери качества."
+     },
+     {
+      "t": "Неделя 5 — диффузия на практике",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/week4_practical_dm/practical_dm_lecture.pdf",
+      "k": "слайды",
+      "lang": "en",
+      "n": "Пространства, архитектуры, приёмы обучения и сэмплинга из продакшена."
+     },
+     {
+      "t": "Неделя 6 — flow map модели (consistency, MeanFlow)",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/week5_few_step_models_flow_maps/few_step_flow_map_lecture.pdf",
+      "k": "слайды",
+      "lang": "en",
+      "n": "Обучаемые интеграторы траектории ради быстрой генерации."
+     },
+     {
+      "t": "Неделя 7 — distribution matching (DMD, ADD, SwD)",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/week6_few_step_models_distribution_matching/distribution_matching_lecture.pdf",
+      "k": "слайды",
+      "lang": "en",
+      "n": "Как генераторы за несколько шагов догоняют многошаговые по качеству."
+     },
+     {
+      "t": "Неделя 8 — авторегрессионная визуальная генерация",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/week7_visual_ar_models/visual_ar_models_lecture.pdf",
+      "k": "слайды",
+      "lang": "en",
+      "n": "VQ-VAE и VQ-GAN, масштабные модели VAR и Switti, непрерывный AR."
+     },
+     {
+      "t": "Неделя 9 — генерация видео",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/week8_video_diffusion_and_efficient_genai/video_generation_and_efficient_genai_lecture.pdf",
+      "k": "слайды",
+      "lang": "en",
+      "n": "Архитектуры, трудности и авторегрессионные видео-диффузионные модели."
+     },
+     {
+      "t": "Неделя 10 — эффективные диффузионные модели",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/tree/main/week8_video_diffusion_and_efficient_genai",
+      "k": "слайды",
+      "lang": "en",
+      "n": "Кэширование, разреженное внимание, квантование: оптимизации уровня модели."
+     },
+     {
+      "t": "Неделя 11 — мультимодальная генерация и управление",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/week9_multimodal_generation_and_conditioning/multimodal_generation_and_conditioning.pdf",
+      "k": "слайды",
+      "lang": "en",
+      "n": "ControlNet, IP-Adapter и механизмы обусловливания."
+     },
+     {
+      "t": "Неделя 12 — 3D-генерация",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/week10_3d_generative_models/3d_generative_models_lecture.pdf",
+      "k": "слайды",
+      "lang": "en",
+      "n": "Введение в 3D-моделирование и multi-view диффузию."
+     }
+    ]
+   },
+   {
+    "title": "Visual GenAI: практики и экзамен",
+    "blocks": [
+     "R"
+    ],
+    "items": [
+     {
+      "t": "Практика 1 — DDPM и DSM",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/tree/main/assignments/hw1_diffusion_fundamentals",
+      "k": "ноутбук",
+      "lang": "en",
+      "n": "Стартовый шаблон плюс task.pdf с постановкой."
+     },
+     {
+      "t": "Практика 2 — DPM-Solver",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/tree/main/assignments/hw2_diffusion_solvers",
+      "k": "ноутбук",
+      "lang": "en",
+      "n": "Эффективные солверы, с теоретической частью."
+     },
+     {
+      "t": "Практика 3 — обучение flow matching",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/tree/main/assignments/hw3_flow_matching",
+      "k": "ноутбук",
+      "lang": "en",
+      "n": "Тренировка модели потоков с нуля."
+     },
+     {
+      "t": "Практика 4 — flow map модели",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/tree/main/assignments/hw4_flow_maps",
+      "k": "ноутбук",
+      "lang": "en",
+      "n": "Быстрое сэмплирование через обучаемые интеграторы."
+     },
+     {
+      "t": "Практика 5 — дистилляция ADD и MMD",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/tree/main/assignments/hw5_distribution_matching",
+      "k": "ноутбук",
+      "lang": "en",
+      "n": "Сведение многошагового генератора к нескольким шагам."
+     },
+     {
+      "t": "Практика 6 — MAR с flow-matching головой",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/tree/main/assignments/hw6_masked_ar",
+      "k": "ноутбук",
+      "lang": "en",
+      "n": "Авторегрессионная генерация в непрерывном пространстве."
+     },
+     {
+      "t": "Практика 7 — сэмплирование AR video diffusion",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/tree/main/assignments/hw7_video_ar_diffusion",
+      "k": "ноутбук",
+      "lang": "en",
+      "n": "Генерация видео авторегрессионной диффузией."
+     },
+     {
+      "t": "Экзаменационные вопросы курса",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/exam/exam_topics_visual_genai.md",
+      "k": "список",
+      "lang": "en",
+      "n": "Полный перечень тем к экзамену: удобно как чек-лист по курсу."
+     }
+    ]
+   }
+  ]
+ }
+}

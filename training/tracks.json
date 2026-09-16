@@ -1,41 +1,60 @@
 {
-  "tracks": [
-    {"id": "measure", "title": "Замеры и доказательства", "order": 1},
-    {"id": "data", "title": "Данные", "order": 2},
-    {"id": "models", "title": "Модели", "order": 3},
-    {"id": "retrieval", "title": "Поиск и агенты", "order": 4},
-    {"id": "prod", "title": "Прод и инфраструктура", "order": 5},
-    {"id": "craft", "title": "Ремесло и ML-канон", "order": 6}
-  ],
-  "assignment": {
-    "A": "measure",
-    "G": "measure",
-    "M": "measure",
-    "P": "measure",
-    "X": "measure",
-    "B": "data",
-    "N": "data",
-    "O": "data",
-    "U": "data",
-    "C": "models",
-    "D": "models",
-    "K": "models",
-    "S": "models",
-    "T": "models",
-    "F": "retrieval",
-    "Q": "retrieval",
-    "R": "retrieval",
-    "E": "prod",
-    "H": "prod",
-    "V": "prod",
-    "W": "prod",
-    "AA": "prod",
-    "AC": "prod",
-    "I": "craft",
-    "J": "craft",
-    "L": "craft",
-    "Y": "craft",
-    "AB": "craft",
-    "Z": "craft"
+ "tracks": [
+  {
+   "id": "measure",
+   "title": "Замеры и доказательства",
+   "order": 1
+  },
+  {
+   "id": "data",
+   "title": "Данные",
+   "order": 2
+  },
+  {
+   "id": "models",
+   "title": "Модели",
+   "order": 3
+  },
+  {
+   "id": "retrieval",
+   "title": "Поиск и агенты",
+   "order": 4
+  },
+  {
+   "id": "prod",
+   "title": "Прод и инфраструктура",
+   "order": 5
+  },
+  {
+   "id": "craft",
+   "title": "Ремесло и ML-канон",
+   "order": 6
   }
+ ],
+ "assignment": {
+  "A": "measure",
+  "G": "measure",
+  "M": "measure",
+  "P": "measure",
+  "T": "measure",
+  "B": "data",
+  "N": "data",
+  "O": "data",
+  "C": "models",
+  "D": "models",
+  "K": "models",
+  "S": "models",
+  "W": "models",
+  "F": "retrieval",
+  "R": "retrieval",
+  "U": "retrieval",
+  "V": "retrieval",
+  "E": "prod",
+  "H": "prod",
+  "I": "craft",
+  "J": "craft",
+  "L": "craft",
+  "Q": "craft",
+  "Z": "craft"
+ }
 }

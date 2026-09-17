@@ -346,6 +346,177 @@
  ],
  "videos": [
   {
+   "block": "AC",
+   "items": [
+    {
+     "t": "3Blue1Brown — Gradient descent, how neural networks learn (глава 2)",
+     "u": "https://www.youtube.com/watch?v=IHZwWFHWa-w",
+     "k": "видео",
+     "lang": "en",
+     "n": "Градиент как направление наибольшего роста и почему спуск идёт против него."
+    }
+   ]
+  },
+  {
+   "block": "T",
+   "items": [
+    {
+     "t": "3Blue1Brown — Bayes theorem, the geometry of changing beliefs",
+     "u": "https://www.youtube.com/watch?v=HZGCoVF3YvM",
+     "k": "видео",
+     "lang": "en",
+     "n": "Формула Байеса через площади. Отсюда же понятна ловушка базовой частоты."
+    },
+    {
+     "t": "StatQuest — p-values: What they are and how to interpret them",
+     "u": "https://www.youtube.com/watch?v=vemZtEM63GY",
+     "k": "видео",
+     "lang": "en",
+     "n": "Что p-значение означает и чего не означает, без формул."
+    }
+   ]
+  },
+  {
+   "block": "A",
+   "items": [
+    {
+     "t": "Самая полная и понятная лекция по A/B тестам: метрики, гипотезы, статистика, инструменты",
+     "u": "https://www.youtube.com/watch?v=FEI1OA-zgb8",
+     "k": "видео",
+     "lang": "ru",
+     "n": "Полный цикл проверки гипотезы. Язык, на котором говорят продуктовые команды."
+    },
+    {
+     "t": "Yandex for Analytics — Формула доверия: доверительные интервалы для ratio- и uplift-метрик",
+     "u": "https://www.youtube.com/watch?v=0yhbw9QV9Z4",
+     "k": "видео",
+     "lang": "ru",
+     "n": "Интервалы для дробных метрик — ровно твой случай с пер-полевыми долями."
+    }
+   ]
+  },
+  {
+   "block": "N",
+   "items": [
+    {
+     "t": "StatQuest — Machine Learning Fundamentals: Bias and Variance",
+     "u": "https://www.youtube.com/watch?v=EuBBz3bI-aA",
+     "k": "видео",
+     "lang": "en",
+     "n": "Смещение против дисперсии на картинках: откуда берётся переобучение."
+    }
+   ]
+  },
+  {
+   "block": "L",
+   "items": [
+    {
+     "t": "StatQuest — ROC and AUC, Clearly Explained",
+     "u": "https://www.youtube.com/watch?v=4jRBRDbJemM",
+     "k": "видео",
+     "lang": "en",
+     "n": "Как строится кривая и почему при редком классе смотрят на PR, а не на ROC."
+    },
+    {
+     "t": "StatQuest — The Confusion Matrix",
+     "u": "https://www.youtube.com/watch?v=Kdsp6soqA7o",
+     "k": "видео",
+     "lang": "en",
+     "n": "Четыре клетки, из которых выводятся все метрики классификации."
+    }
+   ]
+  },
+  {
+   "block": "X",
+   "items": [
+    {
+     "t": "StatQuest — Random Forests Part 1: Building, Using and Evaluating",
+     "u": "https://www.youtube.com/watch?v=J4Wdy0Wc_xQ",
+     "k": "видео",
+     "lang": "en",
+     "n": "Бэггинг, случайный выбор признаков и оценка на не попавших в подвыборку."
+    },
+    {
+     "t": "StatQuest — Principal Component Analysis (PCA), Step-by-Step",
+     "u": "https://www.youtube.com/watch?v=FgakZw6K1QQ",
+     "k": "видео",
+     "lang": "en",
+     "n": "Главные компоненты и объяснённая дисперсия по шагам."
+    },
+    {
+     "t": "StatQuest — K-means clustering",
+     "u": "https://www.youtube.com/watch?v=4b5d3muPQmA",
+     "k": "видео",
+     "lang": "en",
+     "n": "Алгоритм, выбор числа кластеров и почему масштаб признаков обязателен."
+    }
+   ]
+  },
+  {
+   "block": "M",
+   "items": [
+    {
+     "t": "Optuna: A Define by Run Hyperparameter Optimization Framework (SciPy 2019)",
+     "u": "https://www.youtube.com/watch?v=J_aymk4YXhg",
+     "k": "видео",
+     "lang": "en",
+     "n": "Доклад авторов: зачем define-by-run и как устроен поиск."
+    },
+    {
+     "t": "Optuna: A Define-by-Run Hyperparameter Optimization Framework (SciPy Japan)",
+     "u": "https://www.youtube.com/watch?v=tcrcLRopTX0",
+     "k": "видео",
+     "lang": "en",
+     "n": "Та же тема подробнее, с примерами пространства поиска и прунеров."
+    }
+   ]
+  },
+  {
+   "block": "Q",
+   "items": [
+    {
+     "t": "Юрий Кашницкий — Лекция 10. Градиентный бустинг (mlcourse.ai, OpenDataScience)",
+     "u": "https://www.youtube.com/watch?v=ow5LdsjzfL0",
+     "k": "видео",
+     "lang": "ru",
+     "n": "Механика бустинга от функции потерь до практики. Базовая лекция блока."
+    },
+    {
+     "t": "Computer Science Center — CatBoost, градиентный бустинг от Яндекса",
+     "u": "https://www.youtube.com/watch?v=UYDwhuyWYSo",
+     "k": "видео",
+     "lang": "ru",
+     "n": "Упорядоченное кодирование категорий и симметричные деревья от команды разработки."
+    },
+    {
+     "t": "Young&&Yandex — Тренировки по ML, лекция 5: градиентный бустинг, тонкости обучения",
+     "u": "https://www.youtube.com/watch?v=DqUtGa99_H8",
+     "k": "видео",
+     "lang": "ru",
+     "n": "Практические тонкости: переобучение, ранняя остановка, параметры."
+    }
+   ]
+  },
+  {
+   "block": "Y",
+   "items": [
+    {
+     "t": "3Blue1Brown — But what is a neural network? (глава 1)",
+     "u": "https://www.youtube.com/watch?v=aircAruvnKk",
+     "k": "видео",
+     "lang": "en",
+     "n": "Слой, веса и нелинейность: с чего начинается вся конструкция."
+    },
+    {
+     "t": "Andrej Karpathy — The spelled-out intro: building micrograd",
+     "u": "https://www.youtube.com/watch?v=VMj-3S1tku0",
+     "k": "видео",
+     "lang": "en",
+     "n": "Обратное распространение руками, с нуля и до работающего автограда."
+    }
+   ]
+  },
+  {
    "block": "S",
    "items": [
     {
@@ -407,6 +578,39 @@
    ]
   },
   {
+   "block": "R",
+   "items": [
+    {
+     "t": "Евгений Разинков — Компьютерное зрение с использованием глубокого обучения, лекция 1",
+     "u": "https://www.youtube.com/watch?v=mvA038KeZ1c",
+     "k": "видео",
+     "lang": "ru",
+     "n": "Введение в задачи зрения: классификация, детекция, сегментация и их метрики."
+    },
+    {
+     "t": "Евгений Разинков — Лекция 6. Локализация объектов",
+     "u": "https://www.youtube.com/watch?v=CRm-7twlcis",
+     "k": "видео",
+     "lang": "ru",
+     "n": "Детекция и IoU: то, что нужно для работы с рамками полей на документе."
+    },
+    {
+     "t": "PythonToday — Распознавание текста с изображения: EasyOCR против Tesseract",
+     "u": "https://www.youtube.com/watch?v=H_nXZSM4WiU",
+     "k": "видео",
+     "lang": "ru",
+     "n": "Практическое сравнение двух движков на Python, с кодом."
+    },
+    {
+     "t": "OTUS — Мультимодальные LLM: как модели видят изображения и понимают текст",
+     "u": "https://www.youtube.com/watch?v=AGEhdbGYneA",
+     "k": "видео",
+     "lang": "ru",
+     "n": "Как картинка попадает в языковую модель. Мост между блоками D и R."
+    }
+   ]
+  },
+  {
    "block": "F",
    "items": [
     {
@@ -443,103 +647,6 @@
      "k": "видео",
      "lang": "ru",
      "n": "Короткий вход в тему для объяснения коллегам и заказчику."
-    }
-   ]
-  },
-  {
-   "block": "Q",
-   "items": [
-    {
-     "t": "Юрий Кашницкий — Лекция 10. Градиентный бустинг (mlcourse.ai, OpenDataScience)",
-     "u": "https://www.youtube.com/watch?v=ow5LdsjzfL0",
-     "k": "видео",
-     "lang": "ru",
-     "n": "Механика бустинга от функции потерь до практики. Базовая лекция блока."
-    },
-    {
-     "t": "Computer Science Center — CatBoost, градиентный бустинг от Яндекса",
-     "u": "https://www.youtube.com/watch?v=UYDwhuyWYSo",
-     "k": "видео",
-     "lang": "ru",
-     "n": "Упорядоченное кодирование категорий и симметричные деревья от команды разработки."
-    },
-    {
-     "t": "Young&&Yandex — Тренировки по ML, лекция 5: градиентный бустинг, тонкости обучения",
-     "u": "https://www.youtube.com/watch?v=DqUtGa99_H8",
-     "k": "видео",
-     "lang": "ru",
-     "n": "Практические тонкости: переобучение, ранняя остановка, параметры."
-    }
-   ]
-  },
-  {
-   "block": "R",
-   "items": [
-    {
-     "t": "Евгений Разинков — Компьютерное зрение с использованием глубокого обучения, лекция 1",
-     "u": "https://www.youtube.com/watch?v=mvA038KeZ1c",
-     "k": "видео",
-     "lang": "ru",
-     "n": "Введение в задачи зрения: классификация, детекция, сегментация и их метрики."
-    },
-    {
-     "t": "Евгений Разинков — Лекция 6. Локализация объектов",
-     "u": "https://www.youtube.com/watch?v=CRm-7twlcis",
-     "k": "видео",
-     "lang": "ru",
-     "n": "Детекция и IoU: то, что нужно для работы с рамками полей на документе."
-    },
-    {
-     "t": "PythonToday — Распознавание текста с изображения: EasyOCR против Tesseract",
-     "u": "https://www.youtube.com/watch?v=H_nXZSM4WiU",
-     "k": "видео",
-     "lang": "ru",
-     "n": "Практическое сравнение двух движков на Python, с кодом."
-    },
-    {
-     "t": "OTUS — Мультимодальные LLM: как модели видят изображения и понимают текст",
-     "u": "https://www.youtube.com/watch?v=AGEhdbGYneA",
-     "k": "видео",
-     "lang": "ru",
-     "n": "Как картинка попадает в языковую модель. Мост между блоками D и R."
-    }
-   ]
-  },
-  {
-   "block": "M",
-   "items": [
-    {
-     "t": "Optuna: A Define by Run Hyperparameter Optimization Framework (SciPy 2019)",
-     "u": "https://www.youtube.com/watch?v=J_aymk4YXhg",
-     "k": "видео",
-     "lang": "en",
-     "n": "Доклад авторов: зачем define-by-run и как устроен поиск."
-    },
-    {
-     "t": "Optuna: A Define-by-Run Hyperparameter Optimization Framework (SciPy Japan)",
-     "u": "https://www.youtube.com/watch?v=tcrcLRopTX0",
-     "k": "видео",
-     "lang": "en",
-     "n": "Та же тема подробнее, с примерами пространства поиска и прунеров."
-    }
-   ]
-  },
-  {
-   "block": "A",
-   "items": [
-    {
-     "t": "Самая полная и понятная лекция по A/B тестам: метрики, гипотезы, статистика, инструменты",
-     "u": "https://www.youtube.com/watch?v=FEI1OA-zgb8",
-     "k": "видео",
-     "lang": "ru",
-     "n": "Полный цикл проверки гипотезы. Язык, на котором говорят продуктовые команды."
-    },
-    {
-     "t": "Yandex for Analytics — Формула доверия: доверительные интервалы для ratio- и uplift-метрик",
-     "u": "https://www.youtube.com/watch?v=0yhbw9QV9Z4",
-     "k": "видео",
-     "lang": "ru",
-     "n": "Интервалы для дробных метрик — ровно твой случай с пер-полевыми долями."
     }
    ]
   }

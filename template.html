@@ -1,3 +1,8 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Тренажёр AI-инженера</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -255,6 +260,40 @@ main { padding-block: 34px 72px; }
 :root:not([data-theme="light"]) .btn-primary { color: #05201C; }
 
 .btn-ghost { border-color: transparent; color: var(--accent); padding-inline: 6px; }
+
+.route { display: grid; gap: 26px; }
+
+.stage-band { display: grid; gap: 10px; }
+
+.stage-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.stage-name {
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+}
+
+.stage-count {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+
+.step-no {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--muted);
+}
 
 .block-grid {
   display: grid;
@@ -797,6 +836,7 @@ const QUIZ = DATA.quiz;
 const FAQ = DATA.faq;
 const LIB = DATA.library;
 const TRACKS = DATA.tracks || { tracks: [], assignment: {} };
+const ROUTE = DATA.route || { stages: [] };
 const KEYS = ["А", "Б", "В", "Г", "Д", "Е"];
 const STORE = "ai-trainer-v2";
 const app = document.getElementById("app");
@@ -913,25 +953,38 @@ function render() {
   return renderQuestion();
 }
 
+function cardOf(b) {
+  const n = questionsOf(b.id).length;
+  const h = state.history[b.id];
+  const pill = h
+    ? `<span class="score-pill ${scoreClass(h.right / h.total)}">${h.right}/${h.total}</span>`
+    : `<span class="score-pill">не пройден</span>`;
+  return `<button class="block-card" type="button" data-block="${b.id}">
+    <span class="block-sigil">${b.id}</span>
+    <span class="block-name"><span class="step-no">${b.order}.</span> ${esc(b.title)}</span>
+    <span class="block-note">${esc(b.hint || b.note || "")}</span>
+    <span class="block-stats">
+      <span class="level-tag ${b.level === "экспертный" ? "is-hard" : ""}">${esc(b.level || "")}</span>
+      ${trackOf(b.id) ? `<span class="level-tag">${esc(trackOf(b.id).title)}</span>` : ""}
+      <span>${n} вопросов</span>
+      ${pill}
+    </span>
+  </button>`;
+}
+
 function renderStart() {
   const list = blocksByLevel();
-  const cards = list.map(b => {
-    const n = questionsOf(b.id).length;
-    const h = state.history[b.id];
-    const pill = h
-      ? `<span class="score-pill ${scoreClass(h.right / h.total)}">${h.right}/${h.total}</span>`
-      : `<span class="score-pill">не пройден</span>`;
-    return `<button class="block-card" type="button" data-block="${b.id}">
-      <span class="block-sigil">${b.id}</span>
-      <span class="block-name">${esc(b.title)}</span>
-      <span class="block-note">${esc(b.note || "")}</span>
-      <span class="block-stats">
-        <span class="level-tag ${b.level === "экспертный" ? "is-hard" : ""}">${esc(b.level || "")}</span>
-        ${trackOf(b.id) ? `<span class="level-tag">${esc(trackOf(b.id).title)}</span>` : ""}
-        <span>${n} вопросов</span>
-        ${pill}
-      </span>
-    </button>`;
+  const stages = ROUTE.stages.filter(name => list.some(b => b.stage === name));
+  const cards = stages.map(name => {
+    const group = list.filter(b => b.stage === name);
+    const done = group.filter(b => state.history[b.id]).length;
+    return `<section class="stage-band">
+      <header class="stage-head">
+        <h3 class="stage-name">${esc(name)}</h3>
+        <span class="stage-count">${done} из ${group.length} пройдено</span>
+      </header>
+      <div class="block-grid">${group.map(cardOf).join("")}</div>
+    </section>`;
   }).join("");
 
   const answered = Object.values(state.history);
@@ -960,7 +1013,7 @@ function renderStart() {
       <button class="chip" type="button" data-track="all" aria-pressed="${state.track === "all"}">все</button>
       ${TRACKS.tracks.map(t => `<button class="chip" type="button" data-track="${t.id}" aria-pressed="${state.track === t.id}">${esc(t.title)}</button>`).join("")}
     </div>
-    <div class="block-grid">${cards.length ? cards : `<p class="empty">В этом сочетании фильтров блоков нет.</p>`}</div>
+    <div class="route">${cards.length ? cards : `<p class="empty">В этом сочетании фильтров блоков нет.</p>`}</div>
     <p class="footer-note">Ответы и прогресс хранятся только в этом браузере.</p>
   `;
 

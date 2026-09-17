@@ -20,7 +20,9 @@ def load(name):
 
 
 def rank(item):
-    return ORDER.index(item["id"]) if item["id"] in ORDER else len(ORDER)
+    if "order" not in item:
+        raise SystemExit(f"блоку не задан шаг маршрута: {item['id']}")
+    return item["order"]
 
 
 def main():
@@ -34,6 +36,7 @@ def main():
 
     tracks = load("tracks.json")
     library = load("library.json")
+    route = load("route.json")
 
     orphans = sorted({b["id"] for b in blocks} - set(tracks["assignment"]))
     if orphans:
@@ -56,6 +59,7 @@ def main():
         "faq": {"sections": sections},
         "library": library,
         "tracks": tracks,
+        "route": route,
     }
     blob = json.dumps(payload, ensure_ascii=False, separators=(",", ":")).replace("</script", "<\\/script")
     page = TEMPLATE.read_text(encoding="utf-8").replace("__DATA__", blob)
@@ -70,7 +74,7 @@ def main():
     materials |= {i["u"] for g in library.get("catalog", {}).get("groups", []) for i in g["items"]}
 
     print(f"блоков: {len(blocks)} · вопросов: {len(questions)} · разделов: {len(sections)} · терминов: {terms}")
-    print(f"треков: {len(tracks['tracks'])} · материалов: {len(materials)}")
+    print(f"треков: {len(tracks['tracks'])} · этапов: {len(route['stages'])} · материалов: {len(materials)}")
     print(f"страница: {'перезаписана' if page != previous else 'без изменений'}, {round(len(page.encode('utf-8')) / 1024, 1)} kb")
     return 0
 

@@ -55,6 +55,11 @@
   "J": "craft",
   "L": "craft",
   "Q": "craft",
-  "Z": "craft"
+  "Z": "craft",
+  "X": "craft",
+  "Y": "models",
+  "AA": "craft",
+  "AB": "prod",
+  "AC": "measure"
  }
 }

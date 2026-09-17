@@ -326,7 +326,7 @@ main { padding-block: 34px 72px; }
   color: var(--muted);
 }
 
-.level-tag.is-senior { color: var(--accent-ink); }
+.level-tag.is-hard { color: var(--accent-ink); }
 
 /* exam */
 .exam-wrap { display: grid; gap: 24px; max-width: 900px; }
@@ -926,7 +926,7 @@ function renderStart() {
       <span class="block-name">${esc(b.title)}</span>
       <span class="block-note">${esc(b.note || "")}</span>
       <span class="block-stats">
-        <span class="level-tag ${b.level === "сеньор" ? "is-senior" : ""}">${esc(b.level || "")}</span>
+        <span class="level-tag ${b.level === "экспертный" ? "is-hard" : ""}">${esc(b.level || "")}</span>
         ${trackOf(b.id) ? `<span class="level-tag">${esc(trackOf(b.id).title)}</span>` : ""}
         <span>${n} вопросов</span>
         ${pill}
@@ -948,11 +948,12 @@ function renderStart() {
       <span>Суммарно верно ${right} из ${total} · пройдено блоков ${answered.length} из ${QUIZ.blocks.length}</span>
       <button class="btn btn-ghost" type="button" id="reset">Сбросить прогресс</button>
     </div>` : ""}
-    <div class="filters" role="group" aria-label="Уровень">
-      <span class="eyebrow">Уровень</span>
+    <div class="filters" role="group" aria-label="Сложность">
+      <span class="eyebrow">Сложность</span>
       <button class="chip" type="button" data-level="all" aria-pressed="${state.level === "all"}">все</button>
-      <button class="chip" type="button" data-level="мидл" aria-pressed="${state.level === "мидл"}">мидл</button>
-      <button class="chip" type="button" data-level="сеньор" aria-pressed="${state.level === "сеньор"}">сеньор</button>
+      <button class="chip" type="button" data-level="базовый" aria-pressed="${state.level === "базовый"}">базовый</button>
+      <button class="chip" type="button" data-level="продвинутый" aria-pressed="${state.level === "продвинутый"}">продвинутый</button>
+      <button class="chip" type="button" data-level="экспертный" aria-pressed="${state.level === "экспертный"}">экспертный</button>
     </div>
     <div class="filters" role="group" aria-label="Трек">
       <span class="eyebrow">Трек</span>
@@ -1057,7 +1058,7 @@ function renderResult() {
         <p>${mono(q.why)}</p>
         ${q.case ? `<div class="note"><span class="note-label">Из твоей практики</span><span>${mono(q.case)}</span></div>` : ""}
       </div>
-    </details>`).join("") : `<p class="empty">Ошибок нет. Возьми блок уровня сеньор.</p>`;
+    </details>`).join("") : `<p class="empty">Ошибок нет. Возьми блок посложнее.</p>`;
 
   const rows = QUIZ.blocks.map(b => {
     const h = state.history[b.id];

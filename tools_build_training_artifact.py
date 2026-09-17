@@ -7,8 +7,8 @@ TRAINING = ROOT / "training"
 TEMPLATE = ROOT / "template.html"
 ARTIFACT = ROOT / "ai_engineer_training.html"
 
-QUIZ_FILES = ["quiz_core.json", "quiz_mid_senior.json", "quiz_senior_agents.json"]
-FAQ_FILES = ["faq_core.json", "faq_mid_senior.json", "faq_senior_agents.json"]
+QUIZ_FILES = ["quiz_core.json", "quiz_extended.json", "quiz_agents.json"]
+FAQ_FILES = ["faq_core.json", "faq_extended.json", "faq_agents.json"]
 ORDER = "ABCDEFGHIJKLMNOPQRSTUVWZ"
 
 

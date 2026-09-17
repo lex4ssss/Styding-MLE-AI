@@ -9,7 +9,6 @@ ARTIFACT = ROOT / "ai_engineer_training.html"
 
 QUIZ_FILES = ["quiz_core.json", "quiz_extended.json", "quiz_agents.json", "quiz_foundations.json"]
 FAQ_FILES = ["faq_core.json", "faq_extended.json", "faq_agents.json", "faq_foundations.json"]
-ORDER = "ABCDEFGHIJKLMNOPQRSTUVWZ"
 
 
 def load(name):

@@ -4,290 +4,325 @@
   {
    "stage": "1",
    "title": "Основания",
-   "goal": "Понимать, что происходит внутри, и уметь говорить об этом формулами, а не метафорами.",
+   "goal": "Читать формулы без страха и уверенно работать в терминале, на сервере и в контейнере.",
    "blocks": [
+    "AC",
     "T",
-    "S",
-    "A"
+    "A",
+    "AB"
    ],
    "items": [
     {
      "t": "MIT 6.042J — Mathematics for Computer Science",
-     "u": "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/mit6_042js15_textbook.pdf",
+     "u": "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2010/",
      "k": "учебник",
-     "lang": "en",
-     "n": "Главы 16–19: вероятность, матожидание, отклонение от среднего. Глава 13: асимптотика. 920 страниц, читать выборочно."
+     "n": "Вероятность, матожидание, отклонение от среднего, графы и асимптотика."
     },
     {
-     "t": "Attention Is All You Need",
-     "u": "https://arxiv.org/abs/1706.03762",
-     "k": "статья",
-     "lang": "en",
-     "n": "Q, K, V и multi-head в оригинале. Разделы 3.1–3.3."
-    },
-    {
-     "t": "Karpathy — Neural Networks: Zero to Hero",
-     "u": "https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ",
+     "t": "3Blue1Brown — суть линейной алгебры",
+     "u": "https://www.3blue1brown.com/topics/linear-algebra",
      "k": "видео",
-     "lang": "en",
-     "n": "От градиента руками до GPT. Единственный курс, после которого трансформер перестаёт быть чёрным ящиком."
+     "n": "Матрица как преобразование, собственные векторы, определитель."
     },
     {
-     "t": "Understanding Deep Learning (Prince)",
-     "u": "https://udlbook.github.io/udlbook/",
+     "t": "Mathematics for Machine Learning",
+     "u": "https://mml-book.github.io/",
      "k": "книга",
-     "lang": "en",
-     "n": "Бесплатный PDF с ноутбуками. Лучший мост между интуицией и математикой."
+     "n": "Алгебра, анализ, вероятность и оптимизация ровно под нужды ML."
     },
     {
-     "t": "Speech and Language Processing (Jurafsky, Martin)",
-     "u": "https://web.stanford.edu/~jurafsky/slp3/",
-     "k": "учебник",
-     "lang": "en",
-     "n": "Канон NLP. Главы про эмбеддинги, последовательности и разметку сущностей."
+     "t": "MIT — The Missing Semester",
+     "u": "https://missing.csail.mit.edu/",
+     "k": "курс",
+     "n": "Терминал, git, отладка и профилирование: то, чему не учат на курсах."
+    },
+    {
+     "t": "Docker — get started",
+     "u": "https://docs.docker.com/get-started/",
+     "k": "документация",
+     "n": "Образы, слои, кэш сборки и монтирование томов."
     }
    ]
   },
   {
    "stage": "2",
-   "title": "Приложения на моделях",
-   "goal": "Собирать работающие системы: промпт, схема ответа, поиск, инструменты.",
+   "title": "Постановка и данные",
+   "goal": "Найти задачу за просьбой, собрать честный эталон и хранить данные так, чтобы их можно было спросить.",
    "blocks": [
-    "C",
-    "F",
+    "I",
+    "B",
+    "N",
+    "O"
+   ],
+   "items": [
+    {
+     "t": "Google — правила ML-инженерии",
+     "u": "https://developers.google.com/machine-learning/guides/rules-of-ml",
+     "k": "руководство",
+     "n": "Порядок действий: сначала бейзлайн и метрика, потом сложность."
+    },
+    {
+     "t": "Designing Machine Learning Systems (Huyen)",
+     "u": "https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/",
+     "k": "книга",
+     "n": "Перевод бизнес-цели в метрику, границы системы, требования."
+    },
+    {
+     "t": "Datasheets for Datasets",
+     "u": "https://arxiv.org/abs/1803.09010",
+     "k": "статья",
+     "n": "Что должно быть в описании набора, чтобы цифра воспроизводилась."
+    },
+    {
+     "t": "pandera — валидация датафреймов",
+     "u": "https://pandera.readthedocs.io/en/stable/",
+     "k": "инструмент",
+     "n": "Схема данных и проверки, которые падают при нарушении."
+    },
+    {
+     "t": "PostgreSQL — официальная документация",
+     "u": "https://www.postgresql.org/docs/current/",
+     "k": "документация",
+     "n": "Схема, индексы, секционирование, транзакции, jsonb."
+    }
+   ]
+  },
+  {
+   "stage": "3",
+   "title": "Классический ML",
+   "goal": "Закрывать табличные задачи бустингом и понимать, когда разметки нет и что тогда делать.",
+   "blocks": [
+    "L",
+    "X",
+    "P",
+    "M",
+    "Q"
+   ],
+   "items": [
+    {
+     "t": "The Elements of Statistical Learning",
+     "u": "https://hastie.su.domains/ElemStatLearn/",
+     "k": "книга",
+     "n": "Канон: деревья, бэггинг, бустинг, смещение и дисперсия."
+    },
+    {
+     "t": "scikit-learn — ансамблевые методы",
+     "u": "https://scikit-learn.org/stable/modules/ensemble.html",
+     "k": "документация",
+     "n": "Лес, бустинг, стекинг и влияние их параметров."
+    },
+    {
+     "t": "scikit-learn — кластеризация",
+     "u": "https://scikit-learn.org/stable/modules/clustering.html",
+     "k": "документация",
+     "n": "Сравнение алгоритмов, их предположения и метрики."
+    },
+    {
+     "t": "Optuna — документация",
+     "u": "https://optuna.readthedocs.io/",
+     "k": "инструмент",
+     "n": "Подбор гиперпараметров с прунером и хранилищем."
+    },
+    {
+     "t": "statsmodels — proportions и тесты",
+     "u": "https://www.statsmodels.org/stable/stats.html",
+     "k": "инструмент",
+     "n": "Интервалы для долей, Макнемар, расчёт мощности."
+    }
+   ]
+  },
+  {
+   "stage": "4",
+   "title": "Глубокое обучение",
+   "goal": "Пройти лестницу от перцептрона до внимания и понимать, почему трансформер устроен именно так.",
+   "blocks": [
+    "Y",
+    "AA",
+    "J",
     "S",
-    "R"
+    "W"
+   ],
+   "items": [
+    {
+     "t": "Karpathy — Neural Networks: Zero to Hero",
+     "u": "https://karpathy.ai/zero-to-hero.html",
+     "k": "видео",
+     "n": "От производной руками до собственного GPT."
+    },
+    {
+     "t": "Dive into Deep Learning",
+     "u": "https://d2l.ai/",
+     "k": "книга",
+     "n": "Оптимизаторы, нормализация, свёртки, рекуррентные сети, внимание."
+    },
+    {
+     "t": "CS231n — свёрточные сети",
+     "u": "https://cs231n.github.io/",
+     "k": "курс",
+     "n": "Свёртка, пулинг, инициализация, отладка обучения."
+    },
+    {
+     "t": "Attention Is All You Need",
+     "u": "https://arxiv.org/abs/1706.03762",
+     "k": "статья",
+     "n": "Первоисточник архитектуры, на которой стоит всё остальное."
+    },
+    {
+     "t": "The Illustrated Transformer",
+     "u": "https://jalammar.github.io/illustrated-transformer/",
+     "k": "статья",
+     "n": "Блок трансформера по шагам с картинками."
+    },
+    {
+     "t": "Speech and Language Processing (Jurafsky, Martin)",
+     "u": "https://web.stanford.edu/~jurafsky/slp3/",
+     "k": "учебник",
+     "n": "Канон NLP: от мешка слов до векторных представлений."
+    }
+   ]
+  },
+  {
+   "stage": "5",
+   "title": "Работа с моделями",
+   "goal": "Выбирать модель по ограничениям, получать структурированный ответ и мерить качество честно.",
+   "blocks": [
+    "K",
+    "C",
+    "D",
+    "R",
+    "G"
    ],
    "items": [
     {
      "t": "Hugging Face LLM Course",
      "u": "https://huggingface.co/learn/llm-course/chapter1/1",
      "k": "курс",
-     "lang": "en",
-     "n": "Трансформеры, датасеты, дообучение, современный инструментарий."
+     "n": "Токенизация, дообучение, инференс, практические тетради."
     },
     {
-     "t": "Anthropic — Prompt engineering",
-     "u": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview",
+     "t": "Anthropic — Tool use overview",
+     "u": "https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview",
      "k": "документация",
-     "lang": "en",
-     "n": "Критерии успеха, тестирование промптов, работа со схемами ответа."
+     "n": "Схема инструмента и режимы tool_choice."
     },
     {
-     "t": "OpenAI Cookbook",
-     "u": "https://cookbook.openai.com/",
-     "k": "код",
-     "lang": "en",
-     "n": "Рабочие примеры structured outputs, tool use, retrieval и эвалов."
-    },
-    {
-     "t": "LlamaIndex — документация",
-     "u": "https://docs.llamaindex.ai/",
-     "k": "документация",
-     "lang": "en",
-     "n": "Ingestion, индексация, ретриверы, агентные конвейеры."
-    },
-    {
-     "t": "Docling",
-     "u": "https://github.com/docling-project/docling",
-     "k": "инструмент",
-     "lang": "en",
-     "n": "Разбор PDF и сканов в структуру. База для структурного чанкинга."
-    },
-    {
-     "t": "Building Effective Agents (Anthropic)",
-     "u": "https://www.anthropic.com/engineering/building-effective-agents",
-     "k": "статья",
-     "lang": "en",
-     "n": "Когда агент нужен, когда достаточно конвейера. Паттерны и их цена."
-    }
-   ]
-  },
-  {
-   "stage": "3",
-   "title": "Оценка и надёжность",
-   "goal": "Уметь доказать, что стало лучше, и поймать деградацию до заказчика.",
-   "blocks": [
-    "A",
-    "B",
-    "G",
-    "P",
-    "L"
-   ],
-   "items": [
-    {
-     "t": "Demystifying Evals for AI Agents (Anthropic)",
+     "t": "Anthropic — Demystifying evals for AI agents",
      "u": "https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents",
      "k": "статья",
-     "lang": "en",
-     "n": "Как строится набор задач, грейдеры и харнесс оценки."
+     "n": "Наборы задач, грейдеры и харнесс оценки."
     },
     {
-     "t": "Ragas",
-     "u": "https://docs.ragas.io/",
-     "k": "инструмент",
-     "lang": "en",
-     "n": "Метрики RAG: faithfulness, context precision и recall."
+     "t": "A Survey on LLM-as-a-Judge",
+     "u": "https://arxiv.org/abs/2411.15594",
+     "k": "статья",
+     "n": "Формы грейдеров, смещения судьи и калибровка."
     },
     {
-     "t": "Promptfoo",
-     "u": "https://www.promptfoo.dev/docs/",
-     "k": "инструмент",
-     "lang": "en",
-     "n": "Тест-кейсы и ассерты для промптов, сравнение моделей, red-team проверки."
-    },
-    {
-     "t": "statsmodels — proportions и тесты",
-     "u": "https://www.statsmodels.org/stable/stats.html",
-     "k": "инструмент",
-     "lang": "en",
-     "n": "proportion_confint, mcnemar, multipletests. Три функции против всех споров о метрике."
-    },
-    {
-     "t": "Designing Machine Learning Systems (Huyen)",
-     "u": "https://www.oreilly.com/library/view/designing-machine-learning/9781098107956/",
-     "k": "книга",
-     "lang": "en",
-     "n": "Утечки, дрейф, мониторинг, границы ответственности компонентов."
-    }
-   ]
-  },
-  {
-   "stage": "4",
-   "title": "Прод и железо",
-   "goal": "Развернуть на своём железе, посчитать деньги, выдержать нагрузку.",
-   "blocks": [
-    "E",
-    "H",
-    "O"
-   ],
-   "items": [
-    {
-     "t": "vLLM — документация",
-     "u": "https://docs.vllm.ai/",
+     "t": "Tesseract — документация",
+     "u": "https://tesseract-ocr.github.io/tessdoc/",
      "k": "документация",
-     "lang": "en",
-     "n": "PagedAttention, continuous batching, guided decoding — три ответа на вопрос «зачем vLLM»."
+     "n": "Режимы сегментации страницы, ориентация, вывод с координатами."
     },
-    {
-     "t": "LiteLLM",
-     "u": "https://docs.litellm.ai/",
-     "k": "инструмент",
-     "lang": "en",
-     "n": "Единый интерфейс к провайдерам, лимиты, учёт расходов."
-    },
-    {
-     "t": "Langfuse",
-     "u": "https://langfuse.com/docs",
-     "k": "инструмент",
-     "lang": "en",
-     "n": "Трассировка вызовов, версии промптов, метрики в проде."
-    },
-    {
-     "t": "OWASP Top 10 для LLM-приложений",
-     "u": "https://genai.owasp.org/llm-top-10/",
-     "k": "документация",
-     "lang": "en",
-     "n": "Инъекции в промпт, утечки данных, небезопасный вывод. Язык разговора с безопасниками."
-    },
-    {
-     "t": "AI Engineering (Huyen)",
-     "u": "https://www.oreilly.com/library/view/ai-engineering/9781098166298/",
-     "k": "книга",
-     "lang": "en",
-     "n": "Приложения на фундаментальных моделях: от выбора модели до эксплуатации."
-    }
-   ]
-  },
-  {
-   "stage": "5",
-   "title": "Генеративное зрение",
-   "goal": "Диффузия и авторегрессия для картинок и видео: теория плюс семь практик.",
-   "blocks": [
-    "R",
-    "K"
-   ],
-   "items": [
     {
      "t": "Visual GenAI — курс Yandex Research и ШАД",
      "u": "https://github.com/dbaranchuk/VisualGenAI",
      "k": "курс",
-     "lang": "en/ru",
-     "n": "12 лекций: слайды на английском, видео на русском. 7 домашних с ноутбуками, список экзаменационных вопросов."
-    },
-    {
-     "t": "Неделя 1 — DDPM и denoising score matching",
-     "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/week1_ddpm_dsm/ddpm_dsm_lecture.pdf",
-     "k": "слайды",
-     "lang": "en",
-     "n": "Точка входа в диффузию. Дальше идут непрерывное время и flow matching."
-    },
-    {
-     "t": "Неделя 5 — диффузия на практике",
-     "u": "https://github.com/dbaranchuk/VisualGenAI/tree/main/week4_practical_dm",
-     "k": "слайды",
-     "lang": "en",
-     "n": "Архитектуры, пространства, приёмы обучения и сэмплинга, которые реально стоят в проде."
-    },
-    {
-     "t": "Недели 6–7 — модели за несколько шагов",
-     "u": "https://github.com/dbaranchuk/VisualGenAI/tree/main/week5_few_step_models_flow_maps",
-     "k": "слайды",
-     "lang": "en",
-     "n": "Consistency models, MeanFlow, distribution matching. Почему генерация ускорилась в десятки раз."
-    },
-    {
-     "t": "Неделя 11 — мультимодальная генерация и управление",
-     "u": "https://github.com/dbaranchuk/VisualGenAI/tree/main/week9_multimodal_generation_and_conditioning",
-     "k": "слайды",
-     "lang": "en",
-     "n": "ControlNet, IP-Adapter: как вообще управляют тем, что генерится."
+     "n": "Диффузия и авторегрессия для картинок и видео, двенадцать лекций."
     }
    ]
   },
   {
    "stage": "6",
-   "title": "Агентная инженерия",
-   "goal": "Строить и удерживать системы, где модель вызывает инструменты и живёт дольше одного окна.",
+   "title": "Поиск и агенты",
+   "goal": "Собрать поиск по своим документам, померить его по слоям и понять, где нужен агент, а где конвейер.",
    "blocks": [
-    "H",
-    "I"
+    "F",
+    "V",
+    "U"
    ],
    "items": [
     {
+     "t": "Retrieval-Augmented Generation (оригинальная статья)",
+     "u": "https://arxiv.org/abs/2005.11401",
+     "k": "статья",
+     "n": "Откуда пошёл RAG и что в нём было изначально."
+    },
+    {
+     "t": "Anthropic — Contextual Retrieval",
+     "u": "https://www.anthropic.com/news/contextual-retrieval",
+     "k": "статья",
+     "n": "Контекст в чанке перед индексацией и замеренный эффект."
+    },
+    {
+     "t": "Ragas",
+     "u": "https://docs.ragas.io/en/stable/",
+     "k": "инструмент",
+     "n": "Четыре метрики RAG и как их считать на своём наборе."
+    },
+    {
+     "t": "Anthropic — Building Effective Agents",
+     "u": "https://www.anthropic.com/engineering/building-effective-agents",
+     "k": "статья",
+     "n": "Когда нужен агент, а когда достаточно конвейера."
+    },
+    {
      "t": "Model Context Protocol",
-     "u": "https://modelcontextprotocol.io/",
-     "k": "спецификация",
-     "lang": "en",
-     "n": "Стандарт подключения инструментов и данных к моделям."
+     "u": "https://modelcontextprotocol.io/docs/getting-started/intro",
+     "k": "документация",
+     "n": "Протокол подключения инструментов и источников данных."
     },
     {
-     "t": "Effective Context Engineering for AI Agents",
-     "u": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+     "t": "ReAct: Synergizing Reasoning and Acting",
+     "u": "https://arxiv.org/abs/2210.03629",
      "k": "статья",
-     "lang": "en",
-     "n": "Что класть в контекст, что выбрасывать, как жить дольше одного окна."
+     "n": "Базовая схема агентного цикла."
+    }
+   ]
+  },
+  {
+   "stage": "7",
+   "title": "Прод",
+   "goal": "Развернуть на своём железе, посчитать деньги, выдержать нагрузку и не пустить чужой текст в инструкции.",
+   "blocks": [
+    "E",
+    "H"
+   ],
+   "items": [
+    {
+     "t": "vLLM — документация",
+     "u": "https://docs.vllm.ai/en/latest/",
+     "k": "документация",
+     "n": "PagedAttention, непрерывный батчинг, кэш префикса."
     },
     {
-     "t": "12-Factor Agents",
-     "u": "https://github.com/humanlayer/12-factor-agents",
-     "k": "репозиторий",
-     "lang": "en",
-     "n": "Принципы управляемых LLM-приложений вокруг детерминированного кода."
-    },
-    {
-     "t": "How We Built Our Multi-Agent Research System",
-     "u": "https://www.anthropic.com/engineering/multi-agent-research-system",
+     "t": "Transformer Inference Arithmetic",
+     "u": "https://kipp.ly/transformer-inference-arithmetic/",
      "k": "статья",
-     "lang": "en",
-     "n": "Оркестратор и воркеры, параллельный поиск, эксплуатационные уроки."
+     "n": "Память, полоса и откуда берутся задержки инференса."
     },
     {
-     "t": "Pydantic AI",
-     "u": "https://ai.pydantic.dev/",
-     "k": "фреймворк",
-     "lang": "en",
-     "n": "Типизированные агенты: схема ответа и валидация как часть каркаса."
+     "t": "Langfuse",
+     "u": "https://langfuse.com/docs",
+     "k": "инструмент",
+     "n": "Трейсы, стоимость и оценка качества в проде."
+    },
+    {
+     "t": "OWASP Top 10 для LLM-приложений",
+     "u": "https://genai.owasp.org/llm-top-10/",
+     "k": "документация",
+     "n": "Инъекция через данные, утечки, избыточные полномочия."
+    },
+    {
+     "t": "AWS — таймауты, повторы и джиттер",
+     "u": "https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/",
+     "k": "статья",
+     "n": "Почему повторы без джиттера усиливают аварию."
+    },
+    {
+     "t": "AI Engineering (Huyen)",
+     "u": "https://www.oreilly.com/library/view/ai-engineering/9781098166298/",
+     "k": "книга",
+     "n": "Инженерная рамка вокруг моделей: оценка, адаптация, прод."
     }
    ]
   }

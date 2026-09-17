@@ -24,7 +24,8 @@ def load_sources():
     for path in sorted(TRAINING.glob("faq_*.json")):
         sections += json.loads(path.read_text(encoding="utf-8")).get("sections", [])
     tracks = json.loads((TRAINING / "tracks.json").read_text(encoding="utf-8"))
-    return blocks, questions, sections, tracks
+    route = json.loads((TRAINING / "route.json").read_text(encoding="utf-8"))
+    return blocks, questions, sections, tracks, route
 
 
 def load_page():
@@ -40,7 +41,7 @@ def load_page():
 
 def main():
     problems = []
-    blocks, questions, sections, tracks = load_sources()
+    blocks, questions, sections, tracks, route = load_sources()
     page, data = load_page()
 
     if len(data["quiz"]["blocks"]) != len(blocks):
@@ -69,6 +70,22 @@ def main():
         if not any(q["block"] == block_id for q in data["quiz"]["questions"]):
             problems.append(f"блок без вопросов: {block_id}")
 
+    stages = set(route["stages"])
+    steps = []
+    for item in blocks + sections:
+        for key in ("order", "stage"):
+            if not item.get(key):
+                problems.append(f"{item['id']}: не задан {key}")
+        if item.get("stage") and item["stage"] not in stages:
+            problems.append(f"{item['id']}: этап вне route.json — {item['stage']}")
+    for b in blocks:
+        if not b.get("hint"):
+            problems.append(f"блок без подписи маршрута: {b['id']}")
+        if b.get("order"):
+            steps.append(b["order"])
+    if sorted(steps) != list(range(min(steps), min(steps) + len(steps))):
+        problems.append(f"шаги маршрута не подряд: {sorted(steps)}")
+
     for s in data["faq"]["sections"]:
         for key in ("lead", "terms", "pitfalls", "drill"):
             if not s.get(key):
@@ -94,8 +111,17 @@ def main():
         return fail(problems)
 
     terms = sum(len(s.get("terms", [])) for s in data["faq"]["sections"])
+    skews = []
+    for q in data["quiz"]["questions"]:
+        lens = [len(o) for o in q["options"]]
+        others = [l for i, l in enumerate(lens) if i != q["correct"]]
+        avg = sum(others) / len(others)
+        skews.append(abs(lens[q["correct"]] - avg) / avg)
+    balanced = sum(1 for s in skews if s < 0.2)
+
     print(f"OK · блоков {len(ids)} · вопросов {len(data['quiz']['questions'])} · разделов {len(data['faq']['sections'])} · терминов {terms}")
-    print(f"OK · треков {len(tracks['tracks'])} · размер {round(size_kb, 1)} kb")
+    print(f"OK · треков {len(tracks['tracks'])} · этапов {len(route['stages'])} · размер {round(size_kb, 1)} kb")
+    print(f"варианты: перекос длины меньше 20% у {balanced} из {len(skews)}, средний {round(sum(skews) / len(skews) * 100)}%")
     return 0
 
 

@@ -118,19 +118,22 @@ def main():
         avg = sum(others) / len(others)
         skews.append(abs(lens[q["correct"]] - avg) / avg)
     balanced = sum(1 for s in skews if s < 0.2)
-    longest = sum(
-        1 for q in data["quiz"]["questions"]
-        if len(q["options"][q["correct"]]) == max(len(o) for o in q["options"])
-    )
+    places = [0] * max(len(q["options"]) for q in data["quiz"]["questions"])
+    for q in data["quiz"]["questions"]:
+        correct_len = len(q["options"][q["correct"]])
+        places[sum(1 for i, o in enumerate(q["options"]) if i != q["correct"] and len(o) < correct_len)] += 1
+    shares = [round(p / len(skews) * 100) for p in places]
     for q, s in zip(data["quiz"]["questions"], skews):
         if s >= 0.25:
             problems.append(f"верный вариант выдаёт себя длиной ({round(s * 100)}%): {q['q'][:60]}")
+    if max(shares) > 35 or min(shares) < 15:
+        problems.append(f"место верного варианта по длине перекошено: {'/'.join(map(str, shares))}%")
     if problems:
         return fail(problems)
 
     print(f"OK · блоков {len(ids)} · вопросов {len(data['quiz']['questions'])} · разделов {len(data['faq']['sections'])} · терминов {terms}")
     print(f"OK · треков {len(tracks['tracks'])} · этапов {len(route['stages'])} · размер {round(size_kb, 1)} kb")
-    print(f"варианты: перекос длины меньше 20% у {balanced} из {len(skews)}, средний {round(sum(skews) / len(skews) * 100)}%, верный самый длинный в {round(longest / len(skews) * 100)}% вопросов")
+    print(f"варианты: перекос длины меньше 20% у {balanced} из {len(skews)}, средний {round(sum(skews) / len(skews) * 100)}%, место верного по длине от короткого к длинному {'/'.join(map(str, shares))}%")
     return 0
 
 

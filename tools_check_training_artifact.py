@@ -118,10 +118,19 @@ def main():
         avg = sum(others) / len(others)
         skews.append(abs(lens[q["correct"]] - avg) / avg)
     balanced = sum(1 for s in skews if s < 0.2)
+    longest = sum(
+        1 for q in data["quiz"]["questions"]
+        if len(q["options"][q["correct"]]) == max(len(o) for o in q["options"])
+    )
+    for q, s in zip(data["quiz"]["questions"], skews):
+        if s >= 0.25:
+            problems.append(f"верный вариант выдаёт себя длиной ({round(s * 100)}%): {q['q'][:60]}")
+    if problems:
+        return fail(problems)
 
     print(f"OK · блоков {len(ids)} · вопросов {len(data['quiz']['questions'])} · разделов {len(data['faq']['sections'])} · терминов {terms}")
     print(f"OK · треков {len(tracks['tracks'])} · этапов {len(route['stages'])} · размер {round(size_kb, 1)} kb")
-    print(f"варианты: перекос длины меньше 20% у {balanced} из {len(skews)}, средний {round(sum(skews) / len(skews) * 100)}%")
+    print(f"варианты: перекос длины меньше 20% у {balanced} из {len(skews)}, средний {round(sum(skews) / len(skews) * 100)}%, верный самый длинный в {round(longest / len(skews) * 100)}% вопросов")
     return 0
 
 

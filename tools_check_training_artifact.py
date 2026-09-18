@@ -128,6 +128,12 @@ def main():
             problems.append(f"верный вариант выдаёт себя длиной ({round(s * 100)}%): {q['q'][:60]}")
     if max(shares) > 35 or min(shares) < 15:
         problems.append(f"место верного варианта по длине перекошено: {'/'.join(map(str, shares))}%")
+    for q in data["quiz"]["questions"]:
+        if q["why"][:1].islower() or q["why"].startswith("…"):
+            problems.append(f"разбор начинается с обрывка: {q['q'][:60]}")
+        for text in [q["q"], q["why"], q.get("case", "")] + q["options"]:
+            if text.count("(") != text.count(")") or text.count("«") != text.count("»"):
+                problems.append(f"незакрытая скобка или кавычка: {text[:60]}")
     if problems:
         return fail(problems)
 

@@ -787,6 +787,122 @@ code.inline {
   white-space: nowrap;
 }
 
+/* progress */
+.progress-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 1px;
+  margin-bottom: 30px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: var(--rule);
+}
+
+.progress-lead, .next-step { display: grid; gap: 12px; align-content: start; padding: 24px; background: var(--surface); }
+.next-step { background: var(--accent-soft); }
+
+.progress-figure {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  font-family: var(--display);
+  font-size: clamp(40px, 7vw, 64px);
+  font-weight: 700;
+  letter-spacing: -.03em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.progress-figure span { font-family: var(--body); font-size: 17px; font-weight: 500; letter-spacing: 0; color: var(--muted); }
+
+.progress-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .04em;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+
+.progress-meta b { color: var(--ink); font-weight: 700; }
+
+.next-title { font-family: var(--display); font-size: 19px; font-weight: 600; line-height: 1.3; text-wrap: balance; }
+.next-need { font-size: 14.5px; color: var(--accent-ink); }
+.next-step .exam-actions { justify-content: flex-start; }
+
+.stage-gauge { height: 4px; background: var(--surface-2); }
+.stage-gauge div { height: 100%; background: var(--ok); }
+
+.step-list { display: grid; gap: 1px; background: var(--rule-soft); border: 1px solid var(--rule-soft); }
+
+.step-row {
+  display: grid;
+  grid-template-columns: 30px 36px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px 14px;
+  padding: 12px 16px;
+  background: var(--surface);
+}
+
+.step-row[data-state="done"] { background: var(--ok-soft); }
+
+.step-sigil {
+  display: grid;
+  place-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent-ink);
+  background: var(--accent-soft);
+}
+
+.step-main { display: grid; gap: 2px; min-width: 0; }
+
+.step-title {
+  justify-self: start;
+  padding: 0;
+  font-size: 15.5px;
+  font-weight: 600;
+  line-height: 1.35;
+  text-align: left;
+  color: var(--ink);
+}
+
+.step-title:hover { color: var(--accent); }
+
+.step-state {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.step-row[data-state="done"] .step-state { color: var(--ok); }
+.step-row[data-state="active"] .step-state { color: var(--warn); }
+
+.step-marks { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; }
+
+.mark { cursor: pointer; }
+.mark[aria-pressed="true"] { border-color: var(--ok); background: var(--ok-soft); color: var(--ok); }
+
+.pill-btn { border: 1px solid transparent; font-family: var(--mono); font-size: 12px; cursor: pointer; }
+.pill-btn:hover { border-color: var(--accent); }
+
+.section-marks { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.ref-link[data-read="true"] b { color: var(--ok); }
+.ref-link[data-read="true"] span::after { content: " ✓"; color: var(--ok); }
+
+.sync-note { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+
 @media (max-width: 980px) {
   .ref-layout { grid-template-columns: minmax(0, 1fr); gap: 24px; }
   .ref-nav { position: static; }
@@ -804,6 +920,9 @@ code.inline {
   .stage-num { grid-row: auto; }
   .exam-actions { justify-content: stretch; }
   .exam-actions .btn { flex: 1 1 auto; }
+  .progress-top { grid-template-columns: minmax(0, 1fr); }
+  .step-row { grid-template-columns: 26px 36px minmax(0, 1fr); }
+  .step-marks { grid-column: 1 / -1; justify-content: flex-start; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -821,6 +940,7 @@ code.inline {
       <button class="mode" id="tab-exam" type="button" aria-pressed="true">Экзамен</button>
       <button class="mode" id="tab-ref" type="button" aria-pressed="false">Справочник</button>
       <button class="mode" id="tab-lib" type="button" aria-pressed="false">Библиотека</button>
+      <button class="mode" id="tab-progress" type="button" aria-pressed="false">Прогресс</button>
     </nav>
   </div>
 </header>
@@ -839,6 +959,11 @@ const TRACKS = DATA.tracks || { tracks: [], assignment: {} };
 const ROUTE = DATA.route || { stages: [] };
 const KEYS = ["А", "Б", "В", "Г", "Д", "Е"];
 const STORE = "ai-trainer-v2";
+const MARKS = "ai-trainer-progress-v1";
+const PASS = 0.8;
+const SECTIONS = Object.fromEntries(FAQ.sections.map(s => [s.id, s]));
+const STATE_LABEL = { done: "шаг пройден", active: "в работе", todo: "не начат" };
+const SYNC = { ref: null, status: "local", timer: null, chain: Promise.resolve() };
 const app = document.getElementById("app");
 const announcer = document.getElementById("announcer");
 
@@ -852,6 +977,8 @@ const state = {
   picked: null,
   answers: {},
   history: load(),
+  marks: loadMarks(),
+  confirmReset: 0,
   query: ""
 };
 
@@ -868,6 +995,215 @@ function save() {
   try {
     localStorage.setItem(STORE, JSON.stringify(state.history));
   } catch (e) {}
+}
+
+function emptyMarks() {
+  return { read: {}, practice: {}, started: null, updated: null, resetAt: null };
+}
+
+function loadMarks() {
+  try {
+    const raw = localStorage.getItem(MARKS);
+    return raw ? { ...emptyMarks(), ...JSON.parse(raw) } : emptyMarks();
+  } catch (e) {
+    return emptyMarks();
+  }
+}
+
+function saveMarks() {
+  try {
+    localStorage.setItem(MARKS, JSON.stringify(state.marks));
+  } catch (e) {}
+}
+
+function stamp() {
+  return new Date().toISOString();
+}
+
+function commit(keepStart) {
+  const now = stamp();
+  state.marks.updated = now;
+  if (!state.marks.started && !keepStart) state.marks.started = now;
+  save();
+  saveMarks();
+  pushRemote();
+}
+
+function snapshotProgress() {
+  return {
+    history: state.history,
+    read: state.marks.read,
+    practice: state.marks.practice,
+    started: state.marks.started,
+    updated: state.marks.updated,
+    resetAt: state.marks.resetAt
+  };
+}
+
+function applyProgress(p) {
+  state.history = p.history || {};
+  state.marks = {
+    read: p.read || {},
+    practice: p.practice || {},
+    started: p.started || null,
+    updated: p.updated || null,
+    resetAt: p.resetAt || null
+  };
+}
+
+function canon(value) {
+  return JSON.stringify(value, (key, x) => x && typeof x === "object" && !Array.isArray(x)
+    ? Object.fromEntries(Object.keys(x).sort().map(k => [k, x[k]]))
+    : x);
+}
+
+function newer(a, b) {
+  if (!b) return a;
+  if (!a) return b;
+  return (b.at || "") > (a.at || "") ? b : a;
+}
+
+function mergeProgress(local, remote) {
+  if (!remote) return local;
+  const resetAt = [local.resetAt, remote.resetAt].filter(Boolean).sort().pop() || null;
+  const fresh = e => e && (!resetAt || (e.at || "") > resetAt);
+  const pick = (x, y) => {
+    const out = {};
+    new Set([...Object.keys(x || {}), ...Object.keys(y || {})]).forEach(id => {
+      const e = newer((x || {})[id], (y || {})[id]);
+      if (fresh(e)) out[id] = e;
+    });
+    return out;
+  };
+  return {
+    history: pick(local.history, remote.history),
+    read: pick(local.read, remote.read),
+    practice: pick(local.practice, remote.practice),
+    started: [local.started, remote.started].filter(t => t && (!resetAt || t > resetAt)).sort()[0] || null,
+    updated: [local.updated, remote.updated].filter(Boolean).sort().pop() || null,
+    resetAt
+  };
+}
+
+function pushRemote() {
+  if (!SYNC.ref) return;
+  clearTimeout(SYNC.timer);
+  SYNC.timer = setTimeout(() => {
+    const body = JSON.parse(JSON.stringify(snapshotProgress()));
+    SYNC.chain = SYNC.chain
+      .then(() => SYNC.ref && SYNC.ref.set(body))
+      .catch(e => {
+        if (e && e.code === "unavailable") {
+          setTimeout(pushRemote, 3000 + Math.random() * 2000);
+          return;
+        }
+        SYNC.ref = null;
+        SYNC.status = "local";
+        renderCounters();
+      });
+  }, 800);
+}
+
+async function connectAccount() {
+  if (!window.claude || typeof window.claude.use !== "function") return;
+  try {
+    const [db, user] = await Promise.all([window.claude.use("db"), window.claude.use("user")]);
+    const uid = user ? await user.id() : null;
+    if (!db || !uid) return;
+    const ref = db.doc("data/users/" + uid + "/progress");
+    const snap = await ref.get();
+    const remote = snap.exists ? snap.data() : null;
+    const local = snapshotProgress();
+    const merged = mergeProgress(local, remote);
+    applyProgress(merged);
+    save();
+    saveMarks();
+    SYNC.ref = ref;
+    SYNC.status = "account";
+    if (!remote || canon(merged) !== canon(mergeProgress(remote, remote))) pushRemote();
+    const busy = state.mode === "exam" && state.block !== null && state.idx < state.order.length;
+    if (state.mode === "ref") refreshMarks();
+    else if (!busy) render();
+    else renderCounters();
+  } catch (e) {
+    SYNC.ref = null;
+    SYNC.status = "local";
+  }
+}
+
+function isOn(kind, id) {
+  const m = state.marks[kind][id];
+  return !!(m && m.on);
+}
+
+function passed(id) {
+  const h = state.history[id];
+  return !!h && h.total > 0 && h.right / h.total >= PASS;
+}
+
+function stepState(b) {
+  if (isOn("read", b.id) && passed(b.id)) return "done";
+  if (isOn("read", b.id) || isOn("practice", b.id) || state.history[b.id]) return "active";
+  return "todo";
+}
+
+function hasPractice(id) {
+  return !!(SECTIONS[id] && (SECTIONS[id].practice || []).length);
+}
+
+function toggleMark(kind, id) {
+  const on = !isOn(kind, id);
+  state.marks[kind][id] = { on, at: stamp() };
+  commit();
+  say(on ? "Отмечено" : "Отметка снята");
+}
+
+function markButton(kind, id, onLabel, offLabel) {
+  const on = isOn(kind, id);
+  return `<button class="chip mark" type="button" data-mark="${kind}" data-id="${id}" data-on="${esc(onLabel)}" data-off="${esc(offLabel)}" aria-pressed="${on}">${esc(on ? "✓ " + onLabel : offLabel)}</button>`;
+}
+
+function refreshMarks() {
+  app.querySelectorAll("[data-mark]").forEach(el => {
+    const on = isOn(el.dataset.mark, el.dataset.id);
+    el.setAttribute("aria-pressed", String(on));
+    el.textContent = on ? "✓ " + el.dataset.on : el.dataset.off;
+  });
+  app.querySelectorAll(".ref-link[data-sec]").forEach(el => {
+    el.dataset.read = String(isOn("read", el.dataset.sec));
+  });
+  renderCounters();
+}
+
+function bindMarks() {
+  app.querySelectorAll("[data-mark]").forEach(el => {
+    el.addEventListener("click", () => {
+      toggleMark(el.dataset.mark, el.dataset.id);
+      if (state.mode === "progress") renderProgress();
+      else refreshMarks();
+    });
+  });
+}
+
+function openSection(id) {
+  state.query = "";
+  setMode("ref");
+  const target = document.getElementById("sec-" + id);
+  if (target) target.scrollIntoView({ block: "start" });
+}
+
+function openExam(id) {
+  setMode("exam");
+  startBlock(id);
+}
+
+function resetAll() {
+  const now = stamp();
+  state.history = {};
+  state.marks = { ...emptyMarks(), updated: now, resetAt: now };
+  state.confirmReset = 0;
+  commit(true);
+  say("Прогресс сброшен");
 }
 
 function esc(s) {
@@ -911,6 +1247,7 @@ function setMode(mode) {
   document.getElementById("tab-exam").setAttribute("aria-pressed", String(mode === "exam"));
   document.getElementById("tab-ref").setAttribute("aria-pressed", String(mode === "ref"));
   document.getElementById("tab-lib").setAttribute("aria-pressed", String(mode === "lib"));
+  document.getElementById("tab-progress").setAttribute("aria-pressed", String(mode === "progress"));
   render();
 }
 
@@ -920,6 +1257,7 @@ function startBlock(id) {
   state.idx = 0;
   state.picked = null;
   state.answers = {};
+  state.recorded = false;
   render();
   window.scrollTo({ top: 0 });
 }
@@ -934,14 +1272,14 @@ function materialCount() {
 
 function renderCounters() {
   const el = document.getElementById("counters");
-  const done = Object.keys(state.history).length;
+  const done = QUIZ.blocks.filter(b => stepState(b) === "done").length;
   el.innerHTML = [
     `<b>${QUIZ.questions.length}</b> вопросов`,
     `<b>${QUIZ.blocks.length}</b> блоков`,
     `<b>${ROUTE.stages.length}</b> этапов`,
     `<b>${termCount()}</b> терминов`,
     `<b>${materialCount()}</b> материалов`,
-    done ? `<b>${done}</b> блоков пройдено` : "не начато"
+    `пройдено <b>${done}</b> из ${QUIZ.blocks.length} шагов`
   ].join("<span aria-hidden=\"true\">·</span>");
 }
 
@@ -949,6 +1287,7 @@ function render() {
   renderCounters();
   if (state.mode === "ref") return renderReference();
   if (state.mode === "lib") return renderLibrary();
+  if (state.mode === "progress") return renderProgress();
   if (state.block === null) return renderStart();
   if (state.idx >= state.order.length) return renderResult();
   return renderQuestion();
@@ -978,11 +1317,11 @@ function renderStart() {
   const stages = ROUTE.stages.filter(name => list.some(b => b.stage === name));
   const cards = stages.map(name => {
     const group = list.filter(b => b.stage === name);
-    const done = group.filter(b => state.history[b.id]).length;
+    const done = group.filter(b => passed(b.id)).length;
     return `<section class="stage-band">
       <header class="stage-head">
         <h3 class="stage-name">${esc(name)}</h3>
-        <span class="stage-count">${done} из ${group.length} пройдено</span>
+        <span class="stage-count">${done} из ${group.length} сдано</span>
       </header>
       <div class="block-grid">${group.map(cardOf).join("")}</div>
     </section>`;
@@ -999,8 +1338,8 @@ function renderStart() {
       <p class="view-lede">Каждый вопрос разбирается сразу после ответа: почему верный вариант верен и чем именно плохи остальные. В конце блока собирается лист ошибок.</p>
     </div>
     ${total ? `<div class="resume-strip">
-      <span>Суммарно верно ${right} из ${total} · пройдено блоков ${answered.length} из ${QUIZ.blocks.length}</span>
-      <button class="btn btn-ghost" type="button" id="reset">Сбросить прогресс</button>
+      <span>Суммарно верно ${right} из ${total} · сдано блоков ${QUIZ.blocks.filter(b => passed(b.id)).length} из ${QUIZ.blocks.length}</span>
+      <button class="btn btn-ghost" type="button" id="toprogress">Открыть прогресс</button>
     </div>` : ""}
     <div class="filters" role="group" aria-label="Сложность">
       <span class="eyebrow">Сложность</span>
@@ -1015,7 +1354,7 @@ function renderStart() {
       ${TRACKS.tracks.map(t => `<button class="chip" type="button" data-track="${t.id}" aria-pressed="${state.track === t.id}">${esc(t.title)}</button>`).join("")}
     </div>
     <div class="route">${cards.length ? cards : `<p class="empty">В этом сочетании фильтров блоков нет.</p>`}</div>
-    <p class="footer-note">Ответы и прогресс хранятся только в этом браузере.</p>
+    <p class="footer-note">${esc(syncText())}</p>
   `;
 
   app.querySelectorAll("[data-block]").forEach(el => {
@@ -1027,8 +1366,8 @@ function renderStart() {
   app.querySelectorAll("[data-track]").forEach(el => {
     el.addEventListener("click", () => { state.track = el.dataset.track; render(); });
   });
-  const reset = document.getElementById("reset");
-  if (reset) reset.addEventListener("click", () => { state.history = {}; save(); render(); });
+  const toProgress = document.getElementById("toprogress");
+  if (toProgress) toProgress.addEventListener("click", () => setMode("progress"));
 }
 
 function renderQuestion() {
@@ -1099,8 +1438,11 @@ function renderResult() {
   const items = questionsOf(state.block);
   const right = items.reduce((n, q, i) => n + (state.answers[i] === q.correct ? 1 : 0), 0);
   const pct = Math.round(right / items.length * 100);
-  state.history[block.id] = { right, total: items.length };
-  save();
+  if (!state.recorded) {
+    state.history[block.id] = { right, total: items.length, at: stamp() };
+    state.recorded = true;
+    commit();
+  }
 
   const misses = items.map((q, i) => ({ q, i })).filter(({ q, i }) => state.answers[i] !== q.correct);
   const missHtml = misses.length ? misses.map(({ q, i }) => `
@@ -1251,7 +1593,7 @@ function renderReference() {
 
   const nav = FAQ.sections.map(s => {
     const on = shown.includes(s);
-    return `<a class="ref-link" href="#sec-${s.id}" style="${on ? "" : "opacity:.35"}"><b>${s.id}</b><span>${esc(s.title)}</span></a>`;
+    return `<a class="ref-link" href="#sec-${s.id}" data-sec="${s.id}" data-read="${isOn("read", s.id)}" style="${on ? "" : "opacity:.35"}"><b>${s.id}</b><span>${esc(s.title)}</span></a>`;
   }).join("");
 
   const body = shown.length ? shown.map(s => `
@@ -1267,6 +1609,10 @@ function renderReference() {
       ${renderPitfalls(s)}
       ${renderDrill(s)}
       ${renderResources(s)}
+      <div class="section-marks" role="group" aria-label="Отметки раздела ${s.id}">
+        ${markButton("read", s.id, "Раздел прочитан", "Отметить раздел прочитанным")}
+        ${hasPractice(s.id) ? markButton("practice", s.id, "Практики сделаны", "Отметить практики сделанными") : ""}
+      </div>
     </section>`).join("") : `<p class="empty">По запросу «${esc(state.query)}» ничего не нашлось.</p>`;
 
   app.innerHTML = `
@@ -1286,6 +1632,7 @@ function renderReference() {
     </div>
   `;
 
+  bindMarks();
   const input = document.getElementById("q");
   input.addEventListener("input", e => {
     state.query = e.target.value;
@@ -1349,9 +1696,127 @@ function renderLibrary() {
   `;
 }
 
+function syncText() {
+  return SYNC.status === "account"
+    ? "Прогресс сохраняется в твоём аккаунте и виден на любом устройстве, где открыт этот тренажёр."
+    : "Прогресс хранится только в этом браузере.";
+}
+
+function fmtDate(iso) {
+  const d = iso ? new Date(iso) : null;
+  return d && !isNaN(d) ? d.toLocaleDateString("ru-RU", { day: "numeric", month: "long", year: "numeric" }) : "";
+}
+
+function stepRow(b) {
+  const h = state.history[b.id];
+  const st = stepState(b);
+  const exam = h && h.total > 0
+    ? `<button class="score-pill pill-btn ${scoreClass(h.right / h.total)}" type="button" data-exam="${b.id}">экзамен ${h.right}/${h.total}</button>`
+    : `<button class="score-pill pill-btn" type="button" data-exam="${b.id}">сдать блок</button>`;
+  return `<li class="step-row" data-state="${st}">
+    <span class="step-no">${b.order}.</span>
+    <span class="step-sigil" aria-hidden="true">${b.id}</span>
+    <span class="step-main">
+      <button class="step-title" type="button" data-ref="${b.id}">${esc(b.title)}</button>
+      <span class="step-state">${STATE_LABEL[st]}</span>
+    </span>
+    <span class="step-marks">
+      ${markButton("read", b.id, "раздел прочитан", "отметить раздел")}
+      ${hasPractice(b.id) ? markButton("practice", b.id, "практики сделаны", "отметить практики") : ""}
+      ${exam}
+    </span>
+  </li>`;
+}
+
+function renderProgress() {
+  renderCounters();
+  const steps = QUIZ.blocks;
+  const total = steps.length || 1;
+  const states = Object.fromEntries(steps.map(b => [b.id, stepState(b)]));
+  const done = steps.filter(b => states[b.id] === "done").length;
+  const pct = Math.round(done / total * 100);
+  const readN = steps.filter(b => isOn("read", b.id)).length;
+  const passN = steps.filter(b => passed(b.id)).length;
+  const withPractice = steps.filter(b => hasPractice(b.id));
+  const pracN = withPractice.filter(b => isOn("practice", b.id)).length;
+  const next = steps.find(b => states[b.id] !== "done");
+  const need = next ? [
+    !isOn("read", next.id) && "отметить раздел прочитанным",
+    !passed(next.id) && `сдать блок на ${Math.round(PASS * 100)}% и выше`
+  ].filter(Boolean).join(" и ") : "";
+  const dates = state.marks.started
+    ? [`начато ${fmtDate(state.marks.started)}`, `последнее занятие ${fmtDate(state.marks.updated)}`]
+    : ["ещё не начато"];
+
+  const stages = ROUTE.stages.map(name => {
+    const group = steps.filter(b => b.stage === name);
+    if (!group.length) return "";
+    const k = group.filter(b => states[b.id] === "done").length;
+    return `<section class="stage-band">
+      <header class="stage-head">
+        <h3 class="stage-name">${esc(name)}</h3>
+        <span class="stage-count">${k} из ${group.length} шагов</span>
+      </header>
+      <div class="stage-gauge" aria-hidden="true"><div style="width:${Math.round(k / group.length * 100)}%"></div></div>
+      <ol class="step-list">${group.map(stepRow).join("")}</ol>
+    </section>`;
+  }).join("");
+
+  const arming = state.confirmReset > Date.now();
+  app.innerHTML = `
+    <div class="view-head">
+      <p class="eyebrow">Прогресс</p>
+      <h2 class="view-title">Маршрут из ${steps.length} шагов, от оснований до прода</h2>
+      <p class="view-lede">Шаг засчитан, когда раздел справочника отмечен прочитанным, а блок экзамена сдан на ${Math.round(PASS * 100)}% и выше. Практики отмечаются отдельно и в зачёт шага не входят.</p>
+    </div>
+    <div class="progress-top">
+      <div class="progress-lead">
+        <p class="eyebrow">Пройдено</p>
+        <p class="progress-figure">${done}<span> из ${steps.length} шагов · ${pct}%</span></p>
+        <div class="gauge-track" role="progressbar" aria-label="Пройдено шагов" aria-valuemin="0" aria-valuemax="${steps.length}" aria-valuenow="${done}"><div class="gauge-fill" style="width:${pct}%"></div></div>
+        <p class="progress-meta"><span>разделов прочитано <b>${readN}</b> из ${steps.length}</span><span>блоков сдано <b>${passN}</b> из ${steps.length}</span><span>практик сделано <b>${pracN}</b> из ${withPractice.length}</span></p>
+        <p class="progress-meta">${dates.map(d => `<span>${esc(d)}</span>`).join("")}</p>
+      </div>
+      <div class="next-step">
+        ${next ? `
+          <p class="eyebrow">Следующий шаг · ${next.order} из ${steps.length}</p>
+          <p class="next-title">${next.id} · ${esc(next.title)}</p>
+          <p class="next-need">Осталось ${esc(need)}.</p>
+          <div class="exam-actions">
+            <button class="btn" type="button" data-ref="${next.id}">Читать раздел</button>
+            <button class="btn btn-primary" type="button" data-exam="${next.id}">Сдать блок</button>
+          </div>` : `
+          <p class="eyebrow">Маршрут</p>
+          <p class="next-title">Все ${steps.length} шагов пройдены</p>
+          <p class="next-need">Пересдай блоки, где счёт ниже 100%, чтобы закрепить.</p>`}
+      </div>
+    </div>
+    <div class="route">${stages}</div>
+    <div class="footer-note sync-note">
+      <span>${esc(syncText())}</span>
+      <button class="btn btn-ghost" type="button" id="reset-all">${arming ? "Нажми ещё раз, чтобы стереть весь прогресс" : "Сбросить прогресс"}</button>
+    </div>
+  `;
+
+  bindMarks();
+  app.querySelectorAll("[data-ref]").forEach(el => el.addEventListener("click", () => openSection(el.dataset.ref)));
+  app.querySelectorAll("[data-exam]").forEach(el => el.addEventListener("click", () => openExam(el.dataset.exam)));
+  document.getElementById("reset-all").addEventListener("click", () => {
+    if (state.confirmReset > Date.now()) {
+      resetAll();
+    } else {
+      state.confirmReset = Date.now() + 5000;
+      setTimeout(() => { if (state.mode === "progress") renderProgress(); }, 5100);
+    }
+    renderProgress();
+  });
+}
+
 document.getElementById("tab-exam").addEventListener("click", () => setMode("exam"));
 document.getElementById("tab-ref").addEventListener("click", () => setMode("ref"));
 document.getElementById("tab-lib").addEventListener("click", () => setMode("lib"));
+document.getElementById("tab-progress").addEventListener("click", () => setMode("progress"));
 
 render();
+connectAccount();
 </script>

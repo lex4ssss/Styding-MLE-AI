@@ -396,6 +396,84 @@
    ]
   },
   {
+   "block": "AB",
+   "items": [
+    {
+     "t": "MIT Missing Semester — Lecture 1: Course Overview + The Shell (2020)",
+     "u": "https://www.youtube.com/watch?v=Z56Jmr9Z34Q",
+     "k": "видео",
+     "lang": "en",
+     "n": "Оболочка, пути, права и конвейеры команд. Минимум, чтобы чужая машина перестала быть чёрным ящиком."
+    },
+    {
+     "t": "MIT Missing Semester — Lecture 6: Version Control (git) (2020)",
+     "u": "https://www.youtube.com/watch?v=2sjqTHE0zok",
+     "k": "видео",
+     "lang": "en",
+     "n": "Git через модель данных: снимки, граф коммитов, ссылки. После неё reset и rebase читаются как операции над графом."
+    },
+    {
+     "t": "Fireship — 100+ Docker Concepts you Need to Know",
+     "u": "https://www.youtube.com/watch?v=rIrNIzy6U_g",
+     "k": "видео",
+     "lang": "en",
+     "n": "Образ, контейнер, слои, реестр и compose за восемь минут. Словарь перед первой сборкой."
+    },
+    {
+     "t": "Яндекс Образование — Тренировки по алгоритмам, лекция 1: сложность, тестирование, особые случаи",
+     "u": "https://www.youtube.com/watch?v=QLhqYNsPIVo",
+     "k": "видео",
+     "lang": "ru",
+     "n": "Оценка сложности и привычка проверять особые случаи до запуска. Основа для любого кода вокруг модели."
+    }
+   ]
+  },
+  {
+   "block": "I",
+   "items": [
+    {
+     "t": "Andrew Ng — Nuts and Bolts of Applying Deep Learning (Deep Learning School 2016)",
+     "u": "https://www.youtube.com/watch?v=F1ka6a13S9I",
+     "k": "видео",
+     "lang": "en",
+     "n": "Ошибка раскладывается на смещение, дисперсию и расхождение распределений, и из каждой части следует своё действие. Рецепт, по которому решают, что чинить первым."
+    },
+    {
+     "t": "DeepLearningAI — Carrying Out Error Analysis (C3W2L01)",
+     "u": "https://www.youtube.com/watch?v=JoAxZsdw_3w",
+     "k": "видео",
+     "lang": "en",
+     "n": "Сотня ошибок вручную в таблицу по причинам: потолок выигрыша от каждой правки виден до того, как её делать."
+    }
+   ]
+  },
+  {
+   "block": "B",
+   "items": [
+    {
+     "t": "Sayash Kapoor — Leakage and the Reproducibility Crisis in ML-based Science (LLNL DSI)",
+     "u": "https://www.youtube.com/watch?v=t0k4415MuZE",
+     "k": "видео",
+     "lang": "en",
+     "n": "Таксономия видов утечки и model info sheet, по которому их ловят. Удобно сверять собственный конвейер."
+    },
+    {
+     "t": "Andrew Ng — A Chat with Andrew on MLOps: From Model-centric to Data-centric AI",
+     "u": "https://www.youtube.com/watch?v=06-AZXmwHjo",
+     "k": "видео",
+     "lang": "en",
+     "n": "Почему несогласованная разметка обходится дороже выбора модели. Примеры с игуанами и дефектами показывают, как искать спорные места в эталоне."
+    },
+    {
+     "t": "Shreya Shankar — All my machine learning problems are actually data management problems (NormConf)",
+     "u": "https://www.youtube.com/watch?v=sr3_DQ-RhTc",
+     "k": "видео",
+     "lang": "en",
+     "n": "Ошибки ML-конвейеров как ошибки обращения с данными: где ставить проверки и что мониторить после выкатки."
+    }
+   ]
+  },
+  {
    "block": "N",
    "items": [
     {
@@ -404,6 +482,32 @@
      "k": "видео",
      "lang": "en",
      "n": "Смещение против дисперсии на картинках: откуда берётся переобучение."
+    }
+   ]
+  },
+  {
+   "block": "O",
+   "items": [
+    {
+     "t": "CMU 15-445, Andy Pavlo — #02 Modern SQL (Fall 2024)",
+     "u": "https://www.youtube.com/watch?v=MzigBKf84aY",
+     "k": "видео",
+     "lang": "en",
+     "n": "Агрегаты, оконные функции, CTE и вложенные запросы. SQL, на котором доли по полям считаются без выгрузки в pandas."
+    },
+    {
+     "t": "Влад Тен — База по базам данных: Storage (индексы, paging, LSM, B+-Tree, R-Tree)",
+     "u": "https://www.youtube.com/watch?v=i-FFVM4cIXQ",
+     "k": "видео",
+     "lang": "ru",
+     "n": "Как база хранит данные на диске: страницы, индексы на B+-дереве, LSM. Отсюда понятно, когда индекс помогает, а когда нет."
+    },
+    {
+     "t": "Vlad Mishustin — Вся база SQL для начинающих за 1 час",
+     "u": "https://www.youtube.com/watch?v=5sG9kmXYsKU",
+     "k": "видео",
+     "lang": "ru",
+     "n": "Синтаксис с нуля за час: вход, если запросы ещё не писал."
     }
    ]
   },
@@ -449,6 +553,32 @@
      "k": "видео",
      "lang": "en",
      "n": "Алгоритм, выбор числа кластеров и почему масштаб признаков обязателен."
+    }
+   ]
+  },
+  {
+   "block": "P",
+   "items": [
+    {
+     "t": "StatQuest — Machine Learning Fundamentals: Cross Validation",
+     "u": "https://www.youtube.com/watch?v=fSytzGwwBVw",
+     "k": "видео",
+     "lang": "en",
+     "n": "Зачем делить данные на фолды и как это защищает оценку от удачного разбиения."
+    },
+    {
+     "t": "DeepLearningAI — Tuning Process (C2W3L01)",
+     "u": "https://www.youtube.com/watch?v=AXDByU3D1hA",
+     "k": "видео",
+     "lang": "en",
+     "n": "Случайный поиск вместо сетки и сужение области от грубого к точному."
+    },
+    {
+     "t": "DeepLearningAI — Hyperparameter Tuning in Practice (C2W3L03)",
+     "u": "https://www.youtube.com/watch?v=wKkcBPp3F1Y",
+     "k": "видео",
+     "lang": "en",
+     "n": "Выхаживать одну модель или запускать много параллельно: выбор диктует бюджет вычислений."
     }
    ]
   },
@@ -517,6 +647,65 @@
    ]
   },
   {
+   "block": "AA",
+   "items": [
+    {
+     "t": "ritvikmath — BM25: The Most Important Text Metric in Data Science",
+     "u": "https://www.youtube.com/watch?v=ruBm9WywevM",
+     "k": "видео",
+     "lang": "en",
+     "n": "Чем плох TF-IDF и как BM25 исправляет насыщение частоты и длину документа."
+    },
+    {
+     "t": "StatQuest — Word Embedding and Word2Vec, Clearly Explained",
+     "u": "https://www.youtube.com/watch?v=viZrOnJclY0",
+     "k": "видео",
+     "lang": "en",
+     "n": "Как слово становится вектором и почему близкие по смыслу слова оказываются рядом."
+    },
+    {
+     "t": "StatQuest — Recurrent Neural Networks (RNNs), Clearly Explained",
+     "u": "https://www.youtube.com/watch?v=AsNTP8Kwu80",
+     "k": "видео",
+     "lang": "en",
+     "n": "Рекуррентная сеть и затухающий градиент: почему длинный текст ей не даётся."
+    },
+    {
+     "t": "StatQuest — Long Short-Term Memory (LSTM), Clearly Explained",
+     "u": "https://www.youtube.com/watch?v=YCzL96nL7j0",
+     "k": "видео",
+     "lang": "en",
+     "n": "Долгая и короткая память через вентили. Последняя ступень перед вниманием."
+    }
+   ]
+  },
+  {
+   "block": "J",
+   "items": [
+    {
+     "t": "From Languages to Information — Introduction to Named Entity Tagging",
+     "u": "https://www.youtube.com/watch?v=7CRyqwCZFY0",
+     "k": "видео",
+     "lang": "en",
+     "n": "Типы сущностей и разметка BIO: как NER сводится к разметке последовательности. Пять минут канона."
+    },
+    {
+     "t": "ODS, Михаил Баранов — NER: как мы учили Почту выделять именованные сущности",
+     "u": "https://www.youtube.com/watch?v=o5NWQPlU1U0",
+     "k": "видео",
+     "lang": "ru",
+     "n": "Статус, номер и дата доставки из писем о заказах. Твоя задача извлечения полей, решённая обученной моделью без LLM."
+    },
+    {
+     "t": "ODS, Михаил Архипов — Распознавание именованных сущностей (Data Fest 2018)",
+     "u": "https://www.youtube.com/watch?v=SSXVSo1lDVA",
+     "k": "видео",
+     "lang": "ru",
+     "n": "BiLSTM-CRF поверх предобученных эмбеддингов: как делали NER до трансформеров. Одиннадцать минут."
+    }
+   ]
+  },
+  {
    "block": "S",
    "items": [
     {
@@ -578,6 +767,124 @@
    ]
   },
   {
+   "block": "W",
+   "items": [
+    {
+     "t": "Umar Jamil — LLaMA explained: KV-Cache, Rotary Positional Embedding, RMS Norm, Grouped Query Attention, SwiGLU",
+     "u": "https://www.youtube.com/watch?v=Mn_9W1nCFLo",
+     "k": "видео",
+     "lang": "en",
+     "n": "RMSNorm, RoPE, KV-кэш и GQA на одной архитектуре. Всё, что блок называет, здесь нарисовано по шагам."
+    },
+    {
+     "t": "Andrej Karpathy — State of GPT (Microsoft Build 2023)",
+     "u": "https://www.youtube.com/watch?v=bZQun8Y4L2A",
+     "k": "видео",
+     "lang": "en",
+     "n": "Путь от предобучения через SFT и модель награды к RLHF. Отсюда разница между базовой и выровненной моделью."
+    },
+    {
+     "t": "Andrej Karpathy — Let's build the GPT Tokenizer",
+     "u": "https://www.youtube.com/watch?v=zduSFxRajkE",
+     "k": "видео",
+     "lang": "en",
+     "n": "BPE руками: откуда у модели проблемы с буквами, цифрами и пробелами."
+    },
+    {
+     "t": "Under The Hood — What is Temperature in LLM",
+     "u": "https://www.youtube.com/watch?v=jnikMver_CE",
+     "k": "видео",
+     "lang": "en",
+     "n": "Жадный выбор, температура, top-k и top-p по очереди за десять минут."
+    }
+   ]
+  },
+  {
+   "block": "K",
+   "items": [
+    {
+     "t": "Andrej Karpathy — Deep Dive into LLMs like ChatGPT",
+     "u": "https://www.youtube.com/watch?v=7xTGNNLPyMI",
+     "k": "видео",
+     "lang": "en",
+     "n": "Путь модели от сырого интернета до ассистента: базовая модель, SFT, RL и откуда берутся галлюцинации. Три с половиной часа, смотреть частями."
+    },
+    {
+     "t": "Andrej Karpathy — Intro to Large Language Models (1hr Talk)",
+     "u": "https://www.youtube.com/watch?v=zjkBMFhNj_g",
+     "k": "видео",
+     "lang": "en",
+     "n": "Карта местности за час: закрытые и открытые модели, законы масштабирования, инструменты и атаки."
+    },
+    {
+     "t": "Maarten Grootendorst — A Visual Guide to Mixture of Experts (MoE) in LLMs",
+     "u": "https://www.youtube.com/watch?v=sOPDGQjFcuM",
+     "k": "видео",
+     "lang": "en",
+     "n": "Роутер, эксперты и разреженные слои. После него запись вида 8x7B и число активных параметров читаются правильно."
+    }
+   ]
+  },
+  {
+   "block": "C",
+   "items": [
+    {
+     "t": "Anthropic — Prompting 101 (Code w/ Claude)",
+     "u": "https://www.youtube.com/watch?v=ysPbXH0LpIE",
+     "k": "видео",
+     "lang": "en",
+     "n": "Промпт для разбора шведского бланка о ДТП с рисунком от руки собирают по шагам: контекст задачи, инструкции, XML-теги, примеры. Ближе всего к твоему извлечению полей."
+    },
+    {
+     "t": "Efficient NLP — Structured Output from LLMs: Grammars, Regex, and State Machines",
+     "u": "https://www.youtube.com/watch?v=xpvFinvqRCA",
+     "k": "видео",
+     "lang": "en",
+     "n": "Как генерация по схеме устроена изнутри: грамматика превращается в автомат, который маскирует недопустимые токены. Поэтому схема надёжнее просьбы в промпте."
+    },
+    {
+     "t": "REU Data Science Club — Structured Output: маст-хев для систем с LLM под капотом",
+     "u": "https://www.youtube.com/watch?v=8LqoOUHyA2I",
+     "k": "видео",
+     "lang": "ru",
+     "n": "Где структурированный вывод окупается, как он снижает цену ошибки и где ломается. Примеры из прода."
+    }
+   ]
+  },
+  {
+   "block": "D",
+   "items": [
+    {
+     "t": "Yannic Kilcher — An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale (ViT)",
+     "u": "https://www.youtube.com/watch?v=TrdevFK_am4",
+     "k": "видео",
+     "lang": "en",
+     "n": "Картинка как последовательность патчей. Отсюда прямая связь разрешения рендера с числом токенов и ценой запроса."
+    },
+    {
+     "t": "Yannic Kilcher — OpenAI CLIP: Connecting Text and Images",
+     "u": "https://www.youtube.com/watch?v=T9XSU0pKX2E",
+     "k": "видео",
+     "lang": "en",
+     "n": "Контрастное обучение на парах картинки и подписи. На энкодерах этого семейства стоят многие VLM."
+    },
+    {
+     "t": "Umar Jamil — Coding a Multimodal (Vision) Language Model from scratch in PyTorch (PaliGemma)",
+     "u": "https://www.youtube.com/watch?v=vAmKB7iPkWw",
+     "k": "видео",
+     "lang": "en",
+     "n": "VLM целиком в коде: энкодер SigLIP, проекция патчей в пространство языковой модели, генерация. Почти шесть часов, брать по главам."
+    },
+    {
+     "t": "Deep Learning School — Лекция. Мультимодальные модели",
+     "u": "https://www.youtube.com/watch?v=_A-5B6gnVLw",
+     "k": "видео",
+     "lang": "ru",
+     "n": "Курс ФПМИ МФТИ: как в одной модели соединяют зрение и язык. Русскоязычная лекция на полтора часа."
+    }
+   ]
+  },
+  {
    "block": "R",
    "items": [
     {
@@ -607,6 +914,39 @@
      "k": "видео",
      "lang": "ru",
      "n": "Как картинка попадает в языковую модель. Мост между блоками D и R."
+    }
+   ]
+  },
+  {
+   "block": "G",
+   "items": [
+    {
+     "t": "Stanford CME295 — Lecture 8: LLM Evaluation (Autumn 2025)",
+     "u": "https://www.youtube.com/watch?v=8fNP4N46RRo",
+     "k": "видео",
+     "lang": "en",
+     "n": "Судья-LLM целиком: согласие разметчиков, практика настройки и перечень смещений судьи."
+    },
+    {
+     "t": "Peter Yang, Hamel Husain — AI Evaluations Clearly Explained in 50 Minutes (Real Example)",
+     "u": "https://www.youtube.com/watch?v=uiza7wp1KrE",
+     "k": "видео",
+     "lang": "en",
+     "n": "Трейсы в таблице, открытое и осевое кодирование ошибок, затем судья с ответом да или нет. Метод на реальном продукте."
+    },
+    {
+     "t": "ODS, Алиса Глушко — Вам нужен LLM-as-a-Judge! Как перестать оценивать на глаз и настроить валидацию",
+     "u": "https://www.youtube.com/watch?v=DI_yNPKBiIU",
+     "k": "видео",
+     "lang": "ru",
+     "n": "Судья получает задание, ответ, эталон и критерии. Как в Сбере обучали такую модель на 58 критериях и сравнивали с человеческими оценками."
+    },
+    {
+     "t": "Yandex for Analytics, Ирина Барская — Человек и LLM: как оценивать качество моделей и строить метрики",
+     "u": "https://www.youtube.com/watch?v=peBvWuCpH_Y",
+     "k": "видео",
+     "lang": "ru",
+     "n": "Почему чем сильнее модель, тем труднее её оценить, и как в Поиске строят метрики на людях и бенчмарках."
     }
    ]
   },
@@ -647,6 +987,131 @@
      "k": "видео",
      "lang": "ru",
      "n": "Короткий вход в тему для объяснения коллегам и заказчику."
+    }
+   ]
+  },
+  {
+   "block": "V",
+   "items": [
+    {
+     "t": "Jerry Liu — Building Production-Ready RAG Applications (AI Engineer)",
+     "u": "https://www.youtube.com/watch?v=TRjq7t2Ms5I",
+     "k": "видео",
+     "lang": "en",
+     "n": "Почему наивный RAG ломается в проде и какие приёмы на стороне поиска это чинят. Восемнадцать минут."
+    },
+    {
+     "t": "Stanford CS25, Douwe Kiela — Retrieval Augmented Language Models",
+     "u": "https://www.youtube.com/watch?v=mE7IDf2SmJg",
+     "k": "видео",
+     "lang": "en",
+     "n": "Обзор моделей с поиском от одного из авторов исходной статьи про RAG: что обучать, что замораживать, какие вопросы открыты."
+    },
+    {
+     "t": "Logical Lenses — RAG Evaluation: Precision, Recall, Faithfulness, RAGAS Explained Clearly",
+     "u": "https://www.youtube.com/watch?v=7_LTU0LA374",
+     "k": "видео",
+     "lang": "en",
+     "n": "Точность и полнота контекста, верность ответа контексту и его релевантность: четыре метрики блока по отдельности."
+    },
+    {
+     "t": "Yandex for ML, Андрей Соколов — RAG-системы сегодня: архитектуры, качество и наши кейсы",
+     "u": "https://www.youtube.com/watch?v=-efHhXHhNys",
+     "k": "видео",
+     "lang": "ru",
+     "n": "RAG как система с уровнями обработки, оценкой качества и настройкой моделей под задачу. Кейсы Яндекса."
+    }
+   ]
+  },
+  {
+   "block": "U",
+   "items": [
+    {
+     "t": "Barry Zhang, Anthropic — How We Build Effective Agents (AI Engineer Summit 2025)",
+     "u": "https://www.youtube.com/watch?v=D7_ipDqhtwk",
+     "k": "видео",
+     "lang": "en",
+     "n": "Когда агент не нужен, из чего он состоит и зачем смотреть на задачу глазами агента. Пятнадцать минут."
+    },
+    {
+     "t": "Anthropic — Tips for building AI agents",
+     "u": "https://www.youtube.com/watch?v=LP5OCa20Zpg",
+     "k": "видео",
+     "lang": "en",
+     "n": "Где граница между workflow и агентом, из чего агент состоит и какие ошибки повторяются. Разговор инженеров Anthropic."
+    },
+    {
+     "t": "Andrew Ng — What's next for AI agentic workflows (Sequoia)",
+     "u": "https://www.youtube.com/watch?v=sal78ACtGTc",
+     "k": "видео",
+     "lang": "en",
+     "n": "Четыре паттерна агентных процессов: рефлексия, инструменты, планирование, несколько агентов."
+    },
+    {
+     "t": "Deep Learning School — Открытая лекция. LLM-агенты",
+     "u": "https://www.youtube.com/watch?v=fVh5YFW95cs",
+     "k": "видео",
+     "lang": "ru",
+     "n": "Открытая лекция ФПМИ МФТИ об устройстве LLM-агентов, почти два часа на русском."
+    }
+   ]
+  },
+  {
+   "block": "E",
+   "items": [
+    {
+     "t": "Anyscale — Fast LLM Serving with vLLM and PagedAttention",
+     "u": "https://www.youtube.com/watch?v=5ZlavKF_98U",
+     "k": "видео",
+     "lang": "en",
+     "n": "Авторы vLLM о том, почему сервер упирается в память под KV-кэш и как страничное хранение поднимает пропускную способность."
+    },
+    {
+     "t": "Mark Moyou, NVIDIA — Understanding the LLM Inference Workload",
+     "u": "https://www.youtube.com/watch?v=z2M8gKGYws4",
+     "k": "видео",
+     "lang": "en",
+     "n": "Префилл и декодинг, бюджет KV-кэша, квантизация и параллелизм: как прикинуть железо под свою нагрузку."
+    },
+    {
+     "t": "Timothée Lacroix, Mistral — Exploring the Latency/Throughput & Cost Space for LLM Inference",
+     "u": "https://www.youtube.com/watch?v=mYRqvB1_gRk",
+     "k": "видео",
+     "lang": "en",
+     "n": "Технический директор Mistral о том, что делает инференс дорогим и как выбирать модель, железо и стек под задержку и цену."
+    },
+    {
+     "t": "Виталий Кулиев — Инструкция по запуску нейросети на своём сервере vLLM",
+     "u": "https://www.youtube.com/watch?v=NQEEL1H7zHw",
+     "k": "видео",
+     "lang": "ru",
+     "n": "On-prem руками: сервер на двух RTX 3090, Docker, vLLM и OpenAI-совместимый интерфейс, выбор модели и квантизации."
+    }
+   ]
+  },
+  {
+   "block": "H",
+   "items": [
+    {
+     "t": "Simon Willison — Prompt Injection, explained",
+     "u": "https://www.youtube.com/watch?v=FgxwCaL6UTA",
+     "k": "видео",
+     "lang": "en",
+     "n": "Автор термина о том, почему инъекцию не закрывает фильтр даже на 99% и почему опаснее всего ассистент с доступом к почте."
+    },
+    {
+     "t": "IBM Technology — OWASP's Top 10 Ways to Attack LLMs",
+     "u": "https://www.youtube.com/watch?v=gUNXZMcd2jU",
+     "k": "видео",
+     "lang": "en",
+     "n": "Десять рисков OWASP для LLM-приложений по списку, от инъекций до утечки данных."
+    },
+    {
+     "t": "SafeCode, Евгений Кокуйкин — Анализ атак на LLM, техники промпт-инъекций и защиты от них",
+     "u": "https://www.youtube.com/watch?v=b9HSmbL1VyA",
+     "k": "видео",
+     "lang": "ru",
+     "n": "Откуда берётся уязвимость LLM-приложений, как работает safety layer и как классифицируют риски. Доклад на русском."
     }
    ]
   }

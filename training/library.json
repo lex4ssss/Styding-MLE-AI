@@ -14,7 +14,7 @@
    "items": [
     {
      "t": "MIT 6.042J — Mathematics for Computer Science",
-     "u": "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2010/",
+     "u": "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/",
      "k": "учебник",
      "n": "Вероятность, матожидание, отклонение от среднего, графы и асимптотика."
     },
@@ -744,7 +744,7 @@
      "n": "Подробный разбор архитектуры с презентацией, уровень выше вводного."
     },
     {
-     "t": "Deep Learning School — Лекция. Контестные эмбеддинги. Word2Vec",
+     "t": "Deep Learning School — Лекция. Контекстные эмбеддинги. Word2Vec",
      "u": "https://www.youtube.com/watch?v=WbtQzAvhnRI",
      "k": "видео",
      "lang": "ru",

@@ -19,7 +19,8 @@
   --accent: #0B6E63;
   --accent-ink: #08544C;
   --accent-soft: #D6EBE7;
-  --ok: #1B7A3E;
+  --on-accent: #FFFFFF;
+  --ok: #18723A;
   --ok-soft: #DCEEE2;
   --bad: #A8322B;
   --bad-soft: #F6E2E0;
@@ -44,6 +45,7 @@
     --accent: #2FC3AE;
     --accent-ink: #7FE3D3;
     --accent-soft: #0E2F2C;
+    --on-accent: #05201C;
     --ok: #52C77E;
     --ok-soft: #10281A;
     --bad: #E9877E;
@@ -65,6 +67,7 @@
   --accent: #2FC3AE;
   --accent-ink: #7FE3D3;
   --accent-soft: #0E2F2C;
+  --on-accent: #05201C;
   --ok: #52C77E;
   --ok-soft: #10281A;
   --bad: #E9877E;
@@ -164,11 +167,8 @@ a { color: var(--accent); text-underline-offset: 3px; }
 
 .mode[aria-pressed="true"] {
   background: var(--accent);
-  color: #fff;
+  color: var(--on-accent);
 }
-
-:root[data-theme="dark"] .mode[aria-pressed="true"],
-:root:not([data-theme="light"]) .mode[aria-pressed="true"] { color: #05201C; }
 
 main { padding-block: 36px 72px; }
 
@@ -253,11 +253,8 @@ main { padding-block: 36px 72px; }
 .btn-primary {
   border-color: var(--accent);
   background: var(--accent);
-  color: #fff;
+  color: var(--on-accent);
 }
-
-:root[data-theme="dark"] .btn-primary,
-:root:not([data-theme="light"]) .btn-primary { color: #05201C; }
 
 .btn-ghost { border-color: transparent; color: var(--accent); padding-inline: 8px; }
 
@@ -1121,6 +1118,10 @@ kbd { display: inline-block; min-width: 20px; padding: 0 4px; border: 1px solid 
 .lab-mw { fill: color-mix(in srgb, var(--ink) 70%, var(--surface)); }
 .lab-mk { fill: var(--accent); }
 .lab-mr { fill: var(--rule); }
+.br-tp { fill: var(--accent); }
+.br-fn { fill: var(--surface); stroke: var(--accent); stroke-width: 1.2; }
+.br-fp { fill: var(--bad); }
+.br-tn { fill: var(--rule); opacity: .7; }
 
 /* teardown plates: hairline ink, fills tinted from the line color */
 .lab-plate { cursor: pointer; }
@@ -1170,6 +1171,7 @@ kbd { display: inline-block; min-width: 20px; padding: 0 4px; border: 1px solid 
 .lab-cell.is-test { border-color: var(--accent); color: var(--accent-ink); background: color-mix(in srgb, var(--accent) 10%, var(--surface)); }
 .lab-cell.is-leak { border-color: var(--bad); color: var(--bad); background: var(--bad-soft); }
 .lab-cell.is-off { opacity: .35; border-style: dashed; }
+.lab-fig { display: grid; gap: 8px; min-width: 0; align-content: start; }
 .lab-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; font-size: 13px; color: var(--muted); }
 .lab-legend .lab-cell { width: 18px; height: 14px; margin-right: -8px; }
 
@@ -1234,6 +1236,12 @@ kbd { display: inline-block; min-width: 20px; padding: 0 4px; border: 1px solid 
   .lab-nrow .lab-cap { grid-column: 1 / -1; }
   .lab-crow { grid-template-columns: minmax(0, 1fr) 80px; }
   .lab-crow > :nth-child(2), .lab-crow > :nth-child(3) { grid-column: 1 / -1; }
+}
+
+@media (max-width: 560px) {
+  .lab-wide { display: none; }
+  .lab-svg text { font-size: 18px; }
+  .lab-svg .lab-cap, .lab-svg .lab-num, .lab-svg .lab-call { font-size: 17px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2067,7 +2075,7 @@ function renderPractice(sec) {
     sec.practice.map(p => `<article class="practice-item">
       <h4>${esc(p.t)}</h4>
       <p>${mono(p.d)}</p>
-      ${p.code ? `<pre><code>${esc(p.code)}</code></pre>` : ""}
+      ${p.code ? `<pre tabindex="0"><code>${esc(p.code)}</code></pre>` : ""}
     </article>`).join("")
   }</div></section>`;
 }
@@ -2791,17 +2799,16 @@ function labAttention(el) {
         <rect x="${x0 + i * gap - 56}" y="34" width="112" height="34" rx="6"/>
         <text x="${x0 + i * gap}" y="56">${t}</text></g>`).join("");
     const bottom = toks.map((t, i) => {
-      const bx = x0 + i * gap, bh = Math.max(2, w[i] * 110);
+      const bx = x0 + i * gap, bh = Math.max(2, w[i] * 96);
       return `<g class="lab-key">
         <rect x="${bx - 56}" y="150" width="112" height="30" rx="6"/>
         <text x="${bx}" y="170">${t}</text>
         <rect class="lab-bar" x="${bx - 18}" y="${300 - bh}" width="36" height="${bh}"/>
-        <text class="lab-num" x="${bx}" y="${292 - bh}">${pct(w[i])}</text>
+        <text class="lab-num" x="${bx}" y="${294 - bh}">${pct(w[i])}</text>
         <text class="lab-cap" x="${bx}" y="318">q·k ${fmt(logits[i], 1)}</text></g>`;
     }).join("");
-    view.innerHTML = `<svg viewBox="0 0 ${W} 330" class="lab-svg" role="img" aria-label="Веса внимания">
-      <text class="lab-cap" x="8" y="22" text-anchor="start">запрос (query): нажми на слово</text>
-      <text class="lab-cap" x="8" y="198" text-anchor="start">ключи (keys) и веса после softmax</text>
+    view.innerHTML = `<p class="lab-legend">сверху запрос (query), нажми на слово; снизу ключи (keys) и веса после softmax, толщина дуги — тот же вес</p>
+      <svg viewBox="0 24 ${W} 306" class="lab-svg" role="group" aria-label="Веса внимания">
       ${arcs}${top}${bottom}</svg>`;
     const lead = toks.map((t, i) => [t, w[i]]).filter((_, i) => i !== st.q).sort((a, b) => b[1] - a[1])[0];
     const self = w[st.q];
@@ -2831,11 +2838,11 @@ const TBLOCK = [
 ];
 
 function labTransformer(el) {
-  const st = { split: 1, labels: 1, on: "att" };
+  const st = { split: 1, labels: window.matchMedia("(max-width: 560px)").matches ? 0 : 1, on: "att" };
   el.innerHTML = `
     <div class="lab-controls">
       ${segmented("split", [[1, "разобрать"], [0, "собрать"]], st.split)}
-      ${segmented("labels", [[1, "подписи"], [0, "без подписей"]], st.labels)}
+      <div class="lab-wide">${segmented("labels", [[1, "подписи"], [0, "без подписей"]], st.labels)}</div>
     </div>
     <div class="lab-stage lab-split" data-view></div>`;
   const view = el.querySelector("[data-view]");
@@ -2857,7 +2864,7 @@ function labTransformer(el) {
         <text class="lab-call" x="${lx}" y="${ly + 4}">${p.t}</text>` : ""}</g>`;
     }).join("");
     const cur = TBLOCK.find(p => p.id === st.on);
-    view.innerHTML = `<svg viewBox="0 0 ${st.labels ? 760 : 560} ${base + 40}" class="lab-svg" role="img" aria-label="Блок трансформера по слоям">
+    view.innerHTML = `<svg viewBox="0 0 ${st.labels ? 760 : 560} ${base + 40}" class="lab-svg" role="group" aria-label="Блок трансформера по слоям">
         <text class="lab-cap" x="8" y="22" text-anchor="start">блок трансформера, decoder-only · ×N</text>${plates}</svg>
       <div class="lab-card"><b>${cur.t}</b><p>${cur.d}</p>${cur.f ? `<p class="lab-warn">${cur.f}</p>` : ""}</div>`;
     view.querySelectorAll(".lab-plate").forEach(g => g.addEventListener("keydown", e => {
@@ -2985,8 +2992,7 @@ function labThreshold(el) {
     const barsN = hn.map((v, i) => `<rect class="lab-hneg" x="${X(i / bins)}" y="${hY(v)}" width="${(W - 60) / bins - 1}" height="${150 - hY(v)}"/>`).join("");
     const barsP = hp.map((v, i) => `<rect class="lab-hpos" x="${X(i / bins)}" y="${hY(v)}" width="${(W - 60) / bins - 1}" height="${150 - hY(v)}"/>`).join("");
     const cost = costs.map(([t2, c]) => `${X(t2)},${280 - c / maxCost * 90}`).join(" ");
-    view.innerHTML = `<svg viewBox="0 0 ${W} 310" class="lab-svg" role="img" aria-label="Распределение оценок и стоимость ошибок">
-        <text class="lab-cap" x="30" y="18" text-anchor="start">оценки модели: серые — отрицательные, цветные — положительные (корень по высоте)</text>
+    view.innerHTML = `<div class="lab-fig"><p class="lab-legend">оценки модели: серые — отрицательные, цветные — положительные (корень по высоте)</p><svg viewBox="0 0 ${W} 310" class="lab-svg" role="img" aria-label="Распределение оценок и стоимость ошибок">
         ${barsN}${barsP}
         <line class="lab-axis" x1="30" y1="150" x2="${W - 30}" y2="150"/>
         <line class="lab-thr" x1="${X(th)}" y1="26" x2="${X(th)}" y2="290"/>
@@ -2994,7 +3000,7 @@ function labThreshold(el) {
         <polyline class="lab-line" points="${cost}"/>
         <circle class="lab-best" cx="${X(best[0])}" cy="${280 - best[1] / maxCost * 90}" r="4"/>
         <text class="lab-num" x="${X(best[0])}" y="${270 - best[1] / maxCost * 90}">минимум при ${fmt(best[0], 2)}</text>
-      </svg>
+      </svg></div>
       <div class="lab-card">
         <div class="lab-cm"><span></span><b>факт +</b><b>факт −</b>
           <b>модель +</b><span class="ok">TP ${tp}</span><span class="bad">FP ${fp}</span>
@@ -3041,15 +3047,18 @@ function labDescent(el) {
     const clamp = v => Math.max(-1.6, Math.min(1.6, v));
     const line = r => r.pts.map(([x, y]) => `${X(clamp(x))},${Y(clamp(y))}`).join(" ");
     const dist = r => Math.hypot(...r.pts[r.pts.length - 1]);
-    view.innerHTML = `<svg viewBox="0 0 ${W} ${Hh}" class="lab-svg" role="img" aria-label="Траектории спуска">
+    view.innerHTML = `<p class="lab-legend">f = ½(x² + κy²), 60 шагов, ось y растянута, чтобы овраг был виден</p>
+      <svg viewBox="0 0 ${W} ${Hh}" class="lab-svg" role="img" aria-label="Траектории спуска">
       <defs><clipPath id="${uid}"><rect x="0" y="0" width="${W}" height="${Hh}"/></clipPath></defs>
       <g clip-path="url(#${uid})">${ell}
       <polyline class="lab-path-muted" points="${line(gd)}"/>
       <polyline class="lab-path" points="${line(mo)}"/></g>
       <circle class="lab-best" cx="${X(0)}" cy="${Y(0)}" r="4"/>
-      <text class="lab-cap" x="12" y="20" text-anchor="start">f = ½(x² + κy²), 60 шагов, ось y растянута, чтобы овраг был виден</text>
-      <text class="lab-cap lab-cap-muted" x="12" y="${Hh - 28}" text-anchor="start">серая — без момента: до минимума ${gd.div ? "разошёлся" : fmt(dist(gd), 3)}</text>
-      <text class="lab-cap lab-cap-accent" x="12" y="${Hh - 10}" text-anchor="start">цветная — с моментом β ${fmt(st.mom / 100, 2)}: ${mo.div ? "разошёлся" : fmt(dist(mo), 3)}</text></svg>`;
+</svg>
+      <p class="lab-kv">
+        <span>серая, без момента: до минимума</span><b>${gd.div ? "разошёлся" : fmt(dist(gd), 3)}</b>
+        <span>цветная, с моментом β ${fmt(st.mom / 100, 2)}: до минимума</span><b>${mo.div ? "разошёлся" : fmt(dist(mo), 3)}</b>
+      </p>`;
     const limit = 2 / st.kappa;
     note.textContent = (st.lr / 1000 > limit
       ? `Шаг больше 2/κ = ${fmt(limit, 3)}: поперёк оврага спуск без момента раскачивается и уходит. `
@@ -3122,18 +3131,17 @@ function labBiasVariance(el) {
     const cmax = Math.min(1.5, Math.max(...curves.map(c => c[1]))), EX = d => 30 + d / 12 * 280, EY = v => 210 - Math.min(v, cmax) / cmax * 180;
     const trL = curves.map((c, d) => `${EX(d)},${EY(c[0])}`).join(" "), vaL = curves.map((c, d) => `${EX(d)},${EY(c[1])}`).join(" ");
     const bestD = curves.reduce((b, c, d) => c[1] < curves[b][1] ? d : b, 0);
-    view.innerHTML = `<svg viewBox="0 0 ${W} ${H}" class="lab-svg" role="img" aria-label="Подгонка многочленом">
+    view.innerHTML = `<div class="lab-fig"><p class="lab-legend">серая — истина, цветная — модель степени ${st.deg}</p><svg viewBox="0 0 ${W} ${H}" class="lab-svg" role="img" aria-label="Подгонка многочленом">
         <polyline class="lab-path-muted" points="${tru.join(" ")}"/>
         <defs><clipPath id="${uid}"><rect x="0" y="0" width="${W}" height="${H}"/></clipPath></defs>
         <polyline class="lab-path" clip-path="url(#${uid})" points="${fit.join(" ")}"/>${pts}
-        <text class="lab-cap" x="16" y="18" text-anchor="start">серая — истина, цветная — модель степени ${st.deg}</text></svg>
-      <svg viewBox="0 0 340 240" class="lab-svg" role="img" aria-label="Ошибка на обучении и проверке по степени">
+</svg></div>
+      <div class="lab-fig"><p class="lab-legend">ошибка по степени: серая — обучение, цветная — проверка</p><svg viewBox="0 0 340 240" class="lab-svg" role="img" aria-label="Ошибка на обучении и проверке по степени">
         <line class="lab-axis" x1="30" y1="210" x2="310" y2="210"/>
         <polyline class="lab-path-muted" points="${trL}"/><polyline class="lab-path" points="${vaL}"/>
         <line class="lab-thr" x1="${EX(st.deg)}" y1="24" x2="${EX(st.deg)}" y2="210"/>
         <circle class="lab-best" cx="${EX(bestD)}" cy="${EY(curves[bestD][1])}" r="4"/>
-        <text class="lab-cap" x="30" y="18" text-anchor="start">ошибка: серая — обучение, цветная — проверка</text>
-        <text class="lab-cap" x="30" y="230" text-anchor="start">степень 0</text><text class="lab-cap" x="310" y="230" text-anchor="end">12</text></svg>
+        <text class="lab-cap" x="30" y="230" text-anchor="start">степень 0</text><text class="lab-cap" x="310" y="230" text-anchor="end">12</text></svg></div>
       <p class="lab-note">Обучение ${fmt(curves[st.deg][0], 3)}, проверка ${fmt(curves[st.deg][1], 3)}. ${st.deg < bestD ? "Слишком простая модель: высокое смещение, обе ошибки высокие." : st.deg > bestD + 1 ? "Слишком гибкая: обучение почти идеально, проверка хуже. Нажми «новая выборка», чтобы увидеть разброс." : "Около лучшей степени на проверке."} Шум данных σ² = ${fmt(0.0625, 3)} — ниже него ошибка проверки не опустится.</p>`;
   }
   bindLab(el, st, draw);
@@ -3214,7 +3222,7 @@ function labWilson(el) {
       <text class="lab-cap" x="8" y="114" text-anchor="start">Уилсон</text>
       <line class="lab-int" x1="${X(wil[0])}" y1="110" x2="${X(wil[1])}" y2="110"/>
       <circle class="lab-best" cx="${X(p)}" cy="90" r="4"/>
-      <text class="lab-num" x="${X(p)}" y="30">${st.k}/${st.n} = ${fmt(p, 3)}</text></svg>
+      <text class="lab-num" x="${X(p)}" y="30" text-anchor="${p < 0.15 ? "start" : p > 0.85 ? "end" : "middle"}">${st.k}/${st.n} = ${fmt(p, 3)}</text></svg>
       <p class="lab-kv"><span>Уилсон</span><b>[${fmt(wil[0], 3)}; ${fmt(wil[1], 3)}]</b><span>Вальд</span><b>[${fmt(wal[0], 3)}; ${fmt(wal[1], 3)}]</b><span>ширина</span><b>${fmt((wil[1] - wil[0]) * 100, 1)} п.п.</b></p>
       <p class="lab-note">${st.k === 0 || st.k === st.n
         ? `Ноль ошибок или ноль успехов: Вальд схлопывается в точку, а честная граница по правилу трёх около ${pct(3 / n, 1)}.`
@@ -3258,11 +3266,11 @@ function labVram(el) {
     const fits = total <= st.gpu;
     let maxConc = 0;
     for (let c = 1; c <= 512; c++) { if ((weights + perTok * st.ctx * 1024 * c / G) * 1.15 <= st.gpu) maxConc = c; }
-    view.innerHTML = `<svg viewBox="0 0 ${W} 130" class="lab-svg" role="img" aria-label="Память видеокарты">
+    view.innerHTML = `<p class="lab-legend">веса ${fmt(weights, 1)} · KV-кэш ${fmt(kv, 1)} · запас 15% ${fmt(reserve, 1)} · итого ${fmt(total, 1)} ГиБ</p>
+      <svg viewBox="0 0 ${W} 100" class="lab-svg" role="img" aria-label="Память видеокарты">
       ${seg(0, weights, "lab-mw")}${seg(weights, weights + kv, "lab-mk")}${seg(weights + kv, total, "lab-mr")}
       <line class="lab-thr" x1="${X(st.gpu)}" y1="26" x2="${X(st.gpu)}" y2="96"/>
-      <text class="lab-num" x="${X(st.gpu)}" y="20">карта ${st.gpu} ГБ</text>
-      <text class="lab-cap" x="20" y="112" text-anchor="start">веса ${fmt(weights, 1)} · KV-кэш ${fmt(kv, 1)} · запас 15% ${fmt(reserve, 1)} · итого ${fmt(total, 1)} ГиБ</text></svg>
+      <text class="lab-num" x="${X(st.gpu)}" y="20">карта ${st.gpu} ГБ</text></svg>
       <p class="lab-kv"><span>KV на токен</span><b>${fmt(perTok / 1024, 0)} КиБ</b><span>влезает</span><b class="${fits ? "ok" : "bad"}">${fits ? "да" : "нет"}</b><span>макс. запросов при этом контексте</span><b>${maxConc}</b></p>
       <p class="lab-note">${st.preset === "moe" ? "MoE хранит все 35 млрд параметров, а считает примерно как трёхмиллиардная: память по полному размеру, скорость по активным. " : ""}${kv > weights ? "Кэш уже больше весов: упирается длина и число запросов, а не размер модели." : "Пока основную память занимают веса; добавь контекст или запросы, и кэш их обгонит."} Конфигурации слоёв условные, для своей модели числа берут из config.json.</p>`;
   }
@@ -3326,7 +3334,7 @@ function labPageTokens(el) {
     view.innerHTML = `<div class="lab-split"><svg viewBox="0 0 ${W} 260" class="lab-svg" role="img" aria-label="Страница и сетка патчей">
         <rect x="40" y="20" width="${w * scale}" height="${h * scale}" class="lab-page"/>${grid}
         <text class="lab-cap" x="${50 + w * scale}" y="36" text-anchor="start">${w} × ${h} px</text>
-        <text class="lab-cap" x="${50 + w * scale}" y="56" text-anchor="start">${cols} × ${rows} ${st.patch === 28 ? "токенов" : "патчей"}${step > 1 ? `, линия на каждые ${step}` : ""}</text></svg>
+        <text class="lab-cap" x="${50 + w * scale}" y="62" text-anchor="start">${cols} × ${rows} ${st.patch === 28 ? "токенов" : "патчей"}${step > 1 ? `, линия на каждые ${step}` : ""}</text></svg>
       <div class="lab-card">
         <p class="lab-kv"><span>токенов на страницу</span><b>${tok.toLocaleString("ru-RU")}</b><span>на запрос</span><b>${total.toLocaleString("ru-RU")}</b><span>высота строчной буквы 10 pt, px</span><b class="${font < 8 ? "bad" : "ok"}">${fmt(font, 1)}</b></p>
         <p class="lab-note">${k < 1 ? "Длинная сторона упёрлась в лимит: рост dpi больше не добавляет ни токенов, ни деталей. " : "Удвоение dpi учетверяет площадь и число токенов. "}${font < 8 ? "Строчная буква 10-го кегля меньше 8 пикселей: мелкие цифры номера начнут теряться." : "Мелкий шрифт ещё различим."} Модели режут картинку по-разному: у части патч 14 px с объединением 2 × 2 в один токен, у части фиксированное разрешение, поэтому число токенов сверяют с ответом API.</p>
@@ -3415,13 +3423,183 @@ function labPsi(el) {
     const W = 600, bw = 90, X = i => 60 + i * 130;
     const bars = cur.map((c, i) => `<rect class="lab-hneg" x="${X(i)}" y="${180 - ref[i] * 320}" width="${bw / 2 - 4}" height="${ref[i] * 320}"/>
       <rect class="lab-hpos" x="${X(i) + bw / 2}" y="${180 - c * 320}" width="${bw / 2 - 4}" height="${c * 320}"/>
-      <text class="lab-num" x="${X(i) + bw / 2}" y="${200}">${pct(c)}</text>
-      <text class="lab-cap" x="${X(i) + bw / 2}" y="${216}">вклад ${fmt(parts[i], 3)}</text>`).join("");
-    view.innerHTML = `<svg viewBox="0 0 ${W} 230" class="lab-svg" role="img" aria-label="Доли по корзинам: эталон и сейчас">
-      <line class="lab-axis" x1="40" y1="180" x2="${W - 20}" y2="180"/>${bars}
-      <text class="lab-cap" x="40" y="16" text-anchor="start">серые — эталонный период по 25%, цветные — текущий; четвёртая корзина добирает до 100%</text></svg>
+      <text class="lab-num" x="${X(i) + bw / 2}" y="${198}">${pct(c)}</text>
+      <text class="lab-cap" x="${X(i) + bw / 2}" y="${222}">вклад ${fmt(parts[i], 3)}</text>`).join("");
+    view.innerHTML = `<p class="lab-legend">серые — эталонный период по 25%, цветные — текущий; четвёртая корзина добирает до 100%</p><svg viewBox="0 0 ${W} 230" class="lab-svg" role="img" aria-label="Доли по корзинам: эталон и сейчас">
+      <line class="lab-axis" x1="40" y1="180" x2="${W - 20}" y2="180"/>${bars}</svg>
       <p class="lab-kv"><span>PSI = Σ (факт − эталон) · ln(факт / эталон)</span><b class="${level[0]}">${fmt(psi, 3)} · ${level[1]}</b></p>
       <p class="lab-note">Пороги условные: до 0.1 обычно спокойно, с 0.25 тревога. Дрейф входа говорит, где проверить качество на свежей разметке, но само качество он не мерит.</p>`;
+  }
+  bindLab(el, st, draw);
+  draw();
+}
+
+/* Base rate in natural frequencies */
+const BR_PRESETS = {
+  defect: { label: "дефект 1 из 1000", prev: 1, sens: 99, spec: 990 },
+  disease: { label: "болезнь у 1%", prev: 10, sens: 99, spec: 950 },
+  spam: { label: "спам у 30%", prev: 300, sens: 95, spec: 980 }
+};
+
+function labBaseRate(el) {
+  const st = { preset: "defect", applied: "defect", prev: 1, sens: 99, spec: 990, tests: 1 };
+  el.innerHTML = `
+    <div class="lab-controls">
+      ${segmented("preset", Object.entries(BR_PRESETS).map(([k, v]) => [k, v.label]), st.preset)}
+      ${segmented("tests", [[1, "один тест"], [2, "два независимых"]], st.tests)}
+    </div>
+    <div class="lab-controls">
+      ${range("Больных или дефектных на 1000", "prev", 1, 300, 1, st.prev)}
+      ${range("Чувствительность", "sens", 50, 100, 1, st.sens, "%")}
+      ${range("Специфичность", "spec", 800, 999, 1, st.spec)}
+    </div>
+    <div class="lab-stage" data-view></div>`;
+  const view = el.querySelector("[data-view]");
+  function draw() {
+    if (st.preset && st.preset !== st.applied) {
+      const p = BR_PRESETS[st.preset];
+      Object.assign(st, { prev: p.prev, sens: p.sens, spec: p.spec, applied: st.preset });
+      el.querySelectorAll("input[data-k]").forEach(i => { i.value = st[i.dataset.k]; });
+    }
+    const match = Object.keys(BR_PRESETS).find(k => ["prev", "sens", "spec"].every(f => BR_PRESETS[k][f] === st[f])) || null;
+    st.preset = st.applied = match;
+    el.querySelectorAll("[data-seg]").forEach(b => b.setAttribute("aria-pressed", String(String(st[b.dataset.seg]) === b.dataset.v)));
+    syncOutputs(el, st, { sens: v => v + "%", spec: v => fmt(v / 10, 1) + "%" });
+    const t = st.tests, se = (st.sens / 100) ** t, fpr = (1 - st.spec / 1000) ** t;
+    const D = st.prev, TP = D * se, FP = (1000 - D) * fpr, prec = TP / (TP + FP);
+    const tpN = Math.round(TP), fnN = D - tpN, fpN = Math.min(1000 - D, Math.round(FP));
+    const cls = i => i < tpN ? "br-tp" : i < D ? "br-fn" : i < D + fpN ? "br-fp" : "br-tn";
+    const cells = Array.from({ length: 1000 }, (_, i) =>
+      `<rect class="${cls(i)}" x="${(i % 50) * 12}" y="${30 + Math.floor(i / 50) * 12}" width="10" height="10" rx="2"/>`).join("");
+    const odds = x => x >= 1 ? `${fmt(x, x < 10 ? 1 : 0)} : 1` : `1 : ${fmt(1 / x, 1 / x < 10 ? 1 : 0)}`;
+    const tone = prec >= 0.8 ? "ok" : prec >= 0.4 ? "warn" : "bad";
+    view.innerHTML = `<p class="lab-legend">цветные — пойманные, контур — пропущенные, красные — ложные тревоги, серые — чистые без тревоги</p><svg viewBox="0 0 600 274" class="lab-svg" role="img" aria-label="Тысяча случаев: пойманные, пропущенные, ложные тревоги">
+        ${cells}</svg>
+      <p class="lab-kv">
+        <span>срабатываний на 1000</span><b>${fmt(TP + FP, 1)}</b>
+        <span>из них настоящих</span><b>${fmt(TP, 1)}</b>
+        <span>доверие к срабатыванию</span><b class="${tone}">${pct(prec, 1)}</b>
+        <span>шансы до теста и после</span><b>${odds(D / (1000 - D))} → ${odds(TP / FP)}</b>
+      </p>
+      <p class="lab-note">Шансы после теста равны шансам до него, умноженным на отношение правдоподобия чувствительность / (1 − специфичность). При редком событии почти все тревоги приходят из огромной чистой части, поэтому специфичность решает больше чувствительности. Поднять доверие можно предфильтром, который повышает базовую частоту в потоке, или вторым тестом.${t === 2 ? " Здесь второй тест считается независимым от первого при известном статусе; два прогона одной модели или два похожих детектора такими не являются, и выигрыш будет меньше." : ""}</p>`;
+  }
+  bindLab(el, st, draw);
+  draw();
+}
+
+/* Random forest: correlation caps the gain */
+function labForest(el) {
+  const st = { rho: 30, k: 20 };
+  const trees = v => Math.round(10 ** (v / 10));
+  el.innerHTML = `
+    <div class="lab-controls">
+      ${range("Корреляция деревьев ρ", "rho", 0, 90, 5, st.rho)}
+      ${range("Деревьев в лесу", "k", 0, 30, 1, st.k)}
+    </div>
+    <div class="lab-stage" data-view></div>`;
+  const view = el.querySelector("[data-view]");
+  function simulate(rho, n) {
+    // tree_i = √ρ·c + √(1−ρ)·e_i; the mean of n independent e_i is drawn directly as N(0, 1/n)
+    const r = rng(11 + n * 7 + Math.round(rho * 1000)), R = 5000, avgs = [];
+    for (let j = 0; j < R; j++) avgs.push(Math.sqrt(rho) * gauss(r) + Math.sqrt(1 - rho) * gauss(r) / Math.sqrt(n));
+    const m = avgs.reduce((a, b) => a + b, 0) / R;
+    return avgs.reduce((a, b) => a + (b - m) ** 2, 0) / (R - 1);
+  }
+  function draw() {
+    syncOutputs(el, st, { rho: v => fmt(v / 100, 2), k: v => String(trees(v)) });
+    const rho = st.rho / 100, n = trees(st.k), f = k => rho + (1 - rho) / k;
+    const W = 600, H = 230, X = lk => 50 + lk / 3 * (W - 80), Y = v => 20 + (1 - v) * (H - 60);
+    const curve = g => Array.from({ length: 61 }, (_, i) => { const lk = i / 20; return `${fmt(X(lk), 1)},${fmt(Y(g(10 ** lk)), 1)}`; }).join(" ");
+    const sim = simulate(rho, n);
+    const yt = [0, 0.25, 0.5, 0.75, 1].map(v => `<line class="lab-axis" x1="50" y1="${Y(v)}" x2="${W - 30}" y2="${Y(v)}" opacity=".5"/><text class="lab-cap" x="42" y="${Y(v) + 4}" text-anchor="end">${pct(v)}</text>`).join("");
+    const xt = [1, 10, 100, 1000].map(k => `<text class="lab-cap" x="${X(Math.log10(k))}" y="${H - 8}">${k}</text>`).join("");
+    view.innerHTML = `<p class="lab-legend">разброс среднего в долях от одного дерева по числу деревьев (шкала логарифмическая): цветная — при ρ = ${fmt(rho, 2)}, серая — при независимых деревьях</p><svg viewBox="0 0 ${W} ${H}" class="lab-svg" role="img" aria-label="Разброс леса в зависимости от числа деревьев">
+        ${yt}${xt}
+        <polyline class="lab-path-muted" points="${curve(k => 1 / k)}"/>
+        <line class="lab-thr" x1="50" y1="${Y(rho)}" x2="${W - 30}" y2="${Y(rho)}"/>
+        <text class="lab-cap" x="${W - 30}" y="${Y(rho) - 6}" text-anchor="end">предел ρ</text>
+        <polyline class="lab-path" points="${curve(f)}"/>
+        <circle class="lab-best" cx="${X(Math.log10(n))}" cy="${Y(f(n))}" r="5"/>
+</svg>
+      <p class="lab-kv">
+        <span>по формуле ρσ² + (1 − ρ)σ²/k</span><b>${pct(f(n), 1)}</b>
+        <span>в симуляции 5000 лесов по ${n} деревьев</span><b>${pct(sim, 1)}</b>
+        <span>предел при бесконечном числе деревьев</span><b>${pct(rho, 1)}</b>
+      </p>
+      <p class="lab-note">Деревья помогают, пока заметно второе слагаемое, дальше разброс упирается в ρ: при ρ = 0.3 сто и тысяча деревьев почти неотличимы. Поэтому борются с самой корреляцией: бутстреп и случайное подмножество признаков в каждой вершине делают деревья непохожими. Смещение леса равно смещению одного дерева, отсюда глубокие деревья. Переобучения от числа деревьев нет, есть только время обучения и инференса.</p>`;
+  }
+  bindLab(el, st, draw);
+  draw();
+}
+
+/* Weight init: signal through 30 layers */
+function labInit(el) {
+  const st = { fn: "relu", init: "xavier" };
+  const N = 64, B = 16, L = 30;
+  const VAR = { small: () => 1e-4, xavier: n => 2 / (n + n), he: n => 2 / n, big: () => 1 };
+  el.innerHTML = `
+    <div class="lab-controls">
+      ${segmented("fn", [["relu", "ReLU"], ["tanh", "tanh"]], st.fn)}
+      ${segmented("init", [["small", "N(0, 0.01²)"], ["xavier", "Xavier"], ["he", "He"], ["big", "N(0, 1)"]], st.init)}
+    </div>
+    <div class="lab-stage" data-view></div>`;
+  const view = el.querySelector("[data-view]");
+  const std = a => { let s = 0, q = 0; for (const v of a) { s += v; q += v * v; } const m = s / a.length; return Math.sqrt(Math.max(0, q / a.length - m * m)); };
+  function run() {
+    const r = rng(42), sd = Math.sqrt(VAR[st.init](N)), relu = st.fn === "relu";
+    let a = Float64Array.from({ length: B * N }, () => gauss(r));
+    const Ws = [], Hs = [], fwd = [];
+    for (let l = 0; l < L; l++) {
+      const W = Float64Array.from({ length: N * N }, () => gauss(r) * sd), h = new Float64Array(B * N);
+      for (let b = 0; b < B; b++) for (let i = 0; i < N; i++) { const ai = a[b * N + i]; if (!ai) continue; for (let j = 0; j < N; j++) h[b * N + j] += ai * W[i * N + j]; }
+      Ws.push(W); Hs.push(h); fwd.push(std(h));
+      a = h.map(v => relu ? Math.max(0, v) : Math.tanh(v));
+    }
+    const sat = relu ? null : a.filter(v => Math.abs(v) > 0.99).length / a.length;
+    let g = Float64Array.from({ length: B * N }, () => gauss(r));
+    const bwd = new Array(L);
+    for (let l = L - 1; l >= 0; l--) {
+      const h = Hs[l], W = Ws[l], gh = g.map((v, k) => v * (relu ? (h[k] > 0 ? 1 : 0) : 1 - Math.tanh(h[k]) ** 2));
+      bwd[l] = std(gh);
+      const gp = new Float64Array(B * N);
+      for (let b = 0; b < B; b++) for (let j = 0; j < N; j++) { const v = gh[b * N + j]; if (!v) continue; for (let i = 0; i < N; i++) gp[b * N + i] += v * W[i * N + j]; }
+      g = gp;
+    }
+    return { fwd, bwd, sat };
+  }
+  const SUP = { "-": "⁻", 0: "⁰", 1: "¹", 2: "²", 3: "³", 4: "⁴", 5: "⁵", 6: "⁶", 7: "⁷", 8: "⁸", 9: "⁹" };
+  const sci = x => {
+    if (!Number.isFinite(x)) return "—";
+    if (x === 0) return "0";
+    if (x >= 0.01 && x < 1000) return fmt(x, 2);
+    const [m, e] = x.toExponential(1).split("e");
+    return `${m}·10${[...String(Number(e))].map(c => SUP[c]).join("")}`;
+  };
+  function draw() {
+    el.querySelectorAll("[data-seg]").forEach(b => b.setAttribute("aria-pressed", String(String(st[b.dataset.seg]) === b.dataset.v)));
+    const { fwd, bwd, sat } = run();
+    const W = 600, H = 236, X = l => 50 + l / (L - 1) * (W - 80), lg = v => Math.max(-8, Math.min(8, Math.log10(Math.max(v, 1e-300)))), Y = v => 14 + (8 - lg(v)) / 16 * (H - 54);
+    const line = arr => arr.map((v, l) => `${fmt(X(l), 1)},${fmt(Y(v), 1)}`).join(" ");
+    const yt = [-8, -4, 0, 4, 8].map(e => `<line class="lab-axis" x1="50" y1="${Y(10 ** e)}" x2="${W - 30}" y2="${Y(10 ** e)}" opacity=".5"/><text class="lab-cap" x="42" y="${Y(10 ** e) + 4}" text-anchor="end">${e === 0 ? "1" : "1e" + e}</text>`).join("");
+    const ratio = fwd[L - 1] / fwd[0], gr = bwd[0] / bwd[L - 1];
+    const verdict = ratio < 1e-2 ? ["bad", "сигнал затухает: последние слои получают почти нули"]
+      : ratio > 1e2 ? ["bad", "сигнал взрывается: значения растут от слоя к слою"]
+      : gr > 1e2 ? ["bad", `амплитуда держится за счёт насыщения, а градиент к первым слоям растёт в ${sci(gr)} раз: хаотический режим, обучение неустойчиво`]
+      : gr < 1e-2 ? ["warn", "прямой проход держится, а градиент к первым слоям гаснет"]
+      : ["ok", "сигнал и градиент держат масштаб"];
+    view.innerHTML = `<p class="lab-legend">стандартное отклонение по слоям: цветная — прямой проход, серая — градиент</p><svg viewBox="0 0 ${W} ${H}" class="lab-svg" role="img" aria-label="Разброс сигнала и градиента по слоям">
+        ${yt}
+        <polyline class="lab-path-muted" points="${line(bwd)}"/>
+        <polyline class="lab-path" points="${line(fwd)}"/>
+        <text class="lab-cap" x="${X(0)}" y="${H - 6}" text-anchor="start">слой 1</text><text class="lab-cap" x="${X(L - 1)}" y="${H - 6}" text-anchor="end">слой ${L}</text></svg>
+      <p class="lab-kv">
+        <span>на первом слое</span><b>${sci(fwd[0])}</b>
+        <span>на последнем слое</span><b>${sci(fwd[L - 1])}</b>
+        <span>градиент у первого слоя</span><b>${sci(bwd[0])}</b>
+        ${sat !== null ? `<span>насыщенных нейронов в конце</span><b>${pct(sat)}</b>` : ""}
+        <span>итог</span><b class="${verdict[0]}">${verdict[1]}</b>
+      </p>
+      <p class="lab-note">Сеть ${L} слоёв по ${N} нейронов, честный прямой и обратный проход на случайном батче. Дисперсия выхода слоя примерно равна n_in · Var(w) · E[a²]. ReLU обнуляет половину входов, поэтому He берёт Var(w) = 2 / n_in; Xavier, 2 / (n_in + n_out), выведена для симметричных активаций вроде tanh. Колебания в пределах нескольких раз даже при удачной схеме — шум конечной ширины; плохая инициализация видна по экспоненциальному тренду. Нормализация и остаточные связи делают сеть менее чувствительной к инициализации, но не отменяют её.</p>`;
   }
   bindLab(el, st, draw);
   draw();
@@ -3522,14 +3700,14 @@ function renderIvItem() {
         <div class="gauge-track"><div class="gauge-fill" style="width:${Math.round(iv.idx / total * 100)}%"></div></div>
       </div>
       <h2 class="question">${esc(it.q)}</h2>
-      ${it.task ? `<pre><code>${esc(it.task)}</code></pre>` : ""}
+      ${it.task ? `<pre tabindex="0"><code>${esc(it.task)}</code></pre>` : ""}
       <label class="sr-only" for="iv-answer">Твой ответ</label>
       <textarea id="iv-answer" class="iv-answer" rows="${it.kind === "code" ? 10 : 6}" ${iv.revealed ? "readonly" : ""} placeholder="${it.kind === "code" ? "Напиши код, как на доске. Ctrl+Enter — открыть эталон" : "Ответь так, как сказал бы вслух. Ctrl+Enter — открыть эталон"}">${esc(iv.draft)}</textarea>
       ${iv.revealed ? `
         <div class="verdict">
           <p class="eyebrow">Эталон</p>
           <p class="verdict-why">${mono(it.answer)}</p>
-          ${it.solution ? `<pre><code>${esc(it.solution)}</code></pre>` : ""}
+          ${it.solution ? `<pre tabindex="0"><code>${esc(it.solution)}</code></pre>` : ""}
           <p class="eyebrow">Что ты назвал своими словами</p>
           <div class="iv-points">${it.points.map((pt, i) => `<label class="iv-point"><input type="checkbox" data-pt="${i}" ${iv.checks.has(i) ? "checked" : ""}><span>${esc(pt)}</span></label>`).join("")}</div>
           <p class="kbd-hint">Засчитывается от 70% пунктов · сейчас <span id="iv-cover">${Math.round(iv.checks.size / it.points.length * 100)}%</span> · <kbd>Enter</kbd> — дальше</p>
@@ -3634,7 +3812,7 @@ function labWindow(el) {
         return [r[0], r[1], fmt(r[2], 2), v];
       });
     }
-    view.innerHTML = `<pre><code>SELECT model, ${st.fn === "grp" ? "" : "created_at, score, "}${FN[st.fn][0]}\nFROM runs</code></pre>
+    view.innerHTML = `<pre tabindex="0"><code>SELECT model, ${st.fn === "grp" ? "" : "created_at, score, "}${FN[st.fn][0]}\nFROM runs</code></pre>
       <div class="table-scroll"><table><thead><tr>${head.map(h => `<th>${h}</th>`).join("")}</tr></thead><tbody>${out.map(r => `<tr class="${r[0] === "A" ? "" : "lab-alt"}">${r.map((c, i) => `<td class="${i === r.length - 1 ? "lab-hl" : ""}">${c}</td>`).join("")}</tr>`).join("")}</tbody></table></div>
       <p class="lab-note">${st.fn === "grp" ? "GROUP BY сворачивает строки: от пяти прогонов осталось две строки, сравнить прогон с предыдущим уже нельзя." : "Оконная функция считает по окну, но строки не сворачивает: у каждого прогона остаётся своя строка, а окно задаёт PARTITION BY и ORDER BY."}</p>`;
   }
@@ -3699,7 +3877,7 @@ function labConstrained(el) {
     const s = CD_STEPS[st.i];
     const okSum = s.cands.filter(c => c[2]).reduce((x, c) => x + c[1], 0);
     view.innerHTML = `<p class="lab-cap">схема: {"date": string в формате YYYY-MM-DD или null}, других полей нет</p>
-      <pre><code>${esc(s.prefix)}<span class="lab-caret">▍</span></code></pre>
+      <pre tabindex="0"><code>${esc(s.prefix)}<span class="lab-caret">▍</span></code></pre>
       <div class="lab-ntable">${s.cands.map(([tk, p, ok]) => {
         const q = st.g ? (ok ? p / okSum : 0) : p;
         return `<div class="lab-crow"><code>${esc(tk)}</code><span class="lab-cap">${st.g && !ok ? "запрещено схемой" : ok ? "валидно" : "ломает схему"}</span><span class="lab-cbar"><span style="width:${Math.max(1, q * 100)}%" class="${ok ? "" : "bad"}"></span></span><b>${pct(q)}</b></div>`;
@@ -3746,12 +3924,12 @@ const LABS = {
   V: { title: "RAG по шагам", fn: labRag },
   L: { title: "Порог, precision, recall и цена ошибки", fn: labThreshold },
   AC: { title: "Спуск в овраге: шаг и момент", fn: labDescent },
-  X: { title: "Смещение и разброс на одном графике", fn: labBiasVariance },
+  X: { title: "Лес: почему тысяча деревьев не вдесятеро лучше сотни", fn: labForest },
   P: { title: "Смещение и разброс на одном графике", fn: labBiasVariance },
   M: { title: "Разбиения и утечки", fn: labSplits },
   B: { title: "Разбиения и утечки", fn: labSplits },
   A: { title: "Интервал Уилсона против Вальда", fn: labWilson },
-  T: { title: "Интервал Уилсона против Вальда", fn: labWilson },
+  T: { title: "Базовая частота на тысяче случаев", fn: labBaseRate },
   E: { title: "Сколько памяти нужно модели", fn: labVram },
   AD: { title: "Маршрут ответа на system design", fn: labSysDesign },
   U: { title: "Цикл агента с предохранителями", fn: labAgent },
@@ -3769,7 +3947,7 @@ const LABS = {
   G: { title: "Позиционное смещение судьи", fn: labJudgeBias },
   Z: { title: "Шесть проверок перед отчётом", fn: labReport },
   K: { title: "Сколько памяти нужно модели", fn: labVram },
-  Y: { title: "Блок трансформера в разборе", fn: labTransformer }
+  Y: { title: "Инициализация: сигнал через 30 слоёв", fn: labInit }
 };
 
 function renderLab(sec) {

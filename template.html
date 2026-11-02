@@ -598,6 +598,8 @@ details.miss[open] > summary::after { content: "–"; }
 }
 
 .section-head { display: grid; gap: 8px; }
+.section, .sub, .theory, .practice, .practice-item { grid-template-columns: minmax(0, 1fr); min-width: 0; }
+.section p, .drill, .task-text, .flash-def, .flash-use, .verdict-why, .question, .option { overflow-wrap: anywhere; }
 
 .section-title {
   display: flex;
@@ -903,6 +905,143 @@ code.inline {
 
 .sync-note { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
 
+/* today */
+.today-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 1px;
+  margin-bottom: 28px;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  background: var(--rule);
+  overflow: hidden;
+}
+
+.hero-main, .hero-side { display: grid; gap: 14px; align-content: start; padding: 26px; background: var(--surface); }
+.hero-main { background: var(--accent-soft); }
+.hero-title { font-family: var(--display); font-size: clamp(22px, 3.4vw, 30px); font-weight: 700; line-height: 1.2; letter-spacing: -.02em; text-wrap: balance; }
+.hero-sub { font-size: 15px; color: var(--accent-ink); max-width: 60ch; }
+.hero-main .exam-actions { justify-content: flex-start; }
+.btn-big { padding: 14px 22px; font-size: 16px; font-weight: 600; }
+
+.pace { display: inline-flex; align-items: center; gap: 8px; justify-self: start; padding: 4px 12px; border-radius: 999px; font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .04em; }
+.pace.is-good { background: var(--ok-soft); color: var(--ok); }
+.pace.is-mid { background: var(--warn-soft); color: var(--warn); }
+.pace.is-bad { background: var(--bad-soft); color: var(--bad); }
+
+.stat-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.stat { display: grid; gap: 2px; }
+.stat b { font-family: var(--display); font-size: 28px; font-weight: 700; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.stat span { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+
+.week-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.week-chip { display: inline-flex; gap: 6px; align-items: center; padding: 3px 10px; border: 1px solid var(--rule); border-radius: 999px; font-size: 13px; background: var(--surface); }
+.week-chip b { font-family: var(--mono); font-size: 12px; color: var(--accent); }
+.week-chip[data-done="true"] { border-color: var(--ok); color: var(--ok); }
+.week-chip[data-done="true"] b { color: var(--ok); }
+
+.tasks { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-bottom: 28px; }
+.task {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 8px;
+  padding: 20px;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  background: var(--surface);
+  transition: transform .15s ease, border-color .15s ease;
+}
+.task:hover { transform: translateY(-2px); border-color: var(--accent); }
+.task[data-done="true"] { background: var(--ok-soft); border-color: var(--ok); }
+.task-icon { font-size: 26px; line-height: 1; }
+.task-title { font-size: 17px; font-weight: 700; line-height: 1.3; }
+.task-text { font-size: 14.5px; line-height: 1.5; color: var(--muted); }
+.task-count { position: absolute; top: 16px; right: 16px; min-width: 30px; padding: 2px 9px; border-radius: 999px; background: var(--accent); color: var(--surface); font-family: var(--mono); font-size: 13px; font-weight: 700; text-align: center; }
+.task[data-done="true"] .task-count { background: var(--ok); }
+.task .btn { justify-self: start; }
+
+.panel-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; margin-bottom: 28px; }
+.panel { display: grid; gap: 14px; align-content: start; padding: 20px; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface); min-width: 0; }
+
+.goal-bar { height: 12px; border-radius: 999px; background: var(--surface-2); overflow: hidden; }
+.goal-bar div { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--accent), var(--ok)); transition: width .4s ease; }
+
+.heat { display: grid; grid-auto-flow: column; grid-template-rows: repeat(7, 13px); gap: 3px; justify-content: start; overflow-x: auto; padding-bottom: 2px; }
+.heat i { width: 13px; height: 13px; border-radius: 3px; background: var(--surface-2); }
+.heat i[data-l="1"] { background: color-mix(in srgb, var(--accent) 30%, var(--surface-2)); }
+.heat i[data-l="2"] { background: color-mix(in srgb, var(--accent) 60%, var(--surface-2)); }
+.heat i[data-l="3"] { background: var(--accent); }
+.heat i[data-today="true"] { outline: 2px solid var(--ink); outline-offset: -1px; }
+.heat i[data-future="true"] { background: transparent; }
+
+.weak-list { display: grid; gap: 8px; }
+.weak-row { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; align-items: center; gap: 10px; font-size: 14.5px; }
+.weak-row .step-sigil { width: 34px; height: 34px; }
+
+.settings { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; font-size: 14px; color: var(--muted); }
+.settings label { display: inline-flex; align-items: center; gap: 8px; }
+.settings input, .settings select { padding: 6px 8px; border: 1px solid var(--rule); border-radius: 3px; background: var(--surface); }
+
+.kbd-hint { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+kbd { display: inline-block; min-width: 20px; padding: 0 5px; border: 1px solid var(--rule); border-bottom-width: 2px; border-radius: 3px; font-family: var(--mono); font-size: 11.5px; text-align: center; background: var(--surface); }
+
+.option.is-right { animation: pop .35s ease; }
+.option.is-wrong { animation: shake .35s ease; }
+@keyframes pop { 40% { transform: scale(1.015); } }
+@keyframes shake { 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+
+/* flashcards */
+.flash-wrap { display: grid; gap: 20px; max-width: 760px; }
+.flash {
+  display: grid;
+  gap: 14px;
+  align-content: center;
+  min-height: 300px;
+  padding: 32px;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  background:
+    radial-gradient(circle at 100% 0, var(--accent-soft), transparent 55%),
+    var(--surface);
+  text-align: left;
+  box-shadow: 0 10px 30px -18px rgba(0, 0, 0, .35);
+  animation: flip-in .3s ease;
+}
+.flash:hover { border-color: var(--accent); }
+.flash:disabled { color: var(--ink); cursor: default; }
+.flash:disabled:hover { border-color: var(--rule); }
+.flash-term { font-family: var(--display); font-size: clamp(22px, 4vw, 32px); font-weight: 700; line-height: 1.2; letter-spacing: -.02em; }
+.flash-hint { color: var(--muted); font-size: 14px; }
+.flash-def { font-size: 16.5px; line-height: 1.6; }
+.flash-use { padding: 12px 14px; border-left: 3px solid var(--accent); background: var(--surface-2); font-size: 15px; line-height: 1.55; color: var(--ink); }
+.flash-grade { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.flash-grade .btn { padding: 14px; font-size: 15.5px; font-weight: 600; }
+.btn-bad { border-color: var(--bad); color: var(--bad); }
+.btn-bad:hover { background: var(--bad-soft); }
+.btn-good { border-color: var(--ok); color: var(--ok); }
+.btn-good:hover { background: var(--ok-soft); }
+@keyframes flip-in { from { transform: rotateX(12deg) translateY(6px); opacity: .4; } }
+
+.confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; }
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 60;
+  transform: translateX(-50%);
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--ground);
+  font-weight: 600;
+  font-size: 15px;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, .5);
+  animation: toast-in .25s ease;
+}
+@keyframes toast-in { from { transform: translate(-50%, 12px); opacity: 0; } }
+
 @media (max-width: 980px) {
   .ref-layout { grid-template-columns: minmax(0, 1fr); gap: 24px; }
   .ref-nav { position: static; }
@@ -913,8 +1052,9 @@ code.inline {
 @media (max-width: 720px) {
   .shell { padding-inline: 16px; }
   .topbar-inner { align-items: stretch; flex-direction: column; gap: 16px; }
-  .modes { width: 100%; }
-  .mode { flex: 1 1 auto; padding-inline: 8px; }
+  .modes { width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .mode { min-width: 0; padding-inline: 4px; font-size: 13px; }
+  .mode:first-child { grid-column: 1 / -1; }
   .result-top { grid-template-columns: minmax(0, 1fr); }
   .stage { grid-template-columns: minmax(0, 1fr); gap: 14px; }
   .stage-num { grid-row: auto; }
@@ -923,6 +1063,9 @@ code.inline {
   .progress-top { grid-template-columns: minmax(0, 1fr); }
   .step-row { grid-template-columns: 26px 36px minmax(0, 1fr); }
   .step-marks { grid-column: 1 / -1; justify-content: flex-start; }
+  .today-hero, .panel-row { grid-template-columns: minmax(0, 1fr); }
+  .hero-main, .hero-side { padding: 20px; }
+  .flash { min-height: 240px; padding: 22px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -937,7 +1080,8 @@ code.inline {
       <div class="counters" id="counters"></div>
     </div>
     <nav class="modes" aria-label="Режим">
-      <button class="mode" id="tab-exam" type="button" aria-pressed="true">Экзамен</button>
+      <button class="mode" id="tab-today" type="button" aria-pressed="true">Сегодня</button>
+      <button class="mode" id="tab-exam" type="button" aria-pressed="false">Экзамен</button>
       <button class="mode" id="tab-ref" type="button" aria-pressed="false">Справочник</button>
       <button class="mode" id="tab-lib" type="button" aria-pressed="false">Библиотека</button>
       <button class="mode" id="tab-progress" type="button" aria-pressed="false">Прогресс</button>
@@ -961,26 +1105,141 @@ const KEYS = ["А", "Б", "В", "Г", "Д", "Е"];
 const STORE = "ai-trainer-v2";
 const MARKS = "ai-trainer-progress-v1";
 const PASS = 0.8;
+const STUDY = "ai-trainer-study-v1";
+const INTERVALS = [0, 1, 3, 7, 14, 30, 60];
+const DEFAULT_PLAN = { deadline: "2026-12-31", perDay: 20, at: "" };
+const MODES = ["today", "exam", "ref", "lib", "progress"];
+const KEY_CODES = [["Digit1", "Numpad1", "KeyF"], ["Digit2", "Numpad2", "Comma"], ["Digit3", "Numpad3", "KeyD"], ["Digit4", "Numpad4", "KeyU"]];
 const SECTIONS = Object.fromEntries(FAQ.sections.map(s => [s.id, s]));
+const QKEY = new Map(QUIZ.questions.map(q => [q, "q" + hash(q.q)]));
+const TERMS = FAQ.sections.flatMap(s => (s.terms || []).map(t => ({ sec: s.id, term: t, key: "t" + hash(s.id + "|" + t.t) })));
 const STATE_LABEL = { done: "шаг пройден", active: "в работе", todo: "не начат" };
 const SYNC = { ref: null, status: "local", timer: null, chain: Promise.resolve() };
 const app = document.getElementById("app");
 const announcer = document.getElementById("announcer");
 
 const state = {
-  mode: "exam",
+  mode: "today",
   level: "all",
   track: "all",
-  block: null,
-  order: [],
-  idx: 0,
-  picked: null,
-  answers: {},
+  session: null,
+  cards: null,
   history: load(),
   marks: loadMarks(),
+  study: loadStudy(),
   confirmReset: 0,
   query: ""
 };
+
+function hash(s) {
+  let h = 2166136261;
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return (h >>> 0).toString(36);
+}
+
+function emptyStudy() {
+  return { srs: {}, days: {}, plan: { ...DEFAULT_PLAN } };
+}
+
+function loadStudy() {
+  try {
+    const raw = localStorage.getItem(STUDY);
+    const s = raw ? JSON.parse(raw) : {};
+    return { ...emptyStudy(), ...s, plan: { ...DEFAULT_PLAN, ...(s.plan || {}) } };
+  } catch (e) {
+    return emptyStudy();
+  }
+}
+
+function saveStudy() {
+  try {
+    localStorage.setItem(STUDY, JSON.stringify(state.study));
+  } catch (e) {}
+}
+
+function dayKey(d = new Date()) {
+  const z = n => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${z(d.getMonth() + 1)}-${z(d.getDate())}`;
+}
+
+function parseDay(key) {
+  const [y, m, d] = key.split("-").map(Number);
+  return new Date(y, m - 1, d);
+}
+
+function shiftDay(key, n) {
+  const d = parseDay(key);
+  d.setDate(d.getDate() + n);
+  return dayKey(d);
+}
+
+function daysBetween(a, b) {
+  const utc = k => { const [y, m, d] = k.split("-").map(Number); return Date.UTC(y, m - 1, d); };
+  return Math.round((utc(b) - utc(a)) / 86400000);
+}
+
+function shuffled(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function grade(key, ok) {
+  const cur = state.study.srs[key];
+  const box = ok ? (cur ? Math.min(cur.box + 1, INTERVALS.length - 1) : 2) : 0;
+  const today = dayKey();
+  state.study.srs[key] = {
+    box,
+    due: shiftDay(today, INTERVALS[box]),
+    at: stamp(),
+    n: (cur ? cur.n : 0) + 1,
+    lapses: (cur ? cur.lapses : 0) + (ok ? 0 : 1)
+  };
+  const d = state.study.days[today] || { n: 0, ok: 0 };
+  state.study.days[today] = { n: d.n + 1, ok: d.ok + (ok ? 1 : 0), at: stamp() };
+  if (d.n + 1 === state.study.plan.perDay) {
+    celebrate();
+    toast(`Дневная цель выполнена: ${state.study.plan.perDay} ответов`);
+  }
+}
+
+function todayCount() {
+  const d = state.study.days[dayKey()];
+  return d ? d.n : 0;
+}
+
+function streak() {
+  let day = dayKey();
+  if (!state.study.days[day]) day = shiftDay(day, -1);
+  let n = 0;
+  while (state.study.days[day] && state.study.days[day].n > 0) {
+    n += 1;
+    day = shiftDay(day, -1);
+  }
+  return n;
+}
+
+function dueQuestions() {
+  const today = dayKey();
+  return QUIZ.questions
+    .map(q => ({ q, e: state.study.srs[QKEY.get(q)] }))
+    .filter(x => x.e && x.e.due <= today)
+    .sort((a, b) => a.e.box - b.e.box || b.e.lapses - a.e.lapses)
+    .map(x => x.q);
+}
+
+function weakQuestions() {
+  return QUIZ.questions.filter(q => {
+    const e = state.study.srs[QKEY.get(q)];
+    return e && e.box <= 1 && e.lapses > 0;
+  });
+}
 
 function load() {
   try {
@@ -1026,6 +1285,7 @@ function commit(keepStart) {
   if (!state.marks.started && !keepStart) state.marks.started = now;
   save();
   saveMarks();
+  saveStudy();
   pushRemote();
 }
 
@@ -1034,6 +1294,9 @@ function snapshotProgress() {
     history: state.history,
     read: state.marks.read,
     practice: state.marks.practice,
+    srs: state.study.srs,
+    days: state.study.days,
+    plan: state.study.plan,
     started: state.marks.started,
     updated: state.marks.updated,
     resetAt: state.marks.resetAt
@@ -1048,6 +1311,11 @@ function applyProgress(p) {
     started: p.started || null,
     updated: p.updated || null,
     resetAt: p.resetAt || null
+  };
+  state.study = {
+    srs: p.srs || {},
+    days: p.days || {},
+    plan: { ...DEFAULT_PLAN, ...(p.plan || state.study.plan) }
   };
 }
 
@@ -1079,6 +1347,9 @@ function mergeProgress(local, remote) {
     history: pick(local.history, remote.history),
     read: pick(local.read, remote.read),
     practice: pick(local.practice, remote.practice),
+    srs: pick(local.srs, remote.srs),
+    days: pick(local.days, remote.days),
+    plan: newer(local.plan, remote.plan) || null,
     started: [local.started, remote.started].filter(t => t && (!resetAt || t > resetAt)).sort()[0] || null,
     updated: [local.updated, remote.updated].filter(Boolean).sort().pop() || null,
     resetAt
@@ -1121,7 +1392,8 @@ async function connectAccount() {
     SYNC.ref = ref;
     SYNC.status = "account";
     if (!remote || canon(merged) !== canon(mergeProgress(remote, remote))) pushRemote();
-    const busy = state.mode === "exam" && state.block !== null && state.idx < state.order.length;
+    const busy = (state.session && state.session.idx < state.session.items.length) ||
+      (state.cards && state.cards.idx < state.cards.items.length);
     if (state.mode === "ref") refreshMarks();
     else if (!busy) render();
     else renderCounters();
@@ -1136,9 +1408,15 @@ function isOn(kind, id) {
   return !!(m && m.on);
 }
 
+function bestOf(h) {
+  if (!h || !h.total) return null;
+  const b = h.best && h.best.total ? h.best : null;
+  return b && b.right / b.total > h.right / h.total ? b : { right: h.right, total: h.total };
+}
+
 function passed(id) {
-  const h = state.history[id];
-  return !!h && h.total > 0 && h.right / h.total >= PASS;
+  const b = bestOf(state.history[id]);
+  return !!b && b.right / b.total >= PASS;
 }
 
 function stepState(b) {
@@ -1185,10 +1463,10 @@ function bindMarks() {
   });
 }
 
-function openSection(id) {
+function openSection(id, part) {
   state.query = "";
   setMode("ref");
-  const target = document.getElementById("sec-" + id);
+  const target = document.getElementById((part ? part + "-" : "sec-") + id) || document.getElementById("sec-" + id);
   if (target) target.scrollIntoView({ block: "start" });
 }
 
@@ -1201,6 +1479,7 @@ function resetAll() {
   const now = stamp();
   state.history = {};
   state.marks = { ...emptyMarks(), updated: now, resetAt: now };
+  state.study = { ...emptyStudy(), plan: state.study.plan };
   state.confirmReset = 0;
   commit(true);
   say("Прогресс сброшен");
@@ -1244,22 +1523,86 @@ function say(text) {
 
 function setMode(mode) {
   state.mode = mode;
-  document.getElementById("tab-exam").setAttribute("aria-pressed", String(mode === "exam"));
-  document.getElementById("tab-ref").setAttribute("aria-pressed", String(mode === "ref"));
-  document.getElementById("tab-lib").setAttribute("aria-pressed", String(mode === "lib"));
-  document.getElementById("tab-progress").setAttribute("aria-pressed", String(mode === "progress"));
+  state.session = null;
+  state.cards = null;
+  MODES.forEach(m => document.getElementById("tab-" + m).setAttribute("aria-pressed", String(m === mode)));
   render();
+  window.scrollTo({ top: 0 });
+}
+
+function startSession(kind, items, extra = {}) {
+  if (!items.length) return;
+  const list = kind === "block" ? shuffled(items) : items;
+  state.cards = null;
+  state.session = {
+    kind,
+    items: list,
+    perms: list.map(q => shuffled(q.options.map((_, i) => i))),
+    idx: 0,
+    picked: null,
+    answers: {},
+    recorded: false,
+    title: "",
+    back: state.mode,
+    ...extra
+  };
+  render();
+  window.scrollTo({ top: 0 });
 }
 
 function startBlock(id) {
-  state.block = id;
-  state.order = questionsOf(id).map((_, i) => i);
-  state.idx = 0;
-  state.picked = null;
-  state.answers = {};
-  state.recorded = false;
+  const block = QUIZ.blocks.find(b => b.id === id);
+  startSession("block", questionsOf(id), { block: id, title: block ? block.title : id });
+}
+
+function startReview() {
+  startSession("review", dueQuestions().slice(0, 20), { title: "Повторение по расписанию" });
+}
+
+function startWeak() {
+  startSession("weak", shuffled(weakQuestions()).slice(0, 15), { title: "Работа над ошибками" });
+}
+
+function startMix() {
+  const next = nextStep();
+  const limit = next ? next.order : Infinity;
+  const open = new Set(QUIZ.blocks.filter(b => b.order <= limit || state.history[b.id]).map(b => b.id));
+  startSession("mix", shuffled(QUIZ.questions.filter(q => open.has(q.block))).slice(0, 5), { title: "Смешанная пятиминутка" });
+}
+
+function nextStep() {
+  return QUIZ.blocks.find(b => stepState(b) !== "done") || null;
+}
+
+function pick(orig) {
+  const s = state.session;
+  if (!s || s.picked !== null) return;
+  const q = s.items[s.idx];
+  const ok = orig === q.correct;
+  s.picked = orig;
+  s.answers[s.idx] = orig;
+  grade(QKEY.get(q), ok);
+  commit();
+  say(ok ? "Верно" : "Неверно");
+  renderQuestion();
+  const next = document.getElementById("next");
+  if (next) next.focus({ preventScroll: true });
+}
+
+function advance() {
+  const s = state.session;
+  if (!s || s.picked === null) return;
+  s.idx += 1;
+  s.picked = null;
   render();
   window.scrollTo({ top: 0 });
+}
+
+function leaveSession() {
+  const back = state.session ? state.session.back : state.mode;
+  state.session = null;
+  state.cards = null;
+  setMode(back);
 }
 
 function materialCount() {
@@ -1285,19 +1628,20 @@ function renderCounters() {
 
 function render() {
   renderCounters();
+  if (state.cards) return renderCards();
+  if (state.session) return state.session.idx >= state.session.items.length ? renderResult() : renderQuestion();
+  if (state.mode === "today") return renderToday();
   if (state.mode === "ref") return renderReference();
   if (state.mode === "lib") return renderLibrary();
   if (state.mode === "progress") return renderProgress();
-  if (state.block === null) return renderStart();
-  if (state.idx >= state.order.length) return renderResult();
-  return renderQuestion();
+  return renderStart();
 }
 
 function cardOf(b) {
   const n = questionsOf(b.id).length;
-  const h = state.history[b.id];
+  const h = bestOf(state.history[b.id]);
   const pill = h
-    ? `<span class="score-pill ${scoreClass(h.right / h.total)}">${h.right}/${h.total}</span>`
+    ? `<span class="score-pill ${scoreClass(h.right / h.total)}" title="лучший результат">${h.right}/${h.total}</span>`
     : `<span class="score-pill">не пройден</span>`;
   return `<button class="block-card" type="button" data-block="${b.id}">
     <span class="block-sigil">${b.id}</span>
@@ -1370,25 +1714,35 @@ function renderStart() {
   if (toProgress) toProgress.addEventListener("click", () => setMode("progress"));
 }
 
-function renderQuestion() {
-  const block = QUIZ.blocks.find(b => b.id === state.block);
-  const items = questionsOf(state.block);
-  const q = items[state.order[state.idx]];
-  const picked = state.picked;
-  const done = picked !== null;
-  const pct = Math.round((state.idx + (done ? 1 : 0)) / items.length * 100);
+function sessionLabel(s) {
+  return s.kind === "block" ? "К списку блоков" : "К плану на сегодня";
+}
 
-  const options = q.options.map((opt, i) => {
+function renderQuestion() {
+  const s = state.session;
+  const q = s.items[s.idx];
+  const perm = s.perms[s.idx];
+  const block = QUIZ.blocks.find(b => b.id === q.block);
+  const picked = s.picked;
+  const done = picked !== null;
+  const total = s.items.length;
+  const pct = Math.round((s.idx + (done ? 1 : 0)) / total * 100);
+  const right = Object.entries(s.answers).filter(([i, a]) => s.items[i].correct === a).length;
+  const head = s.kind === "block"
+    ? `Блок ${block.id} · ${esc(block.title)}`
+    : `${esc(s.title)} · блок ${block.id}`;
+
+  const options = perm.map((orig, j) => {
     let cls = "option";
     let mark = "";
     if (done) {
-      if (i === picked && i === q.correct) { cls += " is-right"; mark = "✓"; }
-      else if (i === picked) { cls += " is-wrong"; mark = "✕"; }
-      else if (i === q.correct) { cls += " is-key"; mark = "✓"; }
+      if (orig === picked && orig === q.correct) { cls += " is-right"; mark = "✓"; }
+      else if (orig === picked) { cls += " is-wrong"; mark = "✕"; }
+      else if (orig === q.correct) { cls += " is-key"; mark = "✓"; }
     }
-    return `<button class="${cls}" type="button" data-opt="${i}" ${done ? "disabled" : ""}>
-      <span class="option-key">${KEYS[i]}</span>
-      <span>${esc(opt)}</span>
+    return `<button class="${cls}" type="button" data-opt="${orig}" ${done ? "disabled" : ""}>
+      <span class="option-key">${KEYS[j]}</span>
+      <span>${esc(q.options[orig])}</span>
       <span class="option-mark">${mark}</span>
     </button>`;
   }).join("");
@@ -1397,8 +1751,8 @@ function renderQuestion() {
     <div class="exam-wrap">
       <div class="gauge">
         <div class="gauge-row">
-          <span>Блок ${block.id} · ${esc(block.title)}</span>
-          <span>${state.idx + 1} / ${items.length}</span>
+          <span>${head}</span>
+          <span>${s.idx + 1} / ${total} · верно ${right}</span>
         </div>
         <div class="gauge-track"><div class="gauge-fill" style="width:${pct}%"></div></div>
       </div>
@@ -1407,57 +1761,56 @@ function renderQuestion() {
       ${done ? `<div class="verdict">
         <p class="verdict-why">${mono(q.why)}</p>
         ${q.case ? `<div class="note"><span class="note-label">Из твоей практики</span><span>${mono(q.case)}</span></div>` : ""}
-      </div>` : ""}
+      </div>` : `<p class="kbd-hint">Клавиши <kbd>1</kbd>–<kbd>4</kbd> или <kbd>А</kbd>–<kbd>Г</kbd> выбирают ответ, <kbd>Enter</kbd> ведёт дальше</p>`}
       <div class="exam-actions">
-        <button class="btn" type="button" id="quit">К списку блоков</button>
-        ${done ? `<button class="btn btn-primary" type="button" id="next">${state.idx + 1 === items.length ? "Итоги блока" : "Дальше"}</button>` : ""}
+        <button class="btn" type="button" id="quit">${sessionLabel(s)}</button>
+        ${done ? `<button class="btn btn-primary" type="button" id="next">${s.idx + 1 === total ? "Итоги" : "Дальше →"}</button>` : ""}
       </div>
     </div>
   `;
 
   app.querySelectorAll("[data-opt]").forEach(el => {
-    el.addEventListener("click", () => {
-      state.picked = Number(el.dataset.opt);
-      state.answers[state.idx] = state.picked;
-      say(state.picked === q.correct ? "Верно" : "Неверно");
-      renderQuestion();
-    });
+    el.addEventListener("click", () => pick(Number(el.dataset.opt)));
   });
-  document.getElementById("quit").addEventListener("click", () => { state.block = null; render(); });
+  document.getElementById("quit").addEventListener("click", leaveSession);
   const next = document.getElementById("next");
-  if (next) next.addEventListener("click", () => {
-    state.idx += 1;
-    state.picked = null;
-    render();
-    window.scrollTo({ top: 0 });
-  });
+  if (next) next.addEventListener("click", advance);
 }
 
 function renderResult() {
-  const block = QUIZ.blocks.find(b => b.id === state.block);
-  const items = questionsOf(state.block);
-  const right = items.reduce((n, q, i) => n + (state.answers[i] === q.correct ? 1 : 0), 0);
+  const s = state.session;
+  const items = s.items;
+  const block = s.kind === "block" ? QUIZ.blocks.find(b => b.id === s.block) : null;
+  const right = items.reduce((n, q, i) => n + (s.answers[i] === q.correct ? 1 : 0), 0);
   const pct = Math.round(right / items.length * 100);
-  if (!state.recorded) {
-    state.history[block.id] = { right, total: items.length, at: stamp() };
-    state.recorded = true;
+  if (block && !s.recorded) {
+    const wasPassed = passed(block.id);
+    const prev = bestOf(state.history[block.id]);
+    const best = prev && prev.right / prev.total > right / items.length ? prev : { right, total: items.length };
+    state.history[block.id] = { right, total: items.length, at: stamp(), best };
     commit();
+    if (!wasPassed && passed(block.id)) {
+      celebrate();
+      toast(`Блок ${block.id} сдан`);
+    }
   }
+  if (!block && !s.recorded && pct >= 80) celebrate();
+  s.recorded = true;
 
-  const misses = items.map((q, i) => ({ q, i })).filter(({ q, i }) => state.answers[i] !== q.correct);
+  const misses = items.map((q, i) => ({ q, i })).filter(({ q, i }) => s.answers[i] !== q.correct);
   const missHtml = misses.length ? misses.map(({ q, i }) => `
     <details class="miss">
       <summary>${esc(q.q)}</summary>
       <div class="miss-body">
-        <p class="miss-line"><b>Ты выбрал</b>${esc(q.options[state.answers[i]] ?? "нет ответа")}</p>
+        <p class="miss-line"><b>Ты выбрал</b>${esc(q.options[s.answers[i]] ?? "нет ответа")}</p>
         <p class="miss-line"><b>Верно</b>${esc(q.options[q.correct])}</p>
         <p>${mono(q.why)}</p>
         ${q.case ? `<div class="note"><span class="note-label">Из твоей практики</span><span>${mono(q.case)}</span></div>` : ""}
       </div>
-    </details>`).join("") : `<p class="empty">Ошибок нет. Возьми блок посложнее.</p>`;
+    </details>`).join("") : `<p class="empty">Ошибок нет. ${block ? "Возьми блок посложнее." : "Так держать."}</p>`;
 
-  const rows = QUIZ.blocks.map(b => {
-    const h = state.history[b.id];
+  const rows = block ? QUIZ.blocks.map(b => {
+    const h = bestOf(state.history[b.id]);
     const r = h ? h.right / h.total : 0;
     return `<tr>
       <td class="term-name">${b.id}</td>
@@ -1465,17 +1818,29 @@ function renderResult() {
       <td style="font-family:var(--mono);font-variant-numeric:tabular-nums">${h ? `${h.right}/${h.total}` : "—"}</td>
       <td><div class="bar-track"><div class="bar-fill" style="width:${Math.round(r * 100)}%"></div></div></td>
     </tr>`;
-  }).join("");
+  }).join("") : "";
+
+  const best = block ? bestOf(state.history[block.id]) : null;
+  const lede = right === items.length
+    ? (block ? "Блок закрыт без ошибок." : "Без ошибок.")
+    : `Ошибок ${items.length - right}. Они уже в повторении: сегодня, потом через день, потом реже.`;
 
   app.innerHTML = `
     <div class="result">
       <div class="result-top">
         <div>
-          <p class="eyebrow">Итог блока ${block.id}</p>
-          <h2 class="view-title">${esc(block.title)}</h2>
-          <p class="view-lede">Верно ${right} из ${items.length}. ${right === items.length ? "Блок закрыт." : `Ошибок ${items.length - right}, разбор ниже.`}</p>
+          <p class="eyebrow">${block ? `Итог блока ${block.id}` : "Итог"}</p>
+          <h2 class="view-title">${esc(block ? block.title : s.title)}</h2>
+          <p class="view-lede">Верно ${right} из ${items.length}. ${lede}${block && best && (best.right !== right || best.total !== items.length) ? ` Лучший результат по блоку ${best.right}/${best.total}, он и идёт в зачёт.` : ""}</p>
         </div>
         <div class="result-score"><b>${pct}%</b><span>${right}/${items.length}</span></div>
+      </div>
+
+      <div class="exam-actions" style="justify-content:flex-start">
+        ${misses.length ? `<button class="btn btn-primary" type="button" id="redo">Перерешать ошибки (${misses.length})</button>` : ""}
+        ${block ? `<button class="btn" type="button" id="again">Пройти блок заново</button>
+        <button class="btn" type="button" id="toref">Открыть справочник блока</button>` : ""}
+        <button class="btn ${misses.length ? "" : "btn-primary"}" type="button" id="back">${sessionLabel(s)}</button>
       </div>
 
       <section class="sub">
@@ -1483,31 +1848,32 @@ function renderResult() {
         ${missHtml}
       </section>
 
-      <section class="sub">
+      ${block ? `<section class="sub">
         <h3 class="sub-label">Карта прогресса</h3>
         <div class="table-scroll">
           <table>
-            <thead><tr><th>Блок</th><th>Тема</th><th>Счёт</th><th>Доля</th></tr></thead>
+            <thead><tr><th>Блок</th><th>Тема</th><th>Лучший счёт</th><th>Доля</th></tr></thead>
             <tbody>${rows}</tbody>
           </table>
         </div>
-      </section>
-
-      <div class="exam-actions">
-        <button class="btn" type="button" id="again">Пройти блок заново</button>
-        <button class="btn" type="button" id="toref">Открыть справочник блока</button>
-        <button class="btn btn-primary" type="button" id="back">К списку блоков</button>
-      </div>
+      </section>` : ""}
     </div>
   `;
 
-  document.getElementById("again").addEventListener("click", () => startBlock(block.id));
-  document.getElementById("back").addEventListener("click", () => { state.block = null; render(); });
-  document.getElementById("toref").addEventListener("click", () => {
-    setMode("ref");
-    const target = document.getElementById("sec-" + block.id);
-    if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+  const redo = document.getElementById("redo");
+  if (redo) redo.addEventListener("click", () => {
+    const back = s.back;
+    startSession("mistakes", misses.map(m => m.q), { title: "Ошибки ещё раз", back });
   });
+  document.getElementById("back").addEventListener("click", leaveSession);
+  if (block) {
+    document.getElementById("again").addEventListener("click", () => {
+      const back = s.back;
+      startBlock(block.id);
+      state.session.back = back;
+    });
+    document.getElementById("toref").addEventListener("click", () => openSection(block.id));
+  }
 }
 
 function sectionMatches(sec, q) {
@@ -1565,7 +1931,7 @@ function renderPitfalls(sec) {
 
 function renderDrill(sec) {
   if (!sec.drill) return "";
-  return `<section class="sub"><h3 class="sub-label">Задание</h3>
+  return `<section class="sub" id="drill-${sec.id}"><h3 class="sub-label">Задание</h3>
     <div class="drill">${mono(sec.drill)}</div>
   </section>`;
 }
@@ -1708,9 +2074,9 @@ function fmtDate(iso) {
 }
 
 function stepRow(b) {
-  const h = state.history[b.id];
+  const h = bestOf(state.history[b.id]);
   const st = stepState(b);
-  const exam = h && h.total > 0
+  const exam = h
     ? `<button class="score-pill pill-btn ${scoreClass(h.right / h.total)}" type="button" data-exam="${b.id}">экзамен ${h.right}/${h.total}</button>`
     : `<button class="score-pill pill-btn" type="button" data-exam="${b.id}">сдать блок</button>`;
   return `<li class="step-row" data-state="${st}">
@@ -1812,10 +2178,401 @@ function renderProgress() {
   });
 }
 
-document.getElementById("tab-exam").addEventListener("click", () => setMode("exam"));
-document.getElementById("tab-ref").addEventListener("click", () => setMode("ref"));
-document.getElementById("tab-lib").addEventListener("click", () => setMode("lib"));
-document.getElementById("tab-progress").addEventListener("click", () => setMode("progress"));
+function plural(n, one, few, many) {
+  const a = Math.abs(n) % 100;
+  const b = a % 10;
+  if (a > 10 && a < 20) return many;
+  if (b > 1 && b < 5) return few;
+  if (b === 1) return one;
+  return many;
+}
+
+function planInfo() {
+  const steps = QUIZ.blocks;
+  const today = dayKey();
+  const deadline = state.study.plan.deadline || DEFAULT_PLAN.deadline;
+  const daysLeft = Math.max(0, daysBetween(today, deadline));
+  const done = steps.filter(b => stepState(b) === "done").length;
+  const remaining = steps.filter(b => stepState(b) !== "done");
+  const weeksLeft = Math.max(1, daysLeft / 7);
+  const perWeek = Math.ceil(remaining.length / weeksLeft);
+  const startKey = state.marks.started ? dayKey(new Date(state.marks.started)) : today;
+  const span = Math.max(1, daysBetween(startKey, deadline));
+  const elapsed = Math.min(span, Math.max(0, daysBetween(startKey, today)));
+  const expected = Math.floor(steps.length * elapsed / span);
+  const behind = Math.max(0, expected - done);
+  const weekEnd = shiftDay(today, (7 - parseDay(today).getDay()) % 7);
+  const weekTargets = remaining.slice(0, Math.max(1, Math.min(perWeek, remaining.length)));
+  return { steps, today, deadline, daysLeft, done, remaining, perWeek, behind, weekEnd, weekTargets };
+}
+
+function unlockedTerms() {
+  const next = nextStep();
+  const limit = next ? next.order : Infinity;
+  const open = new Set(QUIZ.blocks.filter(b => b.order <= limit || isOn("read", b.id)).map(b => b.id));
+  return TERMS.filter(c => open.has(c.sec));
+}
+
+function cardDeck(limit = 12) {
+  const today = dayKey();
+  const pool = unlockedTerms();
+  const due = pool.filter(c => state.study.srs[c.key] && state.study.srs[c.key].due <= today);
+  const fresh = pool.filter(c => !state.study.srs[c.key]);
+  const order = id => (QUIZ.blocks.find(b => b.id === id) || { order: 99 }).order;
+  fresh.sort((a, b) => order(b.sec) - order(a.sec));
+  const deck = shuffled(due).slice(0, limit);
+  return deck.concat(fresh.slice(0, Math.min(8, limit - deck.length)));
+}
+
+function startCards() {
+  const items = cardDeck();
+  if (!items.length) return;
+  state.session = null;
+  state.cards = { items, idx: 0, flipped: false, known: 0, back: state.mode };
+  render();
+  window.scrollTo({ top: 0 });
+}
+
+function flipCard() {
+  if (!state.cards || state.cards.flipped) return;
+  state.cards.flipped = true;
+  renderCards();
+}
+
+function gradeCard(ok) {
+  const c = state.cards;
+  if (!c || !c.flipped) return;
+  grade(c.items[c.idx].key, ok);
+  commit();
+  if (ok) c.known += 1;
+  c.idx += 1;
+  c.flipped = false;
+  if (c.idx >= c.items.length && c.known === c.items.length) celebrate();
+  renderCards();
+}
+
+function renderCards() {
+  renderCounters();
+  const c = state.cards;
+  const total = c.items.length;
+  if (c.idx >= total) {
+    app.innerHTML = `
+      <div class="flash-wrap">
+        <div class="view-head">
+          <p class="eyebrow">Карточки терминов</p>
+          <h2 class="view-title">Помню ${c.known} из ${total}</h2>
+          <p class="view-lede">Термины, которые не вспомнил, вернутся завтра. Те, что помнишь, придут реже: через 3, 7, 14, 30 дней.</p>
+        </div>
+        <div class="exam-actions" style="justify-content:flex-start">
+          ${cardDeck().length ? `<button class="btn btn-primary" type="button" id="more">Ещё карточки</button>` : ""}
+          <button class="btn" type="button" id="back">К плану на сегодня</button>
+        </div>
+      </div>`;
+    const more = document.getElementById("more");
+    if (more) more.addEventListener("click", () => { const back = c.back; startCards(); if (state.cards) state.cards.back = back; });
+    document.getElementById("back").addEventListener("click", () => setMode(c.back));
+    return;
+  }
+  const card = c.items[c.idx];
+  const sec = SECTIONS[card.sec];
+  const e = state.study.srs[card.key];
+  app.innerHTML = `
+    <div class="flash-wrap">
+      <div class="gauge">
+        <div class="gauge-row">
+          <span>Карточки · ${e ? "повторение" : "новый термин"}</span>
+          <span>${c.idx + 1} / ${total} · помню ${c.known}</span>
+        </div>
+        <div class="gauge-track"><div class="gauge-fill" style="width:${Math.round(c.idx / total * 100)}%"></div></div>
+      </div>
+      <button class="flash" type="button" id="flash" ${c.flipped ? "disabled" : ""} aria-label="Перевернуть карточку">
+        <span class="eyebrow">Раздел ${card.sec} · ${esc(sec ? sec.title : "")}</span>
+        <span class="flash-term">${esc(card.term.t)}</span>
+        ${c.flipped
+          ? `<span class="flash-def">${mono(card.term.d)}</span><span class="flash-use">${mono(card.term.m)}</span>`
+          : `<span class="flash-hint">Сначала вспомни сам: что это и где применяется. Потом нажми на карточку или <kbd>Пробел</kbd>.</span>`}
+      </button>
+      ${c.flipped ? `<div class="flash-grade">
+        <button class="btn btn-bad" type="button" id="nope">✕ Не вспомнил <kbd>1</kbd></button>
+        <button class="btn btn-good" type="button" id="yes">✓ Вспомнил <kbd>2</kbd></button>
+      </div>` : ""}
+      <div class="exam-actions">
+        <button class="btn" type="button" id="quit">К плану на сегодня</button>
+      </div>
+    </div>`;
+  document.getElementById("flash").addEventListener("click", flipCard);
+  const yes = document.getElementById("yes");
+  if (yes) {
+    yes.addEventListener("click", () => gradeCard(true));
+    document.getElementById("nope").addEventListener("click", () => gradeCard(false));
+  }
+  document.getElementById("quit").addEventListener("click", () => setMode(c.back));
+}
+
+function heatmap(weeks = 14) {
+  const today = dayKey();
+  const dow = (parseDay(today).getDay() + 6) % 7;
+  const start = shiftDay(today, -(weeks - 1) * 7 - dow);
+  const goal = state.study.plan.perDay || 20;
+  const cells = [];
+  for (let i = 0; i < weeks * 7; i++) {
+    const key = shiftDay(start, i);
+    const n = (state.study.days[key] || { n: 0 }).n;
+    const l = n === 0 ? 0 : n < goal / 2 ? 1 : n < goal ? 2 : 3;
+    const future = key > today;
+    cells.push(`<i data-l="${future ? 0 : l}" ${key === today ? 'data-today="true"' : ""} ${future ? 'data-future="true"' : ""} title="${fmtDate(key + "T12:00:00")}: ${n} ${plural(n, "ответ", "ответа", "ответов")}"></i>`);
+  }
+  return `<div class="heat" aria-hidden="true">${cells.join("")}</div>`;
+}
+
+function taskCard({ icon, title, text, count, done, action, label, primary }) {
+  return `<article class="task" data-done="${!!done}">
+    <span class="task-icon" aria-hidden="true">${icon}</span>
+    ${count !== undefined ? `<span class="task-count">${done ? "✓" : count}</span>` : ""}
+    <h3 class="task-title">${title}</h3>
+    <p class="task-text">${text}</p>
+    ${action ? `<button class="btn ${primary ? "btn-primary" : ""}" type="button" data-task="${action}">${label}</button>` : ""}
+  </article>`;
+}
+
+function renderToday() {
+  const p = planInfo();
+  const next = nextStep();
+  const due = dueQuestions();
+  const deck = cardDeck();
+  const weak = weakQuestions();
+  const n = todayCount();
+  const goal = state.study.plan.perDay || 20;
+  const st = streak();
+  const sec = next ? SECTIONS[next.id] : null;
+
+  let stepText = "";
+  let stepAction = "";
+  let stepLabel = "";
+  if (next) {
+    if (!isOn("read", next.id)) {
+      stepText = `Прочитай раздел «${esc(next.title)}»: ${esc(next.hint || "")}. Потом отметь его прочитанным внизу раздела.`;
+      stepAction = "read";
+      stepLabel = "Читать раздел";
+    } else {
+      const b = bestOf(state.history[next.id]);
+      stepText = `Раздел прочитан. Сдай блок на ${Math.round(PASS * 100)}% и выше${b ? `, лучший результат пока ${b.right}/${b.total}` : ""}.`;
+      stepAction = "exam";
+      stepLabel = "Сдать блок";
+    }
+  }
+
+  const primary = due.length ? "review" : next ? stepAction : deck.length ? "cards" : "mix";
+  const primaryLabel = {
+    review: `Начать с повторения · ${due.length}`,
+    read: `Читать шаг ${next ? next.order : ""}`,
+    exam: `Сдать блок ${next ? next.id : ""}`,
+    cards: "Карточки терминов",
+    mix: "Пятиминутка"
+  }[primary];
+
+  const paceClass = !p.remaining.length ? "is-good" : p.behind === 0 ? "is-good" : p.behind <= 2 ? "is-mid" : "is-bad";
+  const paceText = !p.remaining.length
+    ? "маршрут пройден"
+    : p.behind === 0 ? "идёшь по плану" : `отстаёшь на ${p.behind} ${plural(p.behind, "шаг", "шага", "шагов")}`;
+  const greeting = n >= goal ? "Цель дня выполнена. Можно добить повторение или отдохнуть."
+    : n > 0 ? `Сегодня уже ${n} ${plural(n, "ответ", "ответа", "ответов")}. До цели дня ${goal - n}.`
+    : st > 0 ? `Серия ${st} ${plural(st, "день", "дня", "дней")} подряд. Не прерывай её сегодня.`
+    : "Одно занятие в день по 20–30 минут дальше, чем один марафон в неделю.";
+
+  const weakBlocks = Object.entries(weak.reduce((acc, q) => { acc[q.block] = (acc[q.block] || 0) + 1; return acc; }, {}))
+    .sort((a, b) => b[1] - a[1]).slice(0, 4);
+
+  app.innerHTML = `
+    <section class="today-hero">
+      <div class="hero-main">
+        <p class="eyebrow">${esc(fmtDate(p.today + "T12:00:00"))} · до цели ${p.daysLeft} ${plural(p.daysLeft, "день", "дня", "дней")}</p>
+        <h2 class="hero-title">${next ? `Шаг ${next.order} из ${p.steps.length}: ${esc(next.title)}` : "Все шаги маршрута пройдены"}</h2>
+        <p class="hero-sub">${esc(greeting)}</p>
+        <span class="pace ${paceClass}">${paceText}</span>
+        <div class="exam-actions">
+          <button class="btn btn-primary btn-big" type="button" data-task="${primary}">${esc(primaryLabel)} →</button>
+        </div>
+      </div>
+      <div class="hero-side">
+        <div class="stat-row">
+          <div class="stat"><b>${p.done}/${p.steps.length}</b><span>шагов</span></div>
+          <div class="stat"><b>${st}</b><span>${plural(st, "день", "дня", "дней")} подряд</span></div>
+          <div class="stat"><b>${p.remaining.length ? p.perWeek : 0}</b><span>${plural(p.remaining.length ? p.perWeek : 0, "шаг", "шага", "шагов")} в неделю</span></div>
+        </div>
+        <div class="gauge">
+          <div class="gauge-row"><span>Цель дня</span><span>${Math.min(n, goal)} / ${goal}</span></div>
+          <div class="goal-bar"><div style="width:${Math.min(100, Math.round(n / goal * 100))}%"></div></div>
+        </div>
+        ${p.remaining.length ? `<div>
+          <p class="meta-label" style="margin-bottom:8px">План до ${esc(fmtDate(p.weekEnd + "T12:00:00"))}</p>
+          <div class="week-chips">${p.weekTargets.map(b => `<span class="week-chip" data-done="${stepState(b) === "done"}"><b>${b.id}</b>${esc(b.title)}</span>`).join("")}</div>
+        </div>` : ""}
+      </div>
+    </section>
+
+    <div class="view-head" style="margin-bottom:14px">
+      <p class="eyebrow">Занятие на сегодня</p>
+    </div>
+    <div class="tasks">
+      ${taskCard({
+        icon: "🔁", title: "Повторение", count: due.length, done: !due.length,
+        text: due.length
+          ? `Вопросы, на которых ты ошибался или которые пора освежить. Интервалы растут: 1, 3, 7, 14, 30 дней.`
+          : "На сегодня повторять нечего. Новые ошибки сами попадут сюда завтра.",
+        action: due.length ? "review" : "", label: `Повторить ${Math.min(20, due.length)}`, primary: primary === "review"
+      })}
+      ${next ? taskCard({
+        icon: stepAction === "read" ? "📖" : "🎯", title: `Шаг ${next.order} · ${esc(next.title)}`,
+        text: stepText, action: stepAction, label: stepLabel, primary: primary === stepAction
+      }) : taskCard({ icon: "🏁", title: "Маршрут пройден", text: "Пересдавай блоки ниже 100% и держи повторение на нуле.", done: true })}
+      ${taskCard({
+        icon: "🃏", title: "Карточки терминов", count: deck.length, done: !deck.length,
+        text: deck.length
+          ? "Термины из пройденных и текущего разделов. Вспомни сам, переверни, честно оцени."
+          : "Карточек на сегодня нет. Новые откроются со следующим шагом.",
+        action: deck.length ? "cards" : "", label: "Начать", primary: primary === "cards"
+      })}
+      ${taskCard({
+        icon: "⚡", title: "Пятиминутка",
+        text: "Пять случайных вопросов из открытых блоков вперемешку. Смешивание тем держит в памяти лучше, чем повтор одной.",
+        action: "mix", label: "5 вопросов", primary: primary === "mix"
+      })}
+      ${sec && sec.drill ? taskCard({
+        icon: "🛠", title: "Задание шага", text: mono(sec.drill.length > 220 ? sec.drill.slice(0, 220).replace(/\s+\S*$/, "") + "…" : sec.drill),
+        action: "drill", label: "Открыть задание"
+      }) : ""}
+    </div>
+
+    <div class="panel-row">
+      <section class="panel">
+        <p class="eyebrow">Активность за 14 недель</p>
+        ${heatmap()}
+        <p class="progress-meta"><span>всего ответов <b>${Object.values(state.study.days).reduce((s, d) => s + d.n, 0)}</b></span><span>дней с занятиями <b>${Object.keys(state.study.days).length}</b></span><span>в повторении <b>${Object.keys(state.study.srs).length}</b></span></p>
+      </section>
+      <section class="panel">
+        <p class="eyebrow">Слабые места</p>
+        ${weakBlocks.length ? `<div class="weak-list">${weakBlocks.map(([id, k]) => {
+          const b = QUIZ.blocks.find(x => x.id === id);
+          return `<div class="weak-row"><span class="step-sigil">${id}</span><span>${esc(b ? b.title : id)}</span><span class="score-pill is-bad">${k}</span></div>`;
+        }).join("")}</div>
+        <div class="exam-actions" style="justify-content:flex-start"><button class="btn" type="button" data-task="weak">Работа над ошибками · ${Math.min(15, weak.length)}</button></div>`
+        : `<p class="task-text">Пока пусто. Сюда попадут вопросы, где ты ошибся и ещё не исправился.</p>`}
+      </section>
+    </div>
+
+    <div class="settings">
+      <label>Цель к дате <input type="date" id="deadline" value="${esc(state.study.plan.deadline)}" min="${p.today}"></label>
+      <label>Ответов в день <select id="perday">${[10, 20, 30, 50].map(v => `<option value="${v}" ${v === goal ? "selected" : ""}>${v}</option>`).join("")}</select></label>
+      <span>${esc(syncText())}</span>
+    </div>
+  `;
+
+  app.querySelectorAll("[data-task]").forEach(el => el.addEventListener("click", () => {
+    const t = el.dataset.task;
+    if (t === "review") startReview();
+    else if (t === "weak") startWeak();
+    else if (t === "cards") startCards();
+    else if (t === "mix") startMix();
+    else if (t === "exam" && next) startBlock(next.id);
+    else if ((t === "read" || t === "drill") && next) openSection(next.id, t === "drill" ? "drill" : "");
+  }));
+  document.getElementById("deadline").addEventListener("change", e => {
+    if (!e.target.value) return;
+    state.study.plan = { ...state.study.plan, deadline: e.target.value, at: stamp() };
+    commit(true);
+    renderToday();
+  });
+  document.getElementById("perday").addEventListener("change", e => {
+    state.study.plan = { ...state.study.plan, perDay: Number(e.target.value), at: stamp() };
+    commit(true);
+    renderToday();
+  });
+}
+
+function toast(text) {
+  document.querySelectorAll(".toast").forEach(el => el.remove());
+  const el = document.createElement("div");
+  el.className = "toast";
+  el.setAttribute("role", "status");
+  el.textContent = text;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 2600);
+}
+
+function celebrate() {
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const canvas = document.createElement("canvas");
+  canvas.className = "confetti";
+  document.body.appendChild(canvas);
+  const ctx = canvas.getContext("2d");
+  if (!ctx) { canvas.remove(); return; }
+  const dpr = window.devicePixelRatio || 1;
+  const w = window.innerWidth;
+  const h = window.innerHeight;
+  canvas.width = w * dpr;
+  canvas.height = h * dpr;
+  ctx.scale(dpr, dpr);
+  const css = getComputedStyle(document.documentElement);
+  const colors = ["--accent", "--ok", "--warn", "--bad"].map(v => css.getPropertyValue(v).trim() || "#2FC3AE");
+  const parts = Array.from({ length: 140 }, () => ({
+    x: w / 2 + (Math.random() - .5) * w * .3,
+    y: h * .35,
+    vx: (Math.random() - .5) * 14,
+    vy: -Math.random() * 13 - 4,
+    r: Math.random() * Math.PI,
+    vr: (Math.random() - .5) * .3,
+    s: 5 + Math.random() * 6,
+    c: colors[Math.floor(Math.random() * colors.length)]
+  }));
+  const t0 = performance.now();
+  function frame(t) {
+    const k = (t - t0) / 1800;
+    ctx.clearRect(0, 0, w, h);
+    parts.forEach(p => {
+      p.vy += .35;
+      p.vx *= .99;
+      p.x += p.vx;
+      p.y += p.vy;
+      p.r += p.vr;
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, 1 - k);
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.r);
+      ctx.fillStyle = p.c;
+      ctx.fillRect(-p.s / 2, -p.s / 4, p.s, p.s / 2);
+      ctx.restore();
+    });
+    if (k < 1) requestAnimationFrame(frame);
+    else canvas.remove();
+  }
+  requestAnimationFrame(frame);
+}
+
+document.addEventListener("keydown", e => {
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  const tag = e.target && e.target.tagName;
+  if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+  const onButton = tag === "BUTTON";
+  const c = state.cards;
+  if (c && c.idx < c.items.length) {
+    if (!c.flipped && (e.code === "Space" || e.key === "Enter") && !onButton) { e.preventDefault(); flipCard(); }
+    else if (c.flipped && ["Digit1", "Numpad1", "ArrowLeft"].includes(e.code)) { e.preventDefault(); gradeCard(false); }
+    else if (c.flipped && ["Digit2", "Numpad2", "ArrowRight"].includes(e.code)) { e.preventDefault(); gradeCard(true); }
+    return;
+  }
+  const s = state.session;
+  if (!s || s.idx >= s.items.length) return;
+  if (s.picked === null) {
+    const j = KEY_CODES.findIndex(codes => codes.includes(e.code));
+    if (j >= 0 && j < s.perms[s.idx].length) { e.preventDefault(); pick(s.perms[s.idx][j]); }
+  } else if ((e.key === "Enter" && !onButton) || e.key === "ArrowRight") {
+    e.preventDefault();
+    advance();
+  }
+});
+
+MODES.forEach(m => document.getElementById("tab-" + m).addEventListener("click", () => setMode(m)));
 
 render();
 connectAccount();

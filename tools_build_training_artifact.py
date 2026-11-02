@@ -7,8 +7,8 @@ TRAINING = ROOT / "training"
 TEMPLATE = ROOT / "template.html"
 ARTIFACT = ROOT / "ai_engineer_training.html"
 
-QUIZ_FILES = ["quiz_core.json", "quiz_extended.json", "quiz_agents.json", "quiz_foundations.json"]
-FAQ_FILES = ["faq_core.json", "faq_extended.json", "faq_agents.json", "faq_foundations.json"]
+QUIZ_FILES = sorted(p.name for p in TRAINING.glob("quiz_*.json"))
+FAQ_FILES = sorted(p.name for p in TRAINING.glob("faq_*.json"))
 
 
 def load(name):
@@ -42,6 +42,9 @@ def main():
         raise SystemExit(f"блокам не назначен трек в tracks.json: {orphans}")
 
     known = {b["id"] for b in blocks}
+    sec_ids = {s["id"] for s in sections}
+    if known != sec_ids:
+        raise SystemExit(f"блоки без раздела: {sorted(known - sec_ids)}, разделы без блока: {sorted(sec_ids - known)}")
     stray = sorted({q["block"] for q in questions} - known)
     if stray:
         raise SystemExit(f"вопросы ссылаются на несуществующие блоки: {stray}")

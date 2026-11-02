@@ -1176,6 +1176,15 @@ kbd { display: inline-block; min-width: 20px; padding: 0 4px; border: 1px solid 
 .lab-legend .lab-cell { width: 18px; height: 14px; margin-right: -8px; }
 
 .confetti { image-rendering: pixelated; }
+.lab-crow { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.4fr) minmax(0, 2fr) 96px; align-items: center; gap: 12px; font-size: 13px; }
+.lab-crow b { font-family: var(--mono); font-weight: 500; }
+.lab-crow code { font-family: var(--mono); font-size: 12.5px; text-align: right; }
+.lab-cbar { height: 8px; border-radius: 4px; background: var(--surface-2); overflow: hidden; }
+.lab-cbar span { display: block; height: 100%; background: var(--accent); }
+.lab-cbar span.bad { background: var(--bad); }
+.lab-hl { color: var(--accent-ink); font-weight: 600; }
+.lab-alt td { background: var(--ground); }
+.lab-caret { color: var(--accent); }
 .iv-answer { width: 100%; padding: 12px 16px; border: 1px solid var(--rule); border-radius: 12px; background: var(--surface); font-family: var(--mono); font-size: 14px; line-height: 1.55; resize: vertical; }
 .iv-answer:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
 .iv-answer[readonly] { color: var(--muted); }
@@ -1224,6 +1233,8 @@ kbd { display: inline-block; min-width: 20px; padding: 0 4px; border: 1px solid 
   .lab-norm { grid-template-columns: minmax(0, 1fr); }
   .lab-nrow { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   .lab-nrow .lab-cap { grid-column: 1 / -1; }
+  .lab-crow { grid-template-columns: minmax(0, 1fr) 80px; }
+  .lab-crow > :nth-child(2), .lab-crow > :nth-child(3) { grid-column: 1 / -1; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -3572,6 +3583,163 @@ function renderIvResult() {
   document.getElementById("iv-back").addEventListener("click", () => setMode(iv.back));
 }
 
+
+/* complexity */
+function labComplexity(el) {
+  const st = { lg: 5 };
+  el.innerHTML = `<div class="lab-controls">${range("Размер входа n = 10^", "lg", 2, 9, 1, st.lg)}</div><div class="lab-stage" data-view></div>`;
+  const view = el.querySelector("[data-view]");
+  const OPS = 1e8;
+  const human = s => s < 1e-3 ? "< 1 мс" : s < 1 ? Math.round(s * 1000) + " мс" : s < 120 ? fmt(s, 1) + " с" : s < 7200 ? fmt(s / 60, 0) + " мин" : s < 172800 ? fmt(s / 3600, 0) + " ч" : s < 3.15e9 ? fmt(s / 86400, 0) + " дн" : "дольше века";
+  function draw() {
+    syncOutputs(el, st);
+    const n = 10 ** st.lg;
+    const rows = [["O(1)", "словарь, множество", 1], ["O(log n)", "бинарный поиск", Math.log2(n)], ["O(n)", "один проход, хеш вместо вложенного цикла", n], ["O(n log n)", "сортировка", n * Math.log2(n)], ["O(n²)", "вложенный цикл, «x in list» в цикле", n * n]];
+    const maxL = Math.log10(Math.max(...rows.map(r => r[2])));
+    view.innerHTML = `<div class="lab-ntable">${rows.map(([o, ex, ops]) => {
+      const s = ops / OPS, w = Math.max(2, Math.log10(Math.max(ops, 1)) / Math.max(maxL, 1) * 100);
+      return `<div class="lab-crow"><b>${o}</b><span class="lab-cap">${ex}</span><span class="lab-cbar"><span style="width:${w}%" class="${s > 60 ? "bad" : ""}"></span></span><code>${human(s)}</code></div>`;
+    }).join("")}</div>
+    <p class="lab-note">Оценка при 10⁸ простых операций в секунду, шкала полос логарифмическая. При n = 10^${st.lg} квадратичный алгоритм ${n * n / OPS > 60 ? "уже не укладывается в минуту" : "ещё терпим"}: именно поэтому первым делом ищут вложенный цикл, который заменяется словарём или множеством.</p>`;
+  }
+  bindLab(el, st, draw); draw();
+}
+
+/* SQL window functions */
+const SQL_ROWS = [["A", "01.03", 0.81], ["A", "08.03", 0.84], ["A", "15.03", 0.83], ["B", "02.03", 0.77], ["B", "09.03", 0.79]];
+function labWindow(el) {
+  const st = { fn: "lag" };
+  const FN = {
+    rn: ["ROW_NUMBER() OVER (PARTITION BY model ORDER BY created_at DESC)", rows => { const c = {}; return rows.map((r, i) => i); }],
+    lag: ["score − LAG(score) OVER (PARTITION BY model ORDER BY created_at)", null],
+    sum: ["AVG(score) OVER (PARTITION BY model ORDER BY created_at ROWS BETWEEN 1 PRECEDING AND CURRENT ROW)", null],
+    grp: ["AVG(score) … GROUP BY model", null]
+  };
+  el.innerHTML = `<div class="lab-controls">${segmented("fn", [["rn", "ROW_NUMBER"], ["lag", "LAG"], ["sum", "скользящее среднее"], ["grp", "GROUP BY"]], st.fn)}</div><div class="lab-stage" data-view></div>`;
+  const view = el.querySelector("[data-view]");
+  function draw() {
+    el.querySelectorAll("[data-seg]").forEach(b => b.setAttribute("aria-pressed", String(String(st[b.dataset.seg]) === b.dataset.v)));
+    let out, head;
+    if (st.fn === "grp") {
+      const g = {}; SQL_ROWS.forEach(([m, , s]) => { (g[m] = g[m] || []).push(s); });
+      head = ["model", "avg"]; out = Object.entries(g).map(([m, a]) => [m, fmt(a.reduce((x, y) => x + y, 0) / a.length, 3)]);
+    } else {
+      head = ["model", "created_at", "score", st.fn === "rn" ? "rn" : st.fn === "lag" ? "delta" : "avg2"];
+      out = SQL_ROWS.map((r, i) => {
+        const same = SQL_ROWS.filter(x => x[0] === r[0]);
+        const k = same.indexOf(r);
+        let v;
+        if (st.fn === "rn") v = same.length - k;
+        if (st.fn === "lag") v = k ? fmt(r[2] - same[k - 1][2], 2) : "NULL";
+        if (st.fn === "sum") v = fmt(k ? (r[2] + same[k - 1][2]) / 2 : r[2], 3);
+        return [r[0], r[1], fmt(r[2], 2), v];
+      });
+    }
+    view.innerHTML = `<pre><code>SELECT model, ${st.fn === "grp" ? "" : "created_at, score, "}${FN[st.fn][0]}\nFROM runs</code></pre>
+      <div class="table-scroll"><table><thead><tr>${head.map(h => `<th>${h}</th>`).join("")}</tr></thead><tbody>${out.map(r => `<tr class="${r[0] === "A" ? "" : "lab-alt"}">${r.map((c, i) => `<td class="${i === r.length - 1 ? "lab-hl" : ""}">${c}</td>`).join("")}</tr>`).join("")}</tbody></table></div>
+      <p class="lab-note">${st.fn === "grp" ? "GROUP BY сворачивает строки: от пяти прогонов осталось две строки, сравнить прогон с предыдущим уже нельзя." : "Оконная функция считает по окну, но строки не сворачивает: у каждого прогона остаётся своя строка, а окно задаёт PARTITION BY и ORDER BY."}</p>`;
+  }
+  bindLab(el, st, draw); draw();
+}
+
+/* BM25 vs TF-IDF */
+const BM_DOCS = [
+  "договор поставки номер ДП-17 оплата в течение десяти дней",
+  "оплата оплата оплата оплата оплата счёт",
+  "дополнительное соглашение к договору поставки ДП-17 о сроках оплаты и неустойке за просрочку поставки товара по договору",
+  "акт сверки взаимных расчётов"
+];
+function labBm25(el) {
+  const st = { k1: 12, b: 75, q: 0 };
+  const queries = ["оплата ДП-17", "договор поставки", "неустойка"];
+  el.innerHTML = `<div class="lab-controls">${segmented("q", queries.map((q, i) => [i, q]), st.q)}${range("k1 × 10 (насыщение)", "k1", 0, 30, 1, st.k1)}${range("b × 100 (нормировка длины)", "b", 0, 100, 5, st.b)}</div><div class="lab-stage" data-view></div>`;
+  const view = el.querySelector("[data-view]");
+  const tok = s => s.toLowerCase().split(/\s+/);
+  function draw() {
+    el.querySelectorAll("[data-seg]").forEach(b => b.setAttribute("aria-pressed", String(String(st[b.dataset.seg]) === b.dataset.v)));
+    syncOutputs(el, st, { k1: v => fmt(v / 10, 1), b: v => fmt(v / 100, 2) });
+    const docs = BM_DOCS.map(tok), N = docs.length, avg = docs.reduce((s, d) => s + d.length, 0) / N;
+    const q = tok(queries[st.q]);
+    const df = w => docs.filter(d => d.includes(w)).length;
+    const k1 = st.k1 / 10, b = st.b / 100;
+    const rows = docs.map((d, i) => {
+      let bm = 0, ti = 0;
+      q.forEach(w => {
+        const f = d.filter(x => x === w).length; if (!f) return;
+        const idf = Math.log(1 + (N - df(w) + 0.5) / (df(w) + 0.5));
+        bm += idf * f * (k1 + 1) / (f + k1 * (1 - b + b * d.length / avg));
+        ti += f * Math.log(N / df(w));
+      });
+      return [i, bm, ti, d.length];
+    });
+    const rank = key => [...rows].sort((a, c) => c[key] - a[key]).map(r => r[0]);
+    const rb = rank(1), rt = rank(2);
+    view.innerHTML = `<div class="table-scroll"><table><thead><tr><th>документ</th><th>слов</th><th>TF-IDF</th><th>BM25</th></tr></thead><tbody>${rows.map(([i, bm, ti, len]) =>
+      `<tr><td>${esc(BM_DOCS[i])}</td><td>${len}</td><td class="${rt[0] === i ? "lab-hl" : ""}">${fmt(ti, 2)} · ${rt.indexOf(i) + 1}</td><td class="${rb[0] === i ? "lab-hl" : ""}">${fmt(bm, 2)} · ${rb.indexOf(i) + 1}</td></tr>`).join("")}</tbody></table></div>
+      <p class="lab-note">После числа — место в выдаче. На запросе «оплата ДП-17» TF-IDF ставит наверх документ, где слово «оплата» повторено пять раз; BM25 при k1 около 1,2 гасит повторы насыщением, и выигрывает документ с обоими словами. Обнули k1 — частота перестанет влиять; подними b — длинное соглашение начнёт проигрывать коротким. Морфологию здесь никто не приводит: запрос «неустойка» не находит «неустойке», а «оплата» не совпадает с «оплаты», отсюда лемматизация перед индексом.</p>`;
+  }
+  bindLab(el, st, draw); draw();
+}
+
+/* constrained decoding */
+const CD_STEPS = [
+  { prefix: '', cands: [["Конечно", .41, 0], ["{", .33, 1], ["Вот", .18, 0], ["```", .08, 0]] },
+  { prefix: '{', cands: [['"date"', .62, 1], ['"дата"', .21, 0], ["\\n", .12, 0], ['date', .05, 0]] },
+  { prefix: '{"date": ', cands: [['"2026', .55, 1], ['null', .25, 1], ['14 августа', .15, 0], ['"неизвестно"', .05, 0]] },
+  { prefix: '{"date": "2026', cands: [['-08-14"', .7, 1], ['.08.14"', .2, 0], ['-8-14"', .07, 0], ['"', .03, 0]] },
+  { prefix: '{"date": "2026-08-14"', cands: [["}", .58, 1], [",", .3, 0], [" // из шапки", .12, 0]] }
+];
+function labConstrained(el) {
+  const st = { i: 0, g: 1 };
+  el.innerHTML = `<div class="lab-controls">${segmented("g", [[1, "с грамматикой"], [0, "без грамматики"]], st.g)}<div class="lab-seg"><button type="button" data-act="prev">← токен</button><button type="button" data-act="next">токен →</button></div></div><div class="lab-stage" data-view></div>`;
+  const view = el.querySelector("[data-view]");
+  function draw() {
+    if (st.act === "next") st.i = Math.min(CD_STEPS.length - 1, st.i + 1);
+    if (st.act === "prev") st.i = Math.max(0, st.i - 1);
+    el.querySelectorAll("[data-seg]").forEach(b => b.setAttribute("aria-pressed", String(String(st[b.dataset.seg]) === b.dataset.v)));
+    const s = CD_STEPS[st.i];
+    const okSum = s.cands.filter(c => c[2]).reduce((x, c) => x + c[1], 0);
+    view.innerHTML = `<p class="lab-cap">схема: {"date": string в формате YYYY-MM-DD или null}, других полей нет</p>
+      <pre><code>${esc(s.prefix)}<span class="lab-caret">▍</span></code></pre>
+      <div class="lab-ntable">${s.cands.map(([tk, p, ok]) => {
+        const q = st.g ? (ok ? p / okSum : 0) : p;
+        return `<div class="lab-crow"><code>${esc(tk)}</code><span class="lab-cap">${st.g && !ok ? "запрещено схемой" : ok ? "валидно" : "ломает схему"}</span><span class="lab-cbar"><span style="width:${Math.max(1, q * 100)}%" class="${ok ? "" : "bad"}"></span></span><b>${pct(q)}</b></div>`;
+      }).join("")}</div>
+      <p class="lab-note">${st.g ? "Грамматика обнуляет запрещённые токены и перенормирует остальные: невалидный JSON получиться не может, но null остаётся разрешённым, поэтому модель может честно сказать, что даты нет." : "Без грамматики на первом же шаге самый вероятный токен — вежливое «Конечно», и парсер упадёт. Инструкция «отвечай только JSON» снижает его вероятность, но не до нуля."} Шаг ${st.i + 1} из ${CD_STEPS.length}; вероятности условные, для иллюстрации.</p>`;
+  }
+  bindLab(el, st, draw); draw();
+}
+
+/* judge position bias */
+function labJudgeBias(el) {
+  const st = { pa: 60, bias: 15 };
+  el.innerHTML = `<div class="lab-controls">${range("Насколько A на деле лучше: доля побед, %", "pa", 30, 90, 1, st.pa)}${range("Тяга судьи к первому варианту, п.п.", "bias", 0, 35, 1, st.bias)}</div><div class="lab-stage" data-view></div>`;
+  const view = el.querySelector("[data-view]");
+  const clip = x => Math.max(0, Math.min(1, x));
+  function draw() {
+    syncOutputs(el, st);
+    const p = st.pa / 100, b = st.bias / 100;
+    const aFirst = clip(p + b), aSecond = clip(p - b);
+    const both = (aFirst + aSecond) / 2;
+    const agreeA = aFirst * aSecond, agreeB = (1 - aFirst) * (1 - aSecond), tie = 1 - agreeA - agreeB;
+    const bars = [["A всегда первым", aFirst], ["B всегда первым", aSecond], ["оба порядка, среднее", both], ["только согласованные победы A", agreeA / Math.max(1e-9, agreeA + agreeB)]];
+    view.innerHTML = `<div class="lab-ntable">${bars.map(([n, v]) => `<div class="lab-crow"><b>${n}</b><span></span><span class="lab-cbar"><span style="width:${v * 100}%"></span></span><code>${pct(v)}</code></div>`).join("")}</div>
+      <p class="lab-kv"><span>истинная доля побед A</span><b>${pct(p)}</b><span>несогласованных пар (ничьи)</span><b>${pct(tie)}</b></p>
+      <p class="lab-note">Если всегда ставить A первым, судья покажет ${pct(aFirst)} вместо ${pct(p)}. Прогон в обоих порядках возвращает честную оценку, а доля ничьих показывает, насколько судья вообще различает варианты: при ${pct(tie)} ничьих ${tie > 0.5 ? "сравнение почти ничего не говорит" : "сигнал есть"}.</p>`;
+  }
+  bindLab(el, st, draw); draw();
+}
+
+const REPORT_STEPS = { check: [
+  ["Тумблеры", "Вытащи флаги обоих прогонов из манифеста и положи различия первой строкой.", "Флаг store_true теряется молча при пересборке команды."],
+  ["Знаменатель", "Каждое число достраивается до «X из Y по критерию на наборе».", "Процент без знаменателя прячет размер выборки."],
+  ["Интервал", "Рядом с долей интервал Уилсона, рядом с разницей — парный тест.", "«Улучшили на 2 п.п.» на 40 документах — шум."],
+  ["Область вывода", "Вывод для этого набора, этой конфигурации, этого рендера.", "«Потолок пайплайна» вместо «потолок на dev-56»."],
+  ["Отрицательные утверждения", "«Не найдено» с областью: что смотрел, что нет, двумя способами.", "«Нет» без области читается как проверка всего."],
+  ["Адрес", "git remote -v, текущая ветка, последние коммиты цели перед пушем.", "Адрес из памяти уже однажды увёл код в чужой репозиторий."]
+]};
+function labReport(el) { labStepper(el, REPORT_STEPS, { check: ["", "", "", "", "", ""] }, [["check", "перед отправкой отчёта"]]); }
+
 const LABS = {
   S: { title: "Внимание своими руками", fn: labAttention },
   W: { title: "Блок трансформера в разборе", fn: labTransformer },
@@ -3595,6 +3763,12 @@ const LABS = {
   H: { title: "Дрейф входа: PSI на пальцах", fn: labPsi },
   Q: { title: "Разбиения и утечки", fn: labSplits },
   R: { title: "RAG по шагам", fn: labRag },
+  AB: { title: "Сколько стоит алгоритм на большом входе", fn: labComplexity },
+  O: { title: "Оконные функции против GROUP BY", fn: labWindow },
+  AA: { title: "BM25 против TF-IDF", fn: labBm25 },
+  C: { title: "Грамматика вместо просьбы", fn: labConstrained },
+  G: { title: "Позиционное смещение судьи", fn: labJudgeBias },
+  Z: { title: "Шесть проверок перед отчётом", fn: labReport },
   K: { title: "Сколько памяти нужно модели", fn: labVram },
   Y: { title: "Блок трансформера в разборе", fn: labTransformer }
 };

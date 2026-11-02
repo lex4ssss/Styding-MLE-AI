@@ -1176,6 +1176,13 @@ kbd { display: inline-block; min-width: 20px; padding: 0 4px; border: 1px solid 
 .lab-legend .lab-cell { width: 18px; height: 14px; margin-right: -8px; }
 
 .confetti { image-rendering: pixelated; }
+.iv-answer { width: 100%; padding: 12px 16px; border: 1px solid var(--rule); border-radius: 12px; background: var(--surface); font-family: var(--mono); font-size: 14px; line-height: 1.55; resize: vertical; }
+.iv-answer:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.iv-answer[readonly] { color: var(--muted); }
+.iv-points { display: grid; gap: 8px; }
+.iv-point { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 12px; align-items: start; padding: 8px 12px; border: 1px solid var(--rule-soft); border-radius: 8px; background: var(--surface); font-size: 15px; cursor: pointer; }
+.iv-point input { margin-top: 4px; accent-color: var(--accent); width: 16px; height: 16px; }
+.iv-point:has(input:checked) { border-color: var(--ok); background: var(--ok-soft); }
 .lab-page { fill: var(--surface); stroke: var(--ink); stroke-width: 1; }
 .lab-norm { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .lab-norm input { width: 100%; padding: 8px 12px; border: 1px solid var(--rule); border-radius: 8px; background: var(--surface); font-family: var(--mono); font-size: 13px; }
@@ -1197,7 +1204,7 @@ kbd { display: inline-block; min-width: 20px; padding: 0 4px; border: 1px solid 
 @media (max-width: 720px) {
   .shell { padding-inline: 16px; }
   .topbar-inner { align-items: stretch; flex-direction: column; gap: 16px; }
-  .modes { width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .modes { width: 100%; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .mode { min-width: 0; padding-inline: 4px; font-size: 13px; }
   .mode:first-child { grid-column: 1 / -1; }
   .result-top { grid-template-columns: minmax(0, 1fr); }
@@ -1236,6 +1243,7 @@ kbd { display: inline-block; min-width: 20px; padding: 0 4px; border: 1px solid 
       <button class="mode" id="tab-exam" type="button" aria-pressed="false">Экзамен</button>
       <button class="mode" id="tab-ref" type="button" aria-pressed="false">Справочник</button>
       <button class="mode" id="tab-lib" type="button" aria-pressed="false">Библиотека</button>
+      <button class="mode" id="tab-interview" type="button" aria-pressed="false">Собеседование</button>
       <button class="mode" id="tab-progress" type="button" aria-pressed="false">Прогресс</button>
     </nav>
   </div>
@@ -1260,7 +1268,7 @@ const PASS = 0.8;
 const STUDY = "ai-trainer-study-v1";
 const INTERVALS = [0, 1, 3, 7, 14, 30, 60];
 const DEFAULT_PLAN = { deadline: "2026-12-31", perDay: 20, at: "" };
-const MODES = ["today", "exam", "ref", "lib", "progress"];
+const MODES = ["today", "exam", "ref", "lib", "interview", "progress"];
 const KEY_CODES = [["Digit1", "Numpad1", "KeyF"], ["Digit2", "Numpad2", "Comma"], ["Digit3", "Numpad3", "KeyD"], ["Digit4", "Numpad4", "KeyU"]];
 const SECTIONS = Object.fromEntries(FAQ.sections.map(s => [s.id, s]));
 const QKEY = new Map(QUIZ.questions.map(q => [q, "q" + hash(q.q)]));
@@ -1677,6 +1685,7 @@ function setMode(mode) {
   state.mode = mode;
   state.session = null;
   state.cards = null;
+  state.iv = null;
   MODES.forEach(m => document.getElementById("tab-" + m).setAttribute("aria-pressed", String(m === mode)));
   render();
   window.scrollTo({ top: 0 });
@@ -1781,6 +1790,8 @@ function renderCounters() {
 function render() {
   renderCounters();
   if (state.cards) return renderCards();
+  if (state.iv) return state.iv.idx >= state.iv.items.length ? renderIvResult() : renderIvItem();
+  if (state.mode === "interview") return renderInterview();
   if (state.session) return state.session.idx >= state.session.items.length ? renderResult() : renderQuestion();
   if (state.mode === "today") return renderToday();
   if (state.mode === "ref") return renderReference();
@@ -2591,6 +2602,11 @@ function renderToday() {
         text: "Пять случайных вопросов из открытых блоков вперемешку. Смешивание тем держит в памяти лучше, чем повтор одной.",
         action: "mix", label: "5 вопросов", primary: primary === "mix"
       })}
+      ${taskCard({
+        title: "Собеседование", count: ivQueue().length, done: !ivQueue().length,
+        text: ivQueue().length ? "Открытые вопросы и задачи на код по пройденным шагам: ответь своими словами, потом сверь с эталоном по пунктам." : "Вопросов на сегодня нет. Новые откроются со следующими шагами.",
+        action: ivQueue().length ? "interview" : "", label: "Начать"
+      })}
       ${next && LABS[next.id] ? taskCard({
         title: "Схема шага", text: `${esc(LABS[next.id].title)}. Покрути параметры и посмотри, как меняется результат: так механизм запоминается быстрее текста.`,
         action: "lab", label: "Открыть схему"
@@ -2628,6 +2644,7 @@ function renderToday() {
   app.querySelectorAll("[data-task]").forEach(el => el.addEventListener("click", () => {
     const t = el.dataset.task;
     if (t === "review") startReview();
+    else if (t === "interview") startInterview(ivQueue(), "today");
     else if (t === "weak") startWeak();
     else if (t === "cards") startCards();
     else if (t === "mix") startMix();
@@ -3400,6 +3417,161 @@ function labPsi(el) {
   draw();
 }
 
+
+/* ---------- interview mode ---------- */
+const INTERVIEW = (DATA.interview && DATA.interview.items) || [];
+const ivKey = it => "i" + hash(it.id);
+const blockOrder = id => (QUIZ.blocks.find(b => b.id === id) || { order: 99 }).order;
+
+function ivQueue(limit = 5) {
+  const today = dayKey();
+  const next = nextStep();
+  const lim = next ? next.order : Infinity;
+  const open = INTERVIEW.filter(it => blockOrder(it.block) <= lim || passed(it.block));
+  const due = open.filter(it => { const e = state.study.srs[ivKey(it)]; return e && e.due <= today; });
+  const fresh = open.filter(it => !state.study.srs[ivKey(it)]).sort((a, b) => blockOrder(a.block) - blockOrder(b.block));
+  return due.concat(fresh).slice(0, limit);
+}
+
+function startInterview(items, back) {
+  if (!items.length) return;
+  state.session = null;
+  state.cards = null;
+  state.iv = { items, idx: 0, revealed: false, checks: new Set(), draft: "", results: [], back: back || state.mode };
+  render();
+  window.scrollTo({ top: 0 });
+}
+
+function revealIv() {
+  const iv = state.iv;
+  const ta = document.getElementById("iv-answer");
+  iv.draft = ta ? ta.value : iv.draft;
+  iv.revealed = true;
+  renderIvItem();
+}
+
+function gradeIv() {
+  const iv = state.iv;
+  const it = iv.items[iv.idx];
+  const cover = iv.checks.size / it.points.length;
+  grade(ivKey(it), cover >= 0.7);
+  commit();
+  iv.results.push({ it, cover, missed: it.points.filter((_, i) => !iv.checks.has(i)) });
+  iv.idx += 1;
+  iv.revealed = false;
+  iv.checks = new Set();
+  iv.draft = "";
+  render();
+  window.scrollTo({ top: 0 });
+}
+
+function renderInterview() {
+  const total = INTERVIEW.length;
+  const seen = INTERVIEW.filter(it => state.study.srs[ivKey(it)]).length;
+  const queue = ivQueue();
+  const byBlock = QUIZ.blocks.filter(b => INTERVIEW.some(it => it.block === b.id));
+  app.innerHTML = `
+    <div class="view-head">
+      <p class="eyebrow">Собеседование</p>
+      <h2 class="view-title">Отвечай своими словами, потом сверяй по пунктам</h2>
+      <p class="view-lede">На собеседовании нет вариантов ответа. Здесь ${total} открытых вопросов и задач на код по всем блокам: пишешь ответ, открываешь эталон и честно отмечаешь, какие пункты назвал. Ответ засчитан, если назвал не меньше 70% пунктов; вопрос вернётся в повторение по тем же интервалам, что и тесты.</p>
+    </div>
+    <div class="resume-strip">
+      <span>Пройдено ${seen} из ${total} · на сегодня ${queue.length}</span>
+      ${queue.length ? `<button class="btn btn-primary" type="button" id="iv-start">Начать · ${queue.length}</button>` : ""}
+    </div>
+    <div class="route"><section class="stage-band">
+      <header class="stage-head"><h3 class="stage-name">По блокам</h3><span class="stage-count">можно взять любой блок, не дожидаясь шага</span></header>
+      <div class="block-grid">${byBlock.map(b => {
+        const items = INTERVIEW.filter(it => it.block === b.id);
+        const code = items.filter(it => it.kind === "code").length;
+        const done = items.filter(it => state.study.srs[ivKey(it)]).length;
+        return `<button class="block-card" type="button" data-ivb="${b.id}">
+          <span class="block-sigil">${b.id}</span>
+          <span class="block-name"><span class="step-no">${b.order}.</span> ${esc(b.title)}</span>
+          <span class="block-note">${items.map(it => esc(it.q)).join(" · ").slice(0, 160)}…</span>
+          <span class="block-stats"><span>${items.length} ${plural(items.length, "вопрос", "вопроса", "вопросов")}</span>${code ? `<span>код: ${code}</span>` : ""}<span class="score-pill ${done === items.length ? "is-good" : ""}">${done}/${items.length}</span></span>
+        </button>`;
+      }).join("")}</div>
+    </section></div>`;
+  const start = document.getElementById("iv-start");
+  if (start) start.addEventListener("click", () => startInterview(ivQueue(), "interview"));
+  app.querySelectorAll("[data-ivb]").forEach(el => el.addEventListener("click", () =>
+    startInterview(INTERVIEW.filter(it => it.block === el.dataset.ivb), "interview")));
+}
+
+function renderIvItem() {
+  const iv = state.iv;
+  const it = iv.items[iv.idx];
+  const block = QUIZ.blocks.find(b => b.id === it.block);
+  const total = iv.items.length;
+  app.innerHTML = `
+    <div class="exam-wrap">
+      <div class="gauge">
+        <div class="gauge-row"><span>Собеседование · ${it.kind === "code" ? "задача на код" : "устный вопрос"} · блок ${block.id} · ${esc(block.title)}</span><span>${iv.idx + 1} / ${total}</span></div>
+        <div class="gauge-track"><div class="gauge-fill" style="width:${Math.round(iv.idx / total * 100)}%"></div></div>
+      </div>
+      <h2 class="question">${esc(it.q)}</h2>
+      ${it.task ? `<pre><code>${esc(it.task)}</code></pre>` : ""}
+      <label class="sr-only" for="iv-answer">Твой ответ</label>
+      <textarea id="iv-answer" class="iv-answer" rows="${it.kind === "code" ? 10 : 6}" ${iv.revealed ? "readonly" : ""} placeholder="${it.kind === "code" ? "Напиши код, как на доске. Ctrl+Enter — открыть эталон" : "Ответь так, как сказал бы вслух. Ctrl+Enter — открыть эталон"}">${esc(iv.draft)}</textarea>
+      ${iv.revealed ? `
+        <div class="verdict">
+          <p class="eyebrow">Эталон</p>
+          <p class="verdict-why">${mono(it.answer)}</p>
+          ${it.solution ? `<pre><code>${esc(it.solution)}</code></pre>` : ""}
+          <p class="eyebrow">Что ты назвал своими словами</p>
+          <div class="iv-points">${it.points.map((pt, i) => `<label class="iv-point"><input type="checkbox" data-pt="${i}" ${iv.checks.has(i) ? "checked" : ""}><span>${esc(pt)}</span></label>`).join("")}</div>
+          <p class="kbd-hint">Засчитывается от 70% пунктов · сейчас <span id="iv-cover">${Math.round(iv.checks.size / it.points.length * 100)}%</span> · <kbd>Enter</kbd> — дальше</p>
+        </div>` : ""}
+      <div class="exam-actions">
+        <button class="btn" type="button" id="iv-quit">${iv.back === "today" ? "К плану на сегодня" : "К списку вопросов"}</button>
+        ${iv.revealed ? `<button class="btn btn-primary" type="button" id="iv-next">${iv.idx + 1 === total ? "Итоги" : "Дальше →"}</button>`
+          : `<button class="btn btn-primary" type="button" id="iv-reveal">Открыть эталон</button>`}
+      </div>
+    </div>`;
+  const ta = document.getElementById("iv-answer");
+  ta.addEventListener("input", () => { iv.draft = ta.value; });
+  ta.addEventListener("keydown", e => { if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) { e.preventDefault(); if (!iv.revealed) revealIv(); else gradeIv(); } });
+  if (!iv.revealed) ta.focus({ preventScroll: true });
+  app.querySelectorAll("[data-pt]").forEach(cb => cb.addEventListener("change", () => {
+    const i = Number(cb.dataset.pt);
+    if (cb.checked) iv.checks.add(i); else iv.checks.delete(i);
+    document.getElementById("iv-cover").textContent = Math.round(iv.checks.size / it.points.length * 100) + "%";
+  }));
+  document.getElementById("iv-quit").addEventListener("click", () => setMode(iv.back));
+  const rv = document.getElementById("iv-reveal");
+  if (rv) rv.addEventListener("click", revealIv);
+  const nx = document.getElementById("iv-next");
+  if (nx) nx.addEventListener("click", gradeIv);
+}
+
+function renderIvResult() {
+  const iv = state.iv;
+  const avg = iv.results.reduce((s, r) => s + r.cover, 0) / Math.max(1, iv.results.length);
+  const ok = iv.results.filter(r => r.cover >= 0.7).length;
+  if (ok === iv.results.length && iv.results.length >= 3 && !iv.celebrated) { iv.celebrated = true; celebrate(); }
+  app.innerHTML = `
+    <div class="result">
+      <div class="result-top">
+        <div>
+          <p class="eyebrow">Итог собеседования</p>
+          <h2 class="view-title">Засчитано ${ok} из ${iv.results.length}</h2>
+          <p class="view-lede">Средний охват пунктов ${Math.round(avg * 100)}%. Незасчитанные вопросы вернутся в повторение в ближайшие дни.</p>
+        </div>
+        <div class="result-score"><b>${Math.round(avg * 100)}%</b><span>охват</span></div>
+      </div>
+      <section class="sub"><h3 class="sub-label">Что не прозвучало</h3>
+        ${iv.results.filter(r => r.missed.length).map(r => `<details class="miss"><summary>${esc(r.it.q)} · ${Math.round(r.cover * 100)}%</summary>
+          <div class="miss-body">${r.missed.map(m => `<p class="pitfall"><span>${esc(m)}</span></p>`).join("")}</div></details>`).join("") || `<p class="empty">Все пункты названы.</p>`}
+      </section>
+      <div class="exam-actions" style="justify-content:flex-start">
+        <button class="btn btn-primary" type="button" id="iv-back">${iv.back === "today" ? "К плану на сегодня" : "К списку вопросов"}</button>
+      </div>
+    </div>`;
+  document.getElementById("iv-back").addEventListener("click", () => setMode(iv.back));
+}
+
 const LABS = {
   S: { title: "Внимание своими руками", fn: labAttention },
   W: { title: "Блок трансформера в разборе", fn: labTransformer },
@@ -3510,6 +3682,11 @@ document.addEventListener("keydown", e => {
     if (!c.flipped && (e.code === "Space" || e.key === "Enter") && !onButton) { e.preventDefault(); flipCard(); }
     else if (c.flipped && ["Digit1", "Numpad1", "ArrowLeft"].includes(e.code)) { e.preventDefault(); gradeCard(false); }
     else if (c.flipped && ["Digit2", "Numpad2", "ArrowRight"].includes(e.code)) { e.preventDefault(); gradeCard(true); }
+    return;
+  }
+  const iv = state.iv;
+  if (iv && iv.idx < iv.items.length) {
+    if (iv.revealed && (e.key === "Enter" && !onButton)) { e.preventDefault(); gradeIv(); }
     return;
   }
   const s = state.session;

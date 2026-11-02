@@ -581,6 +581,39 @@
     "Отрицательные утверждения с областью проверки"
    ],
    "answer": "Сначала манифесты обоих прогонов: если флаги разные, это первая строка отчёта, до чисел. Каждое число достраивается до «45 из 49 по точному совпадению на дев-56» и получает интервал. Вывод формулируется для того набора и той конфигурации, на которых получен. «Не найдено» пишется с областью: какие форматы и папки смотрел, какие нет."
+  },
+  {
+   "id": "y-mlp",
+   "block": "Y",
+   "kind": "code",
+   "q": "Напиши на NumPy прямой и обратный проход двухслойной сети с ReLU и softmax с кросс-энтропией, без autograd.",
+   "points": [
+    "Прямой проход: XW₁ + b₁, ReLU, aW₂ + b₂, softmax",
+    "Устойчивый softmax: вычесть максимум по строке",
+    "Градиент по логитам равен p − onehot(y), делённому на n",
+    "Матричные градиенты: dW = входᵀ · dвыхода, db — сумма по батчу",
+    "ReLU пропускает градиент только там, где вход был положительным",
+    "Проверка численным градиентом"
+   ],
+   "answer": "Связка softmax и кросс-энтропии даёт простой градиент по логитам: p − onehot(y), это и надо помнить. Дальше правило из главы «Метод обратного распространения ошибки» учебника ШАД: для слоя Y = XW градиент по весам равен Xᵀ·dY, по входу dY·Wᵀ, а поэлементная активация умножает градиент на свою производную. Вычитание максимума перед экспонентой не меняет softmax и спасает от переполнения. Решение проверяют конечной разностью на маленьком примере.",
+   "task": "def mlp_forward_backward(X, y, W1, b1, W2, b2):\n    # вернуть loss и градиенты (dW1, db1, dW2, db2)\n    ...",
+   "solution": "import numpy as np\n\ndef mlp_forward_backward(X, y, W1, b1, W2, b2):\n    # X: (n, d), y: (n,) метки классов, W1: (d, h), W2: (h, k)\n    n = len(X)\n    h = X @ W1 + b1\n    a = np.maximum(h, 0)                       # ReLU\n    z = a @ W2 + b2\n    z = z - z.max(1, keepdims=True)            # устойчивый softmax\n    p = np.exp(z) / np.exp(z).sum(1, keepdims=True)\n    loss = -np.log(p[np.arange(n), y]).mean()\n    dz = p.copy(); dz[np.arange(n), y] -= 1; dz /= n   # softmax + кросс-энтропия: p − onehot\n    dW2, db2 = a.T @ dz, dz.sum(0)\n    da = dz @ W2.T\n    dh = da * (h > 0)                          # производная ReLU\n    dW1, db1 = X.T @ dh, dh.sum(0)\n    return loss, (dW1, db1, dW2, db2)\n\n# проверка численным градиентом по одному весу\nrng = np.random.default_rng(0)\nX, y = rng.normal(size=(8, 4)), rng.integers(0, 3, 8)\nP = [rng.normal(size=(4, 5)) * .5, np.zeros(5), rng.normal(size=(5, 3)) * .5, np.zeros(3)]\nloss, grads = mlp_forward_backward(X, y, *P)\neps = 1e-6; P[0][1, 2] += eps; up = mlp_forward_backward(X, y, *P)[0]; P[0][1, 2] -= 2 * eps\ndown = mlp_forward_backward(X, y, *P)[0]; P[0][1, 2] += eps\nassert abs((up - down) / (2 * eps) - grads[0][1, 2]) < 1e-6"
+  },
+  {
+   "id": "r-nms",
+   "block": "R",
+   "kind": "code",
+   "q": "Реализуй non-maximum suppression: из перекрывающихся рамок детектора оставить по одной на объект.",
+   "points": [
+    "IoU: площадь пересечения на площадь объединения, пересечение не меньше нуля",
+    "Сортировка по уверенности по убыванию",
+    "Берём лучшую рамку, выкидываем всё с IoU выше порога, повторяем",
+    "Векторный IoU одной рамки со всеми остальными",
+    "Сложность O(n²) в худшем случае; порог обычно 0.5"
+   ],
+   "answer": "Детектор выдаёт много рамок на один объект, NMS оставляет самую уверенную и подавляет её соседей с IoU выше порога. Типичные ошибки: забыть обрезать отрицательное пересечение у непересекающихся рамок и сравнивать рамки разных классов, которые подавлять не надо: NMS делают по классам отдельно. Порог IoU — гиперпараметр: низкий теряет близко стоящие объекты, высокий оставляет дубли.",
+   "task": "def nms(boxes, scores, thr=0.5):\n    # boxes: (n, 4) в формате x1, y1, x2, y2; вернуть индексы оставленных рамок\n    ...",
+   "solution": "import numpy as np\n\ndef iou(box, boxes):\n    # рамки в формате (x1, y1, x2, y2)\n    x1 = np.maximum(box[0], boxes[:, 0]); y1 = np.maximum(box[1], boxes[:, 1])\n    x2 = np.minimum(box[2], boxes[:, 2]); y2 = np.minimum(box[3], boxes[:, 3])\n    inter = np.clip(x2 - x1, 0, None) * np.clip(y2 - y1, 0, None)\n    area = lambda b: (b[..., 2] - b[..., 0]) * (b[..., 3] - b[..., 1])\n    return inter / (area(box) + area(boxes) - inter)\n\ndef nms(boxes, scores, thr=0.5):\n    order = np.argsort(-scores)\n    keep = []\n    while len(order):\n        i = order[0]\n        keep.append(int(i))\n        rest = order[1:]\n        order = rest[iou(boxes[i], boxes[rest]) < thr]\n    return keep\n\nboxes = np.array([[0, 0, 10, 10], [1, 1, 11, 11], [20, 20, 30, 30], [0, 0, 9, 10]], float)\nscores = np.array([0.9, 0.8, 0.7, 0.95])\nassert nms(boxes, scores) == [3, 2]"
   }
  ]
 }

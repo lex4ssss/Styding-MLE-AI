@@ -1368,16 +1368,74 @@ function shuffled(arr) {
   return a;
 }
 
-function grade(key, ok) {
+/* FSRS-6 (open-spaced-repetition/ts-fsrs, MIT): stability s in days, difficulty d from 1 to 10.
+   Ratings: 1 again, 2 hard, 3 good, 4 easy. Retention target 0.9 makes the interval equal to s. */
+const FSRS = (() => {
+  const w = [0.212, 1.2931, 2.3065, 8.2956, 6.4133, 0.8334, 3.0194, 0.001, 1.8722, 0.1666, 0.796,
+    1.4835, 0.0614, 0.2629, 1.6483, 0.6014, 1.8729, 0.5425, 0.0912, 0.0658, 0.1542];
+  const RETENTION = 0.9, MAX_IVL = 365;
+  const decay = -w[20], factor = Math.pow(0.9, 1 / decay) - 1;
+  const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
+  const initD = g => w[4] - Math.exp((g - 1) * w[5]) + 1;
+  const recall = (t, s) => Math.pow(1 + factor * t / s, decay);
+  const interval = s => clamp(Math.round(s / factor * (Math.pow(RETENTION, 1 / decay) - 1)), 1, MAX_IVL);
+  function next(mem, t, g) {
+    if (!mem) return { s: clamp(w[g - 1], 0.001, 36500), d: clamp(initD(g), 1, 10) };
+    const { s, d } = mem;
+    let ns;
+    if (t === 0) {
+      const sinc = Math.pow(s, -w[19]) * Math.exp(w[17] * (g - 3 + w[18]));
+      ns = s * (g >= 2 ? Math.max(sinc, 1) : sinc);
+    } else if (g === 1) {
+      const fail = w[11] * Math.pow(d, -w[12]) * (Math.pow(s + 1, w[13]) - 1) * Math.exp((1 - recall(t, s)) * w[14]);
+      ns = Math.min(Math.max(s / Math.exp(w[17] * w[18]), 0.001), fail);
+    } else {
+      ns = s * (1 + Math.exp(w[8]) * (11 - d) * Math.pow(s, -w[9]) * (Math.exp((1 - recall(t, s)) * w[10]) - 1)
+        * (g === 2 ? w[15] : 1) * (g === 4 ? w[16] : 1));
+    }
+    const nd = d + (-w[6] * (g - 3)) * (10 - d) / 9;
+    return { s: clamp(ns, 0.001, 36500), d: clamp(w[7] * initD(4) + (1 - w[7]) * nd, 1, 10) };
+  }
+  return { next, recall, interval, initD, clamp };
+})();
+
+// Memory state of a card; entries saved by the old Leitner scheduler only have box and lapses
+function memOf(e) {
+  if (!e) return null;
+  if (e.s > 0 && e.d >= 1) return { s: e.s, d: e.d };
+  return { s: e.box > 0 ? INTERVALS[e.box] : 0.5, d: FSRS.clamp(FSRS.initD(3) + 1.5 * (e.lapses || 0), 1, 10) };
+}
+
+function lastDay(e) {
+  if (e.last) return e.last;
+  const t = e.at ? new Date(e.at) : null;
+  return t && !isNaN(t) ? dayKey(t) : dayKey();
+}
+
+// Probability of recalling the card today, from 0 to 1
+function recallToday(e) {
+  const m = memOf(e);
+  return m ? FSRS.recall(Math.max(0, daysBetween(lastDay(e), dayKey())), m.s) : 0;
+}
+
+function grade(key, ok, rating) {
+  const g = rating || (ok ? 3 : 1);
   const cur = state.study.srs[key];
-  const box = ok ? (cur ? Math.min(cur.box + 1, INTERVALS.length - 1) : 2) : 0;
   const today = dayKey();
+  const t = cur ? Math.max(0, daysBetween(lastDay(cur), today)) : 0;
+  const mem = FSRS.next(memOf(cur), t, g);
+  const ivl = g === 1 ? 0 : FSRS.interval(mem.s);
+  let box = 0;
+  if (g > 1) INTERVALS.forEach((v, i) => { if (i > 0 && ivl >= v) box = i; });
   state.study.srs[key] = {
+    s: Math.round(mem.s * 1000) / 1000,
+    d: Math.round(mem.d * 1000) / 1000,
+    last: today,
     box,
-    due: shiftDay(today, INTERVALS[box]),
+    due: shiftDay(today, ivl),
     at: stamp(),
     n: (cur ? cur.n : 0) + 1,
-    lapses: (cur ? cur.lapses : 0) + (ok ? 0 : 1)
+    lapses: (cur ? cur.lapses : 0) + (g === 1 ? 1 : 0)
   };
   const d = state.study.days[today] || { n: 0, ok: 0 };
   state.study.days[today] = { n: d.n + 1, ok: d.ok + (ok ? 1 : 0), at: stamp() };
@@ -1408,14 +1466,14 @@ function dueQuestions() {
   return QUIZ.questions
     .map(q => ({ q, e: state.study.srs[QKEY.get(q)] }))
     .filter(x => x.e && x.e.due <= today)
-    .sort((a, b) => a.e.box - b.e.box || b.e.lapses - a.e.lapses)
+    .sort((a, b) => recallToday(a.e) - recallToday(b.e) || b.e.lapses - a.e.lapses)
     .map(x => x.q);
 }
 
 function weakQuestions() {
   return QUIZ.questions.filter(q => {
     const e = state.study.srs[QKEY.get(q)];
-    return e && e.box <= 1 && e.lapses > 0;
+    return e && e.lapses > 0 && memOf(e).s < 5;
   });
 }
 
@@ -2639,7 +2697,7 @@ function renderToday() {
       <section class="panel">
         <p class="eyebrow">Активность за 14 недель</p>
         ${heatmap()}
-        <p class="progress-meta"><span>всего ответов <b>${Object.values(state.study.days).reduce((s, d) => s + d.n, 0)}</b></span><span>дней с занятиями <b>${Object.keys(state.study.days).length}</b></span><span>в повторении <b>${Object.keys(state.study.srs).length}</b></span></p>
+        <p class="progress-meta"><span>всего ответов <b>${Object.values(state.study.days).reduce((s, d) => s + d.n, 0)}</b></span><span>дней с занятиями <b>${Object.keys(state.study.days).length}</b></span><span>в повторении <b>${Object.keys(state.study.srs).length}</b></span><span>в долгой памяти <b>${Object.values(state.study.srs).filter(e => memOf(e).s >= 21).length}</b></span></p>
       </section>
       <section class="panel">
         <p class="eyebrow">Слабые места</p>
@@ -3642,7 +3700,7 @@ function gradeIv() {
   const iv = state.iv;
   const it = iv.items[iv.idx];
   const cover = iv.checks.size / it.points.length;
-  grade(ivKey(it), cover >= 0.7);
+  grade(ivKey(it), cover >= 0.7, cover >= 0.9 ? 4 : cover >= 0.7 ? 3 : 1);
   commit();
   iv.results.push({ it, cover, missed: it.points.filter((_, i) => !iv.checks.has(i)) });
   iv.idx += 1;

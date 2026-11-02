@@ -1275,6 +1275,98 @@
     ]
    },
    {
+    "title": "GitHub: подготовка к собеседованию",
+    "blocks": [
+     "AD",
+     "L",
+     "X",
+     "Y"
+    ],
+    "items": [
+     {
+      "t": "Chip Huyen — Introduction to Machine Learning Interviews",
+      "u": "https://github.com/chiphuyen/ml-interviews-book",
+      "k": "книга",
+      "lang": "en",
+      "n": "Как устроен найм в ML-командах и больше 200 вопросов: математика, данные и выборки, метрики, классический ML, обучение сетей. Хороший список для самопроверки после блоков L, X и Y."
+     },
+     {
+      "t": "AIMLInterviews (бывший Machine-Learning-Interviews)",
+      "u": "https://github.com/alirezadir/AIMLInterviews",
+      "k": "руководство",
+      "lang": "en",
+      "n": "План подготовки: широта и глубина ML, системный дизайн с разборами, LLM и агенты, поведенческая часть. Каркас ответа на system design совпадает с блоком AD."
+     },
+     {
+      "t": "Minimum Viable Study Plan for ML Interviews",
+      "u": "https://github.com/khangich/machine-learning-interview",
+      "k": "руководство",
+      "lang": "en",
+      "n": "Минимальный план для собеседований в крупных компаниях: ML system design, статистика и A/B, основы ML и DL, SQL и кодинг."
+     },
+     {
+      "t": "MLQuestions",
+      "u": "https://github.com/andrewekhalel/MLQuestions",
+      "k": "список",
+      "lang": "en",
+      "n": "69 вопросов с ответами: основы, ансамбли, данные, оптимизация, глубокое обучение, CV, понижение размерности, оценка моделей. Отсюда взяты темы NMS, автоэнкодера и проклятия размерности."
+     },
+     {
+      "t": "A Curated List of ML System Design Case Studies",
+      "u": "https://github.com/Engineer1999/A-Curated-List-of-ML-System-Design-Case-Studies",
+      "k": "список",
+      "lang": "en",
+      "n": "Больше 300 разборов ML-систем от 80 компаний: рекомендации, поиск, антифрод, цены, LLM. Удобно читать по одному разбору в день после блока AD."
+     },
+     {
+      "t": "applied-ml",
+      "u": "https://github.com/eugeneyan/applied-ml",
+      "k": "список",
+      "lang": "en",
+      "n": "Статьи и техблоги компаний о ML в проде, разложенные по задачам: данные, признаки, валидация, рекомендации, поиск, A/B, MLOps."
+     }
+    ]
+   },
+   {
+    "title": "GitHub: практика кода и курсы",
+    "blocks": [
+     "Y",
+     "S",
+     "W",
+     "X"
+    ],
+    "items": [
+     {
+      "t": "Tensor Puzzles",
+      "u": "https://github.com/srush/Tensor-Puzzles",
+      "k": "ноутбук",
+      "lang": "en",
+      "n": "21 головоломка: переписать функции PyTorch через broadcasting без циклов. Лучшая разминка перед задачами на attention и маски из режима «Собеседование»."
+     },
+     {
+      "t": "LLMs from Scratch",
+      "u": "https://github.com/rasbt/LLMs-from-scratch",
+      "k": "код",
+      "lang": "en",
+      "n": "Код книги Себастьяна Рашки: GPT-подобная модель на PyTorch от токенизатора и внимания до предобучения и дообучения."
+     },
+     {
+      "t": "LLM Course",
+      "u": "https://github.com/mlabonne/llm-course",
+      "k": "курс",
+      "lang": "en",
+      "n": "Дорожная карта по LLM с ноутбуками: основы, дообучение, квантование, RAG, агенты, развёртывание."
+     },
+     {
+      "t": "Машинное обучение на ФКН ВШЭ",
+      "u": "https://github.com/esokolov/ml-course-hse",
+      "k": "курс",
+      "lang": "ru",
+      "n": "Курс Евгения Соколова на русском: конспекты лекций, семинары, домашние задания и записи. Дополняет учебник ШАД практикой по тем же темам."
+     }
+    ]
+   },
+   {
     "title": "Книги",
     "blocks": [
      "T",

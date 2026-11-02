@@ -2832,11 +2832,11 @@ const RAG_STEPS = {
 };
 const RAG_METRIC = { index: ["доля таблиц целиком", "доля чанков без разрыва", "recall@5 на чистом корпусе", "recall@k до и после смены модели", "потеря recall HNSW против плоского"], query: ["", "утечки по правам: 0", "recall@50 у каждого ранжирования", "recall@5 после слияния", "прирост recall@5 на том же списке", "faithfulness", "доля верных отказов"] };
 
-function labRag(el) {
-  const st = { phase: "query", i: 0 };
+function labStepper(el, STEPS, METRIC, phases) {
+  const st = { phase: phases[0][0], i: 0 };
   el.innerHTML = `
     <div class="lab-controls">
-      ${segmented("phase", [["index", "индексация"], ["query", "запрос"]], st.phase)}
+      ${phases.length > 1 ? segmented("phase", phases, st.phase) : ""}
       <div class="lab-seg"><button type="button" data-act="prev">← шаг</button><button type="button" data-act="next">шаг →</button></div>
     </div>
     <div class="lab-stage" data-view></div>`;
@@ -2844,7 +2844,7 @@ function labRag(el) {
   let lastPhase = st.phase;
   function draw() {
     if (st.phase !== lastPhase) { st.i = 0; lastPhase = st.phase; }
-    const steps = RAG_STEPS[st.phase];
+    const steps = STEPS[st.phase];
     if (st.act === "next") st.i = Math.min(steps.length - 1, st.i + 1);
     if (st.act === "prev") st.i = Math.max(0, st.i - 1);
     if (st.act === "go") st.i = Number(st.actArg);
@@ -2852,12 +2852,35 @@ function labRag(el) {
     const flow = steps.map((s, i) => `<button type="button" class="lab-node ${i === st.i ? "is-on" : ""} ${i < st.i ? "is-past" : ""}" data-act="go" data-arg="${i}">
       <span class="lab-node-n">${i + 1}</span><span>${s[0]}</span></button>`).join(`<span class="lab-arrow" aria-hidden="true"></span>`);
     const s = steps[st.i];
-    const metric = RAG_METRIC[st.phase][st.i];
+    const metric = (METRIC[st.phase] || [])[st.i];
     view.innerHTML = `<div class="lab-flow">${flow}</div>
       <div class="lab-card"><b>${st.i + 1}. ${s[0]}</b><p>${s[1]}</p><p class="lab-warn">${s[2]}</p>${metric ? `<p class="lab-metric">мерить: ${metric}</p>` : ""}</div>`;
   }
   bindLab(el, st, draw);
   draw();
+}
+
+function labRag(el) {
+  labStepper(el, RAG_STEPS, RAG_METRIC, [["query", "запрос"], ["index", "индексация"]]);
+}
+
+const SYS_STEPS = {
+  design: [
+    ["Решение и метрика", "Какое решение принимает бизнес по ответу модели, какой метрикой это видно, какие ограничители нельзя ухудшать.", "Начать с названия модели — главный сигнал слабого ответа."],
+    ["Ограничения", "Пиковая нагрузка, бюджет задержки p99, объём каталога, приватность, цена тысячи запросов.", "Бюджет задержки, посчитанный после выбора модели, обычно ломает архитектуру."],
+    ["Данные и метки", "Откуда метки, с какой задержкой приходят, какие смещения в логах, нет ли петли обратной связи.", "Логи старой системы показывают только то, что она сама показала."],
+    ["Бейзлайн", "Правило, популярное или прошлое значение. От него считается польза модели.", "Без бейзлайна нельзя сказать, окупается ли модель вообще."],
+    ["Кандидаты", "Дешёвый отбор на полноту из нескольких источников: векторный поиск, соседи, правила, популярное.", "Чего нет среди кандидатов, ранжировщик не вернёт."],
+    ["Ранжирование", "Точная модель на богатых признаках упорядочивает сотни кандидатов, признаки из одного определения для обучения и сервиса.", "Разный код признаков в обучении и сервисе даёт training-serving skew."],
+    ["Офлайн-оценка", "Метрика на отложенных данных по времени, сравнение с бейзлайном, проверка связи с онлайн-метрикой на прошлых экспериментах.", "Офлайн на логах старой системы завышает похожесть на неё."],
+    ["Выкатка", "Теневой режим, канарейка с ограничителями и автооткатом, затем A/B с заранее названной целевой метрикой.", "Выкатка на всех сразу превращает ошибку в инцидент."],
+    ["Мониторинг", "Ошибки и задержки, дрейф входа, распределение скоров, качество по меткам с задержкой, политика переобучения.", "Метрика без учёта задержки меток выглядит зелёной ровно до прихода исходов."]
+  ]
+};
+const SYS_METRIC = { design: ["целевая метрика и ограничители", "QPS, p99, цена 1000 запросов", "задержка меток, доля контроля", "метрика бейзлайна", "recall@k кандидатов", "NDCG или бизнес-метрика", "связь офлайн и онлайн", "ограничители канарейки", "PSI входа, доля пустых ответов"] };
+
+function labSysDesign(el) {
+  labStepper(el, SYS_STEPS, SYS_METRIC, [["design", "проектирование"]]);
 }
 
 /* 4. Threshold, PR and cost */
@@ -3204,6 +3227,7 @@ const LABS = {
   A: { title: "Интервал Уилсона против Вальда", fn: labWilson },
   T: { title: "Интервал Уилсона против Вальда", fn: labWilson },
   E: { title: "Сколько памяти нужно модели", fn: labVram },
+  AD: { title: "Маршрут ответа на system design", fn: labSysDesign },
   K: { title: "Сколько памяти нужно модели", fn: labVram },
   Y: { title: "Блок трансформера в разборе", fn: labTransformer }
 };

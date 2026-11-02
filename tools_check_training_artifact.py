@@ -70,6 +70,12 @@ def main():
         if not any(q["block"] == block_id for q in data["quiz"]["questions"]):
             problems.append(f"блок без вопросов: {block_id}")
 
+    sec_ids = {s["id"] for s in data["faq"]["sections"]}
+    for block_id in sorted(ids - sec_ids):
+        problems.append(f"блок без раздела справочника: {block_id}")
+    for sec_id in sorted(sec_ids - ids):
+        problems.append(f"раздел справочника без блока: {sec_id}")
+
     stages = set(route["stages"])
     steps = []
     for item in blocks + sections:
@@ -97,9 +103,26 @@ def main():
             if not re.match(r"^https://", r["u"]):
                 problems.append(f"раздел {s['id']}: ссылка не по https — {r['u']}")
 
+    iv = json.loads((TRAINING / "interview.json").read_text(encoding="utf-8"))["items"]
+    if len(data.get("interview", {}).get("items", [])) != len(iv):
+        problems.append("пунктов собеседования в странице и в источнике разное число")
+    seen_iv = set()
+    for it in iv:
+        if it["id"] in seen_iv:
+            problems.append(f"собеседование: дубль id {it['id']}")
+        seen_iv.add(it["id"])
+        if it["block"] not in ids:
+            problems.append(f"собеседование {it['id']}: нет блока {it['block']}")
+        if len(it.get("points", [])) < 3 or not it.get("answer"):
+            problems.append(f"собеседование {it['id']}: меньше трёх пунктов или нет эталона")
+        if it["kind"] == "code" and not (it.get("task") and it.get("solution")):
+            problems.append(f"собеседование {it['id']}: задача на код без условия или решения")
+    for block_id in sorted(ids - {it["block"] for it in iv}):
+        problems.append(f"блок без вопроса для собеседования: {block_id}")
+
     if "__DATA__" in page:
         problems.append("страница не собрана: остался placeholder __DATA__")
-    for token in ('id="app"', 'id="counters"', "prefers-color-scheme: dark", "prefers-reduced-motion"):
+    for token in ('id="app"', 'id="counters"', 'id="tab-today"', "prefers-color-scheme: dark", "prefers-reduced-motion"):
         if token not in page:
             problems.append(f"в странице нет обязательного фрагмента: {token}")
 

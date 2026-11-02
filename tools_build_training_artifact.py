@@ -7,8 +7,8 @@ TRAINING = ROOT / "training"
 TEMPLATE = ROOT / "template.html"
 ARTIFACT = ROOT / "ai_engineer_training.html"
 
-QUIZ_FILES = ["quiz_core.json", "quiz_extended.json", "quiz_agents.json", "quiz_foundations.json"]
-FAQ_FILES = ["faq_core.json", "faq_extended.json", "faq_agents.json", "faq_foundations.json"]
+QUIZ_FILES = sorted(p.name for p in TRAINING.glob("quiz_*.json"))
+FAQ_FILES = sorted(p.name for p in TRAINING.glob("faq_*.json"))
 
 
 def load(name):
@@ -36,13 +36,17 @@ def main():
     tracks = load("tracks.json")
     library = load("library.json")
     route = load("route.json")
+    interview = load("interview.json")
 
     orphans = sorted({b["id"] for b in blocks} - set(tracks["assignment"]))
     if orphans:
         raise SystemExit(f"блокам не назначен трек в tracks.json: {orphans}")
 
     known = {b["id"] for b in blocks}
-    stray = sorted({q["block"] for q in questions} - known)
+    sec_ids = {s["id"] for s in sections}
+    if known != sec_ids:
+        raise SystemExit(f"блоки без раздела: {sorted(known - sec_ids)}, разделы без блока: {sorted(sec_ids - known)}")
+    stray = sorted(({q["block"] for q in questions} | {i["block"] for i in interview["items"]}) - known)
     if stray:
         raise SystemExit(f"вопросы ссылаются на несуществующие блоки: {stray}")
 
@@ -59,6 +63,7 @@ def main():
         "library": library,
         "tracks": tracks,
         "route": route,
+        "interview": interview,
     }
     blob = json.dumps(payload, ensure_ascii=False, separators=(",", ":")).replace("</script", "<\\/script")
     page = TEMPLATE.read_text(encoding="utf-8").replace("__DATA__", blob)
@@ -72,7 +77,7 @@ def main():
     materials |= {i["u"] for stage in library.get("roadmap", []) for i in stage["items"]}
     materials |= {i["u"] for g in library.get("catalog", {}).get("groups", []) for i in g["items"]}
 
-    print(f"блоков: {len(blocks)} · вопросов: {len(questions)} · разделов: {len(sections)} · терминов: {terms}")
+    print(f"блоков: {len(blocks)} · вопросов: {len(questions)} · разделов: {len(sections)} · терминов: {terms} · собеседование: {len(interview['items'])}")
     print(f"треков: {len(tracks['tracks'])} · этапов: {len(route['stages'])} · материалов: {len(materials)}")
     print(f"страница: {'перезаписана' if page != previous else 'без изменений'}, {round(len(page.encode('utf-8')) / 1024, 1)} kb")
     return 0

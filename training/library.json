@@ -14,7 +14,7 @@
    "items": [
     {
      "t": "MIT 6.042J — Mathematics for Computer Science",
-     "u": "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2010/",
+     "u": "https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/",
      "k": "учебник",
      "n": "Вероятность, матожидание, отклонение от среднего, графы и асимптотика."
     },
@@ -744,7 +744,7 @@
      "n": "Подробный разбор архитектуры с презентацией, уровень выше вводного."
     },
     {
-     "t": "Deep Learning School — Лекция. Контестные эмбеддинги. Word2Vec",
+     "t": "Deep Learning School — Лекция. Контекстные эмбеддинги. Word2Vec",
      "u": "https://www.youtube.com/watch?v=WbtQzAvhnRI",
      "k": "видео",
      "lang": "ru",
@@ -1119,6 +1119,253 @@
  "catalog": {
   "intro": "Полный перенос awesome-artificial-intelligence: все 83 позиции роадмапа, сгруппированные как в оригинале, с пометкой, какому блоку тренажёра соответствует группа. Плюс полная программа курса Visual GenAI: 12 лекций и 7 практик.",
   "groups": [
+   {
+    "title": "Учебник по ML от ШАД Яндекса",
+    "blocks": [
+     "AC",
+     "T",
+     "L",
+     "X",
+     "P",
+     "M",
+     "Q",
+     "Y"
+    ],
+    "items": [
+     {
+      "t": "Учебник целиком",
+      "u": "https://education.yandex.ru/handbook/ml",
+      "k": "учебник",
+      "lang": "ru",
+      "n": "Официальная версия на сайте Яндекс Образования. Ниже те же главы из открытого репозитория ШАД, лицензия MIT."
+     },
+     {
+      "t": "Линейные модели",
+      "u": "https://yandexdataschool.gitlab.io/ml-handbook/chapters/linear_models/intro",
+      "k": "учебник",
+      "lang": "ru",
+      "n": "МНК, регуляризация L1 и L2, логистическая регрессия, SVM, линейная классификация с нуля и с выводом формул."
+     },
+     {
+      "t": "Метрические алгоритмы",
+      "u": "https://yandexdataschool.gitlab.io/ml-handbook/chapters/metric_based/intro",
+      "k": "учебник",
+      "lang": "ru",
+      "n": "kNN, выбор метрики и почему масштаб признаков решает, кто будет соседом."
+     },
+     {
+      "t": "Решающие деревья",
+      "u": "https://yandexdataschool.gitlab.io/ml-handbook/chapters/decision_tree/intro",
+      "k": "учебник",
+      "lang": "ru",
+      "n": "Критерии разбиения, жадное построение, переобучение и стрижка."
+     },
+     {
+      "t": "Ансамбли",
+      "u": "https://yandexdataschool.gitlab.io/ml-handbook/chapters/ensembles/intro",
+      "k": "учебник",
+      "lang": "ru",
+      "n": "Бэггинг, случайный лес, разложение ошибки ансамбля, стекинг."
+     },
+     {
+      "t": "Градиентный бустинг",
+      "u": "https://yandexdataschool.gitlab.io/ml-handbook/chapters/grad_boost/intro",
+      "k": "учебник",
+      "lang": "ru",
+      "n": "Бустинг как градиентный спуск в пространстве функций, XGBoost, LightGBM, CatBoost."
+     },
+     {
+      "t": "Метрики классификации и регрессии",
+      "u": "https://yandexdataschool.gitlab.io/ml-handbook/chapters/model_evaluation/intro",
+      "k": "учебник",
+      "lang": "ru",
+      "n": "Точность, полнота, F-мера, ROC-AUC, PR-кривая, метрики регрессии и когда какую брать."
+     },
+     {
+      "t": "Кросс-валидация",
+      "u": "https://yandexdataschool.gitlab.io/ml-handbook/chapters/cross_validation/intro",
+      "k": "учебник",
+      "lang": "ru",
+      "n": "Hold-out, k-fold, стратификация, групповые и временные разбиения, утечки при валидации."
+     },
+     {
+      "t": "Подбор гиперпараметров",
+      "u": "https://yandexdataschool.gitlab.io/ml-handbook/chapters/hyperparameters_tuning/intro",
+      "k": "учебник",
+      "lang": "ru",
+      "n": "Сетка, случайный поиск, байесовская оптимизация, TPE, ранняя остановка."
+     },
+     {
+      "t": "Первое знакомство с вероятностными моделями",
+      "u": "https://yandexdataschool.gitlab.io/ml-handbook/chapters/prob_intro/intro",
+      "k": "учебник",
+      "lang": "ru",
+      "n": "Модель как распределение, правдоподобие, связь функций потерь с шумом в данных."
+     },
+     {
+      "t": "Как оценивать вероятности",
+      "u": "https://yandexdataschool.gitlab.io/ml-handbook/chapters/prob_calibration/intro",
+      "k": "учебник",
+      "lang": "ru",
+      "n": "Калибровка, Platt scaling, изотоническая регрессия, кривые надёжности."
+     },
+     {
+      "t": "Байесовский подход к оцениванию",
+      "u": "https://yandexdataschool.gitlab.io/ml-handbook/chapters/prob_bayes/bayes",
+      "k": "учебник",
+      "lang": "ru",
+      "n": "Априорное и апостериорное распределения, MAP, связь с регуляризацией."
+     },
+     {
+      "t": "Первое знакомство с полносвязными нейросетями",
+      "u": "https://yandexdataschool.gitlab.io/ml-handbook/chapters/neural_nets/intro",
+      "k": "учебник",
+      "lang": "ru",
+      "n": "Слои, нелинейности, почему глубина помогает."
+     },
+     {
+      "t": "Метод обратного распространения ошибки",
+      "u": "https://yandexdataschool.gitlab.io/ml-handbook/chapters/neural_nets/backprop",
+      "k": "учебник",
+      "lang": "ru",
+      "n": "Граф вычислений, цепное правило в матричной форме, затухание градиентов."
+     },
+     {
+      "t": "Тонкости обучения нейросетей",
+      "u": "https://yandexdataschool.gitlab.io/ml-handbook/chapters/neural_nets/training",
+      "k": "учебник",
+      "lang": "ru",
+      "n": "Инициализация, нормализации, dropout, оптимизаторы, расписание learning rate."
+     },
+     {
+      "t": "Кластеризация",
+      "u": "https://yandexdataschool.gitlab.io/ml-handbook/chapters/clustering/intro",
+      "k": "учебник",
+      "lang": "ru",
+      "n": "k-means, DBSCAN, иерархическая кластеризация, как оценивать кластеры без разметки."
+     },
+     {
+      "t": "Bias-variance decomposition",
+      "u": "https://yandexdataschool.gitlab.io/ml-handbook/chapters/ml_theory/bias_variance_decomposition",
+      "k": "учебник",
+      "lang": "ru",
+      "n": "Разложение ошибки на смещение, разброс и шум, что из этого лечит ансамбль."
+     },
+     {
+      "t": "Методы оптимизации в ML",
+      "u": "https://yandexdataschool.gitlab.io/ml-handbook/chapters/optimization/intro",
+      "k": "учебник",
+      "lang": "ru",
+      "n": "Градиентный спуск, SGD, моментум, Adam и чем они отличаются на практике."
+     },
+     {
+      "t": "Сходимость SGD",
+      "u": "https://yandexdataschool.gitlab.io/ml-handbook/chapters/optimization/sgd_convergence",
+      "k": "учебник",
+      "lang": "ru",
+      "n": "Почему шаг надо уменьшать и как размер батча влияет на шум градиента."
+     },
+     {
+      "t": "Матричное дифференцирование",
+      "u": "https://yandexdataschool.gitlab.io/ml-handbook/chapters/matrix_diff/intro",
+      "k": "учебник",
+      "lang": "ru",
+      "n": "Теормин: как брать производные по векторам и матрицам без покомпонентной возни."
+     }
+    ]
+   },
+   {
+    "title": "GitHub: подготовка к собеседованию",
+    "blocks": [
+     "AD",
+     "L",
+     "X",
+     "Y"
+    ],
+    "items": [
+     {
+      "t": "Chip Huyen — Introduction to Machine Learning Interviews",
+      "u": "https://github.com/chiphuyen/ml-interviews-book",
+      "k": "книга",
+      "lang": "en",
+      "n": "Как устроен найм в ML-командах и больше 200 вопросов: математика, данные и выборки, метрики, классический ML, обучение сетей. Хороший список для самопроверки после блоков L, X и Y."
+     },
+     {
+      "t": "AIMLInterviews (бывший Machine-Learning-Interviews)",
+      "u": "https://github.com/alirezadir/AIMLInterviews",
+      "k": "руководство",
+      "lang": "en",
+      "n": "План подготовки: широта и глубина ML, системный дизайн с разборами, LLM и агенты, поведенческая часть. Каркас ответа на system design совпадает с блоком AD."
+     },
+     {
+      "t": "Minimum Viable Study Plan for ML Interviews",
+      "u": "https://github.com/khangich/machine-learning-interview",
+      "k": "руководство",
+      "lang": "en",
+      "n": "Минимальный план для собеседований в крупных компаниях: ML system design, статистика и A/B, основы ML и DL, SQL и кодинг."
+     },
+     {
+      "t": "MLQuestions",
+      "u": "https://github.com/andrewekhalel/MLQuestions",
+      "k": "список",
+      "lang": "en",
+      "n": "69 вопросов с ответами: основы, ансамбли, данные, оптимизация, глубокое обучение, CV, понижение размерности, оценка моделей. Отсюда взяты темы NMS, автоэнкодера и проклятия размерности."
+     },
+     {
+      "t": "A Curated List of ML System Design Case Studies",
+      "u": "https://github.com/Engineer1999/A-Curated-List-of-ML-System-Design-Case-Studies",
+      "k": "список",
+      "lang": "en",
+      "n": "Больше 300 разборов ML-систем от 80 компаний: рекомендации, поиск, антифрод, цены, LLM. Удобно читать по одному разбору в день после блока AD."
+     },
+     {
+      "t": "applied-ml",
+      "u": "https://github.com/eugeneyan/applied-ml",
+      "k": "список",
+      "lang": "en",
+      "n": "Статьи и техблоги компаний о ML в проде, разложенные по задачам: данные, признаки, валидация, рекомендации, поиск, A/B, MLOps."
+     }
+    ]
+   },
+   {
+    "title": "GitHub: практика кода и курсы",
+    "blocks": [
+     "Y",
+     "S",
+     "W",
+     "X"
+    ],
+    "items": [
+     {
+      "t": "Tensor Puzzles",
+      "u": "https://github.com/srush/Tensor-Puzzles",
+      "k": "ноутбук",
+      "lang": "en",
+      "n": "21 головоломка: переписать функции PyTorch через broadcasting без циклов. Лучшая разминка перед задачами на attention и маски из режима «Собеседование»."
+     },
+     {
+      "t": "LLMs from Scratch",
+      "u": "https://github.com/rasbt/LLMs-from-scratch",
+      "k": "код",
+      "lang": "en",
+      "n": "Код книги Себастьяна Рашки: GPT-подобная модель на PyTorch от токенизатора и внимания до предобучения и дообучения."
+     },
+     {
+      "t": "LLM Course",
+      "u": "https://github.com/mlabonne/llm-course",
+      "k": "курс",
+      "lang": "en",
+      "n": "Дорожная карта по LLM с ноутбуками: основы, дообучение, квантование, RAG, агенты, развёртывание."
+     },
+     {
+      "t": "Машинное обучение на ФКН ВШЭ",
+      "u": "https://github.com/esokolov/ml-course-hse",
+      "k": "курс",
+      "lang": "ru",
+      "n": "Курс Евгения Соколова на русском: конспекты лекций, семинары, домашние задания и записи. Дополняет учебник ШАД практикой по тем же темам."
+     }
+    ]
+   },
    {
     "title": "Книги",
     "blocks": [
@@ -1793,13 +2040,6 @@
       "k": "статья",
       "lang": "en",
       "n": "Оркестратор и воркеры, параллельный поиск, оценка, эксплуатационные уроки."
-     },
-     {
-      "t": "Factory",
-      "u": "https://github.com/owainlewis/factory",
-      "k": "инструмент",
-      "lang": "en",
-      "n": "Контрольная панель для планирования и координации агентов по репозиториям."
      }
     ]
    },
@@ -1812,84 +2052,84 @@
     "items": [
      {
       "t": "Неделя 1 — DDPM и denoising score matching",
-      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/week1_ddpm_dsm/ddpm_dsm_lecture.pdf",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/visual_genai_course_2026/week1_ddpm_dsm/ddpm_dsm_lecture.pdf",
       "k": "слайды",
       "lang": "en",
       "n": "Точка входа в диффузию. Есть лекция и семинар на русском."
      },
      {
       "t": "Неделя 2 — непрерывная диффузия: PF-ODE и SDE",
-      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/week2_continuous_time_diffusion/continuous_time_diffusion_lecture.pdf",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/visual_genai_course_2026/week2_continuous_time_diffusion/continuous_time_diffusion_lecture.pdf",
       "k": "слайды",
       "lang": "en",
       "n": "Непрерывное время: два эквивалентных взгляда на процесс."
      },
      {
       "t": "Неделя 3 — flow matching",
-      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/week3_flow_matching_and_solvers/flow_matching_lecture.pdf",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/visual_genai_course_2026/week3_flow_matching_and_solvers/flow_matching_lecture.pdf",
       "k": "слайды",
       "lang": "en",
       "n": "Связь flow matching с диффузией, современный стандарт обучения."
      },
      {
       "t": "Неделя 4 — эффективные солверы: DDIM и DPM-Solver",
-      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/week3_flow_matching_and_solvers/solvers_lecture.pdf",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/visual_genai_course_2026/week3_flow_matching_and_solvers/solvers_lecture.pdf",
       "k": "слайды",
       "lang": "en",
       "n": "Как уменьшить число шагов сэмплирования без потери качества."
      },
      {
       "t": "Неделя 5 — диффузия на практике",
-      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/week4_practical_dm/practical_dm_lecture.pdf",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/visual_genai_course_2026/week4_practical_dm/practical_dm_lecture.pdf",
       "k": "слайды",
       "lang": "en",
       "n": "Пространства, архитектуры, приёмы обучения и сэмплинга из продакшена."
      },
      {
       "t": "Неделя 6 — flow map модели (consistency, MeanFlow)",
-      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/week5_few_step_models_flow_maps/few_step_flow_map_lecture.pdf",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/visual_genai_course_2026/week5_few_step_models_flow_maps/few_step_flow_map_lecture.pdf",
       "k": "слайды",
       "lang": "en",
       "n": "Обучаемые интеграторы траектории ради быстрой генерации."
      },
      {
       "t": "Неделя 7 — distribution matching (DMD, ADD, SwD)",
-      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/week6_few_step_models_distribution_matching/distribution_matching_lecture.pdf",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/visual_genai_course_2026/week6_few_step_models_distribution_matching/distribution_matching_lecture.pdf",
       "k": "слайды",
       "lang": "en",
       "n": "Как генераторы за несколько шагов догоняют многошаговые по качеству."
      },
      {
       "t": "Неделя 8 — авторегрессионная визуальная генерация",
-      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/week7_visual_ar_models/visual_ar_models_lecture.pdf",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/visual_genai_course_2026/week7_visual_ar_models/visual_ar_models_lecture.pdf",
       "k": "слайды",
       "lang": "en",
       "n": "VQ-VAE и VQ-GAN, масштабные модели VAR и Switti, непрерывный AR."
      },
      {
       "t": "Неделя 9 — генерация видео",
-      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/week8_video_diffusion_and_efficient_genai/video_generation_and_efficient_genai_lecture.pdf",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/visual_genai_course_2026/week8_video_diffusion_and_efficient_genai/video_generation_and_efficient_genai_lecture.pdf",
       "k": "слайды",
       "lang": "en",
       "n": "Архитектуры, трудности и авторегрессионные видео-диффузионные модели."
      },
      {
       "t": "Неделя 10 — эффективные диффузионные модели",
-      "u": "https://github.com/dbaranchuk/VisualGenAI/tree/main/week8_video_diffusion_and_efficient_genai",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/tree/main/visual_genai_course_2026/week8_video_diffusion_and_efficient_genai",
       "k": "слайды",
       "lang": "en",
       "n": "Кэширование, разреженное внимание, квантование: оптимизации уровня модели."
      },
      {
       "t": "Неделя 11 — мультимодальная генерация и управление",
-      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/week9_multimodal_generation_and_conditioning/multimodal_generation_and_conditioning.pdf",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/visual_genai_course_2026/week9_multimodal_generation_and_conditioning/multimodal_generation_and_conditioning.pdf",
       "k": "слайды",
       "lang": "en",
       "n": "ControlNet, IP-Adapter и механизмы обусловливания."
      },
      {
       "t": "Неделя 12 — 3D-генерация",
-      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/week10_3d_generative_models/3d_generative_models_lecture.pdf",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/visual_genai_course_2026/week10_3d_generative_models/3d_generative_models_lecture.pdf",
       "k": "слайды",
       "lang": "en",
       "n": "Введение в 3D-моделирование и multi-view диффузию."
@@ -1904,56 +2144,56 @@
     "items": [
      {
       "t": "Практика 1 — DDPM и DSM",
-      "u": "https://github.com/dbaranchuk/VisualGenAI/tree/main/assignments/hw1_diffusion_fundamentals",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/tree/main/visual_genai_course_2026/assignments/hw1_diffusion_fundamentals",
       "k": "ноутбук",
       "lang": "en",
       "n": "Стартовый шаблон плюс task.pdf с постановкой."
      },
      {
       "t": "Практика 2 — DPM-Solver",
-      "u": "https://github.com/dbaranchuk/VisualGenAI/tree/main/assignments/hw2_diffusion_solvers",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/tree/main/visual_genai_course_2026/assignments/hw2_diffusion_solvers",
       "k": "ноутбук",
       "lang": "en",
       "n": "Эффективные солверы, с теоретической частью."
      },
      {
       "t": "Практика 3 — обучение flow matching",
-      "u": "https://github.com/dbaranchuk/VisualGenAI/tree/main/assignments/hw3_flow_matching",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/tree/main/visual_genai_course_2026/assignments/hw3_flow_matching",
       "k": "ноутбук",
       "lang": "en",
       "n": "Тренировка модели потоков с нуля."
      },
      {
       "t": "Практика 4 — flow map модели",
-      "u": "https://github.com/dbaranchuk/VisualGenAI/tree/main/assignments/hw4_flow_maps",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/tree/main/visual_genai_course_2026/assignments/hw4_flow_maps",
       "k": "ноутбук",
       "lang": "en",
       "n": "Быстрое сэмплирование через обучаемые интеграторы."
      },
      {
       "t": "Практика 5 — дистилляция ADD и MMD",
-      "u": "https://github.com/dbaranchuk/VisualGenAI/tree/main/assignments/hw5_distribution_matching",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/tree/main/visual_genai_course_2026/assignments/hw5_distribution_matching",
       "k": "ноутбук",
       "lang": "en",
       "n": "Сведение многошагового генератора к нескольким шагам."
      },
      {
       "t": "Практика 6 — MAR с flow-matching головой",
-      "u": "https://github.com/dbaranchuk/VisualGenAI/tree/main/assignments/hw6_masked_ar",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/tree/main/visual_genai_course_2026/assignments/hw6_masked_ar",
       "k": "ноутбук",
       "lang": "en",
       "n": "Авторегрессионная генерация в непрерывном пространстве."
      },
      {
       "t": "Практика 7 — сэмплирование AR video diffusion",
-      "u": "https://github.com/dbaranchuk/VisualGenAI/tree/main/assignments/hw7_video_ar_diffusion",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/tree/main/visual_genai_course_2026/assignments/hw7_video_ar_diffusion",
       "k": "ноутбук",
       "lang": "en",
       "n": "Генерация видео авторегрессионной диффузией."
      },
      {
       "t": "Экзаменационные вопросы курса",
-      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/exam/exam_topics_visual_genai.md",
+      "u": "https://github.com/dbaranchuk/VisualGenAI/blob/main/visual_genai_course_2026/exam/exam_topics_visual_genai.md",
       "k": "список",
       "lang": "en",
       "n": "Полный перечень тем к экзамену: удобно как чек-лист по курсу."

@@ -1,0 +1,34 @@
+name: check
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  training:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Сборка страницы
+        run: python tools_build_training_artifact.py
+      - name: Собранный HTML совпадает с источниками
+        run: |
+          if ! git diff --quiet -- ai_engineer_training.html; then
+            echo "::error::ai_engineer_training.html устарел: правьте training/*.json или template.html и запустите сборку"
+            git diff --stat -- ai_engineer_training.html
+            exit 1
+          fi
+      - name: Проверка
+        run: python tools_check_training_artifact.py
+      - name: Синтаксис JS в странице
+        run: |
+          python - <<'PY'
+          import re, pathlib
+          page = pathlib.Path("ai_engineer_training.html").read_text(encoding="utf-8")
+          scripts = re.findall(r"<script>(.*?)</script>", page, re.S)
+          pathlib.Path("page.js").write_text("\n".join(scripts), encoding="utf-8")
+          PY
+          node --check page.js

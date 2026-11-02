@@ -19,7 +19,8 @@
   --accent: #0B6E63;
   --accent-ink: #08544C;
   --accent-soft: #D6EBE7;
-  --ok: #1B7A3E;
+  --on-accent: #FFFFFF;
+  --ok: #18723A;
   --ok-soft: #DCEEE2;
   --bad: #A8322B;
   --bad-soft: #F6E2E0;
@@ -44,6 +45,7 @@
     --accent: #2FC3AE;
     --accent-ink: #7FE3D3;
     --accent-soft: #0E2F2C;
+    --on-accent: #05201C;
     --ok: #52C77E;
     --ok-soft: #10281A;
     --bad: #E9877E;
@@ -65,6 +67,7 @@
   --accent: #2FC3AE;
   --accent-ink: #7FE3D3;
   --accent-soft: #0E2F2C;
+  --on-accent: #05201C;
   --ok: #52C77E;
   --ok-soft: #10281A;
   --bad: #E9877E;
@@ -116,7 +119,7 @@ a { color: var(--accent); text-underline-offset: 3px; }
   justify-content: space-between;
   gap: 28px;
   flex-wrap: wrap;
-  padding-block: 26px 18px;
+  padding-block: 28px 20px;
 }
 
 .identity { display: grid; gap: 8px; min-width: 0; }
@@ -124,7 +127,7 @@ a { color: var(--accent); text-underline-offset: 3px; }
 .wordmark {
   font-family: var(--display);
   font-size: clamp(22px, 3.4vw, 30px);
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: -.02em;
   line-height: 1.1;
   text-wrap: balance;
@@ -133,7 +136,7 @@ a { color: var(--accent); text-underline-offset: 3px; }
 .counters {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px 18px;
+  gap: 8px 20px;
   font-family: var(--mono);
   font-size: 12px;
   font-variant-numeric: tabular-nums;
@@ -142,21 +145,21 @@ a { color: var(--accent); text-underline-offset: 3px; }
   color: var(--muted);
 }
 
-.counters b { color: var(--ink); font-weight: 700; }
+.counters b { color: var(--ink); font-weight: 600; }
 
 .modes {
   display: flex;
   gap: 4px;
   padding: 4px;
   border: 1px solid var(--rule);
-  border-radius: 3px;
+  border-radius: 8px;
   background: var(--ground);
 }
 
 .mode {
-  min-height: 38px;
-  padding: 7px 16px;
-  border-radius: 2px;
+  min-height: 40px;
+  padding: 8px 16px;
+  border-radius: 8px;
   font-size: 14px;
   font-weight: 600;
   color: var(--muted);
@@ -164,13 +167,10 @@ a { color: var(--accent); text-underline-offset: 3px; }
 
 .mode[aria-pressed="true"] {
   background: var(--accent);
-  color: #fff;
+  color: var(--on-accent);
 }
 
-:root[data-theme="dark"] .mode[aria-pressed="true"],
-:root:not([data-theme="light"]) .mode[aria-pressed="true"] { color: #05201C; }
-
-main { padding-block: 34px 72px; }
+main { padding-block: 36px 72px; }
 
 .eyebrow, .meta-label {
   font-family: var(--mono);
@@ -181,7 +181,7 @@ main { padding-block: 34px 72px; }
   color: var(--muted);
 }
 
-.view-head { display: grid; gap: 10px; max-width: 74ch; margin-bottom: 26px; }
+.view-head { display: grid; gap: 12px; max-width: 74ch; margin-bottom: 28px; }
 
 .view-title {
   font-family: var(--display);
@@ -198,14 +198,14 @@ main { padding-block: 34px 72px; }
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
-  padding-block: 14px;
+  gap: 12px;
+  padding-block: 16px;
   border-block: 1px solid var(--rule-soft);
   margin-bottom: 24px;
 }
 
 .chip {
-  padding: 6px 13px;
+  padding: 8px 12px;
   border: 1px solid var(--rule);
   border-radius: 999px;
   font-family: var(--mono);
@@ -219,7 +219,7 @@ main { padding-block: 34px 72px; }
   border-color: var(--accent);
   background: var(--accent-soft);
   color: var(--accent-ink);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .resume-strip {
@@ -227,12 +227,12 @@ main { padding-block: 34px 72px; }
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
-  padding: 14px 18px;
-  margin-bottom: 26px;
+  gap: 16px;
+  padding: 16px 20px;
+  margin-bottom: 28px;
   border: 1px solid var(--accent);
   border-left-width: 3px;
-  border-radius: 3px;
+  border-radius: 8px;
   background: var(--accent-soft);
   color: var(--accent-ink);
   font-family: var(--mono);
@@ -242,9 +242,9 @@ main { padding-block: 34px 72px; }
 
 .btn {
   min-height: 40px;
-  padding: 9px 16px;
+  padding: 8px 16px;
   border: 1px solid var(--rule);
-  border-radius: 3px;
+  border-radius: 8px;
   background: var(--surface);
   font-size: 14px;
   font-weight: 600;
@@ -253,23 +253,20 @@ main { padding-block: 34px 72px; }
 .btn-primary {
   border-color: var(--accent);
   background: var(--accent);
-  color: #fff;
+  color: var(--on-accent);
 }
 
-:root[data-theme="dark"] .btn-primary,
-:root:not([data-theme="light"]) .btn-primary { color: #05201C; }
+.btn-ghost { border-color: transparent; color: var(--accent); padding-inline: 8px; }
 
-.btn-ghost { border-color: transparent; color: var(--accent); padding-inline: 6px; }
+.route { display: grid; gap: 28px; }
 
-.route { display: grid; gap: 26px; }
-
-.stage-band { display: grid; gap: 10px; }
+.stage-band { display: grid; gap: 12px; }
 
 .stage-head {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 14px;
+  gap: 16px;
   flex-wrap: wrap;
   padding-bottom: 8px;
   border-bottom: 1px solid var(--rule);
@@ -299,7 +296,7 @@ main { padding-block: 34px 72px; }
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
   gap: 1px;
-  background: var(--rule-soft);
+  background: var(--surface);
   border: 1px solid var(--rule-soft);
 }
 
@@ -308,12 +305,13 @@ main { padding-block: 34px 72px; }
   grid-template-columns: 46px minmax(0, 1fr);
   gap: 0 16px;
   align-content: start;
-  padding: 18px;
+  padding: 20px;
   background: var(--surface);
   text-align: left;
   min-height: 100%;
 }
 
+.block-card, .biz-item { box-shadow: 0 0 0 1px var(--rule-soft); }
 .block-card:hover, .block-card:focus-visible { background: var(--surface-2); }
 
 .block-sigil {
@@ -323,10 +321,10 @@ main { padding-block: 34px 72px; }
   width: 46px;
   height: 46px;
   border: 1px solid var(--rule);
-  border-radius: 2px;
+  border-radius: 8px;
   font-family: var(--display);
   font-size: 19px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--accent-ink);
   background: var(--accent-soft);
 }
@@ -337,7 +335,7 @@ main { padding-block: 34px 72px; }
 .block-stats {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px 14px;
+  gap: 4px 16px;
   margin-top: 12px;
   font-family: var(--mono);
   font-size: 12px;
@@ -348,7 +346,7 @@ main { padding-block: 34px 72px; }
 .score-pill {
   padding: 1px 8px;
   border-radius: 999px;
-  font-weight: 700;
+  font-weight: 600;
   background: var(--surface-2);
   color: var(--ink);
 }
@@ -410,10 +408,10 @@ main { padding-block: 34px 72px; }
   display: grid;
   grid-template-columns: 30px minmax(0, 1fr) 22px;
   align-items: start;
-  gap: 14px;
-  padding: 14px 16px;
+  gap: 16px;
+  padding: 16px 16px;
   border: 1px solid var(--rule);
-  border-radius: 3px;
+  border-radius: 8px;
   background: var(--surface);
   text-align: left;
   font-size: 15.5px;
@@ -429,14 +427,14 @@ main { padding-block: 34px 72px; }
   height: 30px;
   margin-top: -2px;
   border: 1px solid var(--rule);
-  border-radius: 2px;
+  border-radius: 8px;
   font-family: var(--mono);
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--muted);
 }
 
-.option-mark { font-family: var(--mono); font-weight: 700; text-align: center; }
+.option-mark { font-family: var(--mono); font-weight: 600; text-align: center; }
 
 .option.is-right { border-color: var(--ok); background: var(--ok-soft); }
 .option.is-right .option-key, .option.is-right .option-mark { color: var(--ok); border-color: var(--ok); }
@@ -452,10 +450,10 @@ main { padding-block: 34px 72px; }
 
 .note {
   display: grid;
-  gap: 6px;
-  padding: 14px 16px;
+  gap: 8px;
+  padding: 16px 16px;
   border-left: 3px solid var(--accent);
-  border-radius: 0 3px 3px 0;
+  border-radius: 0 8px 8px 0;
   background: var(--accent-soft);
   color: var(--ink);
   font-size: 14.5px;
@@ -470,7 +468,7 @@ main { padding-block: 34px 72px; }
   color: var(--accent-ink);
 }
 
-.exam-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end; }
+.exam-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: flex-end; }
 
 /* result */
 .result { display: grid; gap: 28px; max-width: 960px; }
@@ -482,7 +480,7 @@ main { padding-block: 34px 72px; }
   align-items: center;
   padding: 24px;
   border: 1px solid var(--rule);
-  border-radius: 3px;
+  border-radius: 8px;
   background: var(--surface);
 }
 
@@ -490,15 +488,15 @@ main { padding-block: 34px 72px; }
   display: grid;
   justify-items: center;
   gap: 2px;
-  padding: 14px 22px;
+  padding: 16px 24px;
   border: 2px solid var(--accent);
-  border-radius: 3px;
+  border-radius: 8px;
   color: var(--accent-ink);
   font-family: var(--mono);
   font-variant-numeric: tabular-nums;
 }
 
-.result-score b { font-size: 34px; line-height: 1; font-weight: 700; }
+.result-score b { font-size: 34px; line-height: 1; font-weight: 600; }
 .result-score span { font-size: 12px; letter-spacing: .1em; }
 
 .table-scroll { overflow-x: auto; border: 1px solid var(--rule-soft); }
@@ -506,7 +504,7 @@ main { padding-block: 34px 72px; }
 table { width: 100%; border-collapse: collapse; background: var(--surface); }
 
 th {
-  padding: 11px 14px;
+  padding: 12px 16px;
   border-bottom: 1px solid var(--rule);
   font-family: var(--mono);
   font-size: 11px;
@@ -519,7 +517,7 @@ th {
 }
 
 td {
-  padding: 12px 14px;
+  padding: 12px 16px;
   border-bottom: 1px solid var(--rule-soft);
   font-size: 14.5px;
   vertical-align: top;
@@ -535,7 +533,7 @@ details.miss > summary {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 14px 2px;
+  padding: 16px 2px;
   cursor: pointer;
   list-style: none;
   font-weight: 500;
@@ -556,14 +554,14 @@ details.miss[open] > summary::after { content: "–"; }
   align-items: start;
 }
 
-.ref-nav { position: sticky; top: 18px; display: grid; gap: 10px; }
+.ref-nav { position: sticky; top: 18px; display: grid; gap: 12px; }
 
 .ref-search {
   width: 100%;
-  min-height: 42px;
-  padding: 9px 12px;
+  min-height: 44px;
+  padding: 8px 12px;
   border: 1px solid var(--rule);
-  border-radius: 3px;
+  border-radius: 8px;
   background: var(--surface);
   font-size: 15px;
 }
@@ -576,7 +574,7 @@ details.miss[open] > summary::after { content: "–"; }
   display: grid;
   grid-template-columns: 22px minmax(0, 1fr);
   gap: 8px;
-  padding: 7px 8px;
+  padding: 8px 8px;
   border-left: 2px solid var(--rule-soft);
   color: var(--muted);
   font-size: 13.5px;
@@ -591,13 +589,15 @@ details.miss[open] > summary::after { content: "–"; }
 
 .section {
   display: grid;
-  gap: 22px;
+  gap: 24px;
   padding-bottom: 36px;
   border-bottom: 1px solid var(--rule);
   scroll-margin-top: 20px;
 }
 
 .section-head { display: grid; gap: 8px; }
+.section, .sub, .theory, .practice, .practice-item { grid-template-columns: minmax(0, 1fr); min-width: 0; }
+.section p, .drill, .task-text, .flash-def, .flash-use, .verdict-why, .question, .option { overflow-wrap: anywhere; }
 
 .section-title {
   display: flex;
@@ -615,13 +615,13 @@ details.miss[open] > summary::after { content: "–"; }
 
 .sub {
   display: grid;
-  gap: 14px;
+  gap: 16px;
 }
 
 .sub-label {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   font-family: var(--mono);
   font-size: 11px;
   font-weight: 500;
@@ -632,19 +632,19 @@ details.miss[open] > summary::after { content: "–"; }
 
 .sub-label::after { content: ""; flex: 1; height: 1px; background: var(--rule-soft); }
 
-.theory { display: grid; gap: 18px; }
-.theory-item { display: grid; gap: 5px; max-width: 74ch; }
+.theory { display: grid; gap: 20px; }
+.theory-item { display: grid; gap: 4px; max-width: 74ch; }
 .theory-item h4 { font-size: 16px; font-weight: 600; line-height: 1.35; }
 .theory-item p { font-size: 15.5px; line-height: 1.62; }
 
-.practice { display: grid; gap: 14px; }
+.practice { display: grid; gap: 16px; }
 
 .practice-item {
   display: grid;
   gap: 8px;
-  padding: 16px 18px;
+  padding: 16px 20px;
   border: 1px solid var(--rule-soft);
-  border-radius: 3px;
+  border-radius: 8px;
   background: var(--surface);
 }
 
@@ -653,10 +653,10 @@ details.miss[open] > summary::after { content: "–"; }
 
 pre {
   margin: 0;
-  padding: 14px 16px;
+  padding: 16px 16px;
   overflow-x: auto;
   border: 1px solid var(--rule-soft);
-  border-radius: 3px;
+  border-radius: 8px;
   background: var(--ground);
   font-family: var(--mono);
   font-size: 13px;
@@ -664,8 +664,8 @@ pre {
   tab-size: 2;
 }
 
-.biz { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1px; background: var(--rule-soft); border: 1px solid var(--rule-soft); }
-.biz-item { display: grid; gap: 6px; padding: 16px 18px; background: var(--surface); }
+.biz { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1px; background: var(--surface); border: 1px solid var(--rule-soft); }
+.biz-item { display: grid; gap: 8px; padding: 16px 20px; background: var(--surface); }
 .biz-item h4 { font-size: 15px; font-weight: 600; }
 .biz-item p { font-size: 14.5px; line-height: 1.55; color: var(--muted); }
 
@@ -674,11 +674,11 @@ pre {
 .term-name { font-family: var(--mono); font-size: 13px; line-height: 1.45; }
 .term-use { color: var(--muted); }
 
-.pitfalls { display: grid; gap: 9px; padding: 16px 18px; border-left: 3px solid var(--bad); border-radius: 0 3px 3px 0; background: var(--bad-soft); }
-.pitfall { display: grid; grid-template-columns: 14px minmax(0, 1fr); gap: 10px; font-size: 14.5px; line-height: 1.5; }
-.pitfall::before { content: "×"; font-family: var(--mono); font-weight: 700; color: var(--bad); }
+.pitfalls { display: grid; gap: 8px; padding: 16px 20px; border-left: 3px solid var(--bad); border-radius: 0 8px 8px 0; background: var(--bad-soft); }
+.pitfall { display: grid; grid-template-columns: 14px minmax(0, 1fr); gap: 12px; font-size: 14.5px; line-height: 1.5; }
+.pitfall::before { content: "×"; font-family: var(--mono); font-weight: 600; color: var(--bad); }
 
-.drill { display: grid; gap: 6px; padding: 16px 18px; border: 1px dashed var(--accent); border-radius: 3px; background: var(--accent-soft); font-size: 15px; line-height: 1.58; }
+.drill { display: grid; gap: 8px; padding: 16px 20px; border: 1px dashed var(--accent); border-radius: 8px; background: var(--accent-soft); font-size: 15px; line-height: 1.58; }
 
 .links { display: grid; gap: 1px; background: var(--rule-soft); border: 1px solid var(--rule-soft); }
 
@@ -686,7 +686,7 @@ pre {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 8px 16px;
-  padding: 13px 16px;
+  padding: 12px 16px;
   background: var(--surface);
   align-items: baseline;
 }
@@ -707,7 +707,7 @@ pre {
 /* library */
 .stages { display: grid; gap: 1px; background: var(--rule-soft); border: 1px solid var(--rule-soft); }
 
-.stage { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 0 20px; padding: 22px; background: var(--surface); }
+.stage { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 0 20px; padding: 24px; background: var(--surface); }
 
 .stage-num {
   grid-row: span 2;
@@ -721,23 +721,23 @@ pre {
   background: var(--accent-soft);
   font-family: var(--display);
   font-size: 22px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
-.stage-head { display: grid; gap: 6px; }
+.stage-head { display: grid; gap: 8px; }
 .stage-head h3 { font-family: var(--display); font-size: 19px; font-weight: 600; letter-spacing: -.01em; }
 .stage-head p { color: var(--muted); font-size: 15px; max-width: 70ch; }
-.stage-blocks { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
+.stage-blocks { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px; }
 .stage-items { margin-top: 16px; display: grid; gap: 1px; background: var(--rule-soft); border: 1px solid var(--rule-soft); }
 
-.sources { display: grid; gap: 14px; margin-top: 34px; }
+.sources { display: grid; gap: 16px; margin-top: 36px; }
 
-.video-group { display: grid; gap: 10px; }
+.video-group { display: grid; gap: 12px; }
 
 .video-head {
   display: flex;
   align-items: baseline;
-  gap: 10px;
+  gap: 12px;
   font-size: 16px;
   font-weight: 600;
 }
@@ -745,9 +745,9 @@ pre {
 .video-head span {
   font-family: var(--mono);
   font-size: 12px;
-  font-weight: 700;
-  padding: 2px 7px;
-  border-radius: 2px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 8px;
   background: var(--accent-soft);
   color: var(--accent-ink);
 }
@@ -755,8 +755,8 @@ pre {
 .empty { padding: 28px 0; color: var(--muted); font-size: 15px; }
 
 .footer-note {
-  margin-top: 46px;
-  padding-top: 18px;
+  margin-top: 48px;
+  padding-top: 20px;
   border-top: 1px solid var(--rule-soft);
   color: var(--muted);
   font-family: var(--mono);
@@ -767,8 +767,8 @@ pre {
 code.inline {
   font-family: var(--mono);
   font-size: .92em;
-  padding: 1px 5px;
-  border-radius: 2px;
+  padding: 1px 4px;
+  border-radius: 8px;
   background: var(--surface-2);
   overflow-wrap: anywhere;
 }
@@ -792,9 +792,9 @@ code.inline {
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
   gap: 1px;
-  margin-bottom: 30px;
+  margin-bottom: 32px;
   border: 1px solid var(--rule);
-  border-radius: 3px;
+  border-radius: 8px;
   background: var(--rule);
 }
 
@@ -808,7 +808,7 @@ code.inline {
   gap: 4px 12px;
   font-family: var(--display);
   font-size: clamp(40px, 7vw, 64px);
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: -.03em;
   line-height: 1;
   font-variant-numeric: tabular-nums;
@@ -819,7 +819,7 @@ code.inline {
 .progress-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px 18px;
+  gap: 4px 20px;
   font-family: var(--mono);
   font-size: 12px;
   letter-spacing: .04em;
@@ -827,7 +827,7 @@ code.inline {
   color: var(--muted);
 }
 
-.progress-meta b { color: var(--ink); font-weight: 700; }
+.progress-meta b { color: var(--ink); font-weight: 600; }
 
 .next-title { font-family: var(--display); font-size: 19px; font-weight: 600; line-height: 1.3; text-wrap: balance; }
 .next-need { font-size: 14.5px; color: var(--accent-ink); }
@@ -842,7 +842,7 @@ code.inline {
   display: grid;
   grid-template-columns: 30px 36px minmax(0, 1fr) auto;
   align-items: center;
-  gap: 8px 14px;
+  gap: 8px 16px;
   padding: 12px 16px;
   background: var(--surface);
 }
@@ -855,10 +855,10 @@ code.inline {
   width: 36px;
   height: 36px;
   border: 1px solid var(--rule);
-  border-radius: 2px;
+  border-radius: 8px;
   font-family: var(--display);
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--accent-ink);
   background: var(--accent-soft);
 }
@@ -888,7 +888,7 @@ code.inline {
 .step-row[data-state="done"] .step-state { color: var(--ok); }
 .step-row[data-state="active"] .step-state { color: var(--warn); }
 
-.step-marks { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; }
+.step-marks { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
 
 .mark { cursor: pointer; }
 .mark[aria-pressed="true"] { border-color: var(--ok); background: var(--ok-soft); color: var(--ok); }
@@ -903,6 +903,306 @@ code.inline {
 
 .sync-note { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
 
+/* today */
+.today-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 1px;
+  margin-bottom: 28px;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: var(--rule);
+  overflow: hidden;
+}
+
+.hero-main, .hero-side { display: grid; gap: 16px; align-content: start; padding: 28px; background: var(--surface); }
+.hero-main { background: var(--accent-soft); }
+.hero-title { font-family: var(--display); font-size: clamp(22px, 3.4vw, 30px); font-weight: 600; line-height: 1.2; letter-spacing: -.02em; text-wrap: balance; }
+.hero-sub { font-size: 15px; color: var(--accent-ink); max-width: 60ch; }
+.hero-main .exam-actions { justify-content: flex-start; }
+.btn-big { padding: 16px 24px; font-size: 16px; font-weight: 600; }
+
+.pace { display: inline-flex; align-items: center; gap: 8px; justify-self: start; padding: 4px 12px; border-radius: 999px; font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: .04em; }
+.pace.is-good { background: var(--ok-soft); color: var(--ok); }
+.pace.is-mid { background: var(--warn-soft); color: var(--warn); }
+.pace.is-bad { background: var(--bad-soft); color: var(--bad); }
+
+.stat-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.stat { display: grid; gap: 2px; }
+.stat b { font-family: var(--display); font-size: 28px; font-weight: 600; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.stat span { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+
+.week-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.week-chip { display: inline-flex; gap: 8px; align-items: center; padding: 4px 12px; border: 1px solid var(--rule); border-radius: 999px; font-size: 13px; background: var(--surface); }
+.week-chip b { font-family: var(--mono); font-size: 12px; color: var(--accent); }
+.week-chip[data-done="true"] { border-color: var(--ok); color: var(--ok); }
+.week-chip[data-done="true"] b { color: var(--ok); }
+
+.tasks { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-bottom: 28px; }
+.task {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 8px;
+  padding: 20px;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: var(--surface);
+  transition: transform .15s ease, border-color .15s ease;
+}
+.task:hover { transform: translateY(-2px); border-color: var(--accent); }
+.task[data-done="true"] { background: var(--ok-soft); border-color: var(--ok); }
+.task-icon { font-size: 26px; line-height: 1; }
+.task-title { font-size: 17px; font-weight: 600; line-height: 1.3; }
+.task-text { font-size: 14.5px; line-height: 1.5; color: var(--muted); }
+.task-count { position: absolute; top: 16px; right: 16px; min-width: 30px; padding: 2px 8px; border-radius: 999px; background: var(--accent); color: var(--surface); font-family: var(--mono); font-size: 13px; font-weight: 600; text-align: center; }
+.task[data-done="true"] .task-count { background: var(--ok); }
+.task .btn { justify-self: start; }
+
+.panel-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; margin-bottom: 28px; }
+.panel { display: grid; gap: 16px; align-content: start; padding: 20px; border: 1px solid var(--rule); border-radius: 8px; background: var(--surface); min-width: 0; }
+
+.goal-bar { height: 12px; border-radius: 999px; background: var(--surface-2); overflow: hidden; }
+.goal-bar div { height: 100%; border-radius: 999px; background: var(--accent); transition: width .4s ease; }
+
+.heat { display: grid; grid-auto-flow: column; grid-template-rows: repeat(7, 13px); gap: 4px; justify-content: start; overflow-x: auto; padding-bottom: 2px; }
+.heat i { width: 13px; height: 13px; border-radius: 8px; background: var(--surface-2); }
+.heat i[data-l="1"] { background: color-mix(in srgb, var(--accent) 30%, var(--surface-2)); }
+.heat i[data-l="2"] { background: color-mix(in srgb, var(--accent) 60%, var(--surface-2)); }
+.heat i[data-l="3"] { background: var(--accent); }
+.heat i[data-today="true"] { outline: 2px solid var(--ink); outline-offset: -1px; }
+.heat i[data-future="true"] { background: transparent; }
+
+.weak-list { display: grid; gap: 8px; }
+.weak-row { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; align-items: center; gap: 12px; font-size: 14.5px; }
+.weak-row .step-sigil { width: 34px; height: 34px; }
+
+.settings { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; font-size: 14px; color: var(--muted); }
+.settings label { display: inline-flex; align-items: center; gap: 8px; }
+.settings input, .settings select { padding: 8px 8px; border: 1px solid var(--rule); border-radius: 8px; background: var(--surface); }
+
+.kbd-hint { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+kbd { display: inline-block; min-width: 20px; padding: 0 4px; border: 1px solid var(--rule); border-bottom-width: 2px; border-radius: 8px; font-family: var(--mono); font-size: 11.5px; text-align: center; background: var(--surface); }
+
+.option.is-right { animation: pop .35s ease; }
+.option.is-wrong { animation: shake .35s ease; }
+@keyframes pop { 40% { transform: scale(1.015); } }
+@keyframes shake { 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+
+/* flashcards */
+.flash-wrap { display: grid; gap: 20px; max-width: 760px; }
+.flash {
+  display: grid;
+  gap: 16px;
+  align-content: center;
+  min-height: 300px;
+  padding: 32px;
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  background: var(--surface);
+  text-align: left;
+  animation: flip-in .3s ease;
+}
+.flash:hover { border-color: var(--accent); }
+.flash:disabled { color: var(--ink); cursor: default; }
+.flash:disabled:hover { border-color: var(--rule); }
+.flash-term { font-family: var(--display); font-size: clamp(22px, 4vw, 32px); font-weight: 600; line-height: 1.2; letter-spacing: -.02em; }
+.flash-hint { color: var(--muted); font-size: 14px; }
+.flash-def { font-size: 16.5px; line-height: 1.6; }
+.flash-use { padding: 12px 16px; border-left: 3px solid var(--accent); background: var(--surface-2); font-size: 15px; line-height: 1.55; color: var(--ink); }
+.flash-grade { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.flash-grade .btn { padding: 16px; font-size: 15.5px; font-weight: 600; }
+.btn-bad { border-color: var(--bad); color: var(--bad); }
+.btn-bad:hover { background: var(--bad-soft); }
+.btn-good { border-color: var(--ok); color: var(--ok); }
+.btn-good:hover { background: var(--ok-soft); }
+@keyframes flip-in { from { transform: rotateX(12deg) translateY(6px); opacity: .4; } }
+
+.confetti { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; }
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 60;
+  transform: translateX(-50%);
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--ground);
+  font-weight: 600;
+  font-size: 15px;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, .5);
+  animation: toast-in .25s ease;
+}
+@keyframes toast-in { from { transform: translate(-50%, 12px); opacity: 0; } }
+
+/* quiet chrome: sentence case labels, two weights, no hue gradients, no lift on hover */
+.counters, .eyebrow, .meta-label, .gauge-row, .stage-count, .level-tag, .step-state, .stat span,
+.kind, .note-label, .sub-label, th, .miss-line b, .result-score span, .pace, .stage-num, .video-head span {
+  text-transform: none;
+  letter-spacing: .01em;
+}
+.wordmark, .view-title, .hero-title, .flash-term, .question, .stage-name, .next-title, .section-title { font-weight: 600; }
+.stat b, .progress-figure, .result-score b, .block-sigil, .step-sigil { font-weight: 600; }
+.counters b, .progress-meta b, .task-title, .pace, .option-key { font-weight: 600; }
+.hero-title, .flash-term { letter-spacing: -.01em; }
+.goal-bar div { background: var(--accent); }
+.task { transition: border-color .15s ease; }
+.task:hover { transform: none; }
+.task { grid-template-rows: auto 1fr auto; }
+.task-title { padding-right: 36px; }
+.task-count { background: none; color: var(--muted); padding: 0; min-width: 0; font-size: 12px; font-weight: 500; }
+.task[data-done="true"] .task-count { background: none; color: var(--ok); }
+.flash { background: var(--surface); box-shadow: none; animation: none; }
+.toast { font-weight: 500; }
+
+/* radius scale: controls 8, tags 6, cards 12, panels 16; press feedback; one easing */
+:root { --ease: cubic-bezier(.23, 1, .32, 1); }
+.score-pill, .pace, .week-chip, .chip, .level-tag { border-radius: 6px; }
+.task, .panel, .lab-card, .note, .drill, .pitfalls, .practice-item, .resume-strip { border-radius: 12px; }
+.block-grid, .step-list, .links, .stages, .biz, .table-scroll, .stage-items { border-radius: 12px; overflow: hidden; }
+.today-hero, .progress-top, .lab-mount, .flash { border-radius: 16px; }
+.toast { border-radius: 12px; animation-timing-function: var(--ease); }
+.btn, .option, .chip, .mode, .lab-seg button, .lab-node, .mark, .pill-btn { transition: background-color .2s var(--ease), border-color .2s var(--ease), color .2s var(--ease), transform .12s var(--ease); }
+.btn:active, .option:not(:disabled):active, .chip:active, .lab-seg button:active, .lab-node:active, .mark:active { transform: scale(.98); }
+.option.is-right, .option.is-wrong { animation: none; }
+.flash-def, .flash-use { animation: reveal .2s var(--ease); }
+@keyframes reveal { from { opacity: 0; transform: translateY(4px); } }
+.mode { transition: none; }
+.skip-link { position: absolute; left: 16px; top: -48px; z-index: 70; padding: 8px 12px; border-radius: 8px; background: var(--ink); color: var(--ground); text-decoration: none; }
+.skip-link:focus { top: 8px; }
+
+/* labs */
+.lab { gap: 16px; }
+.lab-mount { display: grid; gap: 16px; padding: 20px; border: 1px solid var(--rule); border-radius: 12px; background: var(--surface); min-width: 0; }
+.lab-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+.lab-ctl { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 4px 12px; min-width: 220px; flex: 1 1 220px; font-size: 13px; color: var(--muted); }
+.lab-ctl span { grid-column: 1 / -1; }
+.lab-ctl input { grid-column: 1 / 3; width: 100%; accent-color: var(--accent); }
+.lab-ctl output { font-family: var(--mono); font-size: 12px; color: var(--ink); font-variant-numeric: tabular-nums; min-width: 44px; text-align: right; }
+.lab-seg { display: inline-flex; flex-wrap: wrap; gap: 2px; padding: 2px; border: 1px solid var(--rule); border-radius: 8px; background: var(--ground); }
+.lab-seg button { padding: 8px 12px; border-radius: 8px; font-size: 13px; color: var(--muted); transition: background-color .15s ease, color .15s ease; }
+.lab-seg button:hover { color: var(--ink); }
+.lab-seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 0 0 1px var(--rule); }
+.lab-stage { display: grid; gap: 16px; min-width: 0; }
+.lab-split { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: start; }
+.lab-svg { width: 100%; height: auto; display: block; overflow: visible; font-family: var(--mono); }
+.lab-svg text { font-size: 12px; fill: var(--ink); text-anchor: middle; }
+.lab-svg .lab-cap { font-size: 11px; fill: var(--muted); }
+.lab-svg text[text-anchor="start"] { text-anchor: start; }
+.lab-svg text[text-anchor="end"] { text-anchor: end; }
+.lab-svg .lab-cap-accent { fill: var(--accent-ink); }
+.lab-svg .lab-num { font-size: 11px; fill: var(--ink); font-weight: 500; }
+.lab-svg .lab-call { font-size: 12px; text-anchor: start; fill: var(--ink); }
+.lab-tok rect, .lab-key rect { fill: var(--surface); stroke: var(--rule); stroke-width: 1; }
+.lab-tok { cursor: pointer; }
+.lab-tok:hover rect { stroke: var(--accent); }
+.lab-tok.is-on rect { fill: color-mix(in srgb, var(--accent) 14%, var(--surface)); stroke: var(--accent); }
+.lab-tok:focus-visible { outline: none; }
+.lab-tok:focus-visible rect { stroke: var(--ink); stroke-width: 2; }
+.lab-arc { fill: none; stroke: var(--accent); stroke-linecap: round; }
+.lab-key .lab-bar { fill: var(--accent); stroke: none; }
+.lab-axis { stroke: var(--rule); stroke-width: 1; }
+.lab-thr { stroke: var(--ink); stroke-width: 1; stroke-dasharray: 4 3; }
+.lab-line, .lab-path { fill: none; stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; }
+.lab-path-muted { fill: none; stroke: var(--muted); stroke-width: 1.5; stroke-linejoin: round; opacity: .7; }
+.lab-best { fill: var(--surface); stroke: var(--accent); stroke-width: 2; }
+.lab-pt { fill: var(--surface); stroke: var(--ink); stroke-width: 1.2; }
+.lab-contour { fill: none; stroke: var(--rule); stroke-width: 1; }
+.lab-hneg { fill: var(--muted); opacity: .35; }
+.lab-hpos { fill: var(--accent); opacity: .85; }
+.lab-int { stroke: var(--accent); stroke-width: 6; stroke-linecap: round; }
+.lab-int-muted { stroke: var(--muted); stroke-width: 6; stroke-linecap: round; opacity: .6; }
+.lab-out { fill: var(--bad); opacity: .08; }
+.lab-mw { fill: color-mix(in srgb, var(--ink) 70%, var(--surface)); }
+.lab-mk { fill: var(--accent); }
+.lab-mr { fill: var(--rule); }
+.br-tp { fill: var(--accent); }
+.br-fn { fill: var(--surface); stroke: var(--accent); stroke-width: 1.2; }
+.br-fp { fill: var(--bad); }
+.br-tn { fill: var(--rule); opacity: .7; }
+
+/* teardown plates: hairline ink, fills tinted from the line color */
+.lab-plate { cursor: pointer; }
+.lab-plate polygon { stroke-width: 1; stroke-linejoin: round; transition: fill .15s ease; }
+.lab-plate .top { fill: color-mix(in srgb, var(--tone) 12%, var(--surface)); stroke: var(--tone); }
+.lab-plate .side { fill: color-mix(in srgb, var(--tone) 28%, var(--surface)); stroke: var(--tone); }
+.lab-plate .lead { fill: none; stroke: var(--muted); stroke-width: .8; }
+.lab-plate .dot { fill: var(--tone); }
+.lab-plate:hover .top, .lab-plate.is-on .top { fill: color-mix(in srgb, var(--tone) 30%, var(--surface)); }
+.lab-plate.is-on .lab-call { font-weight: 600; }
+.lab-plate:focus-visible { outline: none; }
+.lab-plate:focus-visible .top { stroke-width: 2.5; }
+.tone-ink { --tone: var(--ink); }
+.tone-accent { --tone: var(--accent); }
+.tone-ok { --tone: var(--ok); }
+.tone-warn { --tone: var(--warn); }
+
+.lab-card { display: grid; gap: 8px; align-content: start; padding: 16px; border: 1px solid var(--rule-soft); border-radius: 8px; background: var(--ground); font-size: 14.5px; line-height: 1.55; }
+.lab-card b { font-weight: 600; }
+.lab-warn { color: var(--bad); }
+.lab-metric { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.lab-note { font-size: 14px; line-height: 1.55; color: var(--muted); max-width: 78ch; }
+.lab-kv { display: grid; grid-template-columns: auto auto; gap: 4px 16px; justify-content: start; font-size: 14px; }
+.lab-kv span { color: var(--muted); }
+.lab-kv b { font-family: var(--mono); font-weight: 500; font-variant-numeric: tabular-nums; }
+.lab-kv .ok, .lab-cm .ok { color: var(--ok); }
+.lab-kv .bad, .lab-cm .bad { color: var(--bad); }
+.lab-cm { display: grid; grid-template-columns: auto 1fr 1fr; gap: 1px; background: var(--rule-soft); border: 1px solid var(--rule-soft); font-family: var(--mono); font-size: 12.5px; }
+.lab-cm > * { padding: 8px 12px; background: var(--surface); }
+.lab-cm b { font-weight: 500; color: var(--muted); }
+
+.lab-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.lab-node { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border: 1px solid var(--rule); border-radius: 8px; background: var(--surface); font-size: 13.5px; transition: border-color .15s ease, background-color .15s ease; }
+.lab-node:hover { border-color: var(--accent); }
+.lab-node.is-past { color: var(--muted); }
+.lab-node.is-on { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, var(--surface)); }
+.lab-node-n { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.lab-arrow { width: 14px; height: 1px; background: var(--rule); position: relative; }
+.lab-arrow::after { content: ""; position: absolute; right: 0; top: -3px; border: 3.5px solid transparent; border-left-color: var(--rule); border-right: 0; }
+
+.lab-grid { display: grid; gap: 8px; }
+.lab-row { display: grid; grid-template-columns: 32px 52px repeat(4, 34px); align-items: center; gap: 8px; font-size: 13px; }
+.lab-row b { font-family: var(--mono); font-weight: 500; }
+.lab-row .lab-cap { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.lab-cell { display: inline-grid; place-content: center; width: 34px; height: 26px; border-radius: 8px; font-family: var(--mono); font-size: 11px; border: 1px solid var(--rule); color: var(--muted); }
+.lab-cell.is-train { background: color-mix(in srgb, var(--ink) 10%, var(--surface)); color: var(--ink); }
+.lab-cell.is-test { border-color: var(--accent); color: var(--accent-ink); background: color-mix(in srgb, var(--accent) 10%, var(--surface)); }
+.lab-cell.is-leak { border-color: var(--bad); color: var(--bad); background: var(--bad-soft); }
+.lab-cell.is-off { opacity: .35; border-style: dashed; }
+.lab-fig { display: grid; gap: 8px; min-width: 0; align-content: start; }
+.lab-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; font-size: 13px; color: var(--muted); }
+.lab-legend .lab-cell { width: 18px; height: 14px; margin-right: -8px; }
+
+.confetti { image-rendering: pixelated; }
+.lab-crow { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.4fr) minmax(0, 2fr) 96px; align-items: center; gap: 12px; font-size: 13px; }
+.lab-crow b { font-family: var(--mono); font-weight: 500; }
+.lab-crow code { font-family: var(--mono); font-size: 12.5px; text-align: right; }
+.lab-cbar { height: 8px; border-radius: 4px; background: var(--surface-2); overflow: hidden; }
+.lab-cbar span { display: block; height: 100%; background: var(--accent); }
+.lab-cbar span.bad { background: var(--bad); }
+.lab-hl { color: var(--accent-ink); font-weight: 600; }
+.lab-alt td { background: var(--ground); }
+.lab-caret { color: var(--accent); }
+.iv-answer { width: 100%; padding: 12px 16px; border: 1px solid var(--rule); border-radius: 12px; background: var(--surface); font-family: var(--mono); font-size: 14px; line-height: 1.55; resize: vertical; }
+.iv-answer:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.iv-answer[readonly] { color: var(--muted); }
+.iv-points { display: grid; gap: 8px; }
+.iv-point { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 12px; align-items: start; padding: 8px 12px; border: 1px solid var(--rule-soft); border-radius: 8px; background: var(--surface); font-size: 15px; cursor: pointer; }
+.iv-point input { margin-top: 4px; accent-color: var(--accent); width: 16px; height: 16px; }
+.iv-point:has(input:checked) { border-color: var(--ok); background: var(--ok-soft); }
+.lab-page { fill: var(--surface); stroke: var(--ink); stroke-width: 1; }
+.lab-norm { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.lab-norm input { width: 100%; padding: 8px 12px; border: 1px solid var(--rule); border-radius: 8px; background: var(--surface); font-family: var(--mono); font-size: 13px; }
+.lab-ntable { display: grid; gap: 4px; }
+.lab-nrow { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 2fr) minmax(0, 2fr) 80px; align-items: center; gap: 8px; font-size: 13px; }
+.lab-nrow code { font-family: var(--mono); font-size: 12.5px; padding: 4px 8px; border-radius: 6px; background: var(--ground); overflow-wrap: anywhere; }
+.lab-nrow b { font-family: var(--mono); font-weight: 500; font-size: 12px; }
+.lab-nrow .ok { color: var(--ok); } .lab-nrow .bad { color: var(--bad); }
+.lab-kv .warn { color: var(--warn); }
+.lab-mark { background: var(--bad-soft); color: var(--bad); border-radius: 4px; padding: 0 2px; }
+
 @media (max-width: 980px) {
   .ref-layout { grid-template-columns: minmax(0, 1fr); gap: 24px; }
   .ref-nav { position: static; }
@@ -913,16 +1213,35 @@ code.inline {
 @media (max-width: 720px) {
   .shell { padding-inline: 16px; }
   .topbar-inner { align-items: stretch; flex-direction: column; gap: 16px; }
-  .modes { width: 100%; }
-  .mode { flex: 1 1 auto; padding-inline: 8px; }
+  .modes { width: 100%; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .mode { min-width: 0; padding-inline: 4px; font-size: 13px; }
+  .cnt, .cnt-sep { display: none; }
+  .cnt.cnt-main { display: inline; }
   .result-top { grid-template-columns: minmax(0, 1fr); }
-  .stage { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .stage { grid-template-columns: minmax(0, 1fr); gap: 16px; }
   .stage-num { grid-row: auto; }
   .exam-actions { justify-content: stretch; }
   .exam-actions .btn { flex: 1 1 auto; }
   .progress-top { grid-template-columns: minmax(0, 1fr); }
   .step-row { grid-template-columns: 26px 36px minmax(0, 1fr); }
   .step-marks { grid-column: 1 / -1; justify-content: flex-start; }
+  .today-hero, .panel-row { grid-template-columns: minmax(0, 1fr); }
+  .hero-main, .hero-side { padding: 20px; }
+  .flash { min-height: 240px; padding: 24px; }
+  .lab-split { grid-template-columns: minmax(0, 1fr); }
+  .lab-mount { padding: 16px; }
+  .lab-ctl { min-width: 0; flex-basis: 100%; }
+  .lab-norm { grid-template-columns: minmax(0, 1fr); }
+  .lab-nrow { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .lab-nrow .lab-cap { grid-column: 1 / -1; }
+  .lab-crow { grid-template-columns: minmax(0, 1fr) 80px; }
+  .lab-crow > :nth-child(2), .lab-crow > :nth-child(3) { grid-column: 1 / -1; }
+}
+
+@media (max-width: 560px) {
+  .lab-wide { display: none; }
+  .lab-svg text { font-size: 18px; }
+  .lab-svg .lab-cap, .lab-svg .lab-num, .lab-svg .lab-call { font-size: 17px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -930,6 +1249,7 @@ code.inline {
 }
 </style>
 
+<a class="skip-link" href="#app">Перейти к содержанию</a>
 <header class="topbar">
   <div class="shell topbar-inner">
     <div class="identity">
@@ -937,15 +1257,17 @@ code.inline {
       <div class="counters" id="counters"></div>
     </div>
     <nav class="modes" aria-label="Режим">
-      <button class="mode" id="tab-exam" type="button" aria-pressed="true">Экзамен</button>
+      <button class="mode" id="tab-today" type="button" aria-pressed="true">Сегодня</button>
+      <button class="mode" id="tab-exam" type="button" aria-pressed="false">Экзамен</button>
       <button class="mode" id="tab-ref" type="button" aria-pressed="false">Справочник</button>
       <button class="mode" id="tab-lib" type="button" aria-pressed="false">Библиотека</button>
+      <button class="mode" id="tab-interview" type="button" aria-pressed="false">Собеседование</button>
       <button class="mode" id="tab-progress" type="button" aria-pressed="false">Прогресс</button>
     </nav>
   </div>
 </header>
 
-<main class="shell" id="app"></main>
+<main class="shell" id="app" tabindex="-1"></main>
 <div class="sr-only" id="announcer" aria-live="polite" aria-atomic="true"></div>
 
 <script>
@@ -961,26 +1283,199 @@ const KEYS = ["А", "Б", "В", "Г", "Д", "Е"];
 const STORE = "ai-trainer-v2";
 const MARKS = "ai-trainer-progress-v1";
 const PASS = 0.8;
+const STUDY = "ai-trainer-study-v1";
+const INTERVALS = [0, 1, 3, 7, 14, 30, 60];
+const DEFAULT_PLAN = { deadline: "2026-12-31", perDay: 20, at: "" };
+const MODES = ["today", "exam", "ref", "lib", "interview", "progress"];
+const KEY_CODES = [["Digit1", "Numpad1", "KeyF"], ["Digit2", "Numpad2", "Comma"], ["Digit3", "Numpad3", "KeyD"], ["Digit4", "Numpad4", "KeyU"]];
 const SECTIONS = Object.fromEntries(FAQ.sections.map(s => [s.id, s]));
+const QKEY = new Map(QUIZ.questions.map(q => [q, "q" + hash(q.q)]));
+const TERMS = FAQ.sections.flatMap(s => (s.terms || []).map(t => ({ sec: s.id, term: t, key: "t" + hash(s.id + "|" + t.t) })));
 const STATE_LABEL = { done: "шаг пройден", active: "в работе", todo: "не начат" };
 const SYNC = { ref: null, status: "local", timer: null, chain: Promise.resolve() };
 const app = document.getElementById("app");
 const announcer = document.getElementById("announcer");
 
 const state = {
-  mode: "exam",
+  mode: "today",
   level: "all",
   track: "all",
-  block: null,
-  order: [],
-  idx: 0,
-  picked: null,
-  answers: {},
+  session: null,
+  cards: null,
   history: load(),
   marks: loadMarks(),
+  study: loadStudy(),
   confirmReset: 0,
   query: ""
 };
+
+function hash(s) {
+  let h = 2166136261;
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return (h >>> 0).toString(36);
+}
+
+function emptyStudy() {
+  return { srs: {}, days: {}, plan: { ...DEFAULT_PLAN } };
+}
+
+function loadStudy() {
+  try {
+    const raw = localStorage.getItem(STUDY);
+    const s = raw ? JSON.parse(raw) : {};
+    return { ...emptyStudy(), ...s, plan: { ...DEFAULT_PLAN, ...(s.plan || {}) } };
+  } catch (e) {
+    return emptyStudy();
+  }
+}
+
+function saveStudy() {
+  try {
+    localStorage.setItem(STUDY, JSON.stringify(state.study));
+  } catch (e) {}
+}
+
+function dayKey(d = new Date()) {
+  const z = n => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${z(d.getMonth() + 1)}-${z(d.getDate())}`;
+}
+
+function parseDay(key) {
+  const [y, m, d] = key.split("-").map(Number);
+  return new Date(y, m - 1, d);
+}
+
+function shiftDay(key, n) {
+  const d = parseDay(key);
+  d.setDate(d.getDate() + n);
+  return dayKey(d);
+}
+
+function daysBetween(a, b) {
+  const utc = k => { const [y, m, d] = k.split("-").map(Number); return Date.UTC(y, m - 1, d); };
+  return Math.round((utc(b) - utc(a)) / 86400000);
+}
+
+function shuffled(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+/* FSRS-6 (open-spaced-repetition/ts-fsrs, MIT): stability s in days, difficulty d from 1 to 10.
+   Ratings: 1 again, 2 hard, 3 good, 4 easy. Retention target 0.9 makes the interval equal to s. */
+const FSRS = (() => {
+  const w = [0.212, 1.2931, 2.3065, 8.2956, 6.4133, 0.8334, 3.0194, 0.001, 1.8722, 0.1666, 0.796,
+    1.4835, 0.0614, 0.2629, 1.6483, 0.6014, 1.8729, 0.5425, 0.0912, 0.0658, 0.1542];
+  const RETENTION = 0.9, MAX_IVL = 365;
+  const decay = -w[20], factor = Math.pow(0.9, 1 / decay) - 1;
+  const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
+  const initD = g => w[4] - Math.exp((g - 1) * w[5]) + 1;
+  const recall = (t, s) => Math.pow(1 + factor * t / s, decay);
+  const interval = s => clamp(Math.round(s / factor * (Math.pow(RETENTION, 1 / decay) - 1)), 1, MAX_IVL);
+  function next(mem, t, g) {
+    if (!mem) return { s: clamp(w[g - 1], 0.001, 36500), d: clamp(initD(g), 1, 10) };
+    const { s, d } = mem;
+    let ns;
+    if (t === 0) {
+      const sinc = Math.pow(s, -w[19]) * Math.exp(w[17] * (g - 3 + w[18]));
+      ns = s * (g >= 2 ? Math.max(sinc, 1) : sinc);
+    } else if (g === 1) {
+      const fail = w[11] * Math.pow(d, -w[12]) * (Math.pow(s + 1, w[13]) - 1) * Math.exp((1 - recall(t, s)) * w[14]);
+      ns = Math.min(Math.max(s / Math.exp(w[17] * w[18]), 0.001), fail);
+    } else {
+      ns = s * (1 + Math.exp(w[8]) * (11 - d) * Math.pow(s, -w[9]) * (Math.exp((1 - recall(t, s)) * w[10]) - 1)
+        * (g === 2 ? w[15] : 1) * (g === 4 ? w[16] : 1));
+    }
+    const nd = d + (-w[6] * (g - 3)) * (10 - d) / 9;
+    return { s: clamp(ns, 0.001, 36500), d: clamp(w[7] * initD(4) + (1 - w[7]) * nd, 1, 10) };
+  }
+  return { next, recall, interval, initD, clamp };
+})();
+
+// Memory state of a card; entries saved by the old Leitner scheduler only have box and lapses
+function memOf(e) {
+  if (!e) return null;
+  if (e.s > 0 && e.d >= 1) return { s: e.s, d: e.d };
+  return { s: e.box > 0 ? INTERVALS[e.box] : 0.5, d: FSRS.clamp(FSRS.initD(3) + 1.5 * (e.lapses || 0), 1, 10) };
+}
+
+function lastDay(e) {
+  if (e.last) return e.last;
+  const t = e.at ? new Date(e.at) : null;
+  return t && !isNaN(t) ? dayKey(t) : dayKey();
+}
+
+// Probability of recalling the card today, from 0 to 1
+function recallToday(e) {
+  const m = memOf(e);
+  return m ? FSRS.recall(Math.max(0, daysBetween(lastDay(e), dayKey())), m.s) : 0;
+}
+
+function grade(key, ok, rating) {
+  const g = rating || (ok ? 3 : 1);
+  const cur = state.study.srs[key];
+  const today = dayKey();
+  const t = cur ? Math.max(0, daysBetween(lastDay(cur), today)) : 0;
+  const mem = FSRS.next(memOf(cur), t, g);
+  const ivl = g === 1 ? 0 : FSRS.interval(mem.s);
+  let box = 0;
+  if (g > 1) INTERVALS.forEach((v, i) => { if (i > 0 && ivl >= v) box = i; });
+  state.study.srs[key] = {
+    s: Math.round(mem.s * 1000) / 1000,
+    d: Math.round(mem.d * 1000) / 1000,
+    last: today,
+    box,
+    due: shiftDay(today, ivl),
+    at: stamp(),
+    n: (cur ? cur.n : 0) + 1,
+    lapses: (cur ? cur.lapses : 0) + (g === 1 ? 1 : 0)
+  };
+  const d = state.study.days[today] || { n: 0, ok: 0 };
+  state.study.days[today] = { n: d.n + 1, ok: d.ok + (ok ? 1 : 0), at: stamp() };
+  if (d.n + 1 === state.study.plan.perDay) {
+    celebrate();
+    toast(`Дневная цель выполнена: ${state.study.plan.perDay} ответов`);
+  }
+}
+
+function todayCount() {
+  const d = state.study.days[dayKey()];
+  return d ? d.n : 0;
+}
+
+function streak() {
+  let day = dayKey();
+  if (!state.study.days[day]) day = shiftDay(day, -1);
+  let n = 0;
+  while (state.study.days[day] && state.study.days[day].n > 0) {
+    n += 1;
+    day = shiftDay(day, -1);
+  }
+  return n;
+}
+
+function dueQuestions() {
+  const today = dayKey();
+  return QUIZ.questions
+    .map(q => ({ q, e: state.study.srs[QKEY.get(q)] }))
+    .filter(x => x.e && x.e.due <= today)
+    .sort((a, b) => recallToday(a.e) - recallToday(b.e) || b.e.lapses - a.e.lapses)
+    .map(x => x.q);
+}
+
+function weakQuestions() {
+  return QUIZ.questions.filter(q => {
+    const e = state.study.srs[QKEY.get(q)];
+    return e && e.lapses > 0 && memOf(e).s < 5;
+  });
+}
 
 function load() {
   try {
@@ -1026,6 +1521,7 @@ function commit(keepStart) {
   if (!state.marks.started && !keepStart) state.marks.started = now;
   save();
   saveMarks();
+  saveStudy();
   pushRemote();
 }
 
@@ -1034,6 +1530,9 @@ function snapshotProgress() {
     history: state.history,
     read: state.marks.read,
     practice: state.marks.practice,
+    srs: state.study.srs,
+    days: state.study.days,
+    plan: state.study.plan,
     started: state.marks.started,
     updated: state.marks.updated,
     resetAt: state.marks.resetAt
@@ -1048,6 +1547,11 @@ function applyProgress(p) {
     started: p.started || null,
     updated: p.updated || null,
     resetAt: p.resetAt || null
+  };
+  state.study = {
+    srs: p.srs || {},
+    days: p.days || {},
+    plan: { ...DEFAULT_PLAN, ...(p.plan || state.study.plan) }
   };
 }
 
@@ -1079,6 +1583,9 @@ function mergeProgress(local, remote) {
     history: pick(local.history, remote.history),
     read: pick(local.read, remote.read),
     practice: pick(local.practice, remote.practice),
+    srs: pick(local.srs, remote.srs),
+    days: pick(local.days, remote.days),
+    plan: newer(local.plan, remote.plan) || null,
     started: [local.started, remote.started].filter(t => t && (!resetAt || t > resetAt)).sort()[0] || null,
     updated: [local.updated, remote.updated].filter(Boolean).sort().pop() || null,
     resetAt
@@ -1121,7 +1628,8 @@ async function connectAccount() {
     SYNC.ref = ref;
     SYNC.status = "account";
     if (!remote || canon(merged) !== canon(mergeProgress(remote, remote))) pushRemote();
-    const busy = state.mode === "exam" && state.block !== null && state.idx < state.order.length;
+    const busy = (state.session && state.session.idx < state.session.items.length) ||
+      (state.cards && state.cards.idx < state.cards.items.length);
     if (state.mode === "ref") refreshMarks();
     else if (!busy) render();
     else renderCounters();
@@ -1136,9 +1644,15 @@ function isOn(kind, id) {
   return !!(m && m.on);
 }
 
+function bestOf(h) {
+  if (!h || !h.total) return null;
+  const b = h.best && h.best.total ? h.best : null;
+  return b && b.right / b.total > h.right / h.total ? b : { right: h.right, total: h.total };
+}
+
 function passed(id) {
-  const h = state.history[id];
-  return !!h && h.total > 0 && h.right / h.total >= PASS;
+  const b = bestOf(state.history[id]);
+  return !!b && b.right / b.total >= PASS;
 }
 
 function stepState(b) {
@@ -1185,10 +1699,10 @@ function bindMarks() {
   });
 }
 
-function openSection(id) {
+function openSection(id, part) {
   state.query = "";
   setMode("ref");
-  const target = document.getElementById("sec-" + id);
+  const target = document.getElementById((part ? part + "-" : "sec-") + id) || document.getElementById("sec-" + id);
   if (target) target.scrollIntoView({ block: "start" });
 }
 
@@ -1201,6 +1715,7 @@ function resetAll() {
   const now = stamp();
   state.history = {};
   state.marks = { ...emptyMarks(), updated: now, resetAt: now };
+  state.study = { ...emptyStudy(), plan: state.study.plan };
   state.confirmReset = 0;
   commit(true);
   say("Прогресс сброшен");
@@ -1244,22 +1759,87 @@ function say(text) {
 
 function setMode(mode) {
   state.mode = mode;
-  document.getElementById("tab-exam").setAttribute("aria-pressed", String(mode === "exam"));
-  document.getElementById("tab-ref").setAttribute("aria-pressed", String(mode === "ref"));
-  document.getElementById("tab-lib").setAttribute("aria-pressed", String(mode === "lib"));
-  document.getElementById("tab-progress").setAttribute("aria-pressed", String(mode === "progress"));
+  state.session = null;
+  state.cards = null;
+  state.iv = null;
+  MODES.forEach(m => document.getElementById("tab-" + m).setAttribute("aria-pressed", String(m === mode)));
   render();
+  window.scrollTo({ top: 0 });
+}
+
+function startSession(kind, items, extra = {}) {
+  if (!items.length) return;
+  const list = kind === "block" ? shuffled(items) : items;
+  state.cards = null;
+  state.session = {
+    kind,
+    items: list,
+    perms: list.map(q => shuffled(q.options.map((_, i) => i))),
+    idx: 0,
+    picked: null,
+    answers: {},
+    recorded: false,
+    title: "",
+    back: state.mode,
+    ...extra
+  };
+  render();
+  window.scrollTo({ top: 0 });
 }
 
 function startBlock(id) {
-  state.block = id;
-  state.order = questionsOf(id).map((_, i) => i);
-  state.idx = 0;
-  state.picked = null;
-  state.answers = {};
-  state.recorded = false;
+  const block = QUIZ.blocks.find(b => b.id === id);
+  startSession("block", questionsOf(id), { block: id, title: block ? block.title : id });
+}
+
+function startReview() {
+  startSession("review", dueQuestions().slice(0, 20), { title: "Повторение по расписанию" });
+}
+
+function startWeak() {
+  startSession("weak", shuffled(weakQuestions()).slice(0, 15), { title: "Работа над ошибками" });
+}
+
+function startMix() {
+  const next = nextStep();
+  const limit = next ? next.order : Infinity;
+  const open = new Set(QUIZ.blocks.filter(b => b.order <= limit || state.history[b.id]).map(b => b.id));
+  startSession("mix", shuffled(QUIZ.questions.filter(q => open.has(q.block))).slice(0, 5), { title: "Смешанная пятиминутка" });
+}
+
+function nextStep() {
+  return QUIZ.blocks.find(b => stepState(b) !== "done") || null;
+}
+
+function pick(orig) {
+  const s = state.session;
+  if (!s || s.picked !== null) return;
+  const q = s.items[s.idx];
+  const ok = orig === q.correct;
+  s.picked = orig;
+  s.answers[s.idx] = orig;
+  grade(QKEY.get(q), ok);
+  commit();
+  say(ok ? "Верно" : "Неверно");
+  renderQuestion();
+  const next = document.getElementById("next");
+  if (next) next.focus({ preventScroll: true });
+}
+
+function advance() {
+  const s = state.session;
+  if (!s || s.picked === null) return;
+  s.idx += 1;
+  s.picked = null;
   render();
   window.scrollTo({ top: 0 });
+}
+
+function leaveSession() {
+  const back = state.session ? state.session.back : state.mode;
+  state.session = null;
+  state.cards = null;
+  setMode(back);
 }
 
 function materialCount() {
@@ -1273,31 +1853,34 @@ function materialCount() {
 function renderCounters() {
   const el = document.getElementById("counters");
   const done = QUIZ.blocks.filter(b => stepState(b) === "done").length;
-  el.innerHTML = [
+  const items = [
     `<b>${QUIZ.questions.length}</b> вопросов`,
     `<b>${QUIZ.blocks.length}</b> блоков`,
     `<b>${ROUTE.stages.length}</b> этапов`,
     `<b>${termCount()}</b> терминов`,
-    `<b>${materialCount()}</b> материалов`,
-    `пройдено <b>${done}</b> из ${QUIZ.blocks.length} шагов`
-  ].join("<span aria-hidden=\"true\">·</span>");
+    `<b>${materialCount()}</b> материалов`
+  ].map(x => `<span class="cnt">${x}</span><span class="cnt-sep" aria-hidden="true">·</span>`).join("");
+  el.innerHTML = items + `<span class="cnt cnt-main">пройдено <b>${done}</b> из ${QUIZ.blocks.length} шагов</span>`;
 }
 
 function render() {
   renderCounters();
+  if (state.cards) return renderCards();
+  if (state.iv) return state.iv.idx >= state.iv.items.length ? renderIvResult() : renderIvItem();
+  if (state.mode === "interview") return renderInterview();
+  if (state.session) return state.session.idx >= state.session.items.length ? renderResult() : renderQuestion();
+  if (state.mode === "today") return renderToday();
   if (state.mode === "ref") return renderReference();
   if (state.mode === "lib") return renderLibrary();
   if (state.mode === "progress") return renderProgress();
-  if (state.block === null) return renderStart();
-  if (state.idx >= state.order.length) return renderResult();
-  return renderQuestion();
+  return renderStart();
 }
 
 function cardOf(b) {
   const n = questionsOf(b.id).length;
-  const h = state.history[b.id];
+  const h = bestOf(state.history[b.id]);
   const pill = h
-    ? `<span class="score-pill ${scoreClass(h.right / h.total)}">${h.right}/${h.total}</span>`
+    ? `<span class="score-pill ${scoreClass(h.right / h.total)}" title="лучший результат">${h.right}/${h.total}</span>`
     : `<span class="score-pill">не пройден</span>`;
   return `<button class="block-card" type="button" data-block="${b.id}">
     <span class="block-sigil">${b.id}</span>
@@ -1370,25 +1953,35 @@ function renderStart() {
   if (toProgress) toProgress.addEventListener("click", () => setMode("progress"));
 }
 
-function renderQuestion() {
-  const block = QUIZ.blocks.find(b => b.id === state.block);
-  const items = questionsOf(state.block);
-  const q = items[state.order[state.idx]];
-  const picked = state.picked;
-  const done = picked !== null;
-  const pct = Math.round((state.idx + (done ? 1 : 0)) / items.length * 100);
+function sessionLabel(s) {
+  return s.kind === "block" ? "К списку блоков" : "К плану на сегодня";
+}
 
-  const options = q.options.map((opt, i) => {
+function renderQuestion() {
+  const s = state.session;
+  const q = s.items[s.idx];
+  const perm = s.perms[s.idx];
+  const block = QUIZ.blocks.find(b => b.id === q.block);
+  const picked = s.picked;
+  const done = picked !== null;
+  const total = s.items.length;
+  const pct = Math.round((s.idx + (done ? 1 : 0)) / total * 100);
+  const right = Object.entries(s.answers).filter(([i, a]) => s.items[i].correct === a).length;
+  const head = s.kind === "block"
+    ? `Блок ${block.id} · ${esc(block.title)}`
+    : `${esc(s.title)} · блок ${block.id}`;
+
+  const options = perm.map((orig, j) => {
     let cls = "option";
     let mark = "";
     if (done) {
-      if (i === picked && i === q.correct) { cls += " is-right"; mark = "✓"; }
-      else if (i === picked) { cls += " is-wrong"; mark = "✕"; }
-      else if (i === q.correct) { cls += " is-key"; mark = "✓"; }
+      if (orig === picked && orig === q.correct) { cls += " is-right"; mark = "✓"; }
+      else if (orig === picked) { cls += " is-wrong"; mark = "✕"; }
+      else if (orig === q.correct) { cls += " is-key"; mark = "✓"; }
     }
-    return `<button class="${cls}" type="button" data-opt="${i}" ${done ? "disabled" : ""}>
-      <span class="option-key">${KEYS[i]}</span>
-      <span>${esc(opt)}</span>
+    return `<button class="${cls}" type="button" data-opt="${orig}" ${done ? "disabled" : ""}>
+      <span class="option-key">${KEYS[j]}</span>
+      <span>${esc(q.options[orig])}</span>
       <span class="option-mark">${mark}</span>
     </button>`;
   }).join("");
@@ -1397,8 +1990,8 @@ function renderQuestion() {
     <div class="exam-wrap">
       <div class="gauge">
         <div class="gauge-row">
-          <span>Блок ${block.id} · ${esc(block.title)}</span>
-          <span>${state.idx + 1} / ${items.length}</span>
+          <span>${head}</span>
+          <span>${s.idx + 1} / ${total} · верно ${right}</span>
         </div>
         <div class="gauge-track"><div class="gauge-fill" style="width:${pct}%"></div></div>
       </div>
@@ -1407,57 +2000,56 @@ function renderQuestion() {
       ${done ? `<div class="verdict">
         <p class="verdict-why">${mono(q.why)}</p>
         ${q.case ? `<div class="note"><span class="note-label">Из твоей практики</span><span>${mono(q.case)}</span></div>` : ""}
-      </div>` : ""}
+      </div>` : `<p class="kbd-hint">Клавиши <kbd>1</kbd>–<kbd>4</kbd> или <kbd>А</kbd>–<kbd>Г</kbd> выбирают ответ, <kbd>Enter</kbd> ведёт дальше</p>`}
       <div class="exam-actions">
-        <button class="btn" type="button" id="quit">К списку блоков</button>
-        ${done ? `<button class="btn btn-primary" type="button" id="next">${state.idx + 1 === items.length ? "Итоги блока" : "Дальше"}</button>` : ""}
+        <button class="btn" type="button" id="quit">${sessionLabel(s)}</button>
+        ${done ? `<button class="btn btn-primary" type="button" id="next">${s.idx + 1 === total ? "Итоги" : "Дальше →"}</button>` : ""}
       </div>
     </div>
   `;
 
   app.querySelectorAll("[data-opt]").forEach(el => {
-    el.addEventListener("click", () => {
-      state.picked = Number(el.dataset.opt);
-      state.answers[state.idx] = state.picked;
-      say(state.picked === q.correct ? "Верно" : "Неверно");
-      renderQuestion();
-    });
+    el.addEventListener("click", () => pick(Number(el.dataset.opt)));
   });
-  document.getElementById("quit").addEventListener("click", () => { state.block = null; render(); });
+  document.getElementById("quit").addEventListener("click", leaveSession);
   const next = document.getElementById("next");
-  if (next) next.addEventListener("click", () => {
-    state.idx += 1;
-    state.picked = null;
-    render();
-    window.scrollTo({ top: 0 });
-  });
+  if (next) next.addEventListener("click", advance);
 }
 
 function renderResult() {
-  const block = QUIZ.blocks.find(b => b.id === state.block);
-  const items = questionsOf(state.block);
-  const right = items.reduce((n, q, i) => n + (state.answers[i] === q.correct ? 1 : 0), 0);
+  const s = state.session;
+  const items = s.items;
+  const block = s.kind === "block" ? QUIZ.blocks.find(b => b.id === s.block) : null;
+  const right = items.reduce((n, q, i) => n + (s.answers[i] === q.correct ? 1 : 0), 0);
   const pct = Math.round(right / items.length * 100);
-  if (!state.recorded) {
-    state.history[block.id] = { right, total: items.length, at: stamp() };
-    state.recorded = true;
+  if (block && !s.recorded) {
+    const wasPassed = passed(block.id);
+    const prev = bestOf(state.history[block.id]);
+    const best = prev && prev.right / prev.total > right / items.length ? prev : { right, total: items.length };
+    state.history[block.id] = { right, total: items.length, at: stamp(), best };
     commit();
+    if (!wasPassed && passed(block.id)) {
+      celebrate();
+      toast(`Блок ${block.id} сдан`);
+    }
   }
+  if (!block && !s.recorded && pct >= 80) celebrate();
+  s.recorded = true;
 
-  const misses = items.map((q, i) => ({ q, i })).filter(({ q, i }) => state.answers[i] !== q.correct);
+  const misses = items.map((q, i) => ({ q, i })).filter(({ q, i }) => s.answers[i] !== q.correct);
   const missHtml = misses.length ? misses.map(({ q, i }) => `
     <details class="miss">
       <summary>${esc(q.q)}</summary>
       <div class="miss-body">
-        <p class="miss-line"><b>Ты выбрал</b>${esc(q.options[state.answers[i]] ?? "нет ответа")}</p>
+        <p class="miss-line"><b>Ты выбрал</b>${esc(q.options[s.answers[i]] ?? "нет ответа")}</p>
         <p class="miss-line"><b>Верно</b>${esc(q.options[q.correct])}</p>
         <p>${mono(q.why)}</p>
         ${q.case ? `<div class="note"><span class="note-label">Из твоей практики</span><span>${mono(q.case)}</span></div>` : ""}
       </div>
-    </details>`).join("") : `<p class="empty">Ошибок нет. Возьми блок посложнее.</p>`;
+    </details>`).join("") : `<p class="empty">Ошибок нет. ${block ? "Возьми блок посложнее." : "Так держать."}</p>`;
 
-  const rows = QUIZ.blocks.map(b => {
-    const h = state.history[b.id];
+  const rows = block ? QUIZ.blocks.map(b => {
+    const h = bestOf(state.history[b.id]);
     const r = h ? h.right / h.total : 0;
     return `<tr>
       <td class="term-name">${b.id}</td>
@@ -1465,17 +2057,29 @@ function renderResult() {
       <td style="font-family:var(--mono);font-variant-numeric:tabular-nums">${h ? `${h.right}/${h.total}` : "—"}</td>
       <td><div class="bar-track"><div class="bar-fill" style="width:${Math.round(r * 100)}%"></div></div></td>
     </tr>`;
-  }).join("");
+  }).join("") : "";
+
+  const best = block ? bestOf(state.history[block.id]) : null;
+  const lede = right === items.length
+    ? (block ? "Блок закрыт без ошибок." : "Без ошибок.")
+    : `Ошибок ${items.length - right}. Они уже в повторении: сегодня, потом через день, потом реже.`;
 
   app.innerHTML = `
     <div class="result">
       <div class="result-top">
         <div>
-          <p class="eyebrow">Итог блока ${block.id}</p>
-          <h2 class="view-title">${esc(block.title)}</h2>
-          <p class="view-lede">Верно ${right} из ${items.length}. ${right === items.length ? "Блок закрыт." : `Ошибок ${items.length - right}, разбор ниже.`}</p>
+          <p class="eyebrow">${block ? `Итог блока ${block.id}` : "Итог"}</p>
+          <h2 class="view-title">${esc(block ? block.title : s.title)}</h2>
+          <p class="view-lede">Верно ${right} из ${items.length}. ${lede}${block && best && (best.right !== right || best.total !== items.length) ? ` Лучший результат по блоку ${best.right}/${best.total}, он и идёт в зачёт.` : ""}</p>
         </div>
         <div class="result-score"><b>${pct}%</b><span>${right}/${items.length}</span></div>
+      </div>
+
+      <div class="exam-actions" style="justify-content:flex-start">
+        ${misses.length ? `<button class="btn btn-primary" type="button" id="redo">Перерешать ошибки (${misses.length})</button>` : ""}
+        ${block ? `<button class="btn" type="button" id="again">Пройти блок заново</button>
+        <button class="btn" type="button" id="toref">Открыть справочник блока</button>` : ""}
+        <button class="btn ${misses.length ? "" : "btn-primary"}" type="button" id="back">${sessionLabel(s)}</button>
       </div>
 
       <section class="sub">
@@ -1483,31 +2087,32 @@ function renderResult() {
         ${missHtml}
       </section>
 
-      <section class="sub">
+      ${block ? `<section class="sub">
         <h3 class="sub-label">Карта прогресса</h3>
         <div class="table-scroll">
           <table>
-            <thead><tr><th>Блок</th><th>Тема</th><th>Счёт</th><th>Доля</th></tr></thead>
+            <thead><tr><th>Блок</th><th>Тема</th><th>Лучший счёт</th><th>Доля</th></tr></thead>
             <tbody>${rows}</tbody>
           </table>
         </div>
-      </section>
-
-      <div class="exam-actions">
-        <button class="btn" type="button" id="again">Пройти блок заново</button>
-        <button class="btn" type="button" id="toref">Открыть справочник блока</button>
-        <button class="btn btn-primary" type="button" id="back">К списку блоков</button>
-      </div>
+      </section>` : ""}
     </div>
   `;
 
-  document.getElementById("again").addEventListener("click", () => startBlock(block.id));
-  document.getElementById("back").addEventListener("click", () => { state.block = null; render(); });
-  document.getElementById("toref").addEventListener("click", () => {
-    setMode("ref");
-    const target = document.getElementById("sec-" + block.id);
-    if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+  const redo = document.getElementById("redo");
+  if (redo) redo.addEventListener("click", () => {
+    const back = s.back;
+    startSession("mistakes", misses.map(m => m.q), { title: "Ошибки ещё раз", back });
   });
+  document.getElementById("back").addEventListener("click", leaveSession);
+  if (block) {
+    document.getElementById("again").addEventListener("click", () => {
+      const back = s.back;
+      startBlock(block.id);
+      state.session.back = back;
+    });
+    document.getElementById("toref").addEventListener("click", () => openSection(block.id));
+  }
 }
 
 function sectionMatches(sec, q) {
@@ -1528,7 +2133,7 @@ function renderPractice(sec) {
     sec.practice.map(p => `<article class="practice-item">
       <h4>${esc(p.t)}</h4>
       <p>${mono(p.d)}</p>
-      ${p.code ? `<pre><code>${esc(p.code)}</code></pre>` : ""}
+      ${p.code ? `<pre tabindex="0"><code>${esc(p.code)}</code></pre>` : ""}
     </article>`).join("")
   }</div></section>`;
 }
@@ -1565,7 +2170,7 @@ function renderPitfalls(sec) {
 
 function renderDrill(sec) {
   if (!sec.drill) return "";
-  return `<section class="sub"><h3 class="sub-label">Задание</h3>
+  return `<section class="sub" id="drill-${sec.id}"><h3 class="sub-label">Задание</h3>
     <div class="drill">${mono(sec.drill)}</div>
   </section>`;
 }
@@ -1602,6 +2207,7 @@ function renderReference() {
         <h2 class="section-title"><span>${s.id}</span>${esc(s.title)}</h2>
         <p class="section-lede">${mono(s.lead)}</p>
       </div>
+      ${renderLab(s)}
       ${renderTheory(s)}
       ${renderPractice(s)}
       ${renderBusiness(s)}
@@ -1633,6 +2239,7 @@ function renderReference() {
   `;
 
   bindMarks();
+  mountLabs(app);
   const input = document.getElementById("q");
   input.addEventListener("input", e => {
     state.query = e.target.value;
@@ -1708,9 +2315,9 @@ function fmtDate(iso) {
 }
 
 function stepRow(b) {
-  const h = state.history[b.id];
+  const h = bestOf(state.history[b.id]);
   const st = stepState(b);
-  const exam = h && h.total > 0
+  const exam = h
     ? `<button class="score-pill pill-btn ${scoreClass(h.right / h.total)}" type="button" data-exam="${b.id}">экзамен ${h.right}/${h.total}</button>`
     : `<button class="score-pill pill-btn" type="button" data-exam="${b.id}">сдать блок</button>`;
   return `<li class="step-row" data-state="${st}">
@@ -1812,10 +2419,1697 @@ function renderProgress() {
   });
 }
 
-document.getElementById("tab-exam").addEventListener("click", () => setMode("exam"));
-document.getElementById("tab-ref").addEventListener("click", () => setMode("ref"));
-document.getElementById("tab-lib").addEventListener("click", () => setMode("lib"));
-document.getElementById("tab-progress").addEventListener("click", () => setMode("progress"));
+function plural(n, one, few, many) {
+  const a = Math.abs(n) % 100;
+  const b = a % 10;
+  if (a > 10 && a < 20) return many;
+  if (b > 1 && b < 5) return few;
+  if (b === 1) return one;
+  return many;
+}
+
+function planInfo() {
+  const steps = QUIZ.blocks;
+  const today = dayKey();
+  const deadline = state.study.plan.deadline || DEFAULT_PLAN.deadline;
+  const daysLeft = Math.max(0, daysBetween(today, deadline));
+  const done = steps.filter(b => stepState(b) === "done").length;
+  const remaining = steps.filter(b => stepState(b) !== "done");
+  const weeksLeft = Math.max(1, daysLeft / 7);
+  const perWeek = Math.ceil(remaining.length / weeksLeft);
+  const startKey = state.marks.started ? dayKey(new Date(state.marks.started)) : today;
+  const span = Math.max(1, daysBetween(startKey, deadline));
+  const elapsed = Math.min(span, Math.max(0, daysBetween(startKey, today)));
+  const expected = Math.floor(steps.length * elapsed / span);
+  const behind = Math.max(0, expected - done);
+  const weekEnd = shiftDay(today, (7 - parseDay(today).getDay()) % 7);
+  const weekTargets = remaining.slice(0, Math.max(1, Math.min(perWeek, remaining.length)));
+  return { steps, today, deadline, daysLeft, done, remaining, perWeek, behind, weekEnd, weekTargets };
+}
+
+function unlockedTerms() {
+  const next = nextStep();
+  const limit = next ? next.order : Infinity;
+  const open = new Set(QUIZ.blocks.filter(b => b.order <= limit || isOn("read", b.id)).map(b => b.id));
+  return TERMS.filter(c => open.has(c.sec));
+}
+
+function cardDeck(limit = 12) {
+  const today = dayKey();
+  const pool = unlockedTerms();
+  const due = pool.filter(c => state.study.srs[c.key] && state.study.srs[c.key].due <= today);
+  const fresh = pool.filter(c => !state.study.srs[c.key]);
+  const order = id => (QUIZ.blocks.find(b => b.id === id) || { order: 99 }).order;
+  fresh.sort((a, b) => order(b.sec) - order(a.sec));
+  const deck = shuffled(due).slice(0, limit);
+  return deck.concat(fresh.slice(0, Math.min(8, limit - deck.length)));
+}
+
+function startCards() {
+  const items = cardDeck();
+  if (!items.length) return;
+  state.session = null;
+  state.cards = { items, idx: 0, flipped: false, known: 0, back: state.mode };
+  render();
+  window.scrollTo({ top: 0 });
+}
+
+function flipCard() {
+  if (!state.cards || state.cards.flipped) return;
+  state.cards.flipped = true;
+  renderCards();
+}
+
+function gradeCard(ok) {
+  const c = state.cards;
+  if (!c || !c.flipped) return;
+  grade(c.items[c.idx].key, ok);
+  commit();
+  if (ok) c.known += 1;
+  c.idx += 1;
+  c.flipped = false;
+  if (c.idx >= c.items.length && c.known === c.items.length) celebrate();
+  renderCards();
+}
+
+function renderCards() {
+  renderCounters();
+  const c = state.cards;
+  const total = c.items.length;
+  if (c.idx >= total) {
+    app.innerHTML = `
+      <div class="flash-wrap">
+        <div class="view-head">
+          <p class="eyebrow">Карточки терминов</p>
+          <h2 class="view-title">Помню ${c.known} из ${total}</h2>
+          <p class="view-lede">Термины, которые не вспомнил, вернутся завтра. Те, что помнишь, придут реже: через 3, 7, 14, 30 дней.</p>
+        </div>
+        <div class="exam-actions" style="justify-content:flex-start">
+          ${cardDeck().length ? `<button class="btn btn-primary" type="button" id="more">Ещё карточки</button>` : ""}
+          <button class="btn" type="button" id="back">К плану на сегодня</button>
+        </div>
+      </div>`;
+    const more = document.getElementById("more");
+    if (more) more.addEventListener("click", () => { const back = c.back; startCards(); if (state.cards) state.cards.back = back; });
+    document.getElementById("back").addEventListener("click", () => setMode(c.back));
+    return;
+  }
+  const card = c.items[c.idx];
+  const sec = SECTIONS[card.sec];
+  const e = state.study.srs[card.key];
+  app.innerHTML = `
+    <div class="flash-wrap">
+      <div class="gauge">
+        <div class="gauge-row">
+          <span>Карточки · ${e ? "повторение" : "новый термин"}</span>
+          <span>${c.idx + 1} / ${total} · помню ${c.known}</span>
+        </div>
+        <div class="gauge-track"><div class="gauge-fill" style="width:${Math.round(c.idx / total * 100)}%"></div></div>
+      </div>
+      <button class="flash" type="button" id="flash" ${c.flipped ? "disabled" : ""} aria-label="Перевернуть карточку">
+        <span class="eyebrow">Раздел ${card.sec} · ${esc(sec ? sec.title : "")}</span>
+        <span class="flash-term">${esc(card.term.t)}</span>
+        ${c.flipped
+          ? `<span class="flash-def">${mono(card.term.d)}</span><span class="flash-use">${mono(card.term.m)}</span>`
+          : `<span class="flash-hint">Сначала вспомни сам: что это и где применяется. Потом нажми на карточку или <kbd>Пробел</kbd>.</span>`}
+      </button>
+      ${c.flipped ? `<div class="flash-grade">
+        <button class="btn btn-bad" type="button" id="nope">✕ Не вспомнил <kbd>1</kbd></button>
+        <button class="btn btn-good" type="button" id="yes">✓ Вспомнил <kbd>2</kbd></button>
+      </div>` : ""}
+      <div class="exam-actions">
+        <button class="btn" type="button" id="quit">К плану на сегодня</button>
+      </div>
+    </div>`;
+  document.getElementById("flash").addEventListener("click", flipCard);
+  const yes = document.getElementById("yes");
+  if (yes) {
+    yes.addEventListener("click", () => gradeCard(true));
+    document.getElementById("nope").addEventListener("click", () => gradeCard(false));
+  }
+  document.getElementById("quit").addEventListener("click", () => setMode(c.back));
+}
+
+function heatmap(weeks = 14) {
+  const today = dayKey();
+  const dow = (parseDay(today).getDay() + 6) % 7;
+  const start = shiftDay(today, -(weeks - 1) * 7 - dow);
+  const goal = state.study.plan.perDay || 20;
+  const cells = [];
+  for (let i = 0; i < weeks * 7; i++) {
+    const key = shiftDay(start, i);
+    const n = (state.study.days[key] || { n: 0 }).n;
+    const l = n === 0 ? 0 : n < goal / 2 ? 1 : n < goal ? 2 : 3;
+    const future = key > today;
+    cells.push(`<i data-l="${future ? 0 : l}" ${key === today ? 'data-today="true"' : ""} ${future ? 'data-future="true"' : ""} title="${fmtDate(key + "T12:00:00")}: ${n} ${plural(n, "ответ", "ответа", "ответов")}"></i>`);
+  }
+  return `<div class="heat" aria-hidden="true">${cells.join("")}</div>`;
+}
+
+function taskCard({ title, text, count, done, action, label, primary }) {
+  return `<article class="task" data-done="${!!done}">
+    ${count !== undefined ? `<span class="task-count">${done ? "✓" : count}</span>` : ""}
+    <h3 class="task-title">${title}</h3>
+    <p class="task-text">${text}</p>
+    ${action ? `<button class="btn ${primary ? "btn-primary" : ""}" type="button" data-task="${action}">${label}</button>` : ""}
+  </article>`;
+}
+
+function renderToday() {
+  const p = planInfo();
+  const next = nextStep();
+  const due = dueQuestions();
+  const deck = cardDeck();
+  const weak = weakQuestions();
+  const n = todayCount();
+  const goal = state.study.plan.perDay || 20;
+  const st = streak();
+  const sec = next ? SECTIONS[next.id] : null;
+
+  let stepText = "";
+  let stepAction = "";
+  let stepLabel = "";
+  if (next) {
+    if (!isOn("read", next.id)) {
+      stepText = `Прочитай раздел «${esc(next.title)}»: ${esc(next.hint || "")}. Потом отметь его прочитанным внизу раздела.`;
+      stepAction = "read";
+      stepLabel = "Читать раздел";
+    } else {
+      const b = bestOf(state.history[next.id]);
+      stepText = `Раздел прочитан. Сдай блок на ${Math.round(PASS * 100)}% и выше${b ? `, лучший результат пока ${b.right}/${b.total}` : ""}.`;
+      stepAction = "exam";
+      stepLabel = "Сдать блок";
+    }
+  }
+
+  const primary = due.length ? "review" : next ? stepAction : deck.length ? "cards" : "mix";
+  const primaryLabel = {
+    review: `Начать с повторения · ${due.length}`,
+    read: `Читать шаг ${next ? next.order : ""}`,
+    exam: `Сдать блок ${next ? next.id : ""}`,
+    cards: "Карточки терминов",
+    mix: "Пятиминутка"
+  }[primary];
+
+  const paceClass = !p.remaining.length ? "is-good" : p.behind === 0 ? "is-good" : p.behind <= 2 ? "is-mid" : "is-bad";
+  const paceText = !p.remaining.length
+    ? "маршрут пройден"
+    : p.behind === 0 ? "идёшь по плану" : `отстаёшь на ${p.behind} ${plural(p.behind, "шаг", "шага", "шагов")}`;
+  const greeting = n >= goal ? "Цель дня выполнена. Можно добить повторение или отдохнуть."
+    : n > 0 ? `Сегодня уже ${n} ${plural(n, "ответ", "ответа", "ответов")}. До цели дня ${goal - n}.`
+    : st > 0 ? `Серия ${st} ${plural(st, "день", "дня", "дней")} подряд. Не прерывай её сегодня.`
+    : "Одно занятие в день по 20–30 минут дальше, чем один марафон в неделю.";
+
+  const weakBlocks = Object.entries(weak.reduce((acc, q) => { acc[q.block] = (acc[q.block] || 0) + 1; return acc; }, {}))
+    .sort((a, b) => b[1] - a[1]).slice(0, 4);
+
+  app.innerHTML = `
+    <section class="today-hero">
+      <div class="hero-main">
+        <p class="eyebrow">${esc(fmtDate(p.today + "T12:00:00"))} · до цели ${p.daysLeft} ${plural(p.daysLeft, "день", "дня", "дней")}</p>
+        <h2 class="hero-title">${next ? `Шаг ${next.order} из ${p.steps.length}: ${esc(next.title)}` : "Все шаги маршрута пройдены"}</h2>
+        <p class="hero-sub">${esc(greeting)}</p>
+        <span class="pace ${paceClass}">${paceText}</span>
+        <div class="exam-actions">
+          <button class="btn btn-primary btn-big" type="button" data-task="${primary}">${esc(primaryLabel)} →</button>
+        </div>
+      </div>
+      <div class="hero-side">
+        <div class="stat-row">
+          <div class="stat"><b>${p.done}/${p.steps.length}</b><span>шагов</span></div>
+          <div class="stat"><b>${st}</b><span>${plural(st, "день", "дня", "дней")} подряд</span></div>
+          <div class="stat"><b>${p.remaining.length ? p.perWeek : 0}</b><span>${plural(p.remaining.length ? p.perWeek : 0, "шаг", "шага", "шагов")} в неделю</span></div>
+        </div>
+        <div class="gauge">
+          <div class="gauge-row"><span>Цель дня</span><span>${Math.min(n, goal)} / ${goal}</span></div>
+          <div class="goal-bar"><div style="width:${Math.min(100, Math.round(n / goal * 100))}%"></div></div>
+        </div>
+        ${p.remaining.length ? `<div>
+          <p class="meta-label" style="margin-bottom:8px">План до ${esc(fmtDate(p.weekEnd + "T12:00:00"))}</p>
+          <div class="week-chips">${p.weekTargets.map(b => `<span class="week-chip" data-done="${stepState(b) === "done"}"><b>${b.id}</b>${esc(b.title)}</span>`).join("")}</div>
+        </div>` : ""}
+      </div>
+    </section>
+
+    <div class="view-head" style="margin-bottom:14px">
+      <p class="eyebrow">Занятие на сегодня</p>
+    </div>
+    <div class="tasks">
+      ${taskCard({
+        title: "Повторение", count: due.length, done: !due.length,
+        text: due.length
+          ? `Вопросы, на которых ты ошибался или которые пора освежить. Интервалы растут: 1, 3, 7, 14, 30 дней.`
+          : "На сегодня повторять нечего. Ошибки попадают сюда сразу после ответа, верные вопросы возвращаются через 3, 7, 14 дней.",
+        action: due.length ? "review" : "", label: `Повторить ${Math.min(20, due.length)}`, primary: primary === "review"
+      })}
+      ${next ? taskCard({
+        title: `Шаг ${next.order} · ${esc(next.title)}`,
+        text: stepText, action: stepAction, label: stepLabel, primary: primary === stepAction
+      }) : taskCard({ title: "Маршрут пройден", text: "Пересдавай блоки ниже 100% и держи повторение на нуле.", done: true })}
+      ${taskCard({
+        title: "Карточки терминов", count: deck.length, done: !deck.length,
+        text: deck.length
+          ? "Термины из пройденных и текущего разделов. Вспомни сам, переверни, честно оцени."
+          : "Карточек на сегодня нет. Новые откроются со следующим шагом.",
+        action: deck.length ? "cards" : "", label: "Начать", primary: primary === "cards"
+      })}
+      ${taskCard({
+        title: "Пятиминутка",
+        text: "Пять случайных вопросов из открытых блоков вперемешку. Смешивание тем держит в памяти лучше, чем повтор одной.",
+        action: "mix", label: "5 вопросов", primary: primary === "mix"
+      })}
+      ${taskCard({
+        title: "Собеседование", count: ivQueue().length, done: !ivQueue().length,
+        text: ivQueue().length ? "Открытые вопросы и задачи на код по пройденным шагам: ответь своими словами, потом сверь с эталоном по пунктам." : "Вопросов на сегодня нет. Новые откроются со следующими шагами.",
+        action: ivQueue().length ? "interview" : "", label: "Начать"
+      })}
+      ${next && LABS[next.id] ? taskCard({
+        title: "Схема шага", text: `${esc(LABS[next.id].title)}. Покрути параметры и посмотри, как меняется результат: так механизм запоминается быстрее текста.`,
+        action: "lab", label: "Открыть схему"
+      }) : ""}
+      ${sec && sec.drill ? taskCard({
+        title: "Задание шага", text: mono(sec.drill.length > 220 ? sec.drill.slice(0, 220).replace(/\s+\S*$/, "") + "…" : sec.drill),
+        action: "drill", label: "Открыть задание"
+      }) : ""}
+    </div>
+
+    <div class="panel-row">
+      <section class="panel">
+        <p class="eyebrow">Активность за 14 недель</p>
+        ${heatmap()}
+        <p class="progress-meta"><span>всего ответов <b>${Object.values(state.study.days).reduce((s, d) => s + d.n, 0)}</b></span><span>дней с занятиями <b>${Object.keys(state.study.days).length}</b></span><span>в повторении <b>${Object.keys(state.study.srs).length}</b></span><span>в долгой памяти <b>${Object.values(state.study.srs).filter(e => memOf(e).s >= 21).length}</b></span></p>
+      </section>
+      <section class="panel">
+        <p class="eyebrow">Слабые места</p>
+        ${weakBlocks.length ? `<div class="weak-list">${weakBlocks.map(([id, k]) => {
+          const b = QUIZ.blocks.find(x => x.id === id);
+          return `<div class="weak-row"><span class="step-sigil">${id}</span><span>${esc(b ? b.title : id)}</span><span class="score-pill is-bad">${k}</span></div>`;
+        }).join("")}</div>
+        <div class="exam-actions" style="justify-content:flex-start"><button class="btn" type="button" data-task="weak">Работа над ошибками · ${Math.min(15, weak.length)}</button></div>`
+        : `<p class="task-text">Пока пусто. Сюда попадут вопросы, где ты ошибся и ещё не исправился.</p>`}
+      </section>
+    </div>
+
+    <div class="settings">
+      <label>Цель к дате <input type="date" id="deadline" value="${esc(state.study.plan.deadline)}" min="${p.today}"></label>
+      <label>Ответов в день <select id="perday">${[10, 20, 30, 50].map(v => `<option value="${v}" ${v === goal ? "selected" : ""}>${v}</option>`).join("")}</select></label>
+      <span>${esc(syncText())}</span>
+    </div>
+  `;
+
+  app.querySelectorAll("[data-task]").forEach(el => el.addEventListener("click", () => {
+    const t = el.dataset.task;
+    if (t === "review") startReview();
+    else if (t === "interview") startInterview(ivQueue(), "today");
+    else if (t === "weak") startWeak();
+    else if (t === "cards") startCards();
+    else if (t === "mix") startMix();
+    else if (t === "exam" && next) startBlock(next.id);
+    else if ((t === "read" || t === "drill" || t === "lab") && next) openSection(next.id, t === "read" ? "" : t);
+  }));
+  document.getElementById("deadline").addEventListener("change", e => {
+    if (!e.target.value) return;
+    state.study.plan = { ...state.study.plan, deadline: e.target.value, at: stamp() };
+    commit(true);
+    renderToday();
+  });
+  document.getElementById("perday").addEventListener("change", e => {
+    state.study.plan = { ...state.study.plan, perDay: Number(e.target.value), at: stamp() };
+    commit(true);
+    renderToday();
+  });
+}
+
+/* ---------- labs: interactive diagrams inside reference sections ---------- */
+
+function rng(seed) {
+  let a = seed >>> 0;
+  return () => {
+    a = (a + 0x6D2B79F5) >>> 0;
+    let t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function gauss(r) {
+  const u = Math.max(r(), 1e-12);
+  return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * r());
+}
+
+function fmt(x, d = 2) {
+  return Number.isFinite(x) ? x.toFixed(d) : "—";
+}
+
+function pct(x, d = 0) {
+  return Number.isFinite(x) ? (x * 100).toFixed(d) + "%" : "—";
+}
+
+function range(label, id, min, max, step, value, suffix = "") {
+  return `<label class="lab-ctl"><span>${label}</span>
+    <input type="range" data-k="${id}" min="${min}" max="${max}" step="${step}" value="${value}">
+    <output data-o="${id}">${value}${suffix}</output></label>`;
+}
+
+function segmented(id, options, value) {
+  return `<div class="lab-seg" role="group">${options.map(([v, t]) =>
+    `<button type="button" data-seg="${id}" data-v="${v}" aria-pressed="${String(v) === String(value)}">${t}</button>`).join("")}</div>`;
+}
+
+function bindLab(el, st, draw) {
+  el.addEventListener("input", e => {
+    const k = e.target.dataset && e.target.dataset.k;
+    if (!k) return;
+    st[k] = Number(e.target.value);
+    draw();
+  });
+  el.addEventListener("click", e => {
+    const b = e.target.closest("[data-seg],[data-act]");
+    if (!b || !el.contains(b)) return;
+    if (b.dataset.seg) {
+      const v = b.dataset.v;
+      st[b.dataset.seg] = isNaN(Number(v)) ? v : Number(v);
+    } else {
+      st.act = b.dataset.act;
+      st.actArg = b.dataset.arg;
+    }
+    draw();
+    st.act = null;
+  });
+}
+
+function syncOutputs(el, st, fmtMap = {}) {
+  el.querySelectorAll("[data-o]").forEach(o => {
+    const k = o.dataset.o;
+    o.textContent = fmtMap[k] ? fmtMap[k](st[k]) : st[k];
+  });
+}
+
+/* 1. Self-attention */
+const ATT_SENT = {
+  lock: { title: "навесной замок на двери", tokens: ["навесной", "замок", "на", "двери"] },
+  castle: { title: "старинный замок на горе", tokens: ["старинный", "замок", "на", "горе"] }
+};
+const ATT_VEC = {
+  "навесной": [0.2, 1.7, 0.0, 0.0],
+  "замок": [0.9, 1.0, 1.0, 0.0],
+  "на": [0.0, 0.0, 0.0, 1.3],
+  "двери": [0.7, 1.3, 0.1, 0.0],
+  "старинный": [0.3, 0.1, 1.5, 0.0],
+  "горе": [0.6, 0.0, 1.7, 0.0]
+};
+
+function labAttention(el) {
+  const st = { sent: "lock", q: 1, d: 64, scale: 1 };
+  el.innerHTML = `
+    <div class="lab-controls">
+      ${segmented("sent", [["lock", "навесной замок"], ["castle", "старинный замок"]], st.sent)}
+      ${range("Размерность головы d", "d", 4, 512, 4, st.d)}
+      ${segmented("scale", [[1, "делить на √d"], [0, "не делить"]], st.scale)}
+    </div>
+    <div class="lab-stage" data-view></div>
+    <p class="lab-note" data-note></p>`;
+  const view = el.querySelector("[data-view]");
+  const note = el.querySelector("[data-note]");
+  function draw() {
+    if (st.act === "q") st.q = Number(st.actArg);
+    el.querySelectorAll("[data-seg]").forEach(b => b.setAttribute("aria-pressed", String(String(st[b.dataset.seg]) === b.dataset.v)));
+    syncOutputs(el, st);
+    const toks = ATT_SENT[st.sent].tokens;
+    const q = ATT_VEC[toks[st.q]];
+    const grow = Math.sqrt(st.d / 4);
+    const raw = toks.map(t => ATT_VEC[t].reduce((s, v, i) => s + v * q[i], 0) * grow * 1.6);
+    const logits = raw.map(x => st.scale ? x / Math.sqrt(st.d) * 2 : x);
+    const m = Math.max(...logits);
+    const ex = logits.map(x => Math.exp(x - m));
+    const z = ex.reduce((a, b) => a + b, 0);
+    const w = ex.map(x => x / z);
+    const H = -w.reduce((s, p) => s + (p > 0 ? p * Math.log2(p) : 0), 0);
+    const W = 640, x0 = 70, gap = (W - 2 * x0) / (toks.length - 1);
+    const qx = x0 + st.q * gap;
+    const arcs = toks.map((t, i) => {
+      const kx = x0 + i * gap;
+      const mid = (qx + kx) / 2, h = 26 + Math.abs(kx - qx) * 0.28;
+      return `<path d="M${qx} 74 Q${mid} ${74 + h} ${kx} 150" class="lab-arc" style="stroke-width:${0.6 + w[i] * 7};opacity:${0.18 + w[i] * 0.82}"/>`;
+    }).join("");
+    const top = toks.map((t, i) => `<g class="lab-tok ${i === st.q ? "is-on" : ""}" data-act="q" data-arg="${i}" tabindex="0" role="button" aria-label="Запрос: ${t}">
+        <rect x="${x0 + i * gap - 56}" y="34" width="112" height="34" rx="6"/>
+        <text x="${x0 + i * gap}" y="56">${t}</text></g>`).join("");
+    const bottom = toks.map((t, i) => {
+      const bx = x0 + i * gap, bh = Math.max(2, w[i] * 96);
+      return `<g class="lab-key">
+        <rect x="${bx - 56}" y="150" width="112" height="30" rx="6"/>
+        <text x="${bx}" y="170">${t}</text>
+        <rect class="lab-bar" x="${bx - 18}" y="${300 - bh}" width="36" height="${bh}"/>
+        <text class="lab-num" x="${bx}" y="${294 - bh}">${pct(w[i])}</text>
+        <text class="lab-cap" x="${bx}" y="318">q·k ${fmt(logits[i], 1)}</text></g>`;
+    }).join("");
+    view.innerHTML = `<p class="lab-legend">сверху запрос (query), нажми на слово; снизу ключи (keys) и веса после softmax, толщина дуги — тот же вес</p>
+      <svg viewBox="0 24 ${W} 306" class="lab-svg" role="group" aria-label="Веса внимания">
+      ${arcs}${top}${bottom}</svg>`;
+    const lead = toks.map((t, i) => [t, w[i]]).filter((_, i) => i !== st.q).sort((a, b) => b[1] - a[1])[0];
+    const self = w[st.q];
+    note.textContent = `Энтропия весов ${fmt(H, 2)} бита из ${fmt(Math.log2(toks.length), 2)} возможных. ` +
+      (st.scale ? "" : (H < 0.3 ? "Без деления на √d softmax почти one-hot: градиент через остальные слова исчезает. " : "Увеличь d, чтобы увидеть насыщение. ")) +
+      (self > 0.9
+        ? `«${toks[st.q]}» смотрит почти только на себя: контекст в его вектор не попадает.`
+        : `Из соседей больше всего «${toks[st.q]}» берёт от «${lead[0]}» (${pct(lead[1])}), поэтому одно и то же слово получает разный вектор в разных фразах. Переключи фразу и сравни.`);
+    view.querySelectorAll(".lab-tok").forEach(g => g.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); st.q = Number(g.dataset.arg); draw(); }
+    }));
+  }
+  bindLab(el, st, draw);
+  draw();
+}
+
+/* 2. Transformer block teardown */
+const TBLOCK = [
+  { id: "emb", t: "Токены → эмбеддинги", d: "Каждый токен становится вектором из таблицы эмбеддингов. Порядка слов здесь ещё нет.", f: "Сломано: чужой токенизатор, и векторы отвечают не тем словам." },
+  { id: "norm1", t: "RMSNorm", d: "Нормировка перед блоком (pre-norm): держит масштаб активаций, обучение устойчиво без тонкого разогрева.", f: "Post-norm без разогрева легко расходится в первые сотни шагов." },
+  { id: "att", t: "Внимание: Q, K, V, головы", d: "Каждый токен смотрит на все остальные. RoPE поворачивает q и k на угол позиции, GQA делит k и v между группами голов.", f: "Квадратично по длине: удвоение входа учетверяет счёт внимания на prefill." },
+  { id: "res1", t: "+ остаточная связь", d: "Вход блока складывается с выходом внимания: градиент проходит сквозь десятки слоёв.", f: "Без остатка глубокая сеть не обучается: градиент гаснет до нижних слоёв." },
+  { id: "norm2", t: "RMSNorm", d: "Вторая нормировка перед полносвязной частью.", f: "" },
+  { id: "mlp", t: "MLP (SwiGLU)", d: "Расширение размерности и обратное сжатие. Здесь большая часть параметров модели.", f: "Именно эти матрицы режет квантование и дообучает LoRA." },
+  { id: "res2", t: "+ остаточная связь", d: "Второе сложение с входом. Блок повторяется N раз: 32, 48, 80.", f: "" },
+  { id: "head", t: "Логиты → softmax → токен", d: "Последний слой даёт число на каждый токен словаря, температура делит логиты, сэмплер выбирает следующий токен.", f: "Температура 0 убирает сэмплинг, но не недетерминизм рантайма." }
+];
+
+function labTransformer(el) {
+  const st = { split: 1, labels: window.matchMedia("(max-width: 560px)").matches ? 0 : 1, on: "att" };
+  el.innerHTML = `
+    <div class="lab-controls">
+      ${segmented("split", [[1, "разобрать"], [0, "собрать"]], st.split)}
+      <div class="lab-wide">${segmented("labels", [[1, "подписи"], [0, "без подписей"]], st.labels)}</div>
+    </div>
+    <div class="lab-stage lab-split" data-view></div>`;
+  const view = el.querySelector("[data-view]");
+  function draw() {
+    if (st.act === "on") st.on = st.actArg;
+    el.querySelectorAll("[data-seg]").forEach(b => b.setAttribute("aria-pressed", String(String(st[b.dataset.seg]) === b.dataset.v)));
+    const n = TBLOCK.length, step = st.split ? 50 : 18, base = 70 + (n - 1) * step;
+    const plates = TBLOCK.map((p, i) => {
+      const y = base - i * step;
+      const big = p.id === "att" || p.id === "mlp";
+      const w = big ? 280 : 230, x = 190 - w / 2 + (big ? 0 : 25);
+      const tone = p.id === "att" ? "accent" : p.id === "mlp" ? "ok" : p.id.startsWith("res") ? "warn" : "ink";
+      const pts = `${x},${y} ${x + w},${y} ${x + w + 60},${y - 26} ${x + 60},${y - 26}`;
+      const side = `${x},${y} ${x + w},${y} ${x + w},${y + 9} ${x},${y + 9}`;
+      const lx = 540, ly = y - 9;
+      return `<g class="lab-plate tone-${tone} ${st.on === p.id ? "is-on" : ""}" data-act="on" data-arg="${p.id}" tabindex="0" role="button" aria-label="${p.t}">
+        <polygon class="side" points="${side}"/><polygon class="top" points="${pts}"/>
+        ${st.labels ? `<path class="lead" d="M${x + w + 36} ${y - 12} L${lx - 8} ${ly}"/><circle class="dot" cx="${x + w + 36}" cy="${y - 12}" r="2.4"/>
+        <text class="lab-call" x="${lx}" y="${ly + 4}">${p.t}</text>` : ""}</g>`;
+    }).join("");
+    const cur = TBLOCK.find(p => p.id === st.on);
+    view.innerHTML = `<svg viewBox="0 0 ${st.labels ? 760 : 560} ${base + 40}" class="lab-svg" role="group" aria-label="Блок трансформера по слоям">
+        <text class="lab-cap" x="8" y="22" text-anchor="start">блок трансформера, decoder-only · ×N</text>${plates}</svg>
+      <div class="lab-card"><b>${cur.t}</b><p>${cur.d}</p>${cur.f ? `<p class="lab-warn">${cur.f}</p>` : ""}</div>`;
+    view.querySelectorAll(".lab-plate").forEach(g => g.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); st.on = g.dataset.arg; draw(); }
+    }));
+  }
+  bindLab(el, st, draw);
+  draw();
+}
+
+/* 3. RAG pipeline step-through */
+const RAG_STEPS = {
+  index: [
+    ["Документы", "PDF, сканы, письма. Сначала разбор структуры: заголовки, абзацы, таблицы.", "Колонтитулы и дубли потом притягиваются к любому запросу."],
+    ["Чистка", "NFKC, склейка переносов, удаление повторяющихся блоков, MinHash-дедупликация.", "Самый дешёвый прирост recall во всём RAG."],
+    ["Чанки", "Резка по структуре: раздел и его абзацы вместе, таблица целиком, путь раздела в тексте чанка.", "Фиксированные 512 символов рвут таблицы, и половины теряют смысл."],
+    ["Эмбеддинги", "Модель превращает чанк в вектор. Для E5 префикс «passage: ».", "Смена модели требует полной переиндексации, смешанный индекс деградирует молча."],
+    ["Индексы", "Векторный (HNSW) и лексический (BM25) рядом, у каждого чанка метаданные и права.", "При переходе на приближённый индекс называют потерю recall цифрой."]
+  ],
+  query: [
+    ["Вопрос", "Пользователь спрашивает своими словами. Иногда вопрос переписывают или строят HyDE.", "Номера и артикулы векторный поиск размывает."],
+    ["Фильтры", "Тип документа, дата, права доступа — до поиска, а не после.", "Фильтр по правам после поиска выдаёт существование закрытых документов."],
+    ["BM25 + векторы", "Два ранжирования по top-50, у каждого свои слепые зоны.", "Чисто векторный поиск на номерах договоров почти всегда ошибка."],
+    ["RRF", "Слияние по обратным рангам 1/(60 + позиция): шкалы оценок не нужны.", "Складывать BM25 и косинус напрямую нельзя: шкалы несопоставимы."],
+    ["Reranker", "Cross-encoder читает пару «вопрос + чанк» и упорядочивает 50 кандидатов.", "На весь корпус его не пускают: стоимость линейна по числу пар."],
+    ["Генератор", "Модель отвечает по 3–5 лучшим чанкам с цитатой на каждый факт.", "Лишние чанки тонут в середине контекста и разбавляют ответ."],
+    ["Проверка", "Постпроцессор сверяет цитаты с поданным контекстом, без источника утверждение не публикуется.", "Без набора «ответа нет в документах» система сочиняет."]
+  ]
+};
+const RAG_METRIC = { index: ["доля таблиц целиком", "доля чанков без разрыва", "recall@5 на чистом корпусе", "recall@k до и после смены модели", "потеря recall HNSW против плоского"], query: ["", "утечки по правам: 0", "recall@50 у каждого ранжирования", "recall@5 после слияния", "прирост recall@5 на том же списке", "faithfulness", "доля верных отказов"] };
+
+function labStepper(el, STEPS, METRIC, phases) {
+  const st = { phase: phases[0][0], i: 0 };
+  el.innerHTML = `
+    <div class="lab-controls">
+      ${phases.length > 1 ? segmented("phase", phases, st.phase) : ""}
+      <div class="lab-seg"><button type="button" data-act="prev">← шаг</button><button type="button" data-act="next">шаг →</button></div>
+    </div>
+    <div class="lab-stage" data-view></div>`;
+  const view = el.querySelector("[data-view]");
+  let lastPhase = st.phase;
+  function draw() {
+    if (st.phase !== lastPhase) { st.i = 0; lastPhase = st.phase; }
+    const steps = STEPS[st.phase];
+    if (st.act === "next") st.i = Math.min(steps.length - 1, st.i + 1);
+    if (st.act === "prev") st.i = Math.max(0, st.i - 1);
+    if (st.act === "go") st.i = Number(st.actArg);
+    el.querySelectorAll("[data-seg]").forEach(b => b.setAttribute("aria-pressed", String(String(st[b.dataset.seg]) === b.dataset.v)));
+    const flow = steps.map((s, i) => `<button type="button" class="lab-node ${i === st.i ? "is-on" : ""} ${i < st.i ? "is-past" : ""}" data-act="go" data-arg="${i}">
+      <span class="lab-node-n">${i + 1}</span><span>${s[0]}</span></button>`).join(`<span class="lab-arrow" aria-hidden="true"></span>`);
+    const s = steps[st.i];
+    const metric = (METRIC[st.phase] || [])[st.i];
+    view.innerHTML = `<div class="lab-flow">${flow}</div>
+      <div class="lab-card"><b>${st.i + 1}. ${s[0]}</b><p>${s[1]}</p><p class="lab-warn">${s[2]}</p>${metric ? `<p class="lab-metric">мерить: ${metric}</p>` : ""}</div>`;
+  }
+  bindLab(el, st, draw);
+  draw();
+}
+
+function labRag(el) {
+  labStepper(el, RAG_STEPS, RAG_METRIC, [["query", "запрос"], ["index", "индексация"]]);
+}
+
+const SYS_STEPS = {
+  design: [
+    ["Решение и метрика", "Какое решение принимает бизнес по ответу модели, какой метрикой это видно, какие ограничители нельзя ухудшать.", "Начать с названия модели — главный сигнал слабого ответа."],
+    ["Ограничения", "Пиковая нагрузка, бюджет задержки p99, объём каталога, приватность, цена тысячи запросов.", "Бюджет задержки, посчитанный после выбора модели, обычно ломает архитектуру."],
+    ["Данные и метки", "Откуда метки, с какой задержкой приходят, какие смещения в логах, нет ли петли обратной связи.", "Логи старой системы показывают только то, что она сама показала."],
+    ["Бейзлайн", "Правило, популярное или прошлое значение. От него считается польза модели.", "Без бейзлайна нельзя сказать, окупается ли модель вообще."],
+    ["Кандидаты", "Дешёвый отбор на полноту из нескольких источников: векторный поиск, соседи, правила, популярное.", "Чего нет среди кандидатов, ранжировщик не вернёт."],
+    ["Ранжирование", "Точная модель на богатых признаках упорядочивает сотни кандидатов, признаки из одного определения для обучения и сервиса.", "Разный код признаков в обучении и сервисе даёт training-serving skew."],
+    ["Офлайн-оценка", "Метрика на отложенных данных по времени, сравнение с бейзлайном, проверка связи с онлайн-метрикой на прошлых экспериментах.", "Офлайн на логах старой системы завышает похожесть на неё."],
+    ["Выкатка", "Теневой режим, канарейка с ограничителями и автооткатом, затем A/B с заранее названной целевой метрикой.", "Выкатка на всех сразу превращает ошибку в инцидент."],
+    ["Мониторинг", "Ошибки и задержки, дрейф входа, распределение скоров, качество по меткам с задержкой, политика переобучения.", "Метрика без учёта задержки меток выглядит зелёной ровно до прихода исходов."]
+  ]
+};
+const SYS_METRIC = { design: ["целевая метрика и ограничители", "QPS, p99, цена 1000 запросов", "задержка меток, доля контроля", "метрика бейзлайна", "recall@k кандидатов", "NDCG или бизнес-метрика", "связь офлайн и онлайн", "ограничители канарейки", "PSI входа, доля пустых ответов"] };
+
+function labSysDesign(el) {
+  labStepper(el, SYS_STEPS, SYS_METRIC, [["design", "проектирование"]]);
+}
+
+/* 4. Threshold, PR and cost */
+function labThreshold(el) {
+  const st = { prev: 5, t: 50, cfp: 1, cfn: 8, sep: 3 };
+  el.innerHTML = `
+    <div class="lab-controls">
+      ${range("Доля положительных", "prev", 1, 50, 1, st.prev, "%")}
+      ${range("Порог", "t", 1, 99, 1, st.t)}
+      ${range("Цена ложной тревоги", "cfp", 1, 20, 1, st.cfp)}
+      ${range("Цена пропуска", "cfn", 1, 20, 1, st.cfn)}
+      ${range("Разделимость классов", "sep", 1, 5, 1, st.sep)}
+    </div>
+    <div class="lab-stage lab-split" data-view></div>`;
+  const view = el.querySelector("[data-view]");
+  function sample() {
+    const r = rng(7), N = 2000, pos = Math.round(N * st.prev / 100), mu = 0.12 + st.sep * 0.06;
+    const clip = x => Math.min(0.999, Math.max(0.001, x));
+    const s = [];
+    for (let i = 0; i < N; i++) {
+      const y = i < pos ? 1 : 0;
+      s.push([clip(0.5 + (y ? mu : -mu) + gauss(r) * 0.16), y]);
+    }
+    return s;
+  }
+  function draw() {
+    syncOutputs(el, st, { t: v => fmt(v / 100, 2), prev: v => v + "%" });
+    const data = sample();
+    const th = st.t / 100;
+    let tp = 0, fp = 0, fn = 0, tn = 0;
+    data.forEach(([s, y]) => { if (s >= th) { y ? tp++ : fp++; } else { y ? fn++ : tn++; } });
+    const P = tp + fn, prec = tp / Math.max(1, tp + fp), rec = tp / Math.max(1, P), acc = (tp + tn) / data.length;
+    const costs = [];
+    for (let k = 1; k < 100; k++) {
+      const t2 = k / 100; let a = 0, b = 0;
+      data.forEach(([s, y]) => { if (s >= t2 && !y) a++; if (s < t2 && y) b++; });
+      costs.push([t2, a * st.cfp + b * st.cfn]);
+    }
+    const best = costs.reduce((m, c) => c[1] < m[1] ? c : m, costs[0]);
+    const maxCost = Math.max(...costs.map(c => c[1]));
+    const bins = 40, hp = new Array(bins).fill(0), hn = new Array(bins).fill(0);
+    data.forEach(([s, y]) => { const b = Math.min(bins - 1, Math.floor(s * bins)); (y ? hp : hn)[b]++; });
+    const hmax = Math.max(...hn, ...hp, 1);
+    const W = 600, X = s => 30 + s * (W - 60), hY = v => 150 - Math.sqrt(v / hmax) * 120;
+    const barsN = hn.map((v, i) => `<rect class="lab-hneg" x="${X(i / bins)}" y="${hY(v)}" width="${(W - 60) / bins - 1}" height="${150 - hY(v)}"/>`).join("");
+    const barsP = hp.map((v, i) => `<rect class="lab-hpos" x="${X(i / bins)}" y="${hY(v)}" width="${(W - 60) / bins - 1}" height="${150 - hY(v)}"/>`).join("");
+    const cost = costs.map(([t2, c]) => `${X(t2)},${280 - c / maxCost * 90}`).join(" ");
+    view.innerHTML = `<div class="lab-fig"><p class="lab-legend">оценки модели: серые — отрицательные, цветные — положительные (корень по высоте)</p><svg viewBox="0 0 ${W} 310" class="lab-svg" role="img" aria-label="Распределение оценок и стоимость ошибок">
+        ${barsN}${barsP}
+        <line class="lab-axis" x1="30" y1="150" x2="${W - 30}" y2="150"/>
+        <line class="lab-thr" x1="${X(th)}" y1="26" x2="${X(th)}" y2="290"/>
+        <text class="lab-cap" x="30" y="182" text-anchor="start">ожидаемая стоимость ошибок по порогу</text>
+        <polyline class="lab-line" points="${cost}"/>
+        <circle class="lab-best" cx="${X(best[0])}" cy="${280 - best[1] / maxCost * 90}" r="4"/>
+        <text class="lab-num" x="${X(best[0])}" y="${270 - best[1] / maxCost * 90}">минимум при ${fmt(best[0], 2)}</text>
+      </svg></div>
+      <div class="lab-card">
+        <div class="lab-cm"><span></span><b>факт +</b><b>факт −</b>
+          <b>модель +</b><span class="ok">TP ${tp}</span><span class="bad">FP ${fp}</span>
+          <b>модель −</b><span class="bad">FN ${fn}</span><span>TN ${tn}</span></div>
+        <p class="lab-kv"><span>precision</span><b>${pct(prec)}</b><span>recall</span><b>${pct(rec)}</b><span>accuracy</span><b>${pct(acc)}</b><span>тревог</span><b>${tp + fp}</b></p>
+        <p class="lab-note">Константа «всегда нет» дала бы accuracy ${pct(1 - st.prev / 100)}. Стоимость при текущем пороге ${fp * st.cfp + fn * st.cfn}, минимум ${best[1]} при пороге ${fmt(best[0], 2)}.</p>
+      </div>`;
+  }
+  bindLab(el, st, draw);
+  draw();
+}
+
+/* 5. Gradient descent with momentum in a ravine */
+function labDescent(el) {
+  const st = { kappa: 100, lr: 18, mom: 60 };
+  el.innerHTML = `
+    <div class="lab-controls">
+      ${range("Вытянутость оврага κ", "kappa", 1, 200, 1, st.kappa)}
+      ${range("Шаг lr × 1000", "lr", 1, 40, 1, st.lr)}
+      ${range("Момент β", "mom", 0, 95, 5, st.mom)}
+    </div>
+    <div class="lab-stage" data-view></div>
+    <p class="lab-note" data-note></p>`;
+  const view = el.querySelector("[data-view]");
+  const note = el.querySelector("[data-note]");
+  const uid = "d" + Math.random().toString(36).slice(2, 8);
+  const squash = () => Math.min(Math.sqrt(st.kappa), 8);
+  function run(beta) {
+    let x = 1, y = 0.9 / squash(), vx = 0, vy = 0; const pts = [[x, y]];
+    const lr = st.lr / 1000;
+    for (let i = 0; i < 60; i++) {
+      vx = beta * vx + x; vy = beta * vy + st.kappa * y;
+      x -= lr * vx; y -= lr * vy;
+      if (!Number.isFinite(x) || Math.abs(x) > 50 || Math.abs(y) > 50) { pts.push([x, y]); return { pts, div: true }; }
+      pts.push([x, y]);
+    }
+    return { pts, div: false };
+  }
+  function draw() {
+    syncOutputs(el, st, { lr: v => fmt(v / 1000, 3), mom: v => fmt(v / 100, 2) });
+    const W = 600, Hh = 300, ys = 130 * squash(), X = x => W / 2 + x * 260, Y = y => Hh / 2 - 10 - y * ys;
+    const ell = [0.02, 0.08, 0.2, 0.4, 0.7].map(c => `<ellipse class="lab-contour" cx="${X(0)}" cy="${Y(0)}" rx="${Math.sqrt(2 * c) * 260}" ry="${Math.min(400, Math.sqrt(2 * c / st.kappa) * ys)}"/>`).join("");
+    const gd = run(0), mo = run(st.mom / 100);
+    const clamp = v => Math.max(-1.6, Math.min(1.6, v));
+    const line = r => r.pts.map(([x, y]) => `${X(clamp(x))},${Y(clamp(y))}`).join(" ");
+    const dist = r => Math.hypot(...r.pts[r.pts.length - 1]);
+    view.innerHTML = `<p class="lab-legend">f = ½(x² + κy²), 60 шагов, ось y растянута, чтобы овраг был виден</p>
+      <svg viewBox="0 0 ${W} ${Hh}" class="lab-svg" role="img" aria-label="Траектории спуска">
+      <defs><clipPath id="${uid}"><rect x="0" y="0" width="${W}" height="${Hh}"/></clipPath></defs>
+      <g clip-path="url(#${uid})">${ell}
+      <polyline class="lab-path-muted" points="${line(gd)}"/>
+      <polyline class="lab-path" points="${line(mo)}"/></g>
+      <circle class="lab-best" cx="${X(0)}" cy="${Y(0)}" r="4"/>
+</svg>
+      <p class="lab-kv">
+        <span>серая, без момента: до минимума</span><b>${gd.div ? "разошёлся" : fmt(dist(gd), 3)}</b>
+        <span>цветная, с моментом β ${fmt(st.mom / 100, 2)}: до минимума</span><b>${mo.div ? "разошёлся" : fmt(dist(mo), 3)}</b>
+      </p>`;
+    const limit = 2 / st.kappa;
+    note.textContent = (st.lr / 1000 > limit
+      ? `Шаг больше 2/κ = ${fmt(limit, 3)}: поперёк оврага спуск без момента раскачивается и уходит. `
+      : `Шаг ограничен узким направлением: при κ = ${st.kappa} он не может быть больше ${fmt(limit, 3)}, а вдоль оврага этого мало. `) +
+      "Момент копит скорость вдоль оврага и гасит колебания поперёк.";
+  }
+  bindLab(el, st, draw);
+  draw();
+}
+
+/* 6. Bias and variance: polynomial degree */
+function polyFit(xs, ys, deg, ridge = 1e-9) {
+  const n = deg + 1, A = Array.from({ length: n }, () => new Array(n + 1).fill(0));
+  xs.forEach((x, k) => {
+    const p = []; let v = 1;
+    for (let i = 0; i < n; i++) { p.push(v); v *= x; }
+    for (let i = 0; i < n; i++) { for (let j = 0; j < n; j++) A[i][j] += p[i] * p[j]; A[i][n] += p[i] * ys[k]; }
+  });
+  for (let i = 0; i < n; i++) A[i][i] += ridge;
+  for (let c = 0; c < n; c++) {
+    let piv = c;
+    for (let r = c + 1; r < n; r++) if (Math.abs(A[r][c]) > Math.abs(A[piv][c])) piv = r;
+    [A[c], A[piv]] = [A[piv], A[c]];
+    for (let r = 0; r < n; r++) {
+      if (r === c || !A[c][c]) continue;
+      const f = A[r][c] / A[c][c];
+      for (let j = c; j <= n; j++) A[r][j] -= f * A[c][j];
+    }
+  }
+  return A.map((row, i) => row[n] / (row[i] || 1));
+}
+
+function polyVal(w, x) {
+  let s = 0, v = 1;
+  for (const c of w) { s += c * v; v *= x; }
+  return s;
+}
+
+function labBiasVariance(el) {
+  const st = { deg: 3, seed: 1, n: 16 };
+  el.innerHTML = `
+    <div class="lab-controls">
+      ${range("Степень многочлена", "deg", 0, 12, 1, st.deg)}
+      ${range("Точек в обучении", "n", 8, 60, 2, st.n)}
+      <div class="lab-seg"><button type="button" data-act="seed">новая выборка</button></div>
+    </div>
+    <div class="lab-stage lab-split" data-view></div>`;
+  const view = el.querySelector("[data-view]");
+  const truth = x => Math.sin(Math.PI * x * 1.3);
+  function data(seed, n) {
+    const r = rng(seed * 97 + n), xs = [], ys = [];
+    for (let i = 0; i < n; i++) { const x = r() * 2 - 1; xs.push(x); ys.push(truth(x) + gauss(r) * 0.25); }
+    return [xs, ys];
+  }
+  const vr = rng(999), vx = [], vy = [];
+  for (let i = 0; i < 300; i++) { const x = vr() * 2 - 1; vx.push(x); vy.push(truth(x) + gauss(vr) * 0.25); }
+  const uid = "b" + Math.random().toString(36).slice(2, 8);
+  const mse = (w, xs, ys) => xs.reduce((s, x, i) => s + (polyVal(w, x) - ys[i]) ** 2, 0) / xs.length;
+  function draw() {
+    if (st.act === "seed") st.seed += 1;
+    syncOutputs(el, st);
+    const [xs, ys] = data(st.seed, st.n);
+    const curves = [];
+    for (let d = 0; d <= 12; d++) { const w = polyFit(xs, ys, d); curves.push([mse(w, xs, ys), mse(w, vx, vy)]); }
+    const w = polyFit(xs, ys, st.deg);
+    const W = 340, H = 260, X = x => 16 + (x + 1) / 2 * (W - 32), Y = y => H / 2 + 14 - y * 70;
+    const fit = [], tru = [];
+    for (let i = 0; i <= 120; i++) { const x = -1 + i / 60; fit.push(`${X(x)},${Y(Math.max(-1.6, Math.min(1.6, polyVal(w, x))))}`); tru.push(`${X(x)},${Y(truth(x))}`); }
+    const pts = xs.map((x, i) => `<circle class="lab-pt" cx="${X(x)}" cy="${Y(ys[i])}" r="3"/>`).join("");
+    const cmax = Math.min(1.5, Math.max(...curves.map(c => c[1]))), EX = d => 30 + d / 12 * 280, EY = v => 210 - Math.min(v, cmax) / cmax * 180;
+    const trL = curves.map((c, d) => `${EX(d)},${EY(c[0])}`).join(" "), vaL = curves.map((c, d) => `${EX(d)},${EY(c[1])}`).join(" ");
+    const bestD = curves.reduce((b, c, d) => c[1] < curves[b][1] ? d : b, 0);
+    view.innerHTML = `<div class="lab-fig"><p class="lab-legend">серая — истина, цветная — модель степени ${st.deg}</p><svg viewBox="0 0 ${W} ${H}" class="lab-svg" role="img" aria-label="Подгонка многочленом">
+        <polyline class="lab-path-muted" points="${tru.join(" ")}"/>
+        <defs><clipPath id="${uid}"><rect x="0" y="0" width="${W}" height="${H}"/></clipPath></defs>
+        <polyline class="lab-path" clip-path="url(#${uid})" points="${fit.join(" ")}"/>${pts}
+</svg></div>
+      <div class="lab-fig"><p class="lab-legend">ошибка по степени: серая — обучение, цветная — проверка</p><svg viewBox="0 0 340 240" class="lab-svg" role="img" aria-label="Ошибка на обучении и проверке по степени">
+        <line class="lab-axis" x1="30" y1="210" x2="310" y2="210"/>
+        <polyline class="lab-path-muted" points="${trL}"/><polyline class="lab-path" points="${vaL}"/>
+        <line class="lab-thr" x1="${EX(st.deg)}" y1="24" x2="${EX(st.deg)}" y2="210"/>
+        <circle class="lab-best" cx="${EX(bestD)}" cy="${EY(curves[bestD][1])}" r="4"/>
+        <text class="lab-cap" x="30" y="230" text-anchor="start">степень 0</text><text class="lab-cap" x="310" y="230" text-anchor="end">12</text></svg></div>
+      <p class="lab-note">Обучение ${fmt(curves[st.deg][0], 3)}, проверка ${fmt(curves[st.deg][1], 3)}. ${st.deg < bestD ? "Слишком простая модель: высокое смещение, обе ошибки высокие." : st.deg > bestD + 1 ? "Слишком гибкая: обучение почти идеально, проверка хуже. Нажми «новая выборка», чтобы увидеть разброс." : "Около лучшей степени на проверке."} Шум данных σ² = ${fmt(0.0625, 3)} — ниже него ошибка проверки не опустится.</p>`;
+  }
+  bindLab(el, st, draw);
+  draw();
+}
+
+/* 7. Splits and leakage */
+function labSplits(el) {
+  const st = { mode: "random", fold: 0 };
+  const docs = ["Д1", "Д2", "Д3", "Д4", "Д5", "Д6"];
+  const rows = [];
+  docs.forEach((d, i) => { for (let f = 0; f < 4; f++) rows.push({ doc: i, field: f, month: i + 1 }); });
+  const r = rng(5);
+  const shuffled = rows.map((x, i) => [r(), i]).sort((a, b) => a[0] - b[0]).map(x => x[1]);
+  el.innerHTML = `
+    <div class="lab-controls">
+      ${segmented("mode", [["random", "KFold по полям"], ["group", "GroupKFold по документам"], ["time", "по времени"]], st.mode)}
+      ${segmented("fold", [[0, "фолд 1"], [1, "фолд 2"], [2, "фолд 3"]], st.fold)}
+    </div>
+    <div class="lab-stage" data-view></div>`;
+  const view = el.querySelector("[data-view]");
+  function draw() {
+    el.querySelectorAll("[data-seg]").forEach(b => b.setAttribute("aria-pressed", String(String(st[b.dataset.seg]) === b.dataset.v)));
+    const test = new Set();
+    if (st.mode === "random") shuffled.forEach((idx, k) => { if (k % 3 === st.fold) test.add(idx); });
+    if (st.mode === "group") rows.forEach((x, idx) => { if (x.doc % 3 === st.fold) test.add(idx); });
+    if (st.mode === "time") rows.forEach((x, idx) => { if (x.doc === 3 + st.fold) test.add(idx); });
+    const trainDocs = new Set(rows.filter((_, i) => !test.has(i) && (st.mode !== "time" || rows[i].doc < 3 + st.fold)).map(x => x.doc));
+    const used = i => st.mode !== "time" || test.has(i) || rows[i].doc < 3 + st.fold;
+    let leaks = 0;
+    const cells = rows.map((x, i) => {
+      const isTest = test.has(i), leak = isTest && trainDocs.has(x.doc);
+      if (leak) leaks++;
+      const cls = !used(i) ? "is-off" : isTest ? (leak ? "is-leak" : "is-test") : "is-train";
+      return `<span class="lab-cell ${cls}" title="${docs[x.doc]}, поле ${x.field + 1}">${x.field + 1}</span>`;
+    });
+    const grid = docs.map((d, i) => `<div class="lab-row"><b>${d}</b><span class="lab-cap">мес. ${i + 1}</span>${cells.slice(i * 4, i * 4 + 4).join("")}</div>`).join("");
+    const msg = st.mode === "random"
+      ? `Поля одного документа разошлись по обучению и проверке: ${leaks} из ${test.size} проверочных полей видели «свой» бланк в обучении. Метрика меряет запоминание бланка.`
+      : st.mode === "group"
+        ? "Документ целиком либо в обучении, либо в проверке: утечки через общий скан и шаблон нет."
+        : "Обучение только на прошлом, проверка на следующем месяце. Будущее в обучение не попадает, светлые строки ещё не наступили.";
+    view.innerHTML = `<div class="lab-grid">${grid}</div>
+      <p class="lab-legend"><span class="lab-cell is-train"></span>обучение <span class="lab-cell is-test"></span>проверка <span class="lab-cell is-leak"></span>проверка с утечкой</p>
+      <p class="lab-note">${msg}</p>`;
+  }
+  bindLab(el, st, draw);
+  draw();
+}
+
+/* 8. Wilson vs Wald */
+function labWilson(el) {
+  const st = { k: 45, n: 49 };
+  el.innerHTML = `
+    <div class="lab-controls">
+      ${range("Успехов k", "k", 0, 200, 1, st.k)}
+      ${range("Наблюдений n", "n", 1, 200, 1, st.n)}
+    </div>
+    <div class="lab-stage" data-view></div>`;
+  const view = el.querySelector("[data-view]");
+  function draw() {
+    if (st.k > st.n) st.k = st.n;
+    el.querySelector('[data-k="k"]').max = st.n;
+    el.querySelector('[data-k="k"]').value = st.k;
+    syncOutputs(el, st);
+    const z = 1.96, p = st.k / st.n, n = st.n;
+    const d = 1 + z * z / n, c = (p + z * z / (2 * n)) / d, h = z * Math.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / d;
+    const wil = [c - h, c + h], wh = z * Math.sqrt(p * (1 - p) / n), wal = [p - wh, p + wh];
+    const W = 600, X = v => 40 + Math.max(-0.15, Math.min(1.15, v)) * 460;
+    const ticks = [0, 0.25, 0.5, 0.75, 1].map(t => `<line class="lab-axis" x1="${X(t)}" y1="40" x2="${X(t)}" y2="150"/><text class="lab-cap" x="${X(t)}" y="168">${fmt(t, 2)}</text>`).join("");
+    const out = wal[0] < 0 || wal[1] > 1;
+    view.innerHTML = `<svg viewBox="0 0 ${W} 180" class="lab-svg" role="img" aria-label="Интервалы Вальда и Уилсона">
+      <rect class="lab-out" x="${X(-0.15)}" y="40" width="${X(0) - X(-0.15)}" height="110"/>
+      <rect class="lab-out" x="${X(1)}" y="40" width="${X(1.15) - X(1)}" height="110"/>
+      ${ticks}
+      <text class="lab-cap" x="8" y="74" text-anchor="start">Вальд</text>
+      <line class="lab-int-muted" x1="${X(wal[0])}" y1="70" x2="${X(wal[1])}" y2="70"/>
+      <text class="lab-cap" x="8" y="114" text-anchor="start">Уилсон</text>
+      <line class="lab-int" x1="${X(wil[0])}" y1="110" x2="${X(wil[1])}" y2="110"/>
+      <circle class="lab-best" cx="${X(p)}" cy="90" r="4"/>
+      <text class="lab-num" x="${X(p)}" y="30" text-anchor="${p < 0.15 ? "start" : p > 0.85 ? "end" : "middle"}">${st.k}/${st.n} = ${fmt(p, 3)}</text></svg>
+      <p class="lab-kv"><span>Уилсон</span><b>[${fmt(wil[0], 3)}; ${fmt(wil[1], 3)}]</b><span>Вальд</span><b>[${fmt(wal[0], 3)}; ${fmt(wal[1], 3)}]</b><span>ширина</span><b>${fmt((wil[1] - wil[0]) * 100, 1)} п.п.</b></p>
+      <p class="lab-note">${st.k === 0 || st.k === st.n
+        ? `Ноль ошибок или ноль успехов: Вальд схлопывается в точку, а честная граница по правилу трёх около ${pct(3 / n, 1)}.`
+        : out ? "Вальд вылез за [0; 1]: у края шкалы и при малом n его формула врёт." : "Чтобы сузить интервал вдвое, нужно вчетверо больше наблюдений."}</p>`;
+  }
+  bindLab(el, st, draw);
+  draw();
+}
+
+/* 9. VRAM calculator */
+const VRAM_PRESETS = {
+  "7b": { p: 7, layers: 32, kv: 8, hd: 128, label: "плотная 7B" },
+  "14b": { p: 14, layers: 48, kv: 8, hd: 128, label: "плотная 14B" },
+  "moe": { p: 35, layers: 48, kv: 4, hd: 128, label: "MoE 35B, ~3B активных" }
+};
+
+function labVram(el) {
+  const st = { preset: "7b", bits: 16, ctx: 8, conc: 8, gpu: 24 };
+  el.innerHTML = `
+    <div class="lab-controls">
+      ${segmented("preset", Object.entries(VRAM_PRESETS).map(([k, v]) => [k, v.label]), st.preset)}
+      ${segmented("bits", [[16, "fp16"], [8, "int8"], [4, "int4"]], st.bits)}
+      ${range("Контекст, тыс. токенов", "ctx", 1, 128, 1, st.ctx)}
+      ${range("Параллельных запросов", "conc", 1, 64, 1, st.conc)}
+      ${segmented("gpu", [[24, "24 ГБ"], [48, "48 ГБ"], [80, "80 ГБ"]], st.gpu)}
+    </div>
+    <div class="lab-stage" data-view></div>`;
+  const view = el.querySelector("[data-view]");
+  function draw() {
+    el.querySelectorAll("[data-seg]").forEach(b => b.setAttribute("aria-pressed", String(String(st[b.dataset.seg]) === b.dataset.v)));
+    syncOutputs(el, st);
+    const m = VRAM_PRESETS[st.preset];
+    const G = 1024 ** 3;
+    const weights = m.p * 1e9 * st.bits / 8 / G;
+    const perTok = 2 * m.layers * m.kv * m.hd * 2;
+    const kv = perTok * st.ctx * 1024 * st.conc / G;
+    const reserve = (weights + kv) * 0.15;
+    const total = weights + kv + reserve;
+    const scale = Math.max(total, st.gpu) * 1.08, W = 600, X = v => 20 + v / scale * (W - 40);
+    const seg = (a, b, cls) => `<rect class="${cls}" x="${X(a)}" y="40" width="${Math.max(0, X(b) - X(a))}" height="40"/>`;
+    const fits = total <= st.gpu;
+    let maxConc = 0;
+    for (let c = 1; c <= 512; c++) { if ((weights + perTok * st.ctx * 1024 * c / G) * 1.15 <= st.gpu) maxConc = c; }
+    view.innerHTML = `<p class="lab-legend">веса ${fmt(weights, 1)} · KV-кэш ${fmt(kv, 1)} · запас 15% ${fmt(reserve, 1)} · итого ${fmt(total, 1)} ГиБ</p>
+      <svg viewBox="0 0 ${W} 100" class="lab-svg" role="img" aria-label="Память видеокарты">
+      ${seg(0, weights, "lab-mw")}${seg(weights, weights + kv, "lab-mk")}${seg(weights + kv, total, "lab-mr")}
+      <line class="lab-thr" x1="${X(st.gpu)}" y1="26" x2="${X(st.gpu)}" y2="96"/>
+      <text class="lab-num" x="${X(st.gpu)}" y="20">карта ${st.gpu} ГБ</text></svg>
+      <p class="lab-kv"><span>KV на токен</span><b>${fmt(perTok / 1024, 0)} КиБ</b><span>влезает</span><b class="${fits ? "ok" : "bad"}">${fits ? "да" : "нет"}</b><span>макс. запросов при этом контексте</span><b>${maxConc}</b></p>
+      <p class="lab-note">${st.preset === "moe" ? "MoE хранит все 35 млрд параметров, а считает примерно как трёхмиллиардная: память по полному размеру, скорость по активным. " : ""}${kv > weights ? "Кэш уже больше весов: упирается длина и число запросов, а не размер модели." : "Пока основную память занимают веса; добавь контекст или запросы, и кэш их обгонит."} Конфигурации слоёв условные, для своей модели числа берут из config.json.</p>`;
+  }
+  bindLab(el, st, draw);
+  draw();
+}
+
+
+const AGENT_STEPS = { loop: [
+  ["Задача и бюджет", "Цель, лимит шагов, бюджет токенов, список разрешённых инструментов и необратимых действий.", "Агент без лимита шагов рано или поздно зациклится."],
+  ["Мысль", "Модель решает, что делать дальше, опираясь на цель и наблюдения.", "Рефлексия без нового факта подтверждает собственную ошибку."],
+  ["Вызов инструмента", "Выбор по описанию инструмента и аргументы по его схеме.", "Границы применимости пишут в описание инструмента, а не в общий промпт."],
+  ["Предохранители", "Проверка повтора вызова, бюджета, белого списка, подтверждение необратимого человеком.", "Общий вопрос «продолжить?» превращает подтверждение в декорацию."],
+  ["Наблюдение", "Результат или структурированная ошибка: таймаут, пусто, отказ по правам.", "Молчаливый пустой ответ вместо ошибки заставляет агента думать, что данных нет."],
+  ["Сводка состояния", "Цель, найденные факты и решения переносятся явно, история сжимается.", "Полная история дорожает квадратично по числу шагов."],
+  ["Ответ или отказ", "Готово, корректный отказ или эскалация человеку, всё со следом в трейсе.", "Успех за сорок шагов вместо четырёх — не успех."]
+]};
+const AGENT_METRIC = { loop: ["доля задач в бюджете", "", "доля вызовов не того инструмента", "срабатывания предохранителей", "доля структурированных ошибок", "повторные вызовы", "решено, шагов, стоимость, верные отказы"] };
+
+const TASK_STEPS = { frame: [
+  ["Просьба", "Заказчик приходит с решением: «добавьте поле», «распознайте подпись».", "Начать делать просьбу, не найдя проблему за ней."],
+  ["Пять вопросов", "Что человек делает сейчас, как часто, что при ошибке, откуда правильный ответ, какой цифрой поймём, что лучше.", "Технологии до этих ответов обсуждать бессмысленно."],
+  ["Прикидка выгоды", "Документов в день × секунд на ручную работу × цена часа против цены разработки и прогона.", "Верхняя граница выгоды часто меньше стоимости разработки."],
+  ["Критерий приёмки", "Набор, метрика, порог, кто принимает и что явно вне области.", "Без него «сделано» определяется постфактум."],
+  ["Вертикальный срез", "Один тип документа, одно поле, двадцать примеров, полный путь до метрики за два дня.", "Горизонтальные слои дают первую цифру только в конце."],
+  ["Эксперименты по информации", "Первым идёт тот, что при любом исходе отсекает больше гипотез.", "Порядок «от дешёвого» тратит время на подтверждение ожидаемого."]
+]};
+const TASK_METRIC = { frame: ["", "", "рублей в год против цены", "метрика и порог на наборе", "первая честная цифра", "отсечено гипотез за час"] };
+
+function labAgent(el) { labStepper(el, AGENT_STEPS, AGENT_METRIC, [["loop", "цикл агента"]]); }
+function labTask(el) { labStepper(el, TASK_STEPS, TASK_METRIC, [["frame", "от просьбы к постановке"]]); }
+
+/* page -> visual tokens */
+function labPageTokens(el) {
+  const st = { dpi: 200, side: 1600, pages: 2, patch: 28 };
+  el.innerHTML = `
+    <div class="lab-controls">
+      ${range("Рендер, dpi", "dpi", 72, 400, 1, st.dpi)}
+      ${range("Длинная сторона не больше, px", "side", 640, 3200, 32, st.side)}
+      ${range("Страниц в запросе", "pages", 1, 10, 1, st.pages)}
+      ${segmented("patch", [[14, "патч 14 px"], [28, "токен 28 px"]], st.patch)}
+    </div>
+    <div class="lab-stage" data-view></div>`;
+  const view = el.querySelector("[data-view]");
+  function draw() {
+    el.querySelectorAll("[data-seg]").forEach(b => b.setAttribute("aria-pressed", String(String(st[b.dataset.seg]) === b.dataset.v)));
+    syncOutputs(el, st);
+    const a4 = [8.27, 11.69];
+    let h = a4[1] * st.dpi, w = a4[0] * st.dpi;
+    const k = Math.min(1, st.side / h);
+    h = Math.round(h * k); w = Math.round(w * k);
+    const tok = Math.ceil(w / st.patch) * Math.ceil(h / st.patch);
+    const total = tok * st.pages;
+    const font = 10 / 72 * st.dpi * k * 0.5;
+    const W = 600, scale = 220 / Math.max(h, 1);
+    const cols = Math.ceil(w / st.patch), rows = Math.ceil(h / st.patch);
+    const step = Math.max(1, Math.round(Math.max(cols, rows) / 40));
+    let grid = "";
+    for (let c = 0; c <= cols; c += step) grid += `<line class="lab-contour" x1="${40 + c * st.patch * scale}" y1="20" x2="${40 + c * st.patch * scale}" y2="${20 + h * scale}"/>`;
+    for (let r = 0; r <= rows; r += step) grid += `<line class="lab-contour" x1="40" y1="${20 + r * st.patch * scale}" x2="${40 + w * scale}" y2="${20 + r * st.patch * scale}"/>`;
+    view.innerHTML = `<div class="lab-split"><svg viewBox="0 0 ${W} 260" class="lab-svg" role="img" aria-label="Страница и сетка патчей">
+        <rect x="40" y="20" width="${w * scale}" height="${h * scale}" class="lab-page"/>${grid}
+        <text class="lab-cap" x="${50 + w * scale}" y="36" text-anchor="start">${w} × ${h} px</text>
+        <text class="lab-cap" x="${50 + w * scale}" y="62" text-anchor="start">${cols} × ${rows} ${st.patch === 28 ? "токенов" : "патчей"}${step > 1 ? `, линия на каждые ${step}` : ""}</text></svg>
+      <div class="lab-card">
+        <p class="lab-kv"><span>токенов на страницу</span><b>${tok.toLocaleString("ru-RU")}</b><span>на запрос</span><b>${total.toLocaleString("ru-RU")}</b><span>высота строчной буквы 10 pt, px</span><b class="${font < 8 ? "bad" : "ok"}">${fmt(font, 1)}</b></p>
+        <p class="lab-note">${k < 1 ? "Длинная сторона упёрлась в лимит: рост dpi больше не добавляет ни токенов, ни деталей. " : "Удвоение dpi учетверяет площадь и число токенов. "}${font < 8 ? "Строчная буква 10-го кегля меньше 8 пикселей: мелкие цифры номера начнут теряться." : "Мелкий шрифт ещё различим."} Модели режут картинку по-разному: у части патч 14 px с объединением 2 × 2 в один токен, у части фиксированное разрешение, поэтому число токенов сверяют с ответом API.</p>
+      </div></div>`;
+  }
+  bindLab(el, st, draw);
+  draw();
+}
+
+/* string normalization */
+const LAB_HOMO = { "A": "А", "B": "В", "C": "С", "E": "Е", "H": "Н", "K": "К", "M": "М", "O": "О", "P": "Р", "T": "Т", "X": "Х", "a": "а", "c": "с", "e": "е", "o": "о", "p": "р", "x": "х", "y": "у" };
+function labNormalize(el) {
+  const st = {};
+  const presets = [
+    ["OOO \u201eT2 МОБАЙЛ\u201c", "ООО «Т2 Мобайл»"],
+    ["ГУФССП\u00a0по Иркутской обла\u00adсти", "ГУФССП по Иркутской области"],
+    ["Исх. № РЦ\u2013ИСХ\u20136596", "Исх. № РЦ-ИСХ-6596"]
+  ];
+  el.innerHTML = `
+    <div class="lab-controls">
+      <div class="lab-seg">${presets.map((p, i) => `<button type="button" data-act="preset" data-arg="${i}">пример ${i + 1}</button>`).join("")}</div>
+    </div>
+    <div class="lab-norm">
+      <label class="lab-ctl"><span>Ответ модели</span><input type="text" data-in="a"></label>
+      <label class="lab-ctl"><span>Эталон</span><input type="text" data-in="b"></label>
+    </div>
+    <div class="lab-stage" data-view></div>`;
+  const ia = el.querySelector('[data-in="a"]'), ib = el.querySelector('[data-in="b"]');
+  const decode = s => s.replace(/\\u([0-9a-f]{4})/gi, (_, h) => String.fromCharCode(parseInt(h, 16)));
+  ia.value = decode(presets[0][0]); ib.value = presets[0][1];
+  const view = el.querySelector("[data-view]");
+  const steps = [
+    ["как есть", s => s],
+    ["NFKC", s => s.normalize("NFKC")],
+    ["невидимые и неразрывные", s => s.replace(/\u00ad/g, "").replace(/[\u00a0\u2007\u202f]/g, " ")],
+    ["кавычки и тире", s => s.replace(/[\u201e\u201c\u201d\u00ab\u00bb"]/g, "\"").replace(/[\u2012-\u2015\u2212]/g, "-")],
+    ["латинские двойники", s => s.replace(/\S+/g, w => { const lat = w.match(/[A-Za-z]/g) || []; return lat.length && lat.every(ch => LAB_HOMO[ch]) ? w.replace(/[A-Za-z]/g, ch => LAB_HOMO[ch]) : w; })],
+    ["регистр и пробелы", s => s.toLowerCase().replace(/\s+/g, " ").trim()]
+  ];
+  function show(s) {
+    return [...s].map(ch => {
+      const code = ch.charCodeAt(0);
+      if (code === 0xa0) return '<mark class="lab-mark" title="неразрывный пробел">⍽</mark>';
+      if (code === 0xad) return '<mark class="lab-mark" title="мягкий перенос">¬</mark>';
+      if (/[A-Za-z]/.test(ch) && LAB_HOMO[ch]) return `<mark class="lab-mark" title="латинская ${ch}">${esc(ch)}</mark>`;
+      if (code > 0x2000 && code < 0x2070) return `<mark class="lab-mark" title="U+${code.toString(16)}">${esc(ch)}</mark>`;
+      return esc(ch);
+    }).join("");
+  }
+  function draw() {
+    if (st.act === "preset") { const p = presets[Number(st.actArg)]; ia.value = decode(p[0]); ib.value = decode(p[1]); }
+    let a = ia.value, b = ib.value;
+    const rows = steps.map(([name, fn], i) => {
+      if (i) { a = fn(a); b = fn(b); }
+      const eq = a === b;
+      return `<div class="lab-nrow"><span class="lab-cap">${i}. ${name}</span><code>${show(a)}</code><code>${show(b)}</code><b class="${eq ? "ok" : "bad"}">${eq ? "равно" : "не равно"}</b></div>`;
+    }).join("");
+    view.innerHTML = `<div class="lab-ntable">${rows}</div><p class="lab-note">Подсвечены символы, которые глаз не отличает: латиница среди кириллицы, неразрывный пробел, мягкий перенос, типографские тире и кавычки. Нормализация применяется к обеим сторонам и не должна склеивать разные значения: «по Иркутской области» и «по Приморскому краю» после неё всё равно разные.</p>`;
+  }
+  ia.addEventListener("input", draw); ib.addEventListener("input", draw);
+  bindLab(el, st, draw);
+  draw();
+}
+
+/* PSI drift */
+function labPsi(el) {
+  const st = { b1: 10, b2: 20, b3: 30 };
+  el.innerHTML = `
+    <div class="lab-controls">
+      ${range("Корзина 1, %", "b1", 1, 70, 1, st.b1)}
+      ${range("Корзина 2, %", "b2", 1, 70, 1, st.b2)}
+      ${range("Корзина 3, %", "b3", 1, 70, 1, st.b3)}
+    </div>
+    <div class="lab-stage" data-view></div>`;
+  const view = el.querySelector("[data-view]");
+  function draw() {
+    syncOutputs(el, st);
+    const ref = [0.25, 0.25, 0.25, 0.25];
+    let cur = [st.b1, st.b2, st.b3].map(v => v / 100);
+    const rest = 1 - cur.reduce((s, v) => s + v, 0);
+    cur.push(Math.max(0.001, rest));
+    const sum = cur.reduce((s, v) => s + v, 0); cur = cur.map(v => v / sum);
+    const parts = cur.map((c, i) => (c - ref[i]) * Math.log(c / ref[i]));
+    const psi = parts.reduce((s, v) => s + v, 0);
+    const level = psi < 0.1 ? ["ok", "стабильно"] : psi < 0.25 ? ["warn", "внимание"] : ["bad", "тревога"];
+    const W = 600, bw = 90, X = i => 60 + i * 130;
+    const bars = cur.map((c, i) => `<rect class="lab-hneg" x="${X(i)}" y="${180 - ref[i] * 320}" width="${bw / 2 - 4}" height="${ref[i] * 320}"/>
+      <rect class="lab-hpos" x="${X(i) + bw / 2}" y="${180 - c * 320}" width="${bw / 2 - 4}" height="${c * 320}"/>
+      <text class="lab-num" x="${X(i) + bw / 2}" y="${198}">${pct(c)}</text>
+      <text class="lab-cap" x="${X(i) + bw / 2}" y="${222}">вклад ${fmt(parts[i], 3)}</text>`).join("");
+    view.innerHTML = `<p class="lab-legend">серые — эталонный период по 25%, цветные — текущий; четвёртая корзина добирает до 100%</p><svg viewBox="0 0 ${W} 230" class="lab-svg" role="img" aria-label="Доли по корзинам: эталон и сейчас">
+      <line class="lab-axis" x1="40" y1="180" x2="${W - 20}" y2="180"/>${bars}</svg>
+      <p class="lab-kv"><span>PSI = Σ (факт − эталон) · ln(факт / эталон)</span><b class="${level[0]}">${fmt(psi, 3)} · ${level[1]}</b></p>
+      <p class="lab-note">Пороги условные: до 0.1 обычно спокойно, с 0.25 тревога. Дрейф входа говорит, где проверить качество на свежей разметке, но само качество он не мерит.</p>`;
+  }
+  bindLab(el, st, draw);
+  draw();
+}
+
+/* Base rate in natural frequencies */
+const BR_PRESETS = {
+  defect: { label: "дефект 1 из 1000", prev: 1, sens: 99, spec: 990 },
+  disease: { label: "болезнь у 1%", prev: 10, sens: 99, spec: 950 },
+  spam: { label: "спам у 30%", prev: 300, sens: 95, spec: 980 }
+};
+
+function labBaseRate(el) {
+  const st = { preset: "defect", applied: "defect", prev: 1, sens: 99, spec: 990, tests: 1 };
+  el.innerHTML = `
+    <div class="lab-controls">
+      ${segmented("preset", Object.entries(BR_PRESETS).map(([k, v]) => [k, v.label]), st.preset)}
+      ${segmented("tests", [[1, "один тест"], [2, "два независимых"]], st.tests)}
+    </div>
+    <div class="lab-controls">
+      ${range("Больных или дефектных на 1000", "prev", 1, 300, 1, st.prev)}
+      ${range("Чувствительность", "sens", 50, 100, 1, st.sens, "%")}
+      ${range("Специфичность", "spec", 800, 999, 1, st.spec)}
+    </div>
+    <div class="lab-stage" data-view></div>`;
+  const view = el.querySelector("[data-view]");
+  function draw() {
+    if (st.preset && st.preset !== st.applied) {
+      const p = BR_PRESETS[st.preset];
+      Object.assign(st, { prev: p.prev, sens: p.sens, spec: p.spec, applied: st.preset });
+      el.querySelectorAll("input[data-k]").forEach(i => { i.value = st[i.dataset.k]; });
+    }
+    const match = Object.keys(BR_PRESETS).find(k => ["prev", "sens", "spec"].every(f => BR_PRESETS[k][f] === st[f])) || null;
+    st.preset = st.applied = match;
+    el.querySelectorAll("[data-seg]").forEach(b => b.setAttribute("aria-pressed", String(String(st[b.dataset.seg]) === b.dataset.v)));
+    syncOutputs(el, st, { sens: v => v + "%", spec: v => fmt(v / 10, 1) + "%" });
+    const t = st.tests, se = (st.sens / 100) ** t, fpr = (1 - st.spec / 1000) ** t;
+    const D = st.prev, TP = D * se, FP = (1000 - D) * fpr, prec = TP / (TP + FP);
+    const tpN = Math.round(TP), fnN = D - tpN, fpN = Math.min(1000 - D, Math.round(FP));
+    const cls = i => i < tpN ? "br-tp" : i < D ? "br-fn" : i < D + fpN ? "br-fp" : "br-tn";
+    const cells = Array.from({ length: 1000 }, (_, i) =>
+      `<rect class="${cls(i)}" x="${(i % 50) * 12}" y="${30 + Math.floor(i / 50) * 12}" width="10" height="10" rx="2"/>`).join("");
+    const odds = x => x >= 1 ? `${fmt(x, x < 10 ? 1 : 0)} : 1` : `1 : ${fmt(1 / x, 1 / x < 10 ? 1 : 0)}`;
+    const tone = prec >= 0.8 ? "ok" : prec >= 0.4 ? "warn" : "bad";
+    view.innerHTML = `<p class="lab-legend">цветные — пойманные, контур — пропущенные, красные — ложные тревоги, серые — чистые без тревоги</p><svg viewBox="0 0 600 274" class="lab-svg" role="img" aria-label="Тысяча случаев: пойманные, пропущенные, ложные тревоги">
+        ${cells}</svg>
+      <p class="lab-kv">
+        <span>срабатываний на 1000</span><b>${fmt(TP + FP, 1)}</b>
+        <span>из них настоящих</span><b>${fmt(TP, 1)}</b>
+        <span>доверие к срабатыванию</span><b class="${tone}">${pct(prec, 1)}</b>
+        <span>шансы до теста и после</span><b>${odds(D / (1000 - D))} → ${odds(TP / FP)}</b>
+      </p>
+      <p class="lab-note">Шансы после теста равны шансам до него, умноженным на отношение правдоподобия чувствительность / (1 − специфичность). При редком событии почти все тревоги приходят из огромной чистой части, поэтому специфичность решает больше чувствительности. Поднять доверие можно предфильтром, который повышает базовую частоту в потоке, или вторым тестом.${t === 2 ? " Здесь второй тест считается независимым от первого при известном статусе; два прогона одной модели или два похожих детектора такими не являются, и выигрыш будет меньше." : ""}</p>`;
+  }
+  bindLab(el, st, draw);
+  draw();
+}
+
+/* Random forest: correlation caps the gain */
+function labForest(el) {
+  const st = { rho: 30, k: 20 };
+  const trees = v => Math.round(10 ** (v / 10));
+  el.innerHTML = `
+    <div class="lab-controls">
+      ${range("Корреляция деревьев ρ", "rho", 0, 90, 5, st.rho)}
+      ${range("Деревьев в лесу", "k", 0, 30, 1, st.k)}
+    </div>
+    <div class="lab-stage" data-view></div>`;
+  const view = el.querySelector("[data-view]");
+  function simulate(rho, n) {
+    // tree_i = √ρ·c + √(1−ρ)·e_i; the mean of n independent e_i is drawn directly as N(0, 1/n)
+    const r = rng(11 + n * 7 + Math.round(rho * 1000)), R = 5000, avgs = [];
+    for (let j = 0; j < R; j++) avgs.push(Math.sqrt(rho) * gauss(r) + Math.sqrt(1 - rho) * gauss(r) / Math.sqrt(n));
+    const m = avgs.reduce((a, b) => a + b, 0) / R;
+    return avgs.reduce((a, b) => a + (b - m) ** 2, 0) / (R - 1);
+  }
+  function draw() {
+    syncOutputs(el, st, { rho: v => fmt(v / 100, 2), k: v => String(trees(v)) });
+    const rho = st.rho / 100, n = trees(st.k), f = k => rho + (1 - rho) / k;
+    const W = 600, H = 230, X = lk => 50 + lk / 3 * (W - 80), Y = v => 20 + (1 - v) * (H - 60);
+    const curve = g => Array.from({ length: 61 }, (_, i) => { const lk = i / 20; return `${fmt(X(lk), 1)},${fmt(Y(g(10 ** lk)), 1)}`; }).join(" ");
+    const sim = simulate(rho, n);
+    const yt = [0, 0.25, 0.5, 0.75, 1].map(v => `<line class="lab-axis" x1="50" y1="${Y(v)}" x2="${W - 30}" y2="${Y(v)}" opacity=".5"/><text class="lab-cap" x="42" y="${Y(v) + 4}" text-anchor="end">${pct(v)}</text>`).join("");
+    const xt = [1, 10, 100, 1000].map(k => `<text class="lab-cap" x="${X(Math.log10(k))}" y="${H - 8}">${k}</text>`).join("");
+    view.innerHTML = `<p class="lab-legend">разброс среднего в долях от одного дерева по числу деревьев (шкала логарифмическая): цветная — при ρ = ${fmt(rho, 2)}, серая — при независимых деревьях</p><svg viewBox="0 0 ${W} ${H}" class="lab-svg" role="img" aria-label="Разброс леса в зависимости от числа деревьев">
+        ${yt}${xt}
+        <polyline class="lab-path-muted" points="${curve(k => 1 / k)}"/>
+        <line class="lab-thr" x1="50" y1="${Y(rho)}" x2="${W - 30}" y2="${Y(rho)}"/>
+        <text class="lab-cap" x="${W - 30}" y="${Y(rho) - 6}" text-anchor="end">предел ρ</text>
+        <polyline class="lab-path" points="${curve(f)}"/>
+        <circle class="lab-best" cx="${X(Math.log10(n))}" cy="${Y(f(n))}" r="5"/>
+</svg>
+      <p class="lab-kv">
+        <span>по формуле ρσ² + (1 − ρ)σ²/k</span><b>${pct(f(n), 1)}</b>
+        <span>в симуляции 5000 лесов по ${n} деревьев</span><b>${pct(sim, 1)}</b>
+        <span>предел при бесконечном числе деревьев</span><b>${pct(rho, 1)}</b>
+      </p>
+      <p class="lab-note">Деревья помогают, пока заметно второе слагаемое, дальше разброс упирается в ρ: при ρ = 0.3 сто и тысяча деревьев почти неотличимы. Поэтому борются с самой корреляцией: бутстреп и случайное подмножество признаков в каждой вершине делают деревья непохожими. Смещение леса равно смещению одного дерева, отсюда глубокие деревья. Переобучения от числа деревьев нет, есть только время обучения и инференса.</p>`;
+  }
+  bindLab(el, st, draw);
+  draw();
+}
+
+/* Weight init: signal through 30 layers */
+function labInit(el) {
+  const st = { fn: "relu", init: "xavier" };
+  const N = 64, B = 16, L = 30;
+  const VAR = { small: () => 1e-4, xavier: n => 2 / (n + n), he: n => 2 / n, big: () => 1 };
+  el.innerHTML = `
+    <div class="lab-controls">
+      ${segmented("fn", [["relu", "ReLU"], ["tanh", "tanh"]], st.fn)}
+      ${segmented("init", [["small", "N(0, 0.01²)"], ["xavier", "Xavier"], ["he", "He"], ["big", "N(0, 1)"]], st.init)}
+    </div>
+    <div class="lab-stage" data-view></div>`;
+  const view = el.querySelector("[data-view]");
+  const std = a => { let s = 0, q = 0; for (const v of a) { s += v; q += v * v; } const m = s / a.length; return Math.sqrt(Math.max(0, q / a.length - m * m)); };
+  function run() {
+    const r = rng(42), sd = Math.sqrt(VAR[st.init](N)), relu = st.fn === "relu";
+    let a = Float64Array.from({ length: B * N }, () => gauss(r));
+    const Ws = [], Hs = [], fwd = [];
+    for (let l = 0; l < L; l++) {
+      const W = Float64Array.from({ length: N * N }, () => gauss(r) * sd), h = new Float64Array(B * N);
+      for (let b = 0; b < B; b++) for (let i = 0; i < N; i++) { const ai = a[b * N + i]; if (!ai) continue; for (let j = 0; j < N; j++) h[b * N + j] += ai * W[i * N + j]; }
+      Ws.push(W); Hs.push(h); fwd.push(std(h));
+      a = h.map(v => relu ? Math.max(0, v) : Math.tanh(v));
+    }
+    const sat = relu ? null : a.filter(v => Math.abs(v) > 0.99).length / a.length;
+    let g = Float64Array.from({ length: B * N }, () => gauss(r));
+    const bwd = new Array(L);
+    for (let l = L - 1; l >= 0; l--) {
+      const h = Hs[l], W = Ws[l], gh = g.map((v, k) => v * (relu ? (h[k] > 0 ? 1 : 0) : 1 - Math.tanh(h[k]) ** 2));
+      bwd[l] = std(gh);
+      const gp = new Float64Array(B * N);
+      for (let b = 0; b < B; b++) for (let j = 0; j < N; j++) { const v = gh[b * N + j]; if (!v) continue; for (let i = 0; i < N; i++) gp[b * N + i] += v * W[i * N + j]; }
+      g = gp;
+    }
+    return { fwd, bwd, sat };
+  }
+  const SUP = { "-": "⁻", 0: "⁰", 1: "¹", 2: "²", 3: "³", 4: "⁴", 5: "⁵", 6: "⁶", 7: "⁷", 8: "⁸", 9: "⁹" };
+  const sci = x => {
+    if (!Number.isFinite(x)) return "—";
+    if (x === 0) return "0";
+    if (x >= 0.01 && x < 1000) return fmt(x, 2);
+    const [m, e] = x.toExponential(1).split("e");
+    return `${m}·10${[...String(Number(e))].map(c => SUP[c]).join("")}`;
+  };
+  function draw() {
+    el.querySelectorAll("[data-seg]").forEach(b => b.setAttribute("aria-pressed", String(String(st[b.dataset.seg]) === b.dataset.v)));
+    const { fwd, bwd, sat } = run();
+    const W = 600, H = 236, X = l => 50 + l / (L - 1) * (W - 80), lg = v => Math.max(-8, Math.min(8, Math.log10(Math.max(v, 1e-300)))), Y = v => 14 + (8 - lg(v)) / 16 * (H - 54);
+    const line = arr => arr.map((v, l) => `${fmt(X(l), 1)},${fmt(Y(v), 1)}`).join(" ");
+    const yt = [-8, -4, 0, 4, 8].map(e => `<line class="lab-axis" x1="50" y1="${Y(10 ** e)}" x2="${W - 30}" y2="${Y(10 ** e)}" opacity=".5"/><text class="lab-cap" x="42" y="${Y(10 ** e) + 4}" text-anchor="end">${e === 0 ? "1" : "1e" + e}</text>`).join("");
+    const ratio = fwd[L - 1] / fwd[0], gr = bwd[0] / bwd[L - 1];
+    const verdict = ratio < 1e-2 ? ["bad", "сигнал затухает: последние слои получают почти нули"]
+      : ratio > 1e2 ? ["bad", "сигнал взрывается: значения растут от слоя к слою"]
+      : gr > 1e2 ? ["bad", `амплитуда держится за счёт насыщения, а градиент к первым слоям растёт в ${sci(gr)} раз: хаотический режим, обучение неустойчиво`]
+      : gr < 1e-2 ? ["warn", "прямой проход держится, а градиент к первым слоям гаснет"]
+      : ["ok", "сигнал и градиент держат масштаб"];
+    view.innerHTML = `<p class="lab-legend">стандартное отклонение по слоям: цветная — прямой проход, серая — градиент</p><svg viewBox="0 0 ${W} ${H}" class="lab-svg" role="img" aria-label="Разброс сигнала и градиента по слоям">
+        ${yt}
+        <polyline class="lab-path-muted" points="${line(bwd)}"/>
+        <polyline class="lab-path" points="${line(fwd)}"/>
+        <text class="lab-cap" x="${X(0)}" y="${H - 6}" text-anchor="start">слой 1</text><text class="lab-cap" x="${X(L - 1)}" y="${H - 6}" text-anchor="end">слой ${L}</text></svg>
+      <p class="lab-kv">
+        <span>на первом слое</span><b>${sci(fwd[0])}</b>
+        <span>на последнем слое</span><b>${sci(fwd[L - 1])}</b>
+        <span>градиент у первого слоя</span><b>${sci(bwd[0])}</b>
+        ${sat !== null ? `<span>насыщенных нейронов в конце</span><b>${pct(sat)}</b>` : ""}
+        <span>итог</span><b class="${verdict[0]}">${verdict[1]}</b>
+      </p>
+      <p class="lab-note">Сеть ${L} слоёв по ${N} нейронов, честный прямой и обратный проход на случайном батче. Дисперсия выхода слоя примерно равна n_in · Var(w) · E[a²]. ReLU обнуляет половину входов, поэтому He берёт Var(w) = 2 / n_in; Xavier, 2 / (n_in + n_out), выведена для симметричных активаций вроде tanh. Колебания в пределах нескольких раз даже при удачной схеме — шум конечной ширины; плохая инициализация видна по экспоненциальному тренду. Нормализация и остаточные связи делают сеть менее чувствительной к инициализации, но не отменяют её.</p>`;
+  }
+  bindLab(el, st, draw);
+  draw();
+}
+
+
+/* ---------- interview mode ---------- */
+const INTERVIEW = (DATA.interview && DATA.interview.items) || [];
+const ivKey = it => "i" + hash(it.id);
+const blockOrder = id => (QUIZ.blocks.find(b => b.id === id) || { order: 99 }).order;
+
+function ivQueue(limit = 5) {
+  const today = dayKey();
+  const next = nextStep();
+  const lim = next ? next.order : Infinity;
+  const open = INTERVIEW.filter(it => blockOrder(it.block) <= lim || passed(it.block));
+  const due = open.filter(it => { const e = state.study.srs[ivKey(it)]; return e && e.due <= today; });
+  const fresh = open.filter(it => !state.study.srs[ivKey(it)]).sort((a, b) => blockOrder(a.block) - blockOrder(b.block));
+  return due.concat(fresh).slice(0, limit);
+}
+
+function startInterview(items, back) {
+  if (!items.length) return;
+  state.session = null;
+  state.cards = null;
+  state.iv = { items, idx: 0, revealed: false, checks: new Set(), draft: "", results: [], back: back || state.mode };
+  render();
+  window.scrollTo({ top: 0 });
+}
+
+function revealIv() {
+  const iv = state.iv;
+  const ta = document.getElementById("iv-answer");
+  iv.draft = ta ? ta.value : iv.draft;
+  iv.revealed = true;
+  renderIvItem();
+}
+
+function gradeIv() {
+  const iv = state.iv;
+  const it = iv.items[iv.idx];
+  const cover = iv.checks.size / it.points.length;
+  grade(ivKey(it), cover >= 0.7, cover >= 0.9 ? 4 : cover >= 0.7 ? 3 : 1);
+  commit();
+  iv.results.push({ it, cover, missed: it.points.filter((_, i) => !iv.checks.has(i)) });
+  iv.idx += 1;
+  iv.revealed = false;
+  iv.checks = new Set();
+  iv.draft = "";
+  render();
+  window.scrollTo({ top: 0 });
+}
+
+function renderInterview() {
+  const total = INTERVIEW.length;
+  const seen = INTERVIEW.filter(it => state.study.srs[ivKey(it)]).length;
+  const queue = ivQueue();
+  const byBlock = QUIZ.blocks.filter(b => INTERVIEW.some(it => it.block === b.id));
+  app.innerHTML = `
+    <div class="view-head">
+      <p class="eyebrow">Собеседование</p>
+      <h2 class="view-title">Отвечай своими словами, потом сверяй по пунктам</h2>
+      <p class="view-lede">На собеседовании нет вариантов ответа. Здесь ${total} открытых вопросов и задач на код по всем блокам: пишешь ответ, открываешь эталон и честно отмечаешь, какие пункты назвал. Ответ засчитан, если назвал не меньше 70% пунктов; вопрос вернётся в повторение по тем же интервалам, что и тесты.</p>
+    </div>
+    <div class="resume-strip">
+      <span>Пройдено ${seen} из ${total} · на сегодня ${queue.length}</span>
+      ${queue.length ? `<button class="btn btn-primary" type="button" id="iv-start">Начать · ${queue.length}</button>` : ""}
+    </div>
+    <div class="route"><section class="stage-band">
+      <header class="stage-head"><h3 class="stage-name">По блокам</h3><span class="stage-count">можно взять любой блок, не дожидаясь шага</span></header>
+      <div class="block-grid">${byBlock.map(b => {
+        const items = INTERVIEW.filter(it => it.block === b.id);
+        const code = items.filter(it => it.kind === "code").length;
+        const done = items.filter(it => state.study.srs[ivKey(it)]).length;
+        return `<button class="block-card" type="button" data-ivb="${b.id}">
+          <span class="block-sigil">${b.id}</span>
+          <span class="block-name"><span class="step-no">${b.order}.</span> ${esc(b.title)}</span>
+          <span class="block-note">${items.map(it => esc(it.q)).join(" · ").slice(0, 160)}…</span>
+          <span class="block-stats"><span>${items.length} ${plural(items.length, "вопрос", "вопроса", "вопросов")}</span>${code ? `<span>код: ${code}</span>` : ""}<span class="score-pill ${done === items.length ? "is-good" : ""}">${done}/${items.length}</span></span>
+        </button>`;
+      }).join("")}</div>
+    </section></div>`;
+  const start = document.getElementById("iv-start");
+  if (start) start.addEventListener("click", () => startInterview(ivQueue(), "interview"));
+  app.querySelectorAll("[data-ivb]").forEach(el => el.addEventListener("click", () =>
+    startInterview(INTERVIEW.filter(it => it.block === el.dataset.ivb), "interview")));
+}
+
+function renderIvItem() {
+  const iv = state.iv;
+  const it = iv.items[iv.idx];
+  const block = QUIZ.blocks.find(b => b.id === it.block);
+  const total = iv.items.length;
+  app.innerHTML = `
+    <div class="exam-wrap">
+      <div class="gauge">
+        <div class="gauge-row"><span>Собеседование · ${it.kind === "code" ? "задача на код" : "устный вопрос"} · блок ${block.id} · ${esc(block.title)}</span><span>${iv.idx + 1} / ${total}</span></div>
+        <div class="gauge-track"><div class="gauge-fill" style="width:${Math.round(iv.idx / total * 100)}%"></div></div>
+      </div>
+      <h2 class="question">${esc(it.q)}</h2>
+      ${it.task ? `<pre tabindex="0"><code>${esc(it.task)}</code></pre>` : ""}
+      <label class="sr-only" for="iv-answer">Твой ответ</label>
+      <textarea id="iv-answer" class="iv-answer" rows="${it.kind === "code" ? 10 : 6}" ${iv.revealed ? "readonly" : ""} placeholder="${it.kind === "code" ? "Напиши код, как на доске. Ctrl+Enter — открыть эталон" : "Ответь так, как сказал бы вслух. Ctrl+Enter — открыть эталон"}">${esc(iv.draft)}</textarea>
+      ${iv.revealed ? `
+        <div class="verdict">
+          <p class="eyebrow">Эталон</p>
+          <p class="verdict-why">${mono(it.answer)}</p>
+          ${it.solution ? `<pre tabindex="0"><code>${esc(it.solution)}</code></pre>` : ""}
+          <p class="eyebrow">Что ты назвал своими словами</p>
+          <div class="iv-points">${it.points.map((pt, i) => `<label class="iv-point"><input type="checkbox" data-pt="${i}" ${iv.checks.has(i) ? "checked" : ""}><span>${esc(pt)}</span></label>`).join("")}</div>
+          <p class="kbd-hint">Засчитывается от 70% пунктов · сейчас <span id="iv-cover">${Math.round(iv.checks.size / it.points.length * 100)}%</span> · <kbd>Enter</kbd> — дальше</p>
+        </div>` : ""}
+      <div class="exam-actions">
+        <button class="btn" type="button" id="iv-quit">${iv.back === "today" ? "К плану на сегодня" : "К списку вопросов"}</button>
+        ${iv.revealed ? `<button class="btn btn-primary" type="button" id="iv-next">${iv.idx + 1 === total ? "Итоги" : "Дальше →"}</button>`
+          : `<button class="btn btn-primary" type="button" id="iv-reveal">Открыть эталон</button>`}
+      </div>
+    </div>`;
+  const ta = document.getElementById("iv-answer");
+  ta.addEventListener("input", () => { iv.draft = ta.value; });
+  ta.addEventListener("keydown", e => { if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) { e.preventDefault(); if (!iv.revealed) revealIv(); else gradeIv(); } });
+  if (!iv.revealed) ta.focus({ preventScroll: true });
+  app.querySelectorAll("[data-pt]").forEach(cb => cb.addEventListener("change", () => {
+    const i = Number(cb.dataset.pt);
+    if (cb.checked) iv.checks.add(i); else iv.checks.delete(i);
+    document.getElementById("iv-cover").textContent = Math.round(iv.checks.size / it.points.length * 100) + "%";
+  }));
+  document.getElementById("iv-quit").addEventListener("click", () => setMode(iv.back));
+  const rv = document.getElementById("iv-reveal");
+  if (rv) rv.addEventListener("click", revealIv);
+  const nx = document.getElementById("iv-next");
+  if (nx) nx.addEventListener("click", gradeIv);
+}
+
+function renderIvResult() {
+  const iv = state.iv;
+  const avg = iv.results.reduce((s, r) => s + r.cover, 0) / Math.max(1, iv.results.length);
+  const ok = iv.results.filter(r => r.cover >= 0.7).length;
+  if (ok === iv.results.length && iv.results.length >= 3 && !iv.celebrated) { iv.celebrated = true; celebrate(); }
+  app.innerHTML = `
+    <div class="result">
+      <div class="result-top">
+        <div>
+          <p class="eyebrow">Итог собеседования</p>
+          <h2 class="view-title">Засчитано ${ok} из ${iv.results.length}</h2>
+          <p class="view-lede">Средний охват пунктов ${Math.round(avg * 100)}%. Незасчитанные вопросы вернутся в повторение в ближайшие дни.</p>
+        </div>
+        <div class="result-score"><b>${Math.round(avg * 100)}%</b><span>охват</span></div>
+      </div>
+      <section class="sub"><h3 class="sub-label">Что не прозвучало</h3>
+        ${iv.results.filter(r => r.missed.length).map(r => `<details class="miss"><summary>${esc(r.it.q)} · ${Math.round(r.cover * 100)}%</summary>
+          <div class="miss-body">${r.missed.map(m => `<p class="pitfall"><span>${esc(m)}</span></p>`).join("")}</div></details>`).join("") || `<p class="empty">Все пункты названы.</p>`}
+      </section>
+      <div class="exam-actions" style="justify-content:flex-start">
+        <button class="btn btn-primary" type="button" id="iv-back">${iv.back === "today" ? "К плану на сегодня" : "К списку вопросов"}</button>
+      </div>
+    </div>`;
+  document.getElementById("iv-back").addEventListener("click", () => setMode(iv.back));
+}
+
+
+/* complexity */
+function labComplexity(el) {
+  const st = { lg: 5 };
+  el.innerHTML = `<div class="lab-controls">${range("Размер входа n = 10^", "lg", 2, 9, 1, st.lg)}</div><div class="lab-stage" data-view></div>`;
+  const view = el.querySelector("[data-view]");
+  const OPS = 1e8;
+  const human = s => s < 1e-3 ? "< 1 мс" : s < 1 ? Math.round(s * 1000) + " мс" : s < 120 ? fmt(s, 1) + " с" : s < 7200 ? fmt(s / 60, 0) + " мин" : s < 172800 ? fmt(s / 3600, 0) + " ч" : s < 3.15e9 ? fmt(s / 86400, 0) + " дн" : "дольше века";
+  function draw() {
+    syncOutputs(el, st);
+    const n = 10 ** st.lg;
+    const rows = [["O(1)", "словарь, множество", 1], ["O(log n)", "бинарный поиск", Math.log2(n)], ["O(n)", "один проход, хеш вместо вложенного цикла", n], ["O(n log n)", "сортировка", n * Math.log2(n)], ["O(n²)", "вложенный цикл, «x in list» в цикле", n * n]];
+    const maxL = Math.log10(Math.max(...rows.map(r => r[2])));
+    view.innerHTML = `<div class="lab-ntable">${rows.map(([o, ex, ops]) => {
+      const s = ops / OPS, w = Math.max(2, Math.log10(Math.max(ops, 1)) / Math.max(maxL, 1) * 100);
+      return `<div class="lab-crow"><b>${o}</b><span class="lab-cap">${ex}</span><span class="lab-cbar"><span style="width:${w}%" class="${s > 60 ? "bad" : ""}"></span></span><code>${human(s)}</code></div>`;
+    }).join("")}</div>
+    <p class="lab-note">Оценка при 10⁸ простых операций в секунду, шкала полос логарифмическая. При n = 10^${st.lg} квадратичный алгоритм ${n * n / OPS > 60 ? "уже не укладывается в минуту" : "ещё терпим"}: именно поэтому первым делом ищут вложенный цикл, который заменяется словарём или множеством.</p>`;
+  }
+  bindLab(el, st, draw); draw();
+}
+
+/* SQL window functions */
+const SQL_ROWS = [["A", "01.03", 0.81], ["A", "08.03", 0.84], ["A", "15.03", 0.83], ["B", "02.03", 0.77], ["B", "09.03", 0.79]];
+function labWindow(el) {
+  const st = { fn: "lag" };
+  const FN = {
+    rn: ["ROW_NUMBER() OVER (PARTITION BY model ORDER BY created_at DESC)", rows => { const c = {}; return rows.map((r, i) => i); }],
+    lag: ["score − LAG(score) OVER (PARTITION BY model ORDER BY created_at)", null],
+    sum: ["AVG(score) OVER (PARTITION BY model ORDER BY created_at ROWS BETWEEN 1 PRECEDING AND CURRENT ROW)", null],
+    grp: ["AVG(score) … GROUP BY model", null]
+  };
+  el.innerHTML = `<div class="lab-controls">${segmented("fn", [["rn", "ROW_NUMBER"], ["lag", "LAG"], ["sum", "скользящее среднее"], ["grp", "GROUP BY"]], st.fn)}</div><div class="lab-stage" data-view></div>`;
+  const view = el.querySelector("[data-view]");
+  function draw() {
+    el.querySelectorAll("[data-seg]").forEach(b => b.setAttribute("aria-pressed", String(String(st[b.dataset.seg]) === b.dataset.v)));
+    let out, head;
+    if (st.fn === "grp") {
+      const g = {}; SQL_ROWS.forEach(([m, , s]) => { (g[m] = g[m] || []).push(s); });
+      head = ["model", "avg"]; out = Object.entries(g).map(([m, a]) => [m, fmt(a.reduce((x, y) => x + y, 0) / a.length, 3)]);
+    } else {
+      head = ["model", "created_at", "score", st.fn === "rn" ? "rn" : st.fn === "lag" ? "delta" : "avg2"];
+      out = SQL_ROWS.map((r, i) => {
+        const same = SQL_ROWS.filter(x => x[0] === r[0]);
+        const k = same.indexOf(r);
+        let v;
+        if (st.fn === "rn") v = same.length - k;
+        if (st.fn === "lag") v = k ? fmt(r[2] - same[k - 1][2], 2) : "NULL";
+        if (st.fn === "sum") v = fmt(k ? (r[2] + same[k - 1][2]) / 2 : r[2], 3);
+        return [r[0], r[1], fmt(r[2], 2), v];
+      });
+    }
+    view.innerHTML = `<pre tabindex="0"><code>SELECT model, ${st.fn === "grp" ? "" : "created_at, score, "}${FN[st.fn][0]}\nFROM runs</code></pre>
+      <div class="table-scroll"><table><thead><tr>${head.map(h => `<th>${h}</th>`).join("")}</tr></thead><tbody>${out.map(r => `<tr class="${r[0] === "A" ? "" : "lab-alt"}">${r.map((c, i) => `<td class="${i === r.length - 1 ? "lab-hl" : ""}">${c}</td>`).join("")}</tr>`).join("")}</tbody></table></div>
+      <p class="lab-note">${st.fn === "grp" ? "GROUP BY сворачивает строки: от пяти прогонов осталось две строки, сравнить прогон с предыдущим уже нельзя." : "Оконная функция считает по окну, но строки не сворачивает: у каждого прогона остаётся своя строка, а окно задаёт PARTITION BY и ORDER BY."}</p>`;
+  }
+  bindLab(el, st, draw); draw();
+}
+
+/* BM25 vs TF-IDF */
+const BM_DOCS = [
+  "договор поставки номер ДП-17 оплата в течение десяти дней",
+  "оплата оплата оплата оплата оплата счёт",
+  "дополнительное соглашение к договору поставки ДП-17 о сроках оплаты и неустойке за просрочку поставки товара по договору",
+  "акт сверки взаимных расчётов"
+];
+function labBm25(el) {
+  const st = { k1: 12, b: 75, q: 0 };
+  const queries = ["оплата ДП-17", "договор поставки", "неустойка"];
+  el.innerHTML = `<div class="lab-controls">${segmented("q", queries.map((q, i) => [i, q]), st.q)}${range("k1 × 10 (насыщение)", "k1", 0, 30, 1, st.k1)}${range("b × 100 (нормировка длины)", "b", 0, 100, 5, st.b)}</div><div class="lab-stage" data-view></div>`;
+  const view = el.querySelector("[data-view]");
+  const tok = s => s.toLowerCase().split(/\s+/);
+  function draw() {
+    el.querySelectorAll("[data-seg]").forEach(b => b.setAttribute("aria-pressed", String(String(st[b.dataset.seg]) === b.dataset.v)));
+    syncOutputs(el, st, { k1: v => fmt(v / 10, 1), b: v => fmt(v / 100, 2) });
+    const docs = BM_DOCS.map(tok), N = docs.length, avg = docs.reduce((s, d) => s + d.length, 0) / N;
+    const q = tok(queries[st.q]);
+    const df = w => docs.filter(d => d.includes(w)).length;
+    const k1 = st.k1 / 10, b = st.b / 100;
+    const rows = docs.map((d, i) => {
+      let bm = 0, ti = 0;
+      q.forEach(w => {
+        const f = d.filter(x => x === w).length; if (!f) return;
+        const idf = Math.log(1 + (N - df(w) + 0.5) / (df(w) + 0.5));
+        bm += idf * f * (k1 + 1) / (f + k1 * (1 - b + b * d.length / avg));
+        ti += f * Math.log(N / df(w));
+      });
+      return [i, bm, ti, d.length];
+    });
+    const rank = key => [...rows].sort((a, c) => c[key] - a[key]).map(r => r[0]);
+    const rb = rank(1), rt = rank(2);
+    view.innerHTML = `<div class="table-scroll"><table><thead><tr><th>документ</th><th>слов</th><th>TF-IDF</th><th>BM25</th></tr></thead><tbody>${rows.map(([i, bm, ti, len]) =>
+      `<tr><td>${esc(BM_DOCS[i])}</td><td>${len}</td><td class="${rt[0] === i ? "lab-hl" : ""}">${fmt(ti, 2)} · ${rt.indexOf(i) + 1}</td><td class="${rb[0] === i ? "lab-hl" : ""}">${fmt(bm, 2)} · ${rb.indexOf(i) + 1}</td></tr>`).join("")}</tbody></table></div>
+      <p class="lab-note">После числа — место в выдаче. На запросе «оплата ДП-17» TF-IDF ставит наверх документ, где слово «оплата» повторено пять раз; BM25 при k1 около 1.2 гасит повторы насыщением, и выигрывает документ с обоими словами. Обнули k1 — частота перестанет влиять; подними b — длинное соглашение начнёт проигрывать коротким. Морфологию здесь никто не приводит: запрос «неустойка» не находит «неустойке», а «оплата» не совпадает с «оплаты», отсюда лемматизация перед индексом.</p>`;
+  }
+  bindLab(el, st, draw); draw();
+}
+
+/* constrained decoding */
+const CD_STEPS = [
+  { prefix: '', cands: [["Конечно", .41, 0], ["{", .33, 1], ["Вот", .18, 0], ["```", .08, 0]] },
+  { prefix: '{', cands: [['"date"', .62, 1], ['"дата"', .21, 0], ["\\n", .12, 0], ['date', .05, 0]] },
+  { prefix: '{"date": ', cands: [['"2026', .55, 1], ['null', .25, 1], ['14 августа', .15, 0], ['"неизвестно"', .05, 0]] },
+  { prefix: '{"date": "2026', cands: [['-08-14"', .7, 1], ['.08.14"', .2, 0], ['-8-14"', .07, 0], ['"', .03, 0]] },
+  { prefix: '{"date": "2026-08-14"', cands: [["}", .58, 1], [",", .3, 0], [" // из шапки", .12, 0]] }
+];
+function labConstrained(el) {
+  const st = { i: 0, g: 1 };
+  el.innerHTML = `<div class="lab-controls">${segmented("g", [[1, "с грамматикой"], [0, "без грамматики"]], st.g)}<div class="lab-seg"><button type="button" data-act="prev">← токен</button><button type="button" data-act="next">токен →</button></div></div><div class="lab-stage" data-view></div>`;
+  const view = el.querySelector("[data-view]");
+  function draw() {
+    if (st.act === "next") st.i = Math.min(CD_STEPS.length - 1, st.i + 1);
+    if (st.act === "prev") st.i = Math.max(0, st.i - 1);
+    el.querySelectorAll("[data-seg]").forEach(b => b.setAttribute("aria-pressed", String(String(st[b.dataset.seg]) === b.dataset.v)));
+    const s = CD_STEPS[st.i];
+    const okSum = s.cands.filter(c => c[2]).reduce((x, c) => x + c[1], 0);
+    view.innerHTML = `<p class="lab-cap">схема: {"date": string в формате YYYY-MM-DD или null}, других полей нет</p>
+      <pre tabindex="0"><code>${esc(s.prefix)}<span class="lab-caret">▍</span></code></pre>
+      <div class="lab-ntable">${s.cands.map(([tk, p, ok]) => {
+        const q = st.g ? (ok ? p / okSum : 0) : p;
+        return `<div class="lab-crow"><code>${esc(tk)}</code><span class="lab-cap">${st.g && !ok ? "запрещено схемой" : ok ? "валидно" : "ломает схему"}</span><span class="lab-cbar"><span style="width:${Math.max(1, q * 100)}%" class="${ok ? "" : "bad"}"></span></span><b>${pct(q)}</b></div>`;
+      }).join("")}</div>
+      <p class="lab-note">${st.g ? "Грамматика обнуляет запрещённые токены и перенормирует остальные: невалидный JSON получиться не может, но null остаётся разрешённым, поэтому модель может честно сказать, что даты нет." : "Без грамматики на первом же шаге самый вероятный токен — вежливое «Конечно», и парсер упадёт. Инструкция «отвечай только JSON» снижает его вероятность, но не до нуля."} Шаг ${st.i + 1} из ${CD_STEPS.length}; вероятности условные, для иллюстрации.</p>`;
+  }
+  bindLab(el, st, draw); draw();
+}
+
+/* judge position bias */
+function labJudgeBias(el) {
+  const st = { pa: 60, bias: 15 };
+  el.innerHTML = `<div class="lab-controls">${range("Насколько A на деле лучше: доля побед, %", "pa", 30, 90, 1, st.pa)}${range("Тяга судьи к первому варианту, п.п.", "bias", 0, 35, 1, st.bias)}</div><div class="lab-stage" data-view></div>`;
+  const view = el.querySelector("[data-view]");
+  const clip = x => Math.max(0, Math.min(1, x));
+  function draw() {
+    syncOutputs(el, st);
+    const p = st.pa / 100, b = st.bias / 100;
+    const aFirst = clip(p + b), aSecond = clip(p - b);
+    const both = (aFirst + aSecond) / 2;
+    const agreeA = aFirst * aSecond, agreeB = (1 - aFirst) * (1 - aSecond), tie = 1 - agreeA - agreeB;
+    const bars = [["A всегда первым", aFirst], ["B всегда первым", aSecond], ["оба порядка, среднее", both], ["только согласованные победы A", agreeA / Math.max(1e-9, agreeA + agreeB)]];
+    view.innerHTML = `<div class="lab-ntable">${bars.map(([n, v]) => `<div class="lab-crow"><b>${n}</b><span></span><span class="lab-cbar"><span style="width:${v * 100}%"></span></span><code>${pct(v)}</code></div>`).join("")}</div>
+      <p class="lab-kv"><span>истинная доля побед A</span><b>${pct(p)}</b><span>несогласованных пар (ничьи)</span><b>${pct(tie)}</b></p>
+      <p class="lab-note">Если всегда ставить A первым, судья покажет ${pct(aFirst)} вместо ${pct(p)}. Прогон в обоих порядках возвращает честную оценку, а доля ничьих показывает, насколько судья вообще различает варианты: при ${pct(tie)} ничьих ${tie > 0.5 ? "сравнение почти ничего не говорит" : "сигнал есть"}.</p>`;
+  }
+  bindLab(el, st, draw); draw();
+}
+
+const REPORT_STEPS = { check: [
+  ["Тумблеры", "Вытащи флаги обоих прогонов из манифеста и положи различия первой строкой.", "Флаг store_true теряется молча при пересборке команды."],
+  ["Знаменатель", "Каждое число достраивается до «X из Y по критерию на наборе».", "Процент без знаменателя прячет размер выборки."],
+  ["Интервал", "Рядом с долей интервал Уилсона, рядом с разницей — парный тест.", "«Улучшили на 2 п.п.» на 40 документах — шум."],
+  ["Область вывода", "Вывод для этого набора, этой конфигурации, этого рендера.", "«Потолок пайплайна» вместо «потолок на dev-56»."],
+  ["Отрицательные утверждения", "«Не найдено» с областью: что смотрел, что нет, двумя способами.", "«Нет» без области читается как проверка всего."],
+  ["Адрес", "git remote -v, текущая ветка, последние коммиты цели перед пушем.", "Адрес из памяти уже однажды увёл код в чужой репозиторий."]
+]};
+function labReport(el) { labStepper(el, REPORT_STEPS, { check: ["", "", "", "", "", ""] }, [["check", "перед отправкой отчёта"]]); }
+
+const LABS = {
+  S: { title: "Внимание своими руками", fn: labAttention },
+  W: { title: "Блок трансформера в разборе", fn: labTransformer },
+  F: { title: "RAG по шагам", fn: labRag },
+  V: { title: "RAG по шагам", fn: labRag },
+  L: { title: "Порог, precision, recall и цена ошибки", fn: labThreshold },
+  AC: { title: "Спуск в овраге: шаг и момент", fn: labDescent },
+  X: { title: "Лес: почему тысяча деревьев не вдесятеро лучше сотни", fn: labForest },
+  P: { title: "Смещение и разброс на одном графике", fn: labBiasVariance },
+  M: { title: "Разбиения и утечки", fn: labSplits },
+  B: { title: "Разбиения и утечки", fn: labSplits },
+  A: { title: "Интервал Уилсона против Вальда", fn: labWilson },
+  T: { title: "Базовая частота на тысяче случаев", fn: labBaseRate },
+  E: { title: "Сколько памяти нужно модели", fn: labVram },
+  AD: { title: "Маршрут ответа на system design", fn: labSysDesign },
+  U: { title: "Цикл агента с предохранителями", fn: labAgent },
+  I: { title: "От просьбы к постановке", fn: labTask },
+  D: { title: "Страница превращается в токены", fn: labPageTokens },
+  N: { title: "Нормализация строк по шагам", fn: labNormalize },
+  J: { title: "Нормализация строк по шагам", fn: labNormalize },
+  H: { title: "Дрейф входа: PSI на пальцах", fn: labPsi },
+  Q: { title: "Разбиения и утечки", fn: labSplits },
+  R: { title: "RAG по шагам", fn: labRag },
+  AB: { title: "Сколько стоит алгоритм на большом входе", fn: labComplexity },
+  O: { title: "Оконные функции против GROUP BY", fn: labWindow },
+  AA: { title: "BM25 против TF-IDF", fn: labBm25 },
+  C: { title: "Грамматика вместо просьбы", fn: labConstrained },
+  G: { title: "Позиционное смещение судьи", fn: labJudgeBias },
+  Z: { title: "Шесть проверок перед отчётом", fn: labReport },
+  K: { title: "Сколько памяти нужно модели", fn: labVram },
+  Y: { title: "Инициализация: сигнал через 30 слоёв", fn: labInit }
+};
+
+function renderLab(sec) {
+  const lab = LABS[sec.id];
+  if (!lab) return "";
+  return `<section class="sub lab" id="lab-${sec.id}"><h3 class="sub-label">Схема · ${esc(lab.title)}</h3><div class="lab-mount" data-lab="${sec.id}"></div></section>`;
+}
+
+function mountLabs(root) {
+  root.querySelectorAll("[data-lab]").forEach(el => {
+    if (el.dataset.mounted) return;
+    el.dataset.mounted = "1";
+    try { LABS[el.dataset.lab].fn(el); } catch (e) { el.textContent = "Схема не загрузилась: " + e.message; }
+  });
+}
+
+function toast(text) {
+  document.querySelectorAll(".toast").forEach(el => el.remove());
+  const el = document.createElement("div");
+  el.className = "toast";
+  el.setAttribute("role", "status");
+  el.textContent = text;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 2600);
+}
+
+function celebrate() {
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  // pixel burst in the spirit of pixelfx: chunky pixels, a short palette, stepped 12 fps
+  const PX = 6;
+  const canvas = document.createElement("canvas");
+  canvas.className = "confetti";
+  canvas.setAttribute("aria-hidden", "true");
+  const w = Math.ceil(window.innerWidth / PX), h = Math.ceil(window.innerHeight / PX);
+  canvas.width = w;
+  canvas.height = h;
+  document.body.appendChild(canvas);
+  const ctx = canvas.getContext("2d");
+  if (!ctx) { canvas.remove(); return; }
+  const css = getComputedStyle(document.documentElement);
+  const tone = v => css.getPropertyValue(v).trim() || "#0B6E63";
+  const palette = [tone("--accent"), tone("--accent-ink"), tone("--ok"), tone("--ink")];
+  const ox = Math.round(w / 2), oy = Math.round(h * 0.55);
+  const r = rng(Date.now() % 100000);
+  const parts = Array.from({ length: 64 }, () => {
+    const a = r() * Math.PI * 2, sp = 1.2 + r() * 2.6;
+    return { x: ox, y: oy, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 1.6, life: 9 + Math.floor(r() * 7), s: r() < 0.25 ? 2 : 1 };
+  });
+  let frame = 0;
+  function ring(radius, color) {
+    ctx.fillStyle = color;
+    for (let i = 0; i < 48; i++) {
+      const a = i / 48 * Math.PI * 2;
+      ctx.fillRect(Math.round(ox + Math.cos(a) * radius), Math.round(oy + Math.sin(a) * radius * 0.8), 1, 1);
+    }
+  }
+  function step() {
+    ctx.clearRect(0, 0, w, h);
+    if (frame < 4) ring(2 + frame * 3, palette[frame % 2]);
+    parts.forEach(p => {
+      if (frame > p.life) return;
+      p.x += p.vx; p.y += p.vy; p.vy += 0.35; p.vx *= 0.94;
+      const k = frame / p.life;
+      ctx.globalAlpha = k < 0.6 ? 1 : k < 0.85 ? 0.66 : 0.33;
+      ctx.fillStyle = palette[k < 0.35 ? 0 : k < 0.7 ? 1 : 2];
+      ctx.fillRect(Math.round(p.x), Math.round(p.y), p.s, p.s);
+    });
+    ctx.globalAlpha = 1;
+    frame += 1;
+    if (frame < 18) setTimeout(step, 83);
+    else canvas.remove();
+  }
+  step();
+}
+
+document.addEventListener("keydown", e => {
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  const tag = e.target && e.target.tagName;
+  if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+  const onButton = tag === "BUTTON";
+  const c = state.cards;
+  if (c && c.idx < c.items.length) {
+    if (!c.flipped && (e.code === "Space" || e.key === "Enter") && !onButton) { e.preventDefault(); flipCard(); }
+    else if (c.flipped && ["Digit1", "Numpad1", "ArrowLeft"].includes(e.code)) { e.preventDefault(); gradeCard(false); }
+    else if (c.flipped && ["Digit2", "Numpad2", "ArrowRight"].includes(e.code)) { e.preventDefault(); gradeCard(true); }
+    return;
+  }
+  const iv = state.iv;
+  if (iv && iv.idx < iv.items.length) {
+    if (iv.revealed && (e.key === "Enter" && !onButton)) { e.preventDefault(); gradeIv(); }
+    return;
+  }
+  const s = state.session;
+  if (!s || s.idx >= s.items.length) return;
+  if (s.picked === null) {
+    const j = KEY_CODES.findIndex(codes => codes.includes(e.code));
+    if (j >= 0 && j < s.perms[s.idx].length) { e.preventDefault(); pick(s.perms[s.idx][j]); }
+  } else if ((e.key === "Enter" && !onButton) || e.key === "ArrowRight") {
+    e.preventDefault();
+    advance();
+  }
+});
+
+MODES.forEach(m => document.getElementById("tab-" + m).addEventListener("click", () => setMode(m)));
 
 render();
 connectAccount();

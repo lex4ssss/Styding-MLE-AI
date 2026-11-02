@@ -1042,6 +1042,125 @@ kbd { display: inline-block; min-width: 20px; padding: 0 5px; border: 1px solid 
 }
 @keyframes toast-in { from { transform: translate(-50%, 12px); opacity: 0; } }
 
+/* quiet chrome: sentence case labels, two weights, no hue gradients, no lift on hover */
+.counters, .eyebrow, .meta-label, .gauge-row, .stage-count, .level-tag, .step-state, .stat span,
+.kind, .note-label, .sub-label, th, .miss-line b, .result-score span, .pace, .stage-num, .video-head span {
+  text-transform: none;
+  letter-spacing: .01em;
+}
+.wordmark, .view-title, .hero-title, .flash-term, .question, .stage-name, .next-title, .section-title { font-weight: 600; }
+.stat b, .progress-figure, .result-score b, .block-sigil, .step-sigil { font-weight: 600; }
+.counters b, .progress-meta b, .task-title, .pace, .option-key { font-weight: 600; }
+.hero-title, .flash-term { letter-spacing: -.01em; }
+.goal-bar div { background: var(--accent); }
+.task { transition: border-color .15s ease; }
+.task:hover { transform: none; }
+.task { grid-template-rows: auto 1fr auto; }
+.task-title { padding-right: 36px; }
+.task-count { background: none; color: var(--muted); padding: 0; min-width: 0; font-size: 12px; font-weight: 500; }
+.task[data-done="true"] .task-count { background: none; color: var(--ok); }
+.flash { background: var(--surface); box-shadow: none; animation: none; }
+.toast { font-weight: 500; }
+
+/* labs */
+.lab { gap: 14px; }
+.lab-mount { display: grid; gap: 14px; padding: 20px; border: 1px solid var(--rule); border-radius: 12px; background: var(--surface); min-width: 0; }
+.lab-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+.lab-ctl { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 4px 10px; min-width: 220px; flex: 1 1 220px; font-size: 13px; color: var(--muted); }
+.lab-ctl span { grid-column: 1 / -1; }
+.lab-ctl input { grid-column: 1 / 3; width: 100%; accent-color: var(--accent); }
+.lab-ctl output { font-family: var(--mono); font-size: 12px; color: var(--ink); font-variant-numeric: tabular-nums; min-width: 44px; text-align: right; }
+.lab-seg { display: inline-flex; flex-wrap: wrap; gap: 2px; padding: 2px; border: 1px solid var(--rule); border-radius: 8px; background: var(--ground); }
+.lab-seg button { padding: 6px 10px; border-radius: 6px; font-size: 13px; color: var(--muted); transition: background-color .15s ease, color .15s ease; }
+.lab-seg button:hover { color: var(--ink); }
+.lab-seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 0 0 1px var(--rule); }
+.lab-stage { display: grid; gap: 14px; min-width: 0; }
+.lab-split { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: start; }
+.lab-svg { width: 100%; height: auto; display: block; overflow: visible; font-family: var(--mono); }
+.lab-svg text { font-size: 12px; fill: var(--ink); text-anchor: middle; }
+.lab-svg .lab-cap { font-size: 11px; fill: var(--muted); }
+.lab-svg text[text-anchor="start"] { text-anchor: start; }
+.lab-svg text[text-anchor="end"] { text-anchor: end; }
+.lab-svg .lab-cap-accent { fill: var(--accent-ink); }
+.lab-svg .lab-num { font-size: 11px; fill: var(--ink); font-weight: 500; }
+.lab-svg .lab-call { font-size: 12px; text-anchor: start; fill: var(--ink); }
+.lab-tok rect, .lab-key rect { fill: var(--surface); stroke: var(--rule); stroke-width: 1; }
+.lab-tok { cursor: pointer; }
+.lab-tok:hover rect { stroke: var(--accent); }
+.lab-tok.is-on rect { fill: color-mix(in srgb, var(--accent) 14%, var(--surface)); stroke: var(--accent); }
+.lab-tok:focus-visible { outline: none; }
+.lab-tok:focus-visible rect { stroke: var(--ink); stroke-width: 2; }
+.lab-arc { fill: none; stroke: var(--accent); stroke-linecap: round; }
+.lab-key .lab-bar { fill: var(--accent); stroke: none; }
+.lab-axis { stroke: var(--rule); stroke-width: 1; }
+.lab-thr { stroke: var(--ink); stroke-width: 1; stroke-dasharray: 4 3; }
+.lab-line, .lab-path { fill: none; stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; }
+.lab-path-muted { fill: none; stroke: var(--muted); stroke-width: 1.5; stroke-linejoin: round; opacity: .7; }
+.lab-best { fill: var(--surface); stroke: var(--accent); stroke-width: 2; }
+.lab-pt { fill: var(--surface); stroke: var(--ink); stroke-width: 1.2; }
+.lab-contour { fill: none; stroke: var(--rule); stroke-width: 1; }
+.lab-hneg { fill: var(--muted); opacity: .35; }
+.lab-hpos { fill: var(--accent); opacity: .85; }
+.lab-int { stroke: var(--accent); stroke-width: 6; stroke-linecap: round; }
+.lab-int-muted { stroke: var(--muted); stroke-width: 6; stroke-linecap: round; opacity: .6; }
+.lab-out { fill: var(--bad); opacity: .08; }
+.lab-mw { fill: color-mix(in srgb, var(--ink) 70%, var(--surface)); }
+.lab-mk { fill: var(--accent); }
+.lab-mr { fill: var(--rule); }
+
+/* teardown plates: hairline ink, fills tinted from the line color */
+.lab-plate { cursor: pointer; }
+.lab-plate polygon { stroke-width: 1; stroke-linejoin: round; transition: fill .15s ease; }
+.lab-plate .top { fill: color-mix(in srgb, var(--tone) 12%, var(--surface)); stroke: var(--tone); }
+.lab-plate .side { fill: color-mix(in srgb, var(--tone) 28%, var(--surface)); stroke: var(--tone); }
+.lab-plate .lead { fill: none; stroke: var(--muted); stroke-width: .8; }
+.lab-plate .dot { fill: var(--tone); }
+.lab-plate:hover .top, .lab-plate.is-on .top { fill: color-mix(in srgb, var(--tone) 30%, var(--surface)); }
+.lab-plate.is-on .lab-call { font-weight: 600; }
+.lab-plate:focus-visible { outline: none; }
+.lab-plate:focus-visible .top { stroke-width: 2.5; }
+.tone-ink { --tone: var(--ink); }
+.tone-accent { --tone: var(--accent); }
+.tone-ok { --tone: var(--ok); }
+.tone-warn { --tone: var(--warn); }
+
+.lab-card { display: grid; gap: 8px; align-content: start; padding: 16px; border: 1px solid var(--rule-soft); border-radius: 8px; background: var(--ground); font-size: 14.5px; line-height: 1.55; }
+.lab-card b { font-weight: 600; }
+.lab-warn { color: var(--bad); }
+.lab-metric { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.lab-note { font-size: 14px; line-height: 1.55; color: var(--muted); max-width: 78ch; }
+.lab-kv { display: grid; grid-template-columns: auto auto; gap: 4px 16px; justify-content: start; font-size: 14px; }
+.lab-kv span { color: var(--muted); }
+.lab-kv b { font-family: var(--mono); font-weight: 500; font-variant-numeric: tabular-nums; }
+.lab-kv .ok, .lab-cm .ok { color: var(--ok); }
+.lab-kv .bad, .lab-cm .bad { color: var(--bad); }
+.lab-cm { display: grid; grid-template-columns: auto 1fr 1fr; gap: 1px; background: var(--rule-soft); border: 1px solid var(--rule-soft); font-family: var(--mono); font-size: 12.5px; }
+.lab-cm > * { padding: 6px 10px; background: var(--surface); }
+.lab-cm b { font-weight: 500; color: var(--muted); }
+
+.lab-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.lab-node { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border: 1px solid var(--rule); border-radius: 8px; background: var(--surface); font-size: 13.5px; transition: border-color .15s ease, background-color .15s ease; }
+.lab-node:hover { border-color: var(--accent); }
+.lab-node.is-past { color: var(--muted); }
+.lab-node.is-on { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, var(--surface)); }
+.lab-node-n { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.lab-arrow { width: 14px; height: 1px; background: var(--rule); position: relative; }
+.lab-arrow::after { content: ""; position: absolute; right: 0; top: -3px; border: 3.5px solid transparent; border-left-color: var(--rule); border-right: 0; }
+
+.lab-grid { display: grid; gap: 6px; }
+.lab-row { display: grid; grid-template-columns: 32px 52px repeat(4, 34px); align-items: center; gap: 6px; font-size: 13px; }
+.lab-row b { font-family: var(--mono); font-weight: 500; }
+.lab-row .lab-cap { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.lab-cell { display: inline-grid; place-content: center; width: 34px; height: 26px; border-radius: 6px; font-family: var(--mono); font-size: 11px; border: 1px solid var(--rule); color: var(--muted); }
+.lab-cell.is-train { background: color-mix(in srgb, var(--ink) 10%, var(--surface)); color: var(--ink); }
+.lab-cell.is-test { border-color: var(--accent); color: var(--accent-ink); background: color-mix(in srgb, var(--accent) 10%, var(--surface)); }
+.lab-cell.is-leak { border-color: var(--bad); color: var(--bad); background: var(--bad-soft); }
+.lab-cell.is-off { opacity: .35; border-style: dashed; }
+.lab-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; font-size: 13px; color: var(--muted); }
+.lab-legend .lab-cell { width: 18px; height: 14px; margin-right: -8px; }
+
+.confetti { image-rendering: pixelated; }
+
 @media (max-width: 980px) {
   .ref-layout { grid-template-columns: minmax(0, 1fr); gap: 24px; }
   .ref-nav { position: static; }
@@ -1066,6 +1185,9 @@ kbd { display: inline-block; min-width: 20px; padding: 0 5px; border: 1px solid 
   .today-hero, .panel-row { grid-template-columns: minmax(0, 1fr); }
   .hero-main, .hero-side { padding: 20px; }
   .flash { min-height: 240px; padding: 22px; }
+  .lab-split { grid-template-columns: minmax(0, 1fr); }
+  .lab-mount { padding: 14px; }
+  .lab-ctl { min-width: 0; flex-basis: 100%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1968,6 +2090,7 @@ function renderReference() {
         <h2 class="section-title"><span>${s.id}</span>${esc(s.title)}</h2>
         <p class="section-lede">${mono(s.lead)}</p>
       </div>
+      ${renderLab(s)}
       ${renderTheory(s)}
       ${renderPractice(s)}
       ${renderBusiness(s)}
@@ -1999,6 +2122,7 @@ function renderReference() {
   `;
 
   bindMarks();
+  mountLabs(app);
   const input = document.getElementById("q");
   input.addEventListener("input", e => {
     state.query = e.target.value;
@@ -2325,9 +2449,8 @@ function heatmap(weeks = 14) {
   return `<div class="heat" aria-hidden="true">${cells.join("")}</div>`;
 }
 
-function taskCard({ icon, title, text, count, done, action, label, primary }) {
+function taskCard({ title, text, count, done, action, label, primary }) {
   return `<article class="task" data-done="${!!done}">
-    <span class="task-icon" aria-hidden="true">${icon}</span>
     ${count !== undefined ? `<span class="task-count">${done ? "✓" : count}</span>` : ""}
     <h3 class="task-title">${title}</h3>
     <p class="task-text">${text}</p>
@@ -2416,30 +2539,34 @@ function renderToday() {
     </div>
     <div class="tasks">
       ${taskCard({
-        icon: "🔁", title: "Повторение", count: due.length, done: !due.length,
+        title: "Повторение", count: due.length, done: !due.length,
         text: due.length
           ? `Вопросы, на которых ты ошибался или которые пора освежить. Интервалы растут: 1, 3, 7, 14, 30 дней.`
-          : "На сегодня повторять нечего. Новые ошибки сами попадут сюда завтра.",
+          : "На сегодня повторять нечего. Ошибки попадают сюда сразу после ответа, верные вопросы возвращаются через 3, 7, 14 дней.",
         action: due.length ? "review" : "", label: `Повторить ${Math.min(20, due.length)}`, primary: primary === "review"
       })}
       ${next ? taskCard({
-        icon: stepAction === "read" ? "📖" : "🎯", title: `Шаг ${next.order} · ${esc(next.title)}`,
+        title: `Шаг ${next.order} · ${esc(next.title)}`,
         text: stepText, action: stepAction, label: stepLabel, primary: primary === stepAction
-      }) : taskCard({ icon: "🏁", title: "Маршрут пройден", text: "Пересдавай блоки ниже 100% и держи повторение на нуле.", done: true })}
+      }) : taskCard({ title: "Маршрут пройден", text: "Пересдавай блоки ниже 100% и держи повторение на нуле.", done: true })}
       ${taskCard({
-        icon: "🃏", title: "Карточки терминов", count: deck.length, done: !deck.length,
+        title: "Карточки терминов", count: deck.length, done: !deck.length,
         text: deck.length
           ? "Термины из пройденных и текущего разделов. Вспомни сам, переверни, честно оцени."
           : "Карточек на сегодня нет. Новые откроются со следующим шагом.",
         action: deck.length ? "cards" : "", label: "Начать", primary: primary === "cards"
       })}
       ${taskCard({
-        icon: "⚡", title: "Пятиминутка",
+        title: "Пятиминутка",
         text: "Пять случайных вопросов из открытых блоков вперемешку. Смешивание тем держит в памяти лучше, чем повтор одной.",
         action: "mix", label: "5 вопросов", primary: primary === "mix"
       })}
+      ${next && LABS[next.id] ? taskCard({
+        title: "Схема шага", text: `${esc(LABS[next.id].title)}. Покрути параметры и посмотри, как меняется результат: так механизм запоминается быстрее текста.`,
+        action: "lab", label: "Открыть схему"
+      }) : ""}
       ${sec && sec.drill ? taskCard({
-        icon: "🛠", title: "Задание шага", text: mono(sec.drill.length > 220 ? sec.drill.slice(0, 220).replace(/\s+\S*$/, "") + "…" : sec.drill),
+        title: "Задание шага", text: mono(sec.drill.length > 220 ? sec.drill.slice(0, 220).replace(/\s+\S*$/, "") + "…" : sec.drill),
         action: "drill", label: "Открыть задание"
       }) : ""}
     </div>
@@ -2475,7 +2602,7 @@ function renderToday() {
     else if (t === "cards") startCards();
     else if (t === "mix") startMix();
     else if (t === "exam" && next) startBlock(next.id);
-    else if ((t === "read" || t === "drill") && next) openSection(next.id, t === "drill" ? "drill" : "");
+    else if ((t === "read" || t === "drill" || t === "lab") && next) openSection(next.id, t === "read" ? "" : t);
   }));
   document.getElementById("deadline").addEventListener("change", e => {
     if (!e.target.value) return;
@@ -2487,6 +2614,611 @@ function renderToday() {
     state.study.plan = { ...state.study.plan, perDay: Number(e.target.value), at: stamp() };
     commit(true);
     renderToday();
+  });
+}
+
+/* ---------- labs: interactive diagrams inside reference sections ---------- */
+
+function rng(seed) {
+  let a = seed >>> 0;
+  return () => {
+    a = (a + 0x6D2B79F5) >>> 0;
+    let t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function gauss(r) {
+  const u = Math.max(r(), 1e-12);
+  return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * r());
+}
+
+function fmt(x, d = 2) {
+  return Number.isFinite(x) ? x.toFixed(d).replace(".", ",") : "—";
+}
+
+function pct(x, d = 0) {
+  return Number.isFinite(x) ? (x * 100).toFixed(d).replace(".", ",") + "%" : "—";
+}
+
+function range(label, id, min, max, step, value, suffix = "") {
+  return `<label class="lab-ctl"><span>${label}</span>
+    <input type="range" data-k="${id}" min="${min}" max="${max}" step="${step}" value="${value}">
+    <output data-o="${id}">${value}${suffix}</output></label>`;
+}
+
+function segmented(id, options, value) {
+  return `<div class="lab-seg" role="group">${options.map(([v, t]) =>
+    `<button type="button" data-seg="${id}" data-v="${v}" aria-pressed="${String(v) === String(value)}">${t}</button>`).join("")}</div>`;
+}
+
+function bindLab(el, st, draw) {
+  el.addEventListener("input", e => {
+    const k = e.target.dataset && e.target.dataset.k;
+    if (!k) return;
+    st[k] = Number(e.target.value);
+    draw();
+  });
+  el.addEventListener("click", e => {
+    const b = e.target.closest("[data-seg],[data-act]");
+    if (!b || !el.contains(b)) return;
+    if (b.dataset.seg) {
+      const v = b.dataset.v;
+      st[b.dataset.seg] = isNaN(Number(v)) ? v : Number(v);
+    } else {
+      st.act = b.dataset.act;
+      st.actArg = b.dataset.arg;
+    }
+    draw();
+    st.act = null;
+  });
+}
+
+function syncOutputs(el, st, fmtMap = {}) {
+  el.querySelectorAll("[data-o]").forEach(o => {
+    const k = o.dataset.o;
+    o.textContent = fmtMap[k] ? fmtMap[k](st[k]) : st[k];
+  });
+}
+
+/* 1. Self-attention */
+const ATT_SENT = {
+  lock: { title: "навесной замок на двери", tokens: ["навесной", "замок", "на", "двери"] },
+  castle: { title: "старинный замок на горе", tokens: ["старинный", "замок", "на", "горе"] }
+};
+const ATT_VEC = {
+  "навесной": [0.2, 1.7, 0.0, 0.0],
+  "замок": [0.9, 1.0, 1.0, 0.0],
+  "на": [0.0, 0.0, 0.0, 1.3],
+  "двери": [0.7, 1.3, 0.1, 0.0],
+  "старинный": [0.3, 0.1, 1.5, 0.0],
+  "горе": [0.6, 0.0, 1.7, 0.0]
+};
+
+function labAttention(el) {
+  const st = { sent: "lock", q: 1, d: 64, scale: 1 };
+  el.innerHTML = `
+    <div class="lab-controls">
+      ${segmented("sent", [["lock", "навесной замок"], ["castle", "старинный замок"]], st.sent)}
+      ${range("Размерность головы d", "d", 4, 512, 4, st.d)}
+      ${segmented("scale", [[1, "делить на √d"], [0, "не делить"]], st.scale)}
+    </div>
+    <div class="lab-stage" data-view></div>
+    <p class="lab-note" data-note></p>`;
+  const view = el.querySelector("[data-view]");
+  const note = el.querySelector("[data-note]");
+  function draw() {
+    if (st.act === "q") st.q = Number(st.actArg);
+    el.querySelectorAll("[data-seg]").forEach(b => b.setAttribute("aria-pressed", String(String(st[b.dataset.seg]) === b.dataset.v)));
+    syncOutputs(el, st);
+    const toks = ATT_SENT[st.sent].tokens;
+    const q = ATT_VEC[toks[st.q]];
+    const grow = Math.sqrt(st.d / 4);
+    const raw = toks.map(t => ATT_VEC[t].reduce((s, v, i) => s + v * q[i], 0) * grow * 1.6);
+    const logits = raw.map(x => st.scale ? x / Math.sqrt(st.d) * 2 : x);
+    const m = Math.max(...logits);
+    const ex = logits.map(x => Math.exp(x - m));
+    const z = ex.reduce((a, b) => a + b, 0);
+    const w = ex.map(x => x / z);
+    const H = -w.reduce((s, p) => s + (p > 0 ? p * Math.log2(p) : 0), 0);
+    const W = 640, x0 = 70, gap = (W - 2 * x0) / (toks.length - 1);
+    const qx = x0 + st.q * gap;
+    const arcs = toks.map((t, i) => {
+      const kx = x0 + i * gap;
+      const mid = (qx + kx) / 2, h = 26 + Math.abs(kx - qx) * 0.28;
+      return `<path d="M${qx} 74 Q${mid} ${74 + h} ${kx} 150" class="lab-arc" style="stroke-width:${0.6 + w[i] * 7};opacity:${0.18 + w[i] * 0.82}"/>`;
+    }).join("");
+    const top = toks.map((t, i) => `<g class="lab-tok ${i === st.q ? "is-on" : ""}" data-act="q" data-arg="${i}" tabindex="0" role="button" aria-label="Запрос: ${t}">
+        <rect x="${x0 + i * gap - 56}" y="34" width="112" height="34" rx="6"/>
+        <text x="${x0 + i * gap}" y="56">${t}</text></g>`).join("");
+    const bottom = toks.map((t, i) => {
+      const bx = x0 + i * gap, bh = Math.max(2, w[i] * 110);
+      return `<g class="lab-key">
+        <rect x="${bx - 56}" y="150" width="112" height="30" rx="6"/>
+        <text x="${bx}" y="170">${t}</text>
+        <rect class="lab-bar" x="${bx - 18}" y="${300 - bh}" width="36" height="${bh}"/>
+        <text class="lab-num" x="${bx}" y="${292 - bh}">${pct(w[i])}</text>
+        <text class="lab-cap" x="${bx}" y="318">q·k ${fmt(logits[i], 1)}</text></g>`;
+    }).join("");
+    view.innerHTML = `<svg viewBox="0 0 ${W} 330" class="lab-svg" role="img" aria-label="Веса внимания">
+      <text class="lab-cap" x="8" y="22" text-anchor="start">запрос (query): нажми на слово</text>
+      <text class="lab-cap" x="8" y="198" text-anchor="start">ключи (keys) и веса после softmax</text>
+      ${arcs}${top}${bottom}</svg>`;
+    const lead = toks.map((t, i) => [t, w[i]]).filter((_, i) => i !== st.q).sort((a, b) => b[1] - a[1])[0];
+    const self = w[st.q];
+    note.textContent = `Энтропия весов ${fmt(H, 2)} бита из ${fmt(Math.log2(toks.length), 2)} возможных. ` +
+      (st.scale ? "" : (H < 0.3 ? "Без деления на √d softmax почти one-hot: градиент через остальные слова исчезает. " : "Увеличь d, чтобы увидеть насыщение. ")) +
+      (self > 0.9
+        ? `«${toks[st.q]}» смотрит почти только на себя: контекст в его вектор не попадает.`
+        : `Из соседей больше всего «${toks[st.q]}» берёт от «${lead[0]}» (${pct(lead[1])}), поэтому одно и то же слово получает разный вектор в разных фразах. Переключи фразу и сравни.`);
+    view.querySelectorAll(".lab-tok").forEach(g => g.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); st.q = Number(g.dataset.arg); draw(); }
+    }));
+  }
+  bindLab(el, st, draw);
+  draw();
+}
+
+/* 2. Transformer block teardown */
+const TBLOCK = [
+  { id: "emb", t: "Токены → эмбеддинги", d: "Каждый токен становится вектором из таблицы эмбеддингов. Порядка слов здесь ещё нет.", f: "Сломано: чужой токенизатор, и векторы отвечают не тем словам." },
+  { id: "norm1", t: "RMSNorm", d: "Нормировка перед блоком (pre-norm): держит масштаб активаций, обучение устойчиво без тонкого разогрева.", f: "Post-norm без разогрева легко расходится в первые сотни шагов." },
+  { id: "att", t: "Внимание: Q, K, V, головы", d: "Каждый токен смотрит на все остальные. RoPE поворачивает q и k на угол позиции, GQA делит k и v между группами голов.", f: "Квадратично по длине: удвоение входа учетверяет счёт внимания на prefill." },
+  { id: "res1", t: "+ остаточная связь", d: "Вход блока складывается с выходом внимания: градиент проходит сквозь десятки слоёв.", f: "Без остатка глубокая сеть не обучается: градиент гаснет до нижних слоёв." },
+  { id: "norm2", t: "RMSNorm", d: "Вторая нормировка перед полносвязной частью.", f: "" },
+  { id: "mlp", t: "MLP (SwiGLU)", d: "Расширение размерности и обратное сжатие. Здесь большая часть параметров модели.", f: "Именно эти матрицы режет квантование и дообучает LoRA." },
+  { id: "res2", t: "+ остаточная связь", d: "Второе сложение с входом. Блок повторяется N раз: 32, 48, 80.", f: "" },
+  { id: "head", t: "Логиты → softmax → токен", d: "Последний слой даёт число на каждый токен словаря, температура делит логиты, сэмплер выбирает следующий токен.", f: "Температура 0 убирает сэмплинг, но не недетерминизм рантайма." }
+];
+
+function labTransformer(el) {
+  const st = { split: 1, labels: 1, on: "att" };
+  el.innerHTML = `
+    <div class="lab-controls">
+      ${segmented("split", [[1, "разобрать"], [0, "собрать"]], st.split)}
+      ${segmented("labels", [[1, "подписи"], [0, "без подписей"]], st.labels)}
+    </div>
+    <div class="lab-stage lab-split" data-view></div>`;
+  const view = el.querySelector("[data-view]");
+  function draw() {
+    if (st.act === "on") st.on = st.actArg;
+    el.querySelectorAll("[data-seg]").forEach(b => b.setAttribute("aria-pressed", String(String(st[b.dataset.seg]) === b.dataset.v)));
+    const n = TBLOCK.length, step = st.split ? 50 : 18, base = 70 + (n - 1) * step;
+    const plates = TBLOCK.map((p, i) => {
+      const y = base - i * step;
+      const big = p.id === "att" || p.id === "mlp";
+      const w = big ? 280 : 230, x = 190 - w / 2 + (big ? 0 : 25);
+      const tone = p.id === "att" ? "accent" : p.id === "mlp" ? "ok" : p.id.startsWith("res") ? "warn" : "ink";
+      const pts = `${x},${y} ${x + w},${y} ${x + w + 60},${y - 26} ${x + 60},${y - 26}`;
+      const side = `${x},${y} ${x + w},${y} ${x + w},${y + 9} ${x},${y + 9}`;
+      const lx = 540, ly = y - 9;
+      return `<g class="lab-plate tone-${tone} ${st.on === p.id ? "is-on" : ""}" data-act="on" data-arg="${p.id}" tabindex="0" role="button" aria-label="${p.t}">
+        <polygon class="side" points="${side}"/><polygon class="top" points="${pts}"/>
+        ${st.labels ? `<path class="lead" d="M${x + w + 36} ${y - 12} L${lx - 8} ${ly}"/><circle class="dot" cx="${x + w + 36}" cy="${y - 12}" r="2.4"/>
+        <text class="lab-call" x="${lx}" y="${ly + 4}">${p.t}</text>` : ""}</g>`;
+    }).join("");
+    const cur = TBLOCK.find(p => p.id === st.on);
+    view.innerHTML = `<svg viewBox="0 0 ${st.labels ? 760 : 560} ${base + 40}" class="lab-svg" role="img" aria-label="Блок трансформера по слоям">
+        <text class="lab-cap" x="8" y="22" text-anchor="start">блок трансформера, decoder-only · ×N</text>${plates}</svg>
+      <div class="lab-card"><b>${cur.t}</b><p>${cur.d}</p>${cur.f ? `<p class="lab-warn">${cur.f}</p>` : ""}</div>`;
+    view.querySelectorAll(".lab-plate").forEach(g => g.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); st.on = g.dataset.arg; draw(); }
+    }));
+  }
+  bindLab(el, st, draw);
+  draw();
+}
+
+/* 3. RAG pipeline step-through */
+const RAG_STEPS = {
+  index: [
+    ["Документы", "PDF, сканы, письма. Сначала разбор структуры: заголовки, абзацы, таблицы.", "Колонтитулы и дубли потом притягиваются к любому запросу."],
+    ["Чистка", "NFKC, склейка переносов, удаление повторяющихся блоков, MinHash-дедупликация.", "Самый дешёвый прирост recall во всём RAG."],
+    ["Чанки", "Резка по структуре: раздел и его абзацы вместе, таблица целиком, путь раздела в тексте чанка.", "Фиксированные 512 символов рвут таблицы, и половины теряют смысл."],
+    ["Эмбеддинги", "Модель превращает чанк в вектор. Для E5 префикс «passage: ».", "Смена модели требует полной переиндексации, смешанный индекс деградирует молча."],
+    ["Индексы", "Векторный (HNSW) и лексический (BM25) рядом, у каждого чанка метаданные и права.", "При переходе на приближённый индекс называют потерю recall цифрой."]
+  ],
+  query: [
+    ["Вопрос", "Пользователь спрашивает своими словами. Иногда вопрос переписывают или строят HyDE.", "Номера и артикулы векторный поиск размывает."],
+    ["Фильтры", "Тип документа, дата, права доступа — до поиска, а не после.", "Фильтр по правам после поиска выдаёт существование закрытых документов."],
+    ["BM25 + векторы", "Два ранжирования по top-50, у каждого свои слепые зоны.", "Чисто векторный поиск на номерах договоров почти всегда ошибка."],
+    ["RRF", "Слияние по обратным рангам 1/(60 + позиция): шкалы оценок не нужны.", "Складывать BM25 и косинус напрямую нельзя: шкалы несопоставимы."],
+    ["Reranker", "Cross-encoder читает пару «вопрос + чанк» и упорядочивает 50 кандидатов.", "На весь корпус его не пускают: стоимость линейна по числу пар."],
+    ["Генератор", "Модель отвечает по 3–5 лучшим чанкам с цитатой на каждый факт.", "Лишние чанки тонут в середине контекста и разбавляют ответ."],
+    ["Проверка", "Постпроцессор сверяет цитаты с поданным контекстом, без источника утверждение не публикуется.", "Без набора «ответа нет в документах» система сочиняет."]
+  ]
+};
+const RAG_METRIC = { index: ["доля таблиц целиком", "доля чанков без разрыва", "recall@5 на чистом корпусе", "recall@k до и после смены модели", "потеря recall HNSW против плоского"], query: ["", "утечки по правам: 0", "recall@50 у каждого ранжирования", "recall@5 после слияния", "прирост recall@5 на том же списке", "faithfulness", "доля верных отказов"] };
+
+function labRag(el) {
+  const st = { phase: "query", i: 0 };
+  el.innerHTML = `
+    <div class="lab-controls">
+      ${segmented("phase", [["index", "индексация"], ["query", "запрос"]], st.phase)}
+      <div class="lab-seg"><button type="button" data-act="prev">← шаг</button><button type="button" data-act="next">шаг →</button></div>
+    </div>
+    <div class="lab-stage" data-view></div>`;
+  const view = el.querySelector("[data-view]");
+  let lastPhase = st.phase;
+  function draw() {
+    if (st.phase !== lastPhase) { st.i = 0; lastPhase = st.phase; }
+    const steps = RAG_STEPS[st.phase];
+    if (st.act === "next") st.i = Math.min(steps.length - 1, st.i + 1);
+    if (st.act === "prev") st.i = Math.max(0, st.i - 1);
+    if (st.act === "go") st.i = Number(st.actArg);
+    el.querySelectorAll("[data-seg]").forEach(b => b.setAttribute("aria-pressed", String(String(st[b.dataset.seg]) === b.dataset.v)));
+    const flow = steps.map((s, i) => `<button type="button" class="lab-node ${i === st.i ? "is-on" : ""} ${i < st.i ? "is-past" : ""}" data-act="go" data-arg="${i}">
+      <span class="lab-node-n">${i + 1}</span><span>${s[0]}</span></button>`).join(`<span class="lab-arrow" aria-hidden="true"></span>`);
+    const s = steps[st.i];
+    const metric = RAG_METRIC[st.phase][st.i];
+    view.innerHTML = `<div class="lab-flow">${flow}</div>
+      <div class="lab-card"><b>${st.i + 1}. ${s[0]}</b><p>${s[1]}</p><p class="lab-warn">${s[2]}</p>${metric ? `<p class="lab-metric">мерить: ${metric}</p>` : ""}</div>`;
+  }
+  bindLab(el, st, draw);
+  draw();
+}
+
+/* 4. Threshold, PR and cost */
+function labThreshold(el) {
+  const st = { prev: 5, t: 50, cfp: 1, cfn: 8, sep: 3 };
+  el.innerHTML = `
+    <div class="lab-controls">
+      ${range("Доля положительных", "prev", 1, 50, 1, st.prev, "%")}
+      ${range("Порог", "t", 1, 99, 1, st.t)}
+      ${range("Цена ложной тревоги", "cfp", 1, 20, 1, st.cfp)}
+      ${range("Цена пропуска", "cfn", 1, 20, 1, st.cfn)}
+      ${range("Разделимость классов", "sep", 1, 5, 1, st.sep)}
+    </div>
+    <div class="lab-stage lab-split" data-view></div>`;
+  const view = el.querySelector("[data-view]");
+  function sample() {
+    const r = rng(7), N = 2000, pos = Math.round(N * st.prev / 100), mu = 0.12 + st.sep * 0.06;
+    const clip = x => Math.min(0.999, Math.max(0.001, x));
+    const s = [];
+    for (let i = 0; i < N; i++) {
+      const y = i < pos ? 1 : 0;
+      s.push([clip(0.5 + (y ? mu : -mu) + gauss(r) * 0.16), y]);
+    }
+    return s;
+  }
+  function draw() {
+    syncOutputs(el, st, { t: v => fmt(v / 100, 2), prev: v => v + "%" });
+    const data = sample();
+    const th = st.t / 100;
+    let tp = 0, fp = 0, fn = 0, tn = 0;
+    data.forEach(([s, y]) => { if (s >= th) { y ? tp++ : fp++; } else { y ? fn++ : tn++; } });
+    const P = tp + fn, prec = tp / Math.max(1, tp + fp), rec = tp / Math.max(1, P), acc = (tp + tn) / data.length;
+    const costs = [];
+    for (let k = 1; k < 100; k++) {
+      const t2 = k / 100; let a = 0, b = 0;
+      data.forEach(([s, y]) => { if (s >= t2 && !y) a++; if (s < t2 && y) b++; });
+      costs.push([t2, a * st.cfp + b * st.cfn]);
+    }
+    const best = costs.reduce((m, c) => c[1] < m[1] ? c : m, costs[0]);
+    const maxCost = Math.max(...costs.map(c => c[1]));
+    const bins = 40, hp = new Array(bins).fill(0), hn = new Array(bins).fill(0);
+    data.forEach(([s, y]) => { const b = Math.min(bins - 1, Math.floor(s * bins)); (y ? hp : hn)[b]++; });
+    const hmax = Math.max(...hn, ...hp, 1);
+    const W = 600, X = s => 30 + s * (W - 60), hY = v => 150 - Math.sqrt(v / hmax) * 120;
+    const barsN = hn.map((v, i) => `<rect class="lab-hneg" x="${X(i / bins)}" y="${hY(v)}" width="${(W - 60) / bins - 1}" height="${150 - hY(v)}"/>`).join("");
+    const barsP = hp.map((v, i) => `<rect class="lab-hpos" x="${X(i / bins)}" y="${hY(v)}" width="${(W - 60) / bins - 1}" height="${150 - hY(v)}"/>`).join("");
+    const cost = costs.map(([t2, c]) => `${X(t2)},${280 - c / maxCost * 90}`).join(" ");
+    view.innerHTML = `<svg viewBox="0 0 ${W} 310" class="lab-svg" role="img" aria-label="Распределение оценок и стоимость ошибок">
+        <text class="lab-cap" x="30" y="18" text-anchor="start">оценки модели: серые — отрицательные, цветные — положительные (корень по высоте)</text>
+        ${barsN}${barsP}
+        <line class="lab-axis" x1="30" y1="150" x2="${W - 30}" y2="150"/>
+        <line class="lab-thr" x1="${X(th)}" y1="26" x2="${X(th)}" y2="290"/>
+        <text class="lab-cap" x="30" y="182" text-anchor="start">ожидаемая стоимость ошибок по порогу</text>
+        <polyline class="lab-line" points="${cost}"/>
+        <circle class="lab-best" cx="${X(best[0])}" cy="${280 - best[1] / maxCost * 90}" r="4"/>
+        <text class="lab-num" x="${X(best[0])}" y="${270 - best[1] / maxCost * 90}">минимум при ${fmt(best[0], 2)}</text>
+      </svg>
+      <div class="lab-card">
+        <div class="lab-cm"><span></span><b>факт +</b><b>факт −</b>
+          <b>модель +</b><span class="ok">TP ${tp}</span><span class="bad">FP ${fp}</span>
+          <b>модель −</b><span class="bad">FN ${fn}</span><span>TN ${tn}</span></div>
+        <p class="lab-kv"><span>precision</span><b>${pct(prec)}</b><span>recall</span><b>${pct(rec)}</b><span>accuracy</span><b>${pct(acc)}</b><span>тревог</span><b>${tp + fp}</b></p>
+        <p class="lab-note">Константа «всегда нет» дала бы accuracy ${pct(1 - st.prev / 100)}. Стоимость при текущем пороге ${fp * st.cfp + fn * st.cfn}, минимум ${best[1]} при пороге ${fmt(best[0], 2)}.</p>
+      </div>`;
+  }
+  bindLab(el, st, draw);
+  draw();
+}
+
+/* 5. Gradient descent with momentum in a ravine */
+function labDescent(el) {
+  const st = { kappa: 100, lr: 18, mom: 60 };
+  el.innerHTML = `
+    <div class="lab-controls">
+      ${range("Вытянутость оврага κ", "kappa", 1, 200, 1, st.kappa)}
+      ${range("Шаг lr × 1000", "lr", 1, 40, 1, st.lr)}
+      ${range("Момент β", "mom", 0, 95, 5, st.mom)}
+    </div>
+    <div class="lab-stage" data-view></div>
+    <p class="lab-note" data-note></p>`;
+  const view = el.querySelector("[data-view]");
+  const note = el.querySelector("[data-note]");
+  const uid = "d" + Math.random().toString(36).slice(2, 8);
+  const squash = () => Math.min(Math.sqrt(st.kappa), 8);
+  function run(beta) {
+    let x = 1, y = 0.9 / squash(), vx = 0, vy = 0; const pts = [[x, y]];
+    const lr = st.lr / 1000;
+    for (let i = 0; i < 60; i++) {
+      vx = beta * vx + x; vy = beta * vy + st.kappa * y;
+      x -= lr * vx; y -= lr * vy;
+      if (!Number.isFinite(x) || Math.abs(x) > 50 || Math.abs(y) > 50) { pts.push([x, y]); return { pts, div: true }; }
+      pts.push([x, y]);
+    }
+    return { pts, div: false };
+  }
+  function draw() {
+    syncOutputs(el, st, { lr: v => fmt(v / 1000, 3), mom: v => fmt(v / 100, 2) });
+    const W = 600, Hh = 300, ys = 130 * squash(), X = x => W / 2 + x * 260, Y = y => Hh / 2 - 10 - y * ys;
+    const ell = [0.02, 0.08, 0.2, 0.4, 0.7].map(c => `<ellipse class="lab-contour" cx="${X(0)}" cy="${Y(0)}" rx="${Math.sqrt(2 * c) * 260}" ry="${Math.min(400, Math.sqrt(2 * c / st.kappa) * ys)}"/>`).join("");
+    const gd = run(0), mo = run(st.mom / 100);
+    const clamp = v => Math.max(-1.6, Math.min(1.6, v));
+    const line = r => r.pts.map(([x, y]) => `${X(clamp(x))},${Y(clamp(y))}`).join(" ");
+    const dist = r => Math.hypot(...r.pts[r.pts.length - 1]);
+    view.innerHTML = `<svg viewBox="0 0 ${W} ${Hh}" class="lab-svg" role="img" aria-label="Траектории спуска">
+      <defs><clipPath id="${uid}"><rect x="0" y="0" width="${W}" height="${Hh}"/></clipPath></defs>
+      <g clip-path="url(#${uid})">${ell}
+      <polyline class="lab-path-muted" points="${line(gd)}"/>
+      <polyline class="lab-path" points="${line(mo)}"/></g>
+      <circle class="lab-best" cx="${X(0)}" cy="${Y(0)}" r="4"/>
+      <text class="lab-cap" x="12" y="20" text-anchor="start">f = ½(x² + κy²), 60 шагов, ось y растянута, чтобы овраг был виден</text>
+      <text class="lab-cap lab-cap-muted" x="12" y="${Hh - 28}" text-anchor="start">серая — без момента: до минимума ${gd.div ? "разошёлся" : fmt(dist(gd), 3)}</text>
+      <text class="lab-cap lab-cap-accent" x="12" y="${Hh - 10}" text-anchor="start">цветная — с моментом β ${fmt(st.mom / 100, 2)}: ${mo.div ? "разошёлся" : fmt(dist(mo), 3)}</text></svg>`;
+    const limit = 2 / st.kappa;
+    note.textContent = (st.lr / 1000 > limit
+      ? `Шаг больше 2/κ = ${fmt(limit, 3)}: поперёк оврага спуск без момента раскачивается и уходит. `
+      : `Шаг ограничен узким направлением: при κ = ${st.kappa} он не может быть больше ${fmt(limit, 3)}, а вдоль оврага этого мало. `) +
+      "Момент копит скорость вдоль оврага и гасит колебания поперёк.";
+  }
+  bindLab(el, st, draw);
+  draw();
+}
+
+/* 6. Bias and variance: polynomial degree */
+function polyFit(xs, ys, deg, ridge = 1e-9) {
+  const n = deg + 1, A = Array.from({ length: n }, () => new Array(n + 1).fill(0));
+  xs.forEach((x, k) => {
+    const p = []; let v = 1;
+    for (let i = 0; i < n; i++) { p.push(v); v *= x; }
+    for (let i = 0; i < n; i++) { for (let j = 0; j < n; j++) A[i][j] += p[i] * p[j]; A[i][n] += p[i] * ys[k]; }
+  });
+  for (let i = 0; i < n; i++) A[i][i] += ridge;
+  for (let c = 0; c < n; c++) {
+    let piv = c;
+    for (let r = c + 1; r < n; r++) if (Math.abs(A[r][c]) > Math.abs(A[piv][c])) piv = r;
+    [A[c], A[piv]] = [A[piv], A[c]];
+    for (let r = 0; r < n; r++) {
+      if (r === c || !A[c][c]) continue;
+      const f = A[r][c] / A[c][c];
+      for (let j = c; j <= n; j++) A[r][j] -= f * A[c][j];
+    }
+  }
+  return A.map((row, i) => row[n] / (row[i] || 1));
+}
+
+function polyVal(w, x) {
+  let s = 0, v = 1;
+  for (const c of w) { s += c * v; v *= x; }
+  return s;
+}
+
+function labBiasVariance(el) {
+  const st = { deg: 3, seed: 1, n: 16 };
+  el.innerHTML = `
+    <div class="lab-controls">
+      ${range("Степень многочлена", "deg", 0, 12, 1, st.deg)}
+      ${range("Точек в обучении", "n", 8, 60, 2, st.n)}
+      <div class="lab-seg"><button type="button" data-act="seed">новая выборка</button></div>
+    </div>
+    <div class="lab-stage lab-split" data-view></div>`;
+  const view = el.querySelector("[data-view]");
+  const truth = x => Math.sin(Math.PI * x * 1.3);
+  function data(seed, n) {
+    const r = rng(seed * 97 + n), xs = [], ys = [];
+    for (let i = 0; i < n; i++) { const x = r() * 2 - 1; xs.push(x); ys.push(truth(x) + gauss(r) * 0.25); }
+    return [xs, ys];
+  }
+  const vr = rng(999), vx = [], vy = [];
+  for (let i = 0; i < 300; i++) { const x = vr() * 2 - 1; vx.push(x); vy.push(truth(x) + gauss(vr) * 0.25); }
+  const uid = "b" + Math.random().toString(36).slice(2, 8);
+  const mse = (w, xs, ys) => xs.reduce((s, x, i) => s + (polyVal(w, x) - ys[i]) ** 2, 0) / xs.length;
+  function draw() {
+    if (st.act === "seed") st.seed += 1;
+    syncOutputs(el, st);
+    const [xs, ys] = data(st.seed, st.n);
+    const curves = [];
+    for (let d = 0; d <= 12; d++) { const w = polyFit(xs, ys, d); curves.push([mse(w, xs, ys), mse(w, vx, vy)]); }
+    const w = polyFit(xs, ys, st.deg);
+    const W = 340, H = 260, X = x => 16 + (x + 1) / 2 * (W - 32), Y = y => H / 2 + 14 - y * 70;
+    const fit = [], tru = [];
+    for (let i = 0; i <= 120; i++) { const x = -1 + i / 60; fit.push(`${X(x)},${Y(Math.max(-1.6, Math.min(1.6, polyVal(w, x))))}`); tru.push(`${X(x)},${Y(truth(x))}`); }
+    const pts = xs.map((x, i) => `<circle class="lab-pt" cx="${X(x)}" cy="${Y(ys[i])}" r="3"/>`).join("");
+    const cmax = Math.min(1.5, Math.max(...curves.map(c => c[1]))), EX = d => 30 + d / 12 * 280, EY = v => 210 - Math.min(v, cmax) / cmax * 180;
+    const trL = curves.map((c, d) => `${EX(d)},${EY(c[0])}`).join(" "), vaL = curves.map((c, d) => `${EX(d)},${EY(c[1])}`).join(" ");
+    const bestD = curves.reduce((b, c, d) => c[1] < curves[b][1] ? d : b, 0);
+    view.innerHTML = `<svg viewBox="0 0 ${W} ${H}" class="lab-svg" role="img" aria-label="Подгонка многочленом">
+        <polyline class="lab-path-muted" points="${tru.join(" ")}"/>
+        <defs><clipPath id="${uid}"><rect x="0" y="0" width="${W}" height="${H}"/></clipPath></defs>
+        <polyline class="lab-path" clip-path="url(#${uid})" points="${fit.join(" ")}"/>${pts}
+        <text class="lab-cap" x="16" y="18" text-anchor="start">серая — истина, цветная — модель степени ${st.deg}</text></svg>
+      <svg viewBox="0 0 340 240" class="lab-svg" role="img" aria-label="Ошибка на обучении и проверке по степени">
+        <line class="lab-axis" x1="30" y1="210" x2="310" y2="210"/>
+        <polyline class="lab-path-muted" points="${trL}"/><polyline class="lab-path" points="${vaL}"/>
+        <line class="lab-thr" x1="${EX(st.deg)}" y1="24" x2="${EX(st.deg)}" y2="210"/>
+        <circle class="lab-best" cx="${EX(bestD)}" cy="${EY(curves[bestD][1])}" r="4"/>
+        <text class="lab-cap" x="30" y="18" text-anchor="start">ошибка: серая — обучение, цветная — проверка</text>
+        <text class="lab-cap" x="30" y="230" text-anchor="start">степень 0</text><text class="lab-cap" x="310" y="230" text-anchor="end">12</text></svg>
+      <p class="lab-note">Обучение ${fmt(curves[st.deg][0], 3)}, проверка ${fmt(curves[st.deg][1], 3)}. ${st.deg < bestD ? "Слишком простая модель: высокое смещение, обе ошибки высокие." : st.deg > bestD + 1 ? "Слишком гибкая: обучение почти идеально, проверка хуже. Нажми «новая выборка», чтобы увидеть разброс." : "Около лучшей степени на проверке."} Шум данных σ² = ${fmt(0.0625, 3)} — ниже него ошибка проверки не опустится.</p>`;
+  }
+  bindLab(el, st, draw);
+  draw();
+}
+
+/* 7. Splits and leakage */
+function labSplits(el) {
+  const st = { mode: "random", fold: 0 };
+  const docs = ["Д1", "Д2", "Д3", "Д4", "Д5", "Д6"];
+  const rows = [];
+  docs.forEach((d, i) => { for (let f = 0; f < 4; f++) rows.push({ doc: i, field: f, month: i + 1 }); });
+  const r = rng(5);
+  const shuffled = rows.map((x, i) => [r(), i]).sort((a, b) => a[0] - b[0]).map(x => x[1]);
+  el.innerHTML = `
+    <div class="lab-controls">
+      ${segmented("mode", [["random", "KFold по полям"], ["group", "GroupKFold по документам"], ["time", "по времени"]], st.mode)}
+      ${segmented("fold", [[0, "фолд 1"], [1, "фолд 2"], [2, "фолд 3"]], st.fold)}
+    </div>
+    <div class="lab-stage" data-view></div>`;
+  const view = el.querySelector("[data-view]");
+  function draw() {
+    el.querySelectorAll("[data-seg]").forEach(b => b.setAttribute("aria-pressed", String(String(st[b.dataset.seg]) === b.dataset.v)));
+    const test = new Set();
+    if (st.mode === "random") shuffled.forEach((idx, k) => { if (k % 3 === st.fold) test.add(idx); });
+    if (st.mode === "group") rows.forEach((x, idx) => { if (x.doc % 3 === st.fold) test.add(idx); });
+    if (st.mode === "time") rows.forEach((x, idx) => { if (x.doc === 3 + st.fold) test.add(idx); });
+    const trainDocs = new Set(rows.filter((_, i) => !test.has(i) && (st.mode !== "time" || rows[i].doc < 3 + st.fold)).map(x => x.doc));
+    const used = i => st.mode !== "time" || test.has(i) || rows[i].doc < 3 + st.fold;
+    let leaks = 0;
+    const cells = rows.map((x, i) => {
+      const isTest = test.has(i), leak = isTest && trainDocs.has(x.doc);
+      if (leak) leaks++;
+      const cls = !used(i) ? "is-off" : isTest ? (leak ? "is-leak" : "is-test") : "is-train";
+      return `<span class="lab-cell ${cls}" title="${docs[x.doc]}, поле ${x.field + 1}">${x.field + 1}</span>`;
+    });
+    const grid = docs.map((d, i) => `<div class="lab-row"><b>${d}</b><span class="lab-cap">мес. ${i + 1}</span>${cells.slice(i * 4, i * 4 + 4).join("")}</div>`).join("");
+    const msg = st.mode === "random"
+      ? `Поля одного документа разошлись по обучению и проверке: ${leaks} из ${test.size} проверочных полей видели «свой» бланк в обучении. Метрика меряет запоминание бланка.`
+      : st.mode === "group"
+        ? "Документ целиком либо в обучении, либо в проверке: утечки через общий скан и шаблон нет."
+        : "Обучение только на прошлом, проверка на следующем месяце. Будущее в обучение не попадает, светлые строки ещё не наступили.";
+    view.innerHTML = `<div class="lab-grid">${grid}</div>
+      <p class="lab-legend"><span class="lab-cell is-train"></span>обучение <span class="lab-cell is-test"></span>проверка <span class="lab-cell is-leak"></span>проверка с утечкой</p>
+      <p class="lab-note">${msg}</p>`;
+  }
+  bindLab(el, st, draw);
+  draw();
+}
+
+/* 8. Wilson vs Wald */
+function labWilson(el) {
+  const st = { k: 45, n: 49 };
+  el.innerHTML = `
+    <div class="lab-controls">
+      ${range("Успехов k", "k", 0, 200, 1, st.k)}
+      ${range("Наблюдений n", "n", 1, 200, 1, st.n)}
+    </div>
+    <div class="lab-stage" data-view></div>`;
+  const view = el.querySelector("[data-view]");
+  function draw() {
+    if (st.k > st.n) st.k = st.n;
+    el.querySelector('[data-k="k"]').max = st.n;
+    el.querySelector('[data-k="k"]').value = st.k;
+    syncOutputs(el, st);
+    const z = 1.96, p = st.k / st.n, n = st.n;
+    const d = 1 + z * z / n, c = (p + z * z / (2 * n)) / d, h = z * Math.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / d;
+    const wil = [c - h, c + h], wh = z * Math.sqrt(p * (1 - p) / n), wal = [p - wh, p + wh];
+    const W = 600, X = v => 40 + Math.max(-0.15, Math.min(1.15, v)) * 460;
+    const ticks = [0, 0.25, 0.5, 0.75, 1].map(t => `<line class="lab-axis" x1="${X(t)}" y1="40" x2="${X(t)}" y2="150"/><text class="lab-cap" x="${X(t)}" y="168">${fmt(t, 2)}</text>`).join("");
+    const out = wal[0] < 0 || wal[1] > 1;
+    view.innerHTML = `<svg viewBox="0 0 ${W} 180" class="lab-svg" role="img" aria-label="Интервалы Вальда и Уилсона">
+      <rect class="lab-out" x="${X(-0.15)}" y="40" width="${X(0) - X(-0.15)}" height="110"/>
+      <rect class="lab-out" x="${X(1)}" y="40" width="${X(1.15) - X(1)}" height="110"/>
+      ${ticks}
+      <text class="lab-cap" x="8" y="74" text-anchor="start">Вальд</text>
+      <line class="lab-int-muted" x1="${X(wal[0])}" y1="70" x2="${X(wal[1])}" y2="70"/>
+      <text class="lab-cap" x="8" y="114" text-anchor="start">Уилсон</text>
+      <line class="lab-int" x1="${X(wil[0])}" y1="110" x2="${X(wil[1])}" y2="110"/>
+      <circle class="lab-best" cx="${X(p)}" cy="90" r="4"/>
+      <text class="lab-num" x="${X(p)}" y="30">${st.k}/${st.n} = ${fmt(p, 3)}</text></svg>
+      <p class="lab-kv"><span>Уилсон</span><b>[${fmt(wil[0], 3)}; ${fmt(wil[1], 3)}]</b><span>Вальд</span><b>[${fmt(wal[0], 3)}; ${fmt(wal[1], 3)}]</b><span>ширина</span><b>${fmt((wil[1] - wil[0]) * 100, 1)} п.п.</b></p>
+      <p class="lab-note">${st.k === 0 || st.k === st.n
+        ? `Ноль ошибок или ноль успехов: Вальд схлопывается в точку, а честная граница по правилу трёх около ${pct(3 / n, 1)}.`
+        : out ? "Вальд вылез за [0; 1]: у края шкалы и при малом n его формула врёт." : "Чтобы сузить интервал вдвое, нужно вчетверо больше наблюдений."}</p>`;
+  }
+  bindLab(el, st, draw);
+  draw();
+}
+
+/* 9. VRAM calculator */
+const VRAM_PRESETS = {
+  "7b": { p: 7, layers: 32, kv: 8, hd: 128, label: "плотная 7B" },
+  "14b": { p: 14, layers: 48, kv: 8, hd: 128, label: "плотная 14B" },
+  "moe": { p: 35, layers: 48, kv: 4, hd: 128, label: "MoE 35B, ~3B активных" }
+};
+
+function labVram(el) {
+  const st = { preset: "7b", bits: 16, ctx: 8, conc: 8, gpu: 24 };
+  el.innerHTML = `
+    <div class="lab-controls">
+      ${segmented("preset", Object.entries(VRAM_PRESETS).map(([k, v]) => [k, v.label]), st.preset)}
+      ${segmented("bits", [[16, "fp16"], [8, "int8"], [4, "int4"]], st.bits)}
+      ${range("Контекст, тыс. токенов", "ctx", 1, 128, 1, st.ctx)}
+      ${range("Параллельных запросов", "conc", 1, 64, 1, st.conc)}
+      ${segmented("gpu", [[24, "24 ГБ"], [48, "48 ГБ"], [80, "80 ГБ"]], st.gpu)}
+    </div>
+    <div class="lab-stage" data-view></div>`;
+  const view = el.querySelector("[data-view]");
+  function draw() {
+    el.querySelectorAll("[data-seg]").forEach(b => b.setAttribute("aria-pressed", String(String(st[b.dataset.seg]) === b.dataset.v)));
+    syncOutputs(el, st);
+    const m = VRAM_PRESETS[st.preset];
+    const G = 1024 ** 3;
+    const weights = m.p * 1e9 * st.bits / 8 / G;
+    const perTok = 2 * m.layers * m.kv * m.hd * 2;
+    const kv = perTok * st.ctx * 1024 * st.conc / G;
+    const reserve = (weights + kv) * 0.15;
+    const total = weights + kv + reserve;
+    const scale = Math.max(total, st.gpu) * 1.08, W = 600, X = v => 20 + v / scale * (W - 40);
+    const seg = (a, b, cls) => `<rect class="${cls}" x="${X(a)}" y="40" width="${Math.max(0, X(b) - X(a))}" height="40"/>`;
+    const fits = total <= st.gpu;
+    let maxConc = 0;
+    for (let c = 1; c <= 512; c++) { if ((weights + perTok * st.ctx * 1024 * c / G) * 1.15 <= st.gpu) maxConc = c; }
+    view.innerHTML = `<svg viewBox="0 0 ${W} 130" class="lab-svg" role="img" aria-label="Память видеокарты">
+      ${seg(0, weights, "lab-mw")}${seg(weights, weights + kv, "lab-mk")}${seg(weights + kv, total, "lab-mr")}
+      <line class="lab-thr" x1="${X(st.gpu)}" y1="26" x2="${X(st.gpu)}" y2="96"/>
+      <text class="lab-num" x="${X(st.gpu)}" y="20">карта ${st.gpu} ГБ</text>
+      <text class="lab-cap" x="20" y="112" text-anchor="start">веса ${fmt(weights, 1)} · KV-кэш ${fmt(kv, 1)} · запас 15% ${fmt(reserve, 1)} · итого ${fmt(total, 1)} ГиБ</text></svg>
+      <p class="lab-kv"><span>KV на токен</span><b>${fmt(perTok / 1024, 0)} КиБ</b><span>влезает</span><b class="${fits ? "ok" : "bad"}">${fits ? "да" : "нет"}</b><span>макс. запросов при этом контексте</span><b>${maxConc}</b></p>
+      <p class="lab-note">${st.preset === "moe" ? "MoE хранит все 35 млрд параметров, а считает примерно как трёхмиллиардная: память по полному размеру, скорость по активным. " : ""}${kv > weights ? "Кэш уже больше весов: упирается длина и число запросов, а не размер модели." : "Пока основную память занимают веса; добавь контекст или запросы, и кэш их обгонит."} Конфигурации слоёв условные, для своей модели числа берут из config.json.</p>`;
+  }
+  bindLab(el, st, draw);
+  draw();
+}
+
+const LABS = {
+  S: { title: "Внимание своими руками", fn: labAttention },
+  W: { title: "Блок трансформера в разборе", fn: labTransformer },
+  F: { title: "RAG по шагам", fn: labRag },
+  V: { title: "RAG по шагам", fn: labRag },
+  L: { title: "Порог, precision, recall и цена ошибки", fn: labThreshold },
+  AC: { title: "Спуск в овраге: шаг и момент", fn: labDescent },
+  X: { title: "Смещение и разброс на одном графике", fn: labBiasVariance },
+  P: { title: "Смещение и разброс на одном графике", fn: labBiasVariance },
+  M: { title: "Разбиения и утечки", fn: labSplits },
+  B: { title: "Разбиения и утечки", fn: labSplits },
+  A: { title: "Интервал Уилсона против Вальда", fn: labWilson },
+  T: { title: "Интервал Уилсона против Вальда", fn: labWilson },
+  E: { title: "Сколько памяти нужно модели", fn: labVram },
+  K: { title: "Сколько памяти нужно модели", fn: labVram },
+  Y: { title: "Блок трансформера в разборе", fn: labTransformer }
+};
+
+function renderLab(sec) {
+  const lab = LABS[sec.id];
+  if (!lab) return "";
+  return `<section class="sub lab" id="lab-${sec.id}"><h3 class="sub-label">Схема · ${esc(lab.title)}</h3><div class="lab-mount" data-lab="${sec.id}"></div></section>`;
+}
+
+function mountLabs(root) {
+  root.querySelectorAll("[data-lab]").forEach(el => {
+    if (el.dataset.mounted) return;
+    el.dataset.mounted = "1";
+    try { LABS[el.dataset.lab].fn(el); } catch (e) { el.textContent = "Схема не загрузилась: " + e.message; }
   });
 }
 
@@ -2502,51 +3234,51 @@ function toast(text) {
 
 function celebrate() {
   if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  // pixel burst in the spirit of pixelfx: chunky pixels, a short palette, stepped 12 fps
+  const PX = 6;
   const canvas = document.createElement("canvas");
   canvas.className = "confetti";
+  canvas.setAttribute("aria-hidden", "true");
+  const w = Math.ceil(window.innerWidth / PX), h = Math.ceil(window.innerHeight / PX);
+  canvas.width = w;
+  canvas.height = h;
   document.body.appendChild(canvas);
   const ctx = canvas.getContext("2d");
   if (!ctx) { canvas.remove(); return; }
-  const dpr = window.devicePixelRatio || 1;
-  const w = window.innerWidth;
-  const h = window.innerHeight;
-  canvas.width = w * dpr;
-  canvas.height = h * dpr;
-  ctx.scale(dpr, dpr);
   const css = getComputedStyle(document.documentElement);
-  const colors = ["--accent", "--ok", "--warn", "--bad"].map(v => css.getPropertyValue(v).trim() || "#2FC3AE");
-  const parts = Array.from({ length: 140 }, () => ({
-    x: w / 2 + (Math.random() - .5) * w * .3,
-    y: h * .35,
-    vx: (Math.random() - .5) * 14,
-    vy: -Math.random() * 13 - 4,
-    r: Math.random() * Math.PI,
-    vr: (Math.random() - .5) * .3,
-    s: 5 + Math.random() * 6,
-    c: colors[Math.floor(Math.random() * colors.length)]
-  }));
-  const t0 = performance.now();
-  function frame(t) {
-    const k = (t - t0) / 1800;
+  const tone = v => css.getPropertyValue(v).trim() || "#0B6E63";
+  const palette = [tone("--accent"), tone("--accent-ink"), tone("--ok"), tone("--ink")];
+  const ox = Math.round(w / 2), oy = Math.round(h * 0.55);
+  const r = rng(Date.now() % 100000);
+  const parts = Array.from({ length: 64 }, () => {
+    const a = r() * Math.PI * 2, sp = 1.2 + r() * 2.6;
+    return { x: ox, y: oy, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - 1.6, life: 9 + Math.floor(r() * 7), s: r() < 0.25 ? 2 : 1 };
+  });
+  let frame = 0;
+  function ring(radius, color) {
+    ctx.fillStyle = color;
+    for (let i = 0; i < 48; i++) {
+      const a = i / 48 * Math.PI * 2;
+      ctx.fillRect(Math.round(ox + Math.cos(a) * radius), Math.round(oy + Math.sin(a) * radius * 0.8), 1, 1);
+    }
+  }
+  function step() {
     ctx.clearRect(0, 0, w, h);
+    if (frame < 4) ring(2 + frame * 3, palette[frame % 2]);
     parts.forEach(p => {
-      p.vy += .35;
-      p.vx *= .99;
-      p.x += p.vx;
-      p.y += p.vy;
-      p.r += p.vr;
-      ctx.save();
-      ctx.globalAlpha = Math.max(0, 1 - k);
-      ctx.translate(p.x, p.y);
-      ctx.rotate(p.r);
-      ctx.fillStyle = p.c;
-      ctx.fillRect(-p.s / 2, -p.s / 4, p.s, p.s / 2);
-      ctx.restore();
+      if (frame > p.life) return;
+      p.x += p.vx; p.y += p.vy; p.vy += 0.35; p.vx *= 0.94;
+      const k = frame / p.life;
+      ctx.globalAlpha = k < 0.6 ? 1 : k < 0.85 ? 0.66 : 0.33;
+      ctx.fillStyle = palette[k < 0.35 ? 0 : k < 0.7 ? 1 : 2];
+      ctx.fillRect(Math.round(p.x), Math.round(p.y), p.s, p.s);
     });
-    if (k < 1) requestAnimationFrame(frame);
+    ctx.globalAlpha = 1;
+    frame += 1;
+    if (frame < 18) setTimeout(step, 83);
     else canvas.remove();
   }
-  requestAnimationFrame(frame);
+  step();
 }
 
 document.addEventListener("keydown", e => {

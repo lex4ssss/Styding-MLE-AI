@@ -154,7 +154,16 @@ def main():
     for q in data["quiz"]["questions"]:
         if q["why"][:1].islower() or q["why"].startswith("…"):
             problems.append(f"разбор начинается с обрывка: {q['q'][:60]}")
-        for text in [q["q"], q["why"], q.get("case", "")] + q["options"]:
+        ex = q.get("ex")
+        if ex is None:
+            problems.append(f"нет разбора неверных вариантов (поле ex): {q['q'][:60]}")
+        else:
+            if len(ex) != len(q["options"]) or ex[q["correct"]]:
+                problems.append(f"разбор вариантов не по числу вариантов или есть у верного: {q['q'][:60]}")
+            for i, e in enumerate(ex):
+                if i != q["correct"] and (not e or e[:1].islower() or e[-1:] not in ".!?»)"):
+                    problems.append(f"пустой или оборванный разбор варианта {i}: {q['q'][:60]}")
+        for text in [q["q"], q["why"], q.get("case", "")] + q["options"] + [e for e in (ex or []) if e]:
             if text.count("(") != text.count(")") or text.count("«") != text.count("»"):
                 problems.append(f"незакрытая скобка или кавычка: {text[:60]}")
     if problems:
@@ -162,6 +171,8 @@ def main():
 
     print(f"OK · блоков {len(ids)} · вопросов {len(data['quiz']['questions'])} · разделов {len(data['faq']['sections'])} · терминов {terms}")
     print(f"OK · треков {len(tracks['tracks'])} · этапов {len(route['stages'])} · размер {round(size_kb, 1)} kb")
+    with_ex = sum(1 for q in data["quiz"]["questions"] if q.get("ex"))
+    print(f"разбор неверных вариантов: {with_ex} из {len(data['quiz']['questions'])} вопросов")
     print(f"варианты: перекос длины меньше 20% у {balanced} из {len(skews)}, средний {round(sum(skews) / len(skews) * 100)}%, место верного по длине от короткого к длинному {'/'.join(map(str, shares))}%")
     return 0
 

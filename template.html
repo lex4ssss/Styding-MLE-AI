@@ -461,6 +461,14 @@ main { padding-block: 36px 72px; }
 }
 
 .note-hot { border-left-color: var(--warn); background: var(--warn-soft); }
+.note-why { border-left-color: var(--bad); background: var(--bad-soft); }
+.note-why .note-label { color: var(--bad); }
+.opts-why { font-size: 14.5px; line-height: 1.55; }
+.opts-why summary { cursor: pointer; color: var(--accent-ink); font-weight: 600; padding: 4px 0; }
+.opts-why ul { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 8px; }
+.opts-why li { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 8px; color: var(--ink); }
+.opts-why li b { font-family: var(--mono); color: var(--muted); font-weight: 500; }
+.opts-why li.is-key b, .opts-why li.is-key span { color: var(--ok); }
 .note-hot .note-label { color: var(--warn); }
 .unsure-row { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; font-size: 13px; color: var(--muted); }
 .unsure-row .btn[aria-pressed="true"] { color: var(--warn); border-color: var(--warn); }
@@ -1440,7 +1448,8 @@ function grade(key, ok, rating) {
     due: shiftDay(today, ivl),
     at: stamp(),
     n: (cur ? cur.n : 0) + 1,
-    lapses: (cur ? cur.lapses : 0) + (g === 1 ? 1 : 0)
+    lapses: (cur ? cur.lapses : 0) + (g === 1 ? 1 : 0),
+    ce: cur ? cur.ce || 0 : 0
   };
   const d = state.study.days[today] || { n: 0, ok: 0 };
   state.study.days[today] = { n: d.n + 1, ok: d.ok + (ok ? 1 : 0), at: stamp() };
@@ -1803,7 +1812,11 @@ function startReview() {
 }
 
 function startWeak() {
-  startSession("weak", shuffled(weakQuestions()).slice(0, 15), { title: "Работа над ошибками" });
+  // Confident errors first: they are the ones worth correcting right away
+  const ce = q => (state.study.srs[QKEY.get(q)] || {}).ce || 0;
+  const weak = weakQuestions();
+  const list = shuffled(weak.filter(q => ce(q) > 0)).concat(shuffled(weak.filter(q => !ce(q))));
+  startSession("weak", list.slice(0, 15), { title: "Работа над ошибками" });
 }
 
 function startMix() {
@@ -1828,6 +1841,7 @@ function pick(orig) {
   // Pretest answers are a warm-up before reading and do not enter the schedule
   if (s.kind !== "pretest") {
     grade(QKEY.get(q), ok, ok ? (unsure ? 2 : 3) : 1);
+    if (!ok && !unsure) state.study.srs[QKEY.get(q)].ce += 1;   // confident error
     commit();
   }
   say(ok ? "Верно" : "Неверно");
@@ -2024,7 +2038,9 @@ function renderQuestion() {
       <div class="options">${options}</div>
       ${done ? `<div class="verdict">
         ${picked !== q.correct && !s.unsure[s.idx] && s.kind !== "pretest" ? `<div class="note note-hot"><span class="note-label">Уверенная ошибка</span><span>Такие исправляются лучше всего, если разобрать прямо сейчас: прочитай разбор и скажи себе, почему верен другой вариант.</span></div>` : ""}
+        ${picked !== q.correct && q.ex && q.ex[picked] ? `<div class="note note-why"><span class="note-label">Почему не твой вариант</span><span>${mono(q.ex[picked])}</span></div>` : ""}
         <p class="verdict-why">${mono(q.why)}</p>
+        ${q.ex ? `<details class="opts-why"><summary>Разбор всех вариантов</summary><ul>${perm.map((orig, j) => `<li class="${orig === q.correct ? "is-key" : ""}"><b>${KEYS[j]}</b><span>${orig === q.correct ? "Верный ответ: обоснование выше." : mono(q.ex[orig])}</span></li>`).join("")}</ul></details>` : ""}
         ${q.case ? `<div class="note"><span class="note-label">Из твоей практики</span><span>${mono(q.case)}</span></div>` : ""}
       </div>` : `<p class="kbd-hint">Клавиши <kbd>1</kbd>–<kbd>4</kbd> или <kbd>А</kbd>–<kbd>Г</kbd> выбирают ответ, <kbd>Enter</kbd> ведёт дальше</p>`}
       <div class="exam-actions">
@@ -2071,6 +2087,7 @@ function renderResult() {
       <div class="miss-body">
         <p class="miss-line"><b>Ты выбрал</b>${esc(q.options[s.answers[i]] ?? "нет ответа")}</p>
         <p class="miss-line"><b>Верно</b>${esc(q.options[q.correct])}</p>
+        ${q.ex && q.ex[s.answers[i]] ? `<p class="miss-line"><b>Почему не твой</b>${mono(q.ex[s.answers[i]])}</p>` : ""}
         <p>${mono(q.why)}</p>
         ${q.case ? `<div class="note"><span class="note-label">Из твоей практики</span><span>${mono(q.case)}</span></div>` : ""}
       </div>

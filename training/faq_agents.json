@@ -52,11 +52,6 @@
      "m": "То же требование, что к ручке сервиса: всё, что можно повторить, будет повторено."
     },
     {
-     "t": "MCP",
-     "d": "Протокол подключения инструментов и данных к модели вместо самописной обёртки под каждого поставщика.",
-     "m": "Знать как факт индустрии: на вопрос «чем подключаете инструменты» отвечают названием протокола, а не именем своего клиента."
-    },
-    {
      "t": "Планирующий и реактивный агент",
      "d": "План целиком с перепланированием против решения следующего шага после каждого наблюдения.",
      "m": "Известна структура задачи, значит чаще всего нужен конвейер, а не агент."
@@ -79,7 +74,7 @@
     {
      "t": "MCP (Model Context Protocol)",
      "d": "Открытый протокол, по которому клиенты LLM подключаются к серверам инструментов, ресурсов и шаблонов промптов по stdio или HTTP.",
-     "m": "Сервер работает с правами запустившего его пользователя: подключать как стороннее приложение с доступом к данным."
+     "m": "Сервер работает с правами запустившего его пользователя: подключать как стороннее приложение с доступом к данным. На вопрос «чем подключаете инструменты» отвечают названием протокола, а не именем своего клиента."
     },
     {
      "t": "Инъекция через описание инструмента (tool poisoning)",
@@ -172,7 +167,7 @@
     {
      "t": "Предохранители в цикле",
      "d": "Лимит шагов, бюджет токенов и защита от повтора одного и того же вызова. Двадцать строк, которые превращают зависание в понятный отказ.",
-     "code": "seen, spent = set(), 0\nfor step in range(MAX_STEPS):\n    out = model(messages, tools=TOOLS)\n    spent += out.usage.input_tokens + out.usage.output_tokens\n    if spent > TOKEN_BUDGET:\n        return 'stopped: token budget'\n    if out.stop_reason != 'tool_use':\n        return out.text\n    key = (out.tool.name, json.dumps(out.tool.args, sort_keys=True))\n    if key in seen:\n        return 'stopped: repeated call'\n    seen.add(key)\n    messages.append(run_tool(out.tool))\nreturn 'stopped: step limit'"
+     "code": "import json\n\ndef run_agent(messages):\n    seen, spent = set(), 0\n    for step in range(MAX_STEPS):\n        out = model(messages, tools=TOOLS)\n        spent += out.usage.input_tokens + out.usage.output_tokens\n        if spent > TOKEN_BUDGET:\n            return 'stopped: token budget'\n        if out.stop_reason != 'tool_use':\n            return out.text\n        key = (out.tool.name, json.dumps(out.tool.args, sort_keys=True))\n        if key in seen:\n            return 'stopped: repeated call'\n        seen.add(key)\n        messages.append(run_tool(out.tool))\n    return 'stopped: step limit'"
     },
     {
      "t": "Оценка агента на наборе задач",
@@ -411,7 +406,7 @@
     {
      "t": "Посчитать все четыре метрики",
      "d": "Собери 30 вопросов с эталонным фрагментом и ответом. Считай context recall и precision по идентификаторам чанков, faithfulness и answer relevancy — судьёй с рубрикой или через ragas.",
-     "code": "from ragas import evaluate\nfrom ragas.metrics import context_recall, context_precision, faithfulness, answer_relevancy\nres = evaluate(dataset, metrics=[context_recall, context_precision, faithfulness, answer_relevancy])\nprint(res)"
+     "code": "# API ragas меняется между версиями: в новых метрики — классы (LLMContextRecall и др.), имена сверять с документацией своей версии\nfrom ragas import evaluate\nfrom ragas.metrics import context_recall, context_precision, faithfulness, answer_relevancy\nres = evaluate(dataset, metrics=[context_recall, context_precision, faithfulness, answer_relevancy])\nprint(res)"
     },
     {
      "t": "Переранжирование на фиксированном списке",
@@ -511,7 +506,7 @@
    "terms": [
     {
      "t": "Self-attention",
-     "d": "Каждый токен сопоставляется с каждым; число пар растёт как квадрат длины. Отсюда стоимость prefill и предел контекста.",
+     "d": "Каждый токен сопоставляется с каждым (в декодере с каждым предыдущим, пар вдвое меньше); число пар растёт как квадрат длины. Отсюда стоимость prefill и предел контекста.",
      "m": "Картинка на две страницы — тысячи визуальных токенов. Удвоение dpi учетверяет площадь и бьёт именно сюда."
     },
     {
@@ -625,7 +620,7 @@
     },
     {
      "h": "Температура, top-k и top-p",
-     "p": "Температура растягивает или сжимает распределение перед выбором: ниже единицы делает пики острее, выше сглаживает. Ноль означает отказ от сэмплирования, всегда берётся самый вероятный токен. top-k оставляет k кандидатов независимо от их весов, поэтому на уверенном распределении тащит хвост, а на неуверенном режет лишнее. top-p берёт минимальный набор, чья суммарная вероятность достигает p, и потому адаптивен. Для извлечения данных рабочая настройка одна: температура 0 и схема ответа."
+     "p": "Температура растягивает или сжимает распределение перед выбором: ниже единицы делает пики острее, выше сглаживает. Ноль означает отказ от сэмплирования, всегда берётся самый вероятный токен. top-k оставляет k кандидатов независимо от их весов, поэтому на уверенном распределении тащит ничтожный хвост, а на неуверенном отрезает правдоподобные варианты. top-p берёт минимальный набор, чья суммарная вероятность достигает p, и потому адаптивен. Для извлечения данных рабочая настройка одна: температура 0 и схема ответа."
     },
     {
      "h": "Greedy против beam search",

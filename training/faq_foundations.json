@@ -718,7 +718,7 @@
     {
      "t": "FastText против словарных векторов на опечатках",
      "d": "Подсловные векторы дают осмысленный ответ на незнакомом слове, словарные отдают заглушку. Для русского это решает половину проблем морфологии.",
-     "code": "words = ['неустойка', 'неустоика', 'неустойкa', 'неусточка']\nfor w in words:\n    known = w in word2vec_vocab\n    print(f'{w:12} в словаре: {known}  fasttext-вектор: есть всегда')"
+     "code": "from gensim.models import FastText, Word2Vec\n\n# sentences: список документов, каждый документ это список слов\nw2v = Word2Vec(sentences, vector_size=100, min_count=2)\nft = FastText(sentences, vector_size=100, min_count=2, min_n=3, max_n=6)\n\nfor w in ['неустойка', 'неустоика', 'неусточка']:\n    in_w2v = 'есть' if w in w2v.wv else 'нет'\n    near = [x for x, _ in ft.wv.most_similar(w, topn=3)]  # FastText соберёт вектор из подслов\n    print(f'{w:12} word2vec: {in_w2v:4}  fasttext ближайшие: {near}')"
     }
    ],
    "business": [

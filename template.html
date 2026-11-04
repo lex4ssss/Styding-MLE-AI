@@ -460,6 +460,11 @@ main { padding-block: 36px 72px; }
   line-height: 1.55;
 }
 
+.note-hot { border-left-color: var(--warn); background: var(--warn-soft); }
+.note-hot .note-label { color: var(--warn); }
+.unsure-row { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; font-size: 13px; color: var(--muted); }
+.unsure-row .btn[aria-pressed="true"] { color: var(--warn); border-color: var(--warn); }
+
 .note-label {
   font-family: var(--mono);
   font-size: 11px;
@@ -1010,7 +1015,7 @@ kbd { display: inline-block; min-width: 20px; padding: 0 4px; border: 1px solid 
 .flash-hint { color: var(--muted); font-size: 14px; }
 .flash-def { font-size: 16.5px; line-height: 1.6; }
 .flash-use { padding: 12px 16px; border-left: 3px solid var(--accent); background: var(--surface-2); font-size: 15px; line-height: 1.55; color: var(--ink); }
-.flash-grade { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.flash-grade { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 .flash-grade .btn { padding: 16px; font-size: 15.5px; font-weight: 600; }
 .btn-bad { border-color: var(--bad); color: var(--bad); }
 .btn-bad:hover { background: var(--bad-soft); }
@@ -1775,6 +1780,7 @@ function startSession(kind, items, extra = {}) {
     kind,
     items: list,
     perms: list.map(q => shuffled(q.options.map((_, i) => i))),
+    unsure: {},
     idx: 0,
     picked: null,
     answers: {},
@@ -1816,14 +1822,32 @@ function pick(orig) {
   if (!s || s.picked !== null) return;
   const q = s.items[s.idx];
   const ok = orig === q.correct;
+  const unsure = !!(s.unsure && s.unsure[s.idx]);
   s.picked = orig;
   s.answers[s.idx] = orig;
-  grade(QKEY.get(q), ok);
-  commit();
+  // Pretest answers are a warm-up before reading and do not enter the schedule
+  if (s.kind !== "pretest") {
+    grade(QKEY.get(q), ok, ok ? (unsure ? 2 : 3) : 1);
+    commit();
+  }
   say(ok ? "Верно" : "Неверно");
   renderQuestion();
   const next = document.getElementById("next");
   if (next) next.focus({ preventScroll: true });
+}
+
+function toggleUnsure() {
+  const s = state.session;
+  if (!s || s.picked !== null) return;
+  s.unsure[s.idx] = !s.unsure[s.idx];
+  renderQuestion();
+}
+
+function startPretest(id) {
+  const block = QUIZ.blocks.find(b => b.id === id);
+  state.study.pre = { ...(state.study.pre || {}), [id]: stamp() };
+  saveStudy();
+  startSession("pretest", shuffled(questionsOf(id)).slice(0, 3), { block: id, title: `Проверка до чтения · ${block ? block.title : id}` });
 }
 
 function advance() {
@@ -1996,8 +2020,10 @@ function renderQuestion() {
         <div class="gauge-track"><div class="gauge-fill" style="width:${pct}%"></div></div>
       </div>
       <h2 class="question">${esc(q.q)}</h2>
+      ${done ? "" : `<div class="unsure-row"><button class="btn btn-ghost" type="button" id="unsure" aria-pressed="${!!s.unsure[s.idx]}">${s.unsure[s.idx] ? "✓ " : ""}Не уверен <kbd>0</kbd></button><span>отметь до ответа, если угадываешь: такой вопрос вернётся раньше</span></div>`}
       <div class="options">${options}</div>
       ${done ? `<div class="verdict">
+        ${picked !== q.correct && !s.unsure[s.idx] && s.kind !== "pretest" ? `<div class="note note-hot"><span class="note-label">Уверенная ошибка</span><span>Такие исправляются лучше всего, если разобрать прямо сейчас: прочитай разбор и скажи себе, почему верен другой вариант.</span></div>` : ""}
         <p class="verdict-why">${mono(q.why)}</p>
         ${q.case ? `<div class="note"><span class="note-label">Из твоей практики</span><span>${mono(q.case)}</span></div>` : ""}
       </div>` : `<p class="kbd-hint">Клавиши <kbd>1</kbd>–<kbd>4</kbd> или <kbd>А</kbd>–<kbd>Г</kbd> выбирают ответ, <kbd>Enter</kbd> ведёт дальше</p>`}
@@ -2011,6 +2037,8 @@ function renderQuestion() {
   app.querySelectorAll("[data-opt]").forEach(el => {
     el.addEventListener("click", () => pick(Number(el.dataset.opt)));
   });
+  const unsureBtn = document.getElementById("unsure");
+  if (unsureBtn) unsureBtn.addEventListener("click", toggleUnsure);
   document.getElementById("quit").addEventListener("click", leaveSession);
   const next = document.getElementById("next");
   if (next) next.addEventListener("click", advance);
@@ -2060,9 +2088,11 @@ function renderResult() {
   }).join("") : "";
 
   const best = block ? bestOf(state.history[block.id]) : null;
-  const lede = right === items.length
-    ? (block ? "Блок закрыт без ошибок." : "Без ошибок.")
-    : `Ошибок ${items.length - right}. Они уже в повторении: сегодня, потом через день, потом реже.`;
+  const lede = s.kind === "pretest"
+    ? "Это проверка до чтения: ответы не идут ни в зачёт, ни в повторение. Теперь открой раздел шага, и ответы на эти вопросы будут встречаться по ходу чтения."
+    : right === items.length
+      ? (block ? "Блок закрыт без ошибок." : "Без ошибок.")
+      : `Ошибок ${items.length - right}. Они уже в повторении: сегодня, потом через день, потом реже.`;
 
   app.innerHTML = `
     <div class="result">
@@ -2457,12 +2487,18 @@ function unlockedTerms() {
 function cardDeck(limit = 12) {
   const today = dayKey();
   const pool = unlockedTerms();
-  const due = pool.filter(c => state.study.srs[c.key] && state.study.srs[c.key].due <= today);
+  // Reverse cards (definition -> term) open once the forward card holds for 3+ days
+  const reverse = pool.filter(c => { const e = state.study.srs[c.key]; return e && memOf(e).s >= 3; })
+    .map(c => ({ ...c, key: "r" + hash(c.sec + "|" + c.term.t), reverse: true }));
+  const isDue = c => state.study.srs[c.key] && state.study.srs[c.key].due <= today;
+  const due = pool.concat(reverse).filter(isDue);
   const fresh = pool.filter(c => !state.study.srs[c.key]);
+  const freshReverse = shuffled(reverse.filter(c => !state.study.srs[c.key])).slice(0, 4);
   const order = id => (QUIZ.blocks.find(b => b.id === id) || { order: 99 }).order;
   fresh.sort((a, b) => order(b.sec) - order(a.sec));
   const deck = shuffled(due).slice(0, limit);
-  return deck.concat(fresh.slice(0, Math.min(8, limit - deck.length)));
+  const newForward = fresh.slice(0, Math.min(8, limit - deck.length));
+  return deck.concat(newForward, freshReverse.slice(0, Math.max(0, limit - deck.length - newForward.length)));
 }
 
 function startCards() {
@@ -2480,10 +2516,12 @@ function flipCard() {
   renderCards();
 }
 
-function gradeCard(ok) {
+// rating: 1 не вспомнил, 2 с трудом, 3 вспомнил (шкала FSRS без «легко»)
+function gradeCard(rating) {
   const c = state.cards;
   if (!c || !c.flipped) return;
-  grade(c.items[c.idx].key, ok);
+  const ok = rating >= 2;
+  grade(c.items[c.idx].key, ok, rating);
   commit();
   if (ok) c.known += 1;
   c.idx += 1;
@@ -2502,7 +2540,7 @@ function renderCards() {
         <div class="view-head">
           <p class="eyebrow">Карточки терминов</p>
           <h2 class="view-title">Помню ${c.known} из ${total}</h2>
-          <p class="view-lede">Термины, которые не вспомнил, вернутся завтра. Те, что помнишь, придут реже: через 3, 7, 14, 30 дней.</p>
+          <p class="view-lede">Термины, которые не вспомнил, вернутся сегодня же. Остальные придут, когда вероятность вспомнить упадёт до 90%: чем увереннее ответ, тем длиннее пауза.</p>
         </div>
         <div class="exam-actions" style="justify-content:flex-start">
           ${cardDeck().length ? `<button class="btn btn-primary" type="button" id="more">Ещё карточки</button>` : ""}
@@ -2521,32 +2559,34 @@ function renderCards() {
     <div class="flash-wrap">
       <div class="gauge">
         <div class="gauge-row">
-          <span>Карточки · ${e ? "повторение" : "новый термин"}</span>
+          <span>Карточки · ${card.reverse ? "обратная" : e ? "повторение" : "новый термин"}</span>
           <span>${c.idx + 1} / ${total} · помню ${c.known}</span>
         </div>
         <div class="gauge-track"><div class="gauge-fill" style="width:${Math.round(c.idx / total * 100)}%"></div></div>
       </div>
       <button class="flash" type="button" id="flash" ${c.flipped ? "disabled" : ""} aria-label="Перевернуть карточку">
         <span class="eyebrow">Раздел ${card.sec} · ${esc(sec ? sec.title : "")}</span>
-        <span class="flash-term">${esc(card.term.t)}</span>
-        ${c.flipped
-          ? `<span class="flash-def">${mono(card.term.d)}</span><span class="flash-use">${mono(card.term.m)}</span>`
-          : `<span class="flash-hint">Сначала вспомни сам: что это и где применяется. Потом нажми на карточку или <kbd>Пробел</kbd>.</span>`}
+        ${card.reverse
+          ? `<span class="flash-def">${mono(card.term.d)}</span>
+             ${c.flipped
+               ? `<span class="flash-term">${esc(card.term.t)}</span><span class="flash-use">${mono(card.term.m)}</span>`
+               : `<span class="flash-hint">Обратная карточка: назови термин по определению. Потом нажми на карточку или <kbd>Пробел</kbd>.</span>`}`
+          : `<span class="flash-term">${esc(card.term.t)}</span>
+             ${c.flipped
+               ? `<span class="flash-def">${mono(card.term.d)}</span><span class="flash-use">${mono(card.term.m)}</span>`
+               : `<span class="flash-hint">Сначала вспомни сам: что это и где применяется. Потом нажми на карточку или <kbd>Пробел</kbd>.</span>`}`}
       </button>
       ${c.flipped ? `<div class="flash-grade">
-        <button class="btn btn-bad" type="button" id="nope">✕ Не вспомнил <kbd>1</kbd></button>
-        <button class="btn btn-good" type="button" id="yes">✓ Вспомнил <kbd>2</kbd></button>
+        <button class="btn btn-bad" type="button" data-grade="1">✕ Не вспомнил <kbd>1</kbd></button>
+        <button class="btn" type="button" data-grade="2">С трудом <kbd>2</kbd></button>
+        <button class="btn btn-good" type="button" data-grade="3">✓ Вспомнил <kbd>3</kbd></button>
       </div>` : ""}
       <div class="exam-actions">
         <button class="btn" type="button" id="quit">К плану на сегодня</button>
       </div>
     </div>`;
   document.getElementById("flash").addEventListener("click", flipCard);
-  const yes = document.getElementById("yes");
-  if (yes) {
-    yes.addEventListener("click", () => gradeCard(true));
-    document.getElementById("nope").addEventListener("click", () => gradeCard(false));
-  }
+  app.querySelectorAll("[data-grade]").forEach(el => el.addEventListener("click", () => gradeCard(Number(el.dataset.grade))));
   document.getElementById("quit").addEventListener("click", () => setMode(c.back));
 }
 
@@ -2658,14 +2698,19 @@ function renderToday() {
       ${taskCard({
         title: "Повторение", count: due.length, done: !due.length,
         text: due.length
-          ? `Вопросы, на которых ты ошибался или которые пора освежить. Интервалы растут: 1, 3, 7, 14, 30 дней.`
-          : "На сегодня повторять нечего. Ошибки попадают сюда сразу после ответа, верные вопросы возвращаются через 3, 7, 14 дней.",
+          ? `Вопросы, на которых ты ошибался или которые пора освежить: каждый приходит, когда вероятность вспомнить падает до 90%.`
+          : "На сегодня повторять нечего. Ошибки попадают сюда сразу после ответа, верные возвращаются, когда начнут забываться.",
         action: due.length ? "review" : "", label: `Повторить ${Math.min(20, due.length)}`, primary: primary === "review"
       })}
       ${next ? taskCard({
         title: `Шаг ${next.order} · ${esc(next.title)}`,
         text: stepText, action: stepAction, label: stepLabel, primary: primary === stepAction
       }) : taskCard({ title: "Маршрут пройден", text: "Пересдавай блоки ниже 100% и держи повторение на нуле.", done: true })}
+      ${next && !isOn("read", next.id) && !state.history[next.id] && !(state.study.pre || {})[next.id] && questionsOf(next.id).length >= 3 ? taskCard({
+        title: "Проверь себя до чтения",
+        text: "Три вопроса шага до теории. Ошибаться здесь нормально: попытка ответить заранее заметно усиливает запоминание прочитанного. В зачёт и в повторение эти ответы не идут.",
+        action: "pretest", label: "3 вопроса"
+      }) : ""}
       ${taskCard({
         title: "Карточки терминов", count: deck.length, done: !deck.length,
         text: deck.length
@@ -2725,6 +2770,7 @@ function renderToday() {
     else if (t === "cards") startCards();
     else if (t === "mix") startMix();
     else if (t === "exam" && next) startBlock(next.id);
+    else if (t === "pretest" && next) startPretest(next.id);
     else if ((t === "read" || t === "drill" || t === "lab") && next) openSection(next.id, t === "read" ? "" : t);
   }));
   document.getElementById("deadline").addEventListener("change", e => {
@@ -4089,8 +4135,9 @@ document.addEventListener("keydown", e => {
   const c = state.cards;
   if (c && c.idx < c.items.length) {
     if (!c.flipped && (e.code === "Space" || e.key === "Enter") && !onButton) { e.preventDefault(); flipCard(); }
-    else if (c.flipped && ["Digit1", "Numpad1", "ArrowLeft"].includes(e.code)) { e.preventDefault(); gradeCard(false); }
-    else if (c.flipped && ["Digit2", "Numpad2", "ArrowRight"].includes(e.code)) { e.preventDefault(); gradeCard(true); }
+    else if (c.flipped && ["Digit1", "Numpad1", "ArrowLeft"].includes(e.code)) { e.preventDefault(); gradeCard(1); }
+    else if (c.flipped && ["Digit2", "Numpad2"].includes(e.code)) { e.preventDefault(); gradeCard(2); }
+    else if (c.flipped && ["Digit3", "Numpad3", "ArrowRight"].includes(e.code)) { e.preventDefault(); gradeCard(3); }
     return;
   }
   const iv = state.iv;
@@ -4100,6 +4147,7 @@ document.addEventListener("keydown", e => {
   }
   const s = state.session;
   if (!s || s.idx >= s.items.length) return;
+  if (s.picked === null && ["Digit0", "Numpad0"].includes(e.code)) { e.preventDefault(); toggleUnsure(); return; }
   if (s.picked === null) {
     const j = KEY_CODES.findIndex(codes => codes.includes(e.code));
     if (j >= 0 && j < s.perms[s.idx].length) { e.preventDefault(); pick(s.perms[s.idx][j]); }
